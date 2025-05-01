@@ -384,6 +384,107 @@
         #experience .timeline-item p {
             line-height: 1.5;
         }
+
+        < !-- ─── in your <style>───────────────────────────────────────────────────────── -->
+
+        /* Hobby icon animations */
+        @keyframes shuttlecock {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(10px, -10px) rotate(45deg);
+            }
+        }
+
+        @keyframes skier {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(20px, 0) rotate(-10deg);
+            }
+        }
+
+        @keyframes bullseye {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes lifter {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hobby-icon {
+            display: inline-block;
+            font-size: 2rem;
+            margin-right: .5rem;
+        }
+
+        .animate-badminton {
+            animation: shuttlecock 1.5s ease-in-out infinite;
+        }
+
+        .animate-skiing {
+            animation: skier 2s ease-in-out infinite;
+        }
+
+        .animate-shooting {
+            animation: bullseye 1s ease-in-out infinite;
+        }
+
+        .animate-gym {
+            animation: lifter 1.2s ease-in-out infinite;
+        }
+
+        /* ─── Updated Hobbies CSS ──────────────────────────────────────────────────── */
+
+        #hobbies .hobby-list {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            /* more space between each */
+            flex-wrap: wrap;
+            /* wrap on small screens if needed */
+        }
+
+        #hobbies .hobby {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hobby-icon {
+            font-size: 4rem;
+            /* double size */
+            margin-bottom: 0.5rem;
+        }
+
+        .hobby-name {
+            font-size: 1.2rem;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -443,14 +544,7 @@
                     <div class="tags"><span>#EDI</span><span>#API</span></div>
                 </div>
 
-                <div class="card full-width">
-                    <h3>Responsive Website Design</h3>
-                    <p>Dark-tech portfolio with neon animations and live preview.</p>
-                    <div class="iframe-wrapper">
-                        <iframe src="https://aurorafurnituremfg.ca"></iframe>
-                    </div>
-                    <div class="tags"><span>#HTML</span><span>#CSS</span><span>#JS</span></div>
-                </div>
+
 
                 <div class="card">
                     <h3>Network Monitoring Dashboard</h3>
@@ -459,12 +553,58 @@
                 </div>
 
                 <div class="card">
-                    <h3>Phyon Tool</h3>
-                    <p>Effortlessly batch-engineers PDF invoice data—configuring, structuring, and delivering polished,
+                    <h3>Phyhon Tool</h3>
+                    <p>Effortlessly batch-engineers files data—configuring, structuring, and delivering polished,
                         design-forward spreadsheet outputs.</p>
 
                     <div class="tags"><span>#Python</span><span>#PDF</span><span>#Automation</span></div>
                 </div>
+                <div class="card">
+                    <h3>Voice Assistant</h3>
+                    <p>Capture live audio, auto-transcribe to text, and tap into the ChatGPT API for instant
+                        Q&amp;A—logging every session for future reference.</p>
+                    <div class="tags">
+                        <span>#Vosk</span>
+                        <span>#ChatGPTAPI</span>
+                        <span>#PythonGUI</span>
+                        <span>#Automation</span>
+                    </div>
+                </div>
+                <!-- Online Product Viewer -->
+                <div class="card full-width">
+                    <h3>Aurora Furniture Company Site</h3>
+                    <p>Online interface for browsing real-time product details and media.</p>
+                    <div class="iframe-wrapper">
+                        <iframe src="https://aurorafurnituremfg.ca" title="Product Viewer"></iframe>
+                    </div>
+                    <div class="tags">
+                        <span>#HTML</span><span>#CSS</span><span>#JavaScript</span><span>#API</span>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h3>Standard Install Company Site</h3>
+                    <p>Wix-based site showcasing installation services and customer resources.</p>
+                    <div class="iframe-wrapper">
+                        <iframe src="https://www.standardinstall.ca" title="Standard Install"></iframe>
+                    </div>
+                    <div class="tags">
+                        <span>#Wix</span><span>#HTML</span><span>#CSS</span><span>#Responsive</span>
+                    </div>
+                </div>
+
+                <!-- Inventory & Reporting Dashboard -->
+                <div class="card full-width">
+                    <h3>Inventory & Reporting Dashboard</h3>
+                    <p>Database reader for generating reports and monitoring inventory levels.</p>
+                    <div class="iframe-wrapper">
+                        <iframe src="https://cobra-moved-constantly.ngrok-free.app/html/"
+                            title="Inventory Dashboard"></iframe>
+                    </div>
+                    <div class="tags">
+                        <span>#NodeJS</span><span>#Python</span><span>#JavaScript</span><span>#MySQL</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -594,21 +734,33 @@
     </section>
 
     <!-- HOBBIES -->
+    <!-- ─── replace your HOBBIES section with this ─────────────────────────────────── -->
+    <!-- ─── Updated Hobbies Section ─────────────────────────────────────────────── -->
     <section id="hobbies">
         <div class="container">
             <h2 class="section-title">&lt;Hobbies /&gt;</h2>
             <div class="hobby-list">
-                <div class="hobby">🏸<div class="hobby-name">Badminton</div>
+                <div class="hobby">
+                    <span class="hobby-icon animate-badminton">🏸</span>
+                    <div class="hobby-name">Badminton</div>
                 </div>
-                <div class="hobby">🎿<div class="hobby-name">Skiing</div>
+                <div class="hobby">
+                    <span class="hobby-icon animate-skiing">🎿</span>
+                    <div class="hobby-name">Skiing</div>
                 </div>
-                <div class="hobby">🎯<div class="hobby-name">Shooting</div>
+                <div class="hobby">
+                    <span class="hobby-icon animate-shooting">🎯</span>
+                    <div class="hobby-name">Shooting</div>
                 </div>
-                <div class="hobby">🏋️‍♂️<div class="hobby-name">Gym</div>
+                <div class="hobby">
+                    <span class="hobby-icon animate-gym">🏋️‍♂️</span>
+                    <div class="hobby-name">Gym</div>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- CONTACT -->
     <section id="contact">
