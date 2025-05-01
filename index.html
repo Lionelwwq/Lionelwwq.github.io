@@ -4,538 +4,656 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weiqi (Lionel) Wang - Portfolio</title>
-    <!-- Google Fonts for beautiful typography -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600|Open+Sans:300,400,600&display=swap"
-        rel="stylesheet" />
-    <!-- AOS Animate on Scroll CSS Library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <title>Weiqi (Lionel) Wang | Portfolio</title>
+    <!-- Orbitron Neon Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Base Styles (Dark Theme) */
+        /* Global & Theme */
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: #0b0e11;
-            /* Dark background */
-            color: #f0f0f0;
-            font-family: 'Open Sans', sans-serif;
-            line-height: 1.6;
+        html {
             scroll-behavior: smooth;
-            /* Smooth scrolling for anchor links */
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
+        body {
+            background: #2a2a44;
+            color: #ccc;
+            font-family: 'Orbitron', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
             color: inherit;
+            text-decoration: none;
         }
 
-        /* Container for section content */
+        /* Neon Colors */
+        :root {
+            --neon-cyan: #00FFF0;
+            --neon-pink: #FF00FF;
+            --neon-purple: #9B00FF;
+            --neon-yellow: #FFFF00;
+        }
+
+        /* Matrix Rain Canvas */
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: #2a2a44;
+        }
+
+        /* Neon Flicker */
+        @keyframes neon-flicker {
+
+            0%,
+            19%,
+            21%,
+            23%,
+            25%,
+            54%,
+            56%,
+            100% {
+                text-shadow: 0 0 6px #fff, 0 0 12px var(--neon-cyan), 0 0 18px var(--neon-cyan), 0 0 24px var(--neon-cyan);
+            }
+
+            20%,
+            24%,
+            55% {
+                text-shadow: none;
+            }
+        }
+
+        .neon {
+            color: var(--neon-cyan);
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+
+        /* Centering Container */
         .container {
-            width: 90%;
+            width: 80%;
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Navigation Bar */
+        /* Navbar */
         nav {
-            width: 100%;
-            padding: 20px 0;
-            position: static;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+            padding: 1rem 0;
         }
 
         nav .container {
             display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-        }
-
-        nav .logo {
-            font-size: 1.5em;
-            font-weight: 600;
-            text-decoration: none;
-            color: #f0f0f0;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 20px;
-            margin: 0;
-            padding: 0;
+            gap: 2rem;
         }
 
-        nav ul li {
-            margin: 0;
+        nav a:hover {
+            color: var(--neon-cyan);
         }
 
-        nav ul li a {
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 2px;
-        }
-
-        nav ul li a:hover {
-            color: #66e2d5;
-        }
-
-        nav ul li a::after {
-            content: "";
+        .hamburger {
+            display: none;
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #66e2d5;
-            transition: width 0.3s;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* Section Styles */
-        section {
-            padding: 60px 20px;
-        }
-
-        /* Hero / About Section */
-        #about {
-            min-height: 100vh;
-            /* Full viewport height for intro */
-            background: radial-gradient(circle at top left, #1a1f25, transparent 40%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: left;
-        }
-
-        #about .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 40px;
-        }
-
-        #about .text {
-            flex: 1 1 500px;
-        }
-
-        #about .text h1 {
-            font-size: 2.5em;
-            color: #ffffff;
-        }
-
-        #about .text h2 {
-            font-size: 1.5em;
-            margin: 10px 0 20px;
-            font-weight: 400;
-            color: #66e2d5;
-        }
-
-        #about .text p {
-            max-width: 600px;
-            margin-bottom: 20px;
-        }
-
-        #about .text .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #66e2d5;
-            color: #0b0e11;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 5px;
-            margin-top: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        #about .text .btn:hover {
-            background: #52bfae;
-        }
-
-        #about .profile-pic {
-            flex: 1 1 300px;
-            text-align: center;
-        }
-
-        #about .profile-pic img {
-            max-width: 200px;
-            border-radius: 50%;
-            border: 5px solid rgba(102, 226, 213, 0.3);
-            box-shadow: 0 0 20px rgba(102, 226, 213, 0.2);
-        }
-
-        /* Glassmorphism effect for other sections */
-        section:not(#about) {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Skills Section */
-        #skills h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        #skills .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        #skills .skill-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-
-        #skills .skill-card:hover {
-            background: rgba(102, 226, 213, 0.2);
-            border-color: rgba(102, 226, 213, 0.5);
-        }
-
-        /* Experience Section */
-        #experience h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        #experience .experience-item {
-            margin-bottom: 30px;
-        }
-
-        #experience .experience-item h3 {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        #experience .experience-item h4 {
-            font-size: 1em;
-            font-weight: 400;
-            color: #66e2d5;
-            margin: 3px 0 10px;
-        }
-
-        #experience .experience-item p {
-            margin: 0 0 5px;
-        }
-
-        /* Projects Section */
-        #projects h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        #projects .project-item {
-            margin-bottom: 20px;
-        }
-
-        #projects .project-item h3 {
-            font-size: 1.05em;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        #projects .project-item p {
-            margin: 0 0 5px;
-        }
-
-        /* Contact Section */
-        #contact h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        #contact .contact-info {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        #contact .contact-info p {
-            margin: 5px 0;
-        }
-
-        #contact .contact-info a {
-            color: #66e2d5;
-            text-decoration: none;
-        }
-
-        #contact .contact-info a:hover {
-            text-decoration: underline;
-        }
-
-        #contact form {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
+            right: 1rem;
+            top: 1.1rem;
             flex-direction: column;
-            gap: 15px;
-        }
-
-        #contact form label {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        #contact form input,
-        #contact form textarea {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: #1a1f25;
-            color: #f0f0f0;
-            font: inherit;
-        }
-
-        #contact form input::placeholder,
-        #contact form textarea::placeholder {
-            color: #999;
-        }
-
-        #contact form input:focus,
-        #contact form textarea:focus {
-            outline: none;
-            background: #22272e;
-            box-shadow: 0 0 0 2px #66e2d5;
-        }
-
-        #contact form textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        #contact form button {
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background: #66e2d5;
-            color: #0b0e11;
-            font-size: 1em;
-            font-weight: 600;
             cursor: pointer;
+            z-index: 1002;
         }
 
-        #contact form button:hover {
-            background: #52bfae;
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: #ccc;
+            margin: 4px 0;
+            transition: 0.3s;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav .container {
-                flex-direction: column;
-            }
-
+        @media (max-width:768px) {
             nav ul {
+                display: none;
                 flex-direction: column;
-                align-items: center;
-                margin-top: 10px;
-            }
-
-            nav ul li {
-                margin: 8px 0;
-            }
-
-            #about {
-                padding: 40px 20px;
+                background: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 200px;
                 text-align: center;
             }
 
-            #about .about-content {
-                flex-direction: column;
+            nav ul.open {
+                display: flex;
             }
 
-            #about .text h1 {
-                font-size: 2em;
-            }
-
-            #about .text h2 {
-                font-size: 1.2em;
-            }
-
-            #about .profile-pic {
-                margin-top: 30px;
+            .hamburger {
+                display: flex;
             }
         }
 
-        @media (max-width: 480px) {
-            #about .text h1 {
-                font-size: 1.6em;
+        /* Sections & Fade-in */
+        section {
+            padding: 120px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 8px var(--neon-yellow);
+        }
+
+        /* About */
+        #about .photo {
+            width: 500px;
+            /* was 180px */
+            height: 500px;
+            /* was 180px */
+            border: 6px solid var(--neon-purple);
+            box-shadow: 0 0 30px var(--neon-purple);
+            margin: 2rem auto;
+            /* center + more breathing room */
+            animation: script-master 4s ease-in-out infinite alternate;
+            transform-origin: center;
+        }
+
+        /* ─── Add this new keyframes block ───────────────────────────────────────── */
+        @keyframes script-master {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
             }
 
-            #about .text h2 {
-                font-size: 1em;
+            50% {
+                transform: translateY(-15px) rotate(-3deg) scale(1.08);
             }
+
+            100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+        }
+
+        #about .photo {
+            width: 180px;
+            height: 180px;
+            border: 4px solid var(--neon-cyan);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--neon-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        #about .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #about h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-cyan);
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+
+        #about .typing {
+            font-size: 1.2rem;
+            color: var(--neon-pink);
+            height: 1.4em;
+            margin-bottom: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid var(--neon-pink);
+        }
+
+        /* Projects Grid */
+        #projects .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        #projects .card {
+            background: #111;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #projects .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        #projects .card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        #projects .card h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        #projects .card p {
+            margin-bottom: 0.8rem;
+        }
+
+        #projects .card .tags span {
+            margin-right: 0.5rem;
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+        }
+
+        /* Skills Bars */
+        #skills .skill-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        #skills .label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+            color: #eee;
+        }
+
+        #skills .bar {
+            background: #222;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        #skills .bar-inner {
+            height: 100%;
+            background: var(--neon-cyan);
+            width: 0;
+        }
+
+        /* Contact Info */
+        #contact .info {
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        #contact .info a:hover {
+            text-decoration: underline;
+            color: var(--neon-cyan);
+        }
+
+        /* Zoom-out iframe wrapper */
+        .iframe-wrapper {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .iframe-wrapper iframe {
+            transform: scale(0.75);
+            transform-origin: top left;
+            width: calc(100% / 0.8);
+            height: calc(500px / 0.8);
+            border: 1px solid #333;
+            margin-bottom: 1.1rem;
+        }
+
+        /* ─── Experience Timeline ───────────────────────────────────────────────────── */
+        #experience .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+
+        #experience .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--neon-pink);
+        }
+
+        #experience .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 2.5rem;
+        }
+
+        #experience .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        #experience .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.25rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--neon-cyan);
+        }
+
+        #experience .timeline-item h3 {
+            margin-bottom: 0.3rem;
+            color: var(--neon-yellow);
+        }
+
+        #experience .timeline-item .meta {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 0.6rem;
+        }
+
+        #experience .timeline-item p {
+            line-height: 1.5;
         }
     </style>
 </head>
 
 <body>
+    <canvas id="matrixCanvas"></canvas>
 
-    <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#about" class="logo">Lionel Wang</a>
-            <ul>
+            <ul id="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </nav>
 
-    <!-- About Section -->
+    <!-- ABOUT -->
     <section id="about">
-        <div class="container about-content" data-aos="fade-up">
-            <div class="text">
-                <h1>Weiqi <span>(Lionel)</span> Wang</h1>
-                <h2>IT Systems &amp; Infrastructure Specialist</h2>
-                <p>Passionate about designing secure, efficient IT systems that empower organizations. With a strong
-                    background in cybersecurity and cloud infrastructure, I excel at building robust architectures and
-                    streamlining operations.</p>
-                <p>Known for problem-solving and a proactive approach, I have successfully implemented AWS cloud
-                    solutions, developed APIs for system integration, and optimized ERP/EDI platforms to improve
-                    business workflows. I hold an M.S. in Cybersecurity and bring a security-first mindset to every
-                    project.</p>
-                <a href="resume.pdf" class="btn" download>Download Resume</a>
-            </div>
-            <div class="profile-pic">
-                <!-- Placeholder profile image -->
-                <img src="profile-placeholder.jpg" alt="Profile picture of Lionel Wang" />
+        <div class="container">
+            <div class="photo"><img src="selfie.jpg" alt="Profile Photo"></div>
+            <h1 class="neon">Hi, I'm Lionel</h1>
+            <div class="typing" id="typing"></div>
+            <p>Motivated System Administrator with a Master’s in Cybersecurity and a Bachelor’s in IT, over two years of
+                experience automating servers, integrating APIs, and designing responsive websites.</p>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">&lt;Projects /&gt;</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Email Phishing Detection</h3>
+                    <p>Apps Script + VirusTotal + custom ML logic for Gmail and Sheets.</p>
+                    <div class="tags"><span>#AppsScript</span><span>#ML</span><span>#VirusTotal</span></div>
+                </div>
+
+                <div class="card">
+                    <h3>AI Chatbot Assistant</h3>
+                    <p>Built with Python, Flask & OpenAI pulling from trained database.</p>
+                    <div class="tags"><span>#Flask</span><span>#Python</span><span>#OpenAI</span></div>
+                </div>
+
+                <div class="card">
+                    <h3>EDI & API Integration</h3>
+                    <p>Robust EDI workflows and REST APIs for order & inventory syncing.</p>
+                    <div class="tags"><span>#EDI</span><span>#API</span></div>
+                </div>
+
+                <div class="card full-width">
+                    <h3>Responsive Website Design</h3>
+                    <p>Dark-tech portfolio with neon animations and live preview.</p>
+                    <div class="iframe-wrapper">
+                        <iframe src="https://aurorafurnituremfg.ca"></iframe>
+                    </div>
+                    <div class="tags"><span>#HTML</span><span>#CSS</span><span>#JS</span></div>
+                </div>
+
+                <div class="card">
+                    <h3>Network Monitoring Dashboard</h3>
+                    <p>Real-time network health metrics with Grafana & Python.</p>
+                    <div class="tags"><span>#Networking</span><span>#Grafana</span><span>#Python</span></div>
+                </div>
+
+                <div class="card">
+                    <h3>Phyon Tool</h3>
+                    <p>Effortlessly batch-engineers PDF invoice data—configuring, structuring, and delivering polished,
+                        design-forward spreadsheet outputs.</p>
+
+                    <div class="tags"><span>#Python</span><span>#PDF</span><span>#Automation</span></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- SKILLS -->
     <section id="skills">
-        <div class="container" data-aos="fade-up">
-            <h2>Skills</h2>
-            <p style="text-align:center; margin-bottom: 30px;">Technical Expertise:</p>
-            <div class="skills-container">
-                <div class="skill-card">Cybersecurity</div>
-                <div class="skill-card">AWS &amp; Cloud Services</div>
-                <div class="skill-card">API Development</div>
-                <div class="skill-card">ERP &amp; EDI Systems</div>
-                <div class="skill-card">Network Administration</div>
-                <div class="skill-card">Linux &amp; Windows Servers</div>
-                <div class="skill-card">Database Management</div>
-                <div class="skill-card">Automation &amp; Scripting</div>
+        <div class="container">
+            <h2 class="section-title">&lt;Skills /&gt;</h2>
+            <div class="skill-bar">
+                <div class="label"><span>AWS Management</span><span>95%</span></div>
+                <div class="bar">
+                    <div class="bar-inner" data-percent="95%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="label"><span>Python Scripting</span><span>90%</span></div>
+                <div class="bar">
+                    <div class="bar-inner" data-percent="90%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="label"><span>JavaScript & Node.js</span><span>90%</span></div>
+                <div class="bar">
+                    <div class="bar-inner" data-percent="90%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="label"><span>Linux & Windows Admin</span><span>90%</span></div>
+                <div class="bar">
+                    <div class="bar-inner" data-percent="90%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="label"><span>API & EDI Integration</span><span>85%</span></div>
+                <div class="bar">
+                    <div class="bar-inner" data-percent="85%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="label"><span>Responsive Web Design</span><span>85%</span></div>
+                <div class="bar">
+                    <div class="bar-inner" data-percent="85%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="label"><span>SQL & Automation</span><span>80%</span></div>
+                <div class="bar">
+                    <div class="bar-inner" data-percent="80%"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- EXPERIENCE -->
     <section id="experience">
-        <div class="container" data-aos="fade-up">
-            <h2>Experience</h2>
-            <div class="experience-item">
-                <h3>System Administrator &ndash; Amax Leather Inc.</h3>
-                <h4>2019 &ndash; Present</h4>
-                <p>Managed and secured enterprise network and server infrastructure. Implemented AWS cloud services to
-                    extend on-premise systems, enhancing scalability and disaster recovery. Developed internal APIs to
-                    integrate ERP and EDI platforms with cloud solutions, streamlining data exchange with partners. Led
-                    cybersecurity training and proactive risk assessments, significantly reducing security incidents.
+        <div class="container">
+            <h2 class="section-title">&lt;Experience /&gt;</h2>
+            <div class="timeline">
+                <!-- Current Role -->
+                <div class="timeline-item">
+                    <h3>IT Systems & Infrastructure Specialist</h3>
+                    <div class="meta">
+                        <em>Amax Leather Canada Ltd & Aurora Furniture MFG | Permanent Full-time | Delta, BC</em><br>
+                        <em>May 2025 – Present (1 mo)</em>
+                    </div>
+                    <p>
+                        Leads design and maintenance of Windows/Linux servers, enterprise networks and hardware
+                        deployments across multiple facilities;
+                        optimizes Fishbowl ERP/WMS with SQL-driven reporting and XML templates;
+                        manages corporate websites, AWS and Google Workspace environments, and API/EDI integrations;
+                        develops Python/JavaScript automation and AI tools for data workflows and security;
+                        enforces cybersecurity best practices and delivers cross-functional IT support and strategic
+                        infrastructure guidance.
+                    </p>
+                </div>
+                <!-- Previous Role -->
+                <div class="timeline-item">
+                    <h3>System Administrator</h3>
+                    <div class="meta">
+                        <em>Amax Leather Canada Ltd & Aurora Furniture MFG | Permanent Full-time | Delta, BC</em><br>
+                        <em>Aug 2022 – Apr 2025 (2 yrs 9 mos)</em>
+                    </div>
+                    <p>
+                        Developed JavaScript sites for report viewing, implemented XML reports, and designed responsive
+                        websites;
+                        managed multiple e-commerce stores and maintained servers;
+                        wrote automation scripts to enhance efficiency;
+                        provided hardware maintenance, troubleshooting, and technical support to ensure seamless
+                        operations.
+                    </p>
+                </div>
+                <!-- Earlier Role -->
+                <div class="timeline-item">
+                    <h3>Web Developer & Sales</h3>
+                    <div class="meta">
+                        <em>Perfect Decor | Permanent Part-time | Vancouver, BC</em><br>
+                        <em>May 2022 – Mar 2023 (11 mos)</em>
+                    </div>
+                    <p>
+                        Redesigned and optimized websites and web stores to enhance functionality and user experience;
+                        developed custom sites and large-scale web applications;
+                        created high-quality visual assets to elevate aesthetics;
+                        integrated new features and updates for modern usability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">&lt;Education /&gt;</h2>
+            <div class="edu-card">
+                <h3>MSc in Cybersecurity</h3>
+                <p><em>NYIT Vancouver • Jan 2024 – Dec 2024</em></p>
+                <p>Core studies: Network Security, Cryptography, Ethical Hacking, Threat Intelligence, Cloud Security.
                 </p>
             </div>
-            <div class="experience-item">
-                <h3>IT Support Specialist &ndash; TechSolutions Co.</h3>
-                <h4>2017 &ndash; 2019</h4>
-                <p>Provided technical support and managed IT infrastructure for a mid-sized enterprise. Oversaw network
-                    administration, hardware/software troubleshooting, and user onboarding. Assisted in deploying a new
-                    ERP system and establishing EDI connections with vendors, improving supply chain communication.
-                    Recognized for exceptional problem-solving and customer service.</p>
-            </div>
-            <!-- Additional experience items can be added here -->
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container" data-aos="fade-up">
-            <h2>Projects</h2>
-            <div class="project-item">
-                <h3>Cloud Infrastructure Automation</h3>
-                <p>Developed a set of scripts and AWS CloudFormation templates to automate the deployment of secure
-                    cloud infrastructure. This project showcases best practices in Infrastructure as Code and AWS
-                    security. <em>(Placeholder description)</em></p>
-            </div>
-            <div class="project-item">
-                <h3>ERP Integration API</h3>
-                <p>Built a custom API service to connect the company’s ERP system with external partners via EDI. It
-                    ensured real-time data synchronization and improved supply chain efficiency. <em>(Placeholder
-                        description)</em></p>
-            </div>
-            <!-- Placeholder for future projects -->
-            <div class="project-item">
-                <h3>More Projects Coming Soon</h3>
-                <p>Additional projects and case studies will be added here to highlight other work.
-                    <em>(Placeholder)</em></p>
+            <div class="edu-card">
+                <h3>BSc in Information Technology</h3>
+                <p><em>KPU • Sep 2017 – Dec 2022</em></p>
+                <p>Covered Web Dev, Database Design, Software Engineering, Cloud Computing, and Network Admin.</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container" data-aos="fade-up">
-            <h2>Contact</h2>
-            <div class="contact-info">
-                <p>Interested in collaborating or have a question? Reach out!</p>
-                <p>Email: <a href="mailto:lionel@example.com">lionel@example.com</a></p>
-                <p>LinkedIn: <a href="#" target="_blank">linkedin.com/in/lionelwang</a></p>
-                <p>GitHub: <a href="#" target="_blank">github.com/Lionelwwq</a></p>
-            </div>
-            <form action="#" method="post">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your name" required />
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your email" required />
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Your message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
+    <!-- HOBBIES -->
+    <section id="hobbies">
         <div class="container">
-            <p style="text-align:center; color: #777; font-size: 0.9em;">&copy; 2025 Weiqi (Lionel) Wang. All rights
-                reserved.</p>
+            <h2 class="section-title">&lt;Hobbies /&gt;</h2>
+            <div class="hobby-list">
+                <div class="hobby">🏸<div class="hobby-name">Badminton</div>
+                </div>
+                <div class="hobby">🎿<div class="hobby-name">Skiing</div>
+                </div>
+                <div class="hobby">🎯<div class="hobby-name">Shooting</div>
+                </div>
+                <div class="hobby">🏋️‍♂️<div class="hobby-name">Gym</div>
+                </div>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <!-- AOS Animation JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">&lt;Contact /&gt;</h2>
+            <div class="info">
+                <p>Email: <a href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a></p>
+                <p>Phone: <a href="tel:7788656808">778-865-6808</a></p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/weiqi-wang-86bb07171" target="_blank">Profile</a></p>
+            </div>
+        </div>
+    </section>
+
     <script>
-        AOS.init({
-            duration: 1000,  // animation duration in ms
-            once: true       // whether animation should happen only once while scrolling
-        });
+        // Matrix rain
+        const canvas = document.getElementById('matrixCanvas'), ctx = canvas.getContext('2d');
+        let W = canvas.width = window.innerWidth, H = canvas.height = window.innerHeight;
+        const chars = 'LionelWangWeiqiWang王玮麒WangWeiqiリオネル리오넬', fontSize = 16;
+        const cols = Math.floor(W / fontSize), drops = Array(cols).fill(0);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(42,42,68,0.15)'; ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--neon-cyan').trim();
+            ctx.font = fontSize + 'px monospace';
+            drops.forEach((y, i) => {
+                const text = chars.charAt(Math.random() * chars.length | 0);
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                drops[i] = (y * fontSize > H && Math.random() > 0.975) ? 0 : y + 1;
+            });
+            requestAnimationFrame(drawMatrix);
+        }
+        window.addEventListener('resize', () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+        drawMatrix();
+
+        // Menu & typing
+        function toggleMenu() { document.getElementById('nav-links').classList.toggle('open'); }
+        document.querySelectorAll('#nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open')));
+        const phrases = ['Python scripting to automate things', 'EDI & API integrations', 'Responsive website design'];
+        let p = 0, c = 0; const typeEl = document.getElementById('typing');
+        function type() { const str = phrases[p]; typeEl.textContent = str.slice(0, c + 1); c++; if (c < str.length) setTimeout(type, 100); else setTimeout(erase, 2000); }
+        function erase() { const str = phrases[p]; typeEl.textContent = str.slice(0, c - 1); c--; if (c > 0) setTimeout(erase, 50); else { p = (p + 1) % phrases.length; setTimeout(type, 500); } }
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(type, 500); document.querySelectorAll('.bar-inner').forEach(bar => bar.style.width = bar.getAttribute('data-percent')); });
+        // Fade-in
+        const sections = document.querySelectorAll('section');
+        function onScroll() { const Y = window.pageYOffset + window.innerHeight * 0.75; sections.forEach(sec => { if (Y > sec.offsetTop) sec.classList.add('visible'); }); }
+        window.addEventListener('scroll', onScroll); onScroll();
     </script>
 </body>
 
