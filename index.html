@@ -3,809 +3,590 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weiqi (Lionel) Wang | Portfolio</title>
-    <!-- Orbitron Neon Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>Lionel Wang | Portfolio</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
     <style>
-        /* Global & Theme */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-dark: #0f0f1a;
+            --bg-light: #1e1e2f;
+            --bg-card: #1a1a1f;
+            --accent: #4fd1c5;
+            --text-light: #fff;
+            --text-muted: #888;
+            --font-main: 'Inter', sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            background: #2a2a44;
-            color: #ccc;
-            font-family: 'Orbitron', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* Neon Colors */
-        :root {
-            --neon-cyan: #00FFF0;
-            --neon-pink: #FF00FF;
-            --neon-purple: #9B00FF;
-            --neon-yellow: #FFFF00;
-        }
-
-        /* Matrix Rain Canvas */
-        #matrixCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: #2a2a44;
-        }
-
-        /* Neon Flicker */
-        @keyframes neon-flicker {
-
-            0%,
-            19%,
-            21%,
-            23%,
-            25%,
-            54%,
-            56%,
-            100% {
-                text-shadow: 0 0 6px #fff, 0 0 12px var(--neon-cyan), 0 0 18px var(--neon-cyan), 0 0 24px var(--neon-cyan);
-            }
-
-            20%,
-            24%,
-            55% {
-                text-shadow: none;
-            }
-        }
-
-        .neon {
-            color: var(--neon-cyan);
-            animation: neon-flicker 1.5s infinite alternate;
-        }
-
-        /* Centering Container */
-        .container {
-            width: 80%;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            z-index: 1001;
-            padding: 1rem 0;
-        }
-
-        nav .container {
             display: flex;
+            min-height: 100vh;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-main);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            /* vertically center */
+            padding: 2rem 1rem;
+        }
+
+        .avatar-box {
+            position: relative;
+        }
+
+        .avatar-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+        }
+
+        .active-status {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 14px;
+            height: 14px;
+            background: #4caf50;
+            border: 2px solid var(--bg-light);
+            border-radius: 50%;
+            box-shadow: 0 0 8px #4caf50, 0 0 15px #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 5px #4caf50;
+            }
+
+            50% {
+                box-shadow: 0 0 15px #4caf50;
+            }
+
+            100% {
+                box-shadow: 0 0 5px #4caf50;
+            }
+        }
+
+        .name {
+            margin-top: 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .info_more-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            margin-top: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .info_more-btn span {
+            margin-right: 0.25rem;
+        }
+
+        .sidebar-info_more {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .contacts-list,
+        .social-list {
+            list-style: none;
+            width: 100%;
+        }
+
+        .contacts-list li,
+        .social-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
             align-items: center;
         }
 
-        nav ul {
+        .contacts-list ion-icon,
+        .social-list ion-icon {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-right: 0.75rem;
+        }
+
+        .contacts-list a,
+        .social-list a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .social-list {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            margin: 2rem auto;
+            max-width: 1000px;
+            width: calc(100% - 4rem);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .navbar {
+            background: var(--bg-card);
+            padding: 1rem 2rem;
+        }
+
+        .navbar-list {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            justify-content: flex-end;
+            gap: 1.5rem;
         }
 
-        nav a:hover {
-            color: var(--neon-cyan);
-        }
-
-        .hamburger {
-            display: none;
-            position: absolute;
-            right: 1rem;
-            top: 1.1rem;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 1002;
-        }
-
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background: #ccc;
-            margin: 4px 0;
-            transition: 0.3s;
-        }
-
-        @media (max-width:768px) {
-            nav ul {
-                display: none;
-                flex-direction: column;
-                background: rgba(0, 0, 0, 0.9);
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 200px;
-                text-align: center;
-            }
-
-            nav ul.open {
-                display: flex;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-        }
-
-        /* Sections & Fade-in */
-        section {
-            padding: 120px 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 8px var(--neon-yellow);
-        }
-
-        /* About */
-        #about .photo {
-            width: 500px;
-            /* was 180px */
-            height: 500px;
-            /* was 180px */
-            border: 6px solid var(--neon-purple);
-            box-shadow: 0 0 30px var(--neon-purple);
-            margin: 2rem auto;
-            /* center + more breathing room */
-            animation: script-master 4s ease-in-out infinite alternate;
-            transform-origin: center;
-        }
-
-        /* ─── Add this new keyframes block ───────────────────────────────────────── */
-        @keyframes script-master {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-
-            50% {
-                transform: translateY(-15px) rotate(-3deg) scale(1.08);
-            }
-
-            100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-        }
-
-        #about .photo {
-            width: 180px;
-            height: 180px;
-            border: 4px solid var(--neon-cyan);
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 0 20px var(--neon-cyan);
-            margin-bottom: 1.5rem;
-        }
-
-        #about .photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        #about h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--neon-cyan);
-            animation: neon-flicker 1.5s infinite alternate;
-        }
-
-        #about .typing {
-            font-size: 1.2rem;
-            color: var(--neon-pink);
-            height: 1.4em;
-            margin-bottom: 1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid var(--neon-pink);
-        }
-
-        /* Projects Grid */
-        #projects .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        #projects .card {
-            background: #111;
-            border-radius: 10px;
-            padding: 1rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        #projects .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px var(--neon-pink);
-        }
-
-        #projects .card.full-width {
-            grid-column: 1 / -1;
-        }
-
-        #projects .card h3 {
-            color: var(--neon-cyan);
-            margin-bottom: 0.5rem;
-        }
-
-        #projects .card p {
-            margin-bottom: 0.8rem;
-        }
-
-        #projects .card .tags span {
-            margin-right: 0.5rem;
-            color: var(--neon-pink);
-            font-size: 0.9rem;
-        }
-
-        /* Skills Bars */
-        #skills .skill-bar {
-            margin-bottom: 1.5rem;
-        }
-
-        #skills .label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.3rem;
-            font-weight: bold;
-            color: #eee;
-        }
-
-        #skills .bar {
-            background: #222;
-            height: 12px;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        #skills .bar-inner {
-            height: 100%;
-            background: var(--neon-cyan);
-            width: 0;
-        }
-
-        /* Contact Info */
-        #contact .info {
-            text-align: center;
+        .navbar-link {
+            background: none;
+            border: none;
+            color: var(--text-light);
             font-size: 1rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .navbar-link.active {
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .content-card article {
+            display: none;
+            padding: 2rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .content-card article.active {
+            display: block;
+        }
+
+        h2.section-title {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
             line-height: 1.5;
         }
 
-        #contact .info a:hover {
-            text-decoration: underline;
-            color: var(--neon-cyan);
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
         }
 
-        /* Zoom-out iframe wrapper */
-        .iframe-wrapper {
+        .project-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .project-card p {
+            margin-bottom: 0.75rem;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: var(--accent);
+            color: var(--text-light);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .iframe-card iframe {
             width: 100%;
-            height: 500px;
-            overflow: hidden;
+            height: 150px;
+            border: none;
+            border-radius: 6px;
         }
 
-        .iframe-wrapper iframe {
-            transform: scale(0.75);
-            transform-origin: top left;
-            width: calc(100% / 0.8);
-            height: calc(500px / 0.8);
-            border: 1px solid #333;
-            margin-bottom: 1.1rem;
-        }
-
-        /* ─── Experience Timeline ───────────────────────────────────────────────────── */
-        #experience .timeline {
+        .timeline {
             position: relative;
-            margin: 2rem 0;
-            padding-left: 2rem;
+            padding-left: 1.5rem;
         }
 
-        #experience .timeline::before {
+        .timeline::before {
             content: '';
             position: absolute;
-            left: 1rem;
+            left: 6px;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background: var(--neon-pink);
+            width: 2px;
+            background: var(--accent);
         }
 
-        #experience .timeline-item {
+        .timeline-item {
             position: relative;
-            margin-bottom: 2.5rem;
-            padding-left: 2.5rem;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
         }
 
-        #experience .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        #experience .timeline-item::before {
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: -0.25rem;
-            top: 0;
-            width: 1rem;
-            height: 1rem;
-            background: var(--neon-cyan);
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-cyan);
         }
 
-        #experience .timeline-item h3 {
-            margin-bottom: 0.3rem;
-            color: var(--neon-yellow);
+        .timeline-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
         }
 
-        #experience .timeline-item .meta {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 0.6rem;
-        }
-
-        #experience .timeline-item p {
-            line-height: 1.5;
-        }
-
-        < !-- ─── in your <style>───────────────────────────────────────────────────────── -->
-
-        /* Hobby icon animations */
-        @keyframes shuttlecock {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            50% {
-                transform: translate(10px, -10px) rotate(45deg);
-            }
-        }
-
-        @keyframes skier {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            50% {
-                transform: translate(20px, 0) rotate(-10deg);
-            }
-        }
-
-        @keyframes bullseye {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-        }
-
-        @keyframes lifter {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .hobby-icon {
-            display: inline-block;
-            font-size: 2rem;
-            margin-right: .5rem;
-        }
-
-        .animate-badminton {
-            animation: shuttlecock 1.5s ease-in-out infinite;
-        }
-
-        .animate-skiing {
-            animation: skier 2s ease-in-out infinite;
-        }
-
-        .animate-shooting {
-            animation: bullseye 1s ease-in-out infinite;
-        }
-
-        .animate-gym {
-            animation: lifter 1.2s ease-in-out infinite;
-        }
-
-        /* ─── Updated Hobbies CSS ──────────────────────────────────────────────────── */
-
-        #hobbies .hobby-list {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            /* more space between each */
-            flex-wrap: wrap;
-            /* wrap on small screens if needed */
-        }
-
-        #hobbies .hobby {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hobby-icon {
-            font-size: 4rem;
-            /* double size */
+        .timeline-item .meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
 
-        .hobby-name {
-            font-size: 1.2rem;
-            color: #fff;
+        .hobbies {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hobby {
+            text-align: center;
+        }
+
+        .hobby ion-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hobby span {
+            font-size: 0.95rem;
+        }
+
+        .content-card footer {
+            background: var(--bg-card);
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
     </style>
 </head>
 
 <body>
-    <canvas id="matrixCanvas"></canvas>
-
-    <nav>
-        <div class="container">
-            <ul id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#hobbies">Hobbies</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <aside class="sidebar">
+        <div class="avatar-box">
+            <img src="selfie.jpg" alt="Lionel Wang" />
+            <span class="active-status"></span>
+        </div>
+        <h1 class="name">Lionel Wang</h1>
+        <p class="title">Sysadmin & Cybersecurity</p>
+        <button class="info_more-btn" data-sidebar-btn>
+            <span>Show Contacts</span>
+            <ion-icon name="chevron-down"></ion-icon>
+        </button>
+        <div class="sidebar-info_more" data-sidebar>
+            <ul class="contacts-list">
+                <li><ion-icon name="mail-outline"></ion-icon><a
+                        href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a></li>
+                <li><ion-icon name="call-outline"></ion-icon><a href="tel:+17788656808">+1 (778) 865-6808</a></li>
+                <li><ion-icon name="logo-linkedin"></ion-icon><a href="https://linkedin.com/in/weiqi-wang-86bb07171"
+                        target="_blank">LinkedIn</a></li>
             </ul>
-            <div class="hamburger" onclick="toggleMenu()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+            <ul class="social-list">
+                <li><a href="https://github.com/lionelwwq" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
+                </li>
+                <li><a href="https://x.com/itzlionel" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            </ul>
         </div>
-    </nav>
+    </aside>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <div class="container">
-            <div class="photo"><img src="selfie.jpg" alt="Profile Photo"></div>
-            <h1 class="neon">Hi, I'm Lionel</h1>
-            <div class="typing" id="typing"></div>
-            <p>Motivated System Administrator with a Master’s in Cybersecurity and a Bachelor’s in IT, over two years of
-                experience automating servers, integrating APIs, and designing responsive websites.</p>
-        </div>
-    </section>
+    <div class="main-content">
+        <div class="content-card">
+            <!-- Navbar -->
+            <nav class="navbar">
+                <ul class="navbar-list">
+                    <li><button class="navbar-link active" data-nav-link="about">About</button></li>
+                    <li><button class="navbar-link" data-nav-link="projects">Projects</button></li>
+                    <li><button class="navbar-link" data-nav-link="experience">Experience</button></li>
+                    <li><button class="navbar-link" data-nav-link="hobbies">Hobbies</button></li>
+                    <li><button class="navbar-link" data-nav-link="contact">Contact</button></li>
+                </ul>
+            </nav>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">&lt;Projects /&gt;</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Email Phishing Detection</h3>
-                    <p>Apps Script + VirusTotal + custom ML logic for Gmail and Sheets.</p>
-                    <div class="tags"><span>#AppsScript</span><span>#ML</span><span>#VirusTotal</span></div>
-                </div>
+            <!-- About -->
+            <article data-page="about" class="active">
+                <h2 class="section-title">About Me</h2>
+                <div class="typing" id="typing"></div>
+                <p>
+                    Motivated System Administrator with an M.S. in Cybersecurity and a B.S. in IT, with 2+ years
+                    automating servers, integrating APIs, and designing responsive websites.
+                </p>
+            </article>
 
-                <div class="card">
-                    <h3>AI Chatbot Assistant</h3>
-                    <p>Built with Python, Flask & OpenAI pulling from trained database.</p>
-                    <div class="tags"><span>#Flask</span><span>#Python</span><span>#OpenAI</span></div>
-                </div>
-
-                <div class="card">
-                    <h3>EDI & API Integration</h3>
-                    <p>Robust EDI workflows and REST APIs for order & inventory syncing.</p>
-                    <div class="tags"><span>#EDI</span><span>#API</span></div>
-                </div>
-
-
-
-                <div class="card">
-                    <h3>Network Monitoring Dashboard</h3>
-                    <p>Real-time network health metrics with Grafana & Python.</p>
-                    <div class="tags"><span>#Networking</span><span>#Grafana</span><span>#Python</span></div>
-                </div>
-
-                <div class="card">
-                    <h3>Phyhon Tool</h3>
-                    <p>Effortlessly batch-engineers files data—configuring, structuring, and delivering polished,
-                        design-forward spreadsheet outputs.</p>
-
-                    <div class="tags"><span>#Python</span><span>#PDF</span><span>#Automation</span></div>
-                </div>
-                <div class="card">
-                    <h3>Voice Assistant</h3>
-                    <p>Capture live audio, auto-transcribe to text, and tap into the ChatGPT API for instant
-                        Q&amp;A—logging every session for future reference.</p>
-                    <div class="tags">
-                        <span>#Vosk</span>
-                        <span>#ChatGPTAPI</span>
-                        <span>#PythonGUI</span>
-                        <span>#Automation</span>
+            <!-- Projects -->
+            <article data-page="projects">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects">
+                    <div class="project-card">
+                        <h3>Email Phishing Detection</h3>
+                        <p>Apps Script + VirusTotal + custom ML logic for Gmail &amp; Sheets.</p>
+                        <div class="tags">
+                            <span class="tag">AppsScript</span>
+                            <span class="tag">ML</span>
+                            <span class="tag">VirusTotal</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Online Product Viewer -->
-                <div class="card full-width">
-                    <h3>Aurora Furniture Company Site</h3>
-                    <p>Online interface for browsing real-time product details and media.</p>
-                    <div class="iframe-wrapper">
-                        <iframe src="https://aurorafurnituremfg.ca" title="Product Viewer"></iframe>
+                    <div class="project-card">
+                        <h3>AI Chatbot Assistant</h3>
+                        <p>Built with Python, Flask &amp; OpenAI pulling from trained database.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Flask</span>
+                            <span class="tag">OpenAI</span>
+                        </div>
                     </div>
-                    <div class="tags">
-                        <span>#HTML</span><span>#CSS</span><span>#JavaScript</span><span>#API</span>
+                    <div class="project-card">
+                        <h3>EDI &amp; API Integration</h3>
+                        <p>Robust EDI workflows and REST APIs for order &amp; inventory syncing.</p>
+                        <div class="tags">
+                            <span class="tag">EDI</span>
+                            <span class="tag">API</span>
+                        </div>
                     </div>
-                </div>
-                <div class="card full-width">
-                    <h3>Standard Install Company Site</h3>
-                    <p>Wix-based site showcasing installation services and customer resources.</p>
-                    <div class="iframe-wrapper">
+                    <div class="project-card">
+                        <h3>Network Monitoring Dashboard</h3>
+                        <p>Real-time network health metrics with Grafana &amp; Python.</p>
+                        <div class="tags">
+                            <span class="tag">Networking</span>
+                            <span class="tag">Grafana</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>Python Tool</h3>
+                        <p>Batch-engineers files: configures, structures, and delivers polished spreadsheet outputs.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">PDF</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>Voice Assistant</h3>
+                        <p>Live audio capture, auto-transcription, ChatGPT API Q&amp;A, session logging.</p>
+                        <div class="tags">
+                            <span class="tag">Vosk</span>
+                            <span class="tag">ChatGPTAPI</span>
+                            <span class="tag">PythonGUI</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                    </div>
+                    <div class="project-card iframe-card">
+                        <h3>Aurora Furniture Site</h3>
+                        <iframe src="https://aurorafurnituremfg.ca" title="Aurora Furniture"></iframe>
+                        <div class="tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">API</span>
+                        </div>
+                    </div>
+                    <div class="project-card iframe-card">
+                        <h3>Standard Install Site</h3>
                         <iframe src="https://www.standardinstall.ca" title="Standard Install"></iframe>
+                        <div class="tags">
+                            <span class="tag">Wix</span>
+                            <span class="tag">Responsive</span>
+                        </div>
                     </div>
-                    <div class="tags">
-                        <span>#Wix</span><span>#HTML</span><span>#CSS</span><span>#Responsive</span>
-                    </div>
-                </div>
-
-                <!-- Inventory & Reporting Dashboard -->
-                <div class="card full-width">
-                    <h3>Inventory & Reporting Dashboard</h3>
-                    <p>Database reader for generating reports and monitoring inventory levels.</p>
-                    <div class="iframe-wrapper">
+                    <div class="project-card iframe-card">
+                        <h3>Inventory &amp; Reporting Dashboard</h3>
                         <iframe src="https://cobra-moved-constantly.ngrok-free.app/html/"
                             title="Inventory Dashboard"></iframe>
+                        <div class="tags">
+                            <span class="tag">NodeJS</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">MySQL</span>
+                        </div>
                     </div>
-                    <div class="tags">
-                        <span>#NodeJS</span><span>#Python</span><span>#JavaScript</span><span>#MySQL</span>
+                </div>
+            </article>
+
+            <!-- Experience -->
+            <article data-page="experience">
+                <h2 class="section-title">Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>IT Systems &amp; Infrastructure Specialist</h3>
+                        <div class="meta">Amax Leather &amp; Aurora Furniture MFG | May 2025 – Present</div>
+                        <p>
+                            Lead Windows/Linux server design, enterprise network planning, ERP/WMS SQL &amp; XML
+                            reporting, API/EDI integrations, and cybersecurity programs.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>System Administrator</h3>
+                        <div class="meta">Amax Leather &amp; Aurora Furniture MFG | Aug 2022 – Apr 2025</div>
+                        <p>
+                            Developed JS-based reporting portals, maintained multiple e-commerce sites, wrote
+                            automation scripts, and provided cross-functional IT support.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Web Developer &amp; Sales</h3>
+                        <div class="meta">Perfect Decor | May 2022 – Mar 2023</div>
+                        <p>
+                            Redesigned websites for UX enhancements, built custom web applications, and managed
+                            visual asset creation to boost engagement.
+                        </p>
                     </div>
                 </div>
+            </article>
 
-            </div>
-        </div>
-    </section>
+            <!-- Hobbies -->
+            <article data-page="hobbies">
+                <h2 class="section-title">Hobbies</h2>
+                <div class="hobbies">
+                    <div class="hobby"><ion-icon name="tennisball-outline"></ion-icon><span>Badminton</span></div>
+                    <div class="hobby"><ion-icon name="snow-outline"></ion-icon><span>Skiing</span></div>
+                    <div class="hobby"><ion-icon name="flask-outline"></ion-icon><span>Shooting</span></div>
+                    <div class="hobby"><ion-icon name="barbell-outline"></ion-icon><span>Gym</span></div>
+                </div>
+            </article>
 
-    <!-- SKILLS -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">&lt;Skills /&gt;</h2>
-            <div class="skill-bar">
-                <div class="label"><span>AWS Management</span><span>95%</span></div>
-                <div class="bar">
-                    <div class="bar-inner" data-percent="95%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="label"><span>Python Scripting</span><span>90%</span></div>
-                <div class="bar">
-                    <div class="bar-inner" data-percent="90%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="label"><span>JavaScript & Node.js</span><span>90%</span></div>
-                <div class="bar">
-                    <div class="bar-inner" data-percent="90%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="label"><span>Linux & Windows Admin</span><span>90%</span></div>
-                <div class="bar">
-                    <div class="bar-inner" data-percent="90%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="label"><span>API & EDI Integration</span><span>85%</span></div>
-                <div class="bar">
-                    <div class="bar-inner" data-percent="85%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="label"><span>Responsive Web Design</span><span>85%</span></div>
-                <div class="bar">
-                    <div class="bar-inner" data-percent="85%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="label"><span>SQL & Automation</span><span>80%</span></div>
-                <div class="bar">
-                    <div class="bar-inner" data-percent="80%"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">&lt;Experience /&gt;</h2>
-            <div class="timeline">
-                <!-- Current Role -->
-                <div class="timeline-item">
-                    <h3>IT Systems & Infrastructure Specialist</h3>
-                    <div class="meta">
-                        <em>Amax Leather Canada Ltd & Aurora Furniture MFG | Permanent Full-time | Delta, BC</em><br>
-                        <em>May 2025 – Present (1 mo)</em>
-                    </div>
-                    <p>
-                        Leads design and maintenance of Windows/Linux servers, enterprise networks and hardware
-                        deployments across multiple facilities;
-                        optimizes Fishbowl ERP/WMS with SQL-driven reporting and XML templates;
-                        manages corporate websites, AWS and Google Workspace environments, and API/EDI integrations;
-                        develops Python/JavaScript automation and AI tools for data workflows and security;
-                        enforces cybersecurity best practices and delivers cross-functional IT support and strategic
-                        infrastructure guidance.
-                    </p>
-                </div>
-                <!-- Previous Role -->
-                <div class="timeline-item">
-                    <h3>System Administrator</h3>
-                    <div class="meta">
-                        <em>Amax Leather Canada Ltd & Aurora Furniture MFG | Permanent Full-time | Delta, BC</em><br>
-                        <em>Aug 2022 – Apr 2025 (2 yrs 9 mos)</em>
-                    </div>
-                    <p>
-                        Developed JavaScript sites for report viewing, implemented XML reports, and designed responsive
-                        websites;
-                        managed multiple e-commerce stores and maintained servers;
-                        wrote automation scripts to enhance efficiency;
-                        provided hardware maintenance, troubleshooting, and technical support to ensure seamless
-                        operations.
-                    </p>
-                </div>
-                <!-- Earlier Role -->
-                <div class="timeline-item">
-                    <h3>Web Developer & Sales</h3>
-                    <div class="meta">
-                        <em>Perfect Decor | Permanent Part-time | Vancouver, BC</em><br>
-                        <em>May 2022 – Mar 2023 (11 mos)</em>
-                    </div>
-                    <p>
-                        Redesigned and optimized websites and web stores to enhance functionality and user experience;
-                        developed custom sites and large-scale web applications;
-                        created high-quality visual assets to elevate aesthetics;
-                        integrated new features and updates for modern usability.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- EDUCATION -->
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title">&lt;Education /&gt;</h2>
-            <div class="edu-card">
-                <h3>MSc in Cybersecurity</h3>
-                <p><em>NYIT Vancouver • Jan 2024 – Dec 2024</em></p>
-                <p>Core studies: Network Security, Cryptography, Ethical Hacking, Threat Intelligence, Cloud Security.
+            <!-- Contact -->
+            <article data-page="contact">
+                <h2 class="section-title">Contact</h2>
+                <p>Email: <a href="mailto:lionelwwq@gmail.com" style="color:var(--accent)">lionelwwq@gmail.com</a></p>
+                <p>Phone: <a href="tel:+17788656808" style="color:var(--accent)">+1 (778) 865-6808</a></p>
+                <p>
+                    LinkedIn:
+                    <a href="https://linkedin.com/in/weiqi-wang-86bb07171" target="_blank" style="color:var(--accent)">
+                        weiqi-wang-86bb07171
+                    </a>
                 </p>
-            </div>
-            <div class="edu-card">
-                <h3>BSc in Information Technology</h3>
-                <p><em>KPU • Sep 2017 – Dec 2022</em></p>
-                <p>Covered Web Dev, Database Design, Software Engineering, Cloud Computing, and Network Admin.</p>
-            </div>
+            </article>
+
+            <footer>© 2025 Lionel Wang. All rights reserved.</footer>
         </div>
-    </section>
-
-    <!-- HOBBIES -->
-    <!-- ─── replace your HOBBIES section with this ─────────────────────────────────── -->
-    <!-- ─── Updated Hobbies Section ─────────────────────────────────────────────── -->
-    <section id="hobbies">
-        <div class="container">
-            <h2 class="section-title">&lt;Hobbies /&gt;</h2>
-            <div class="hobby-list">
-                <div class="hobby">
-                    <span class="hobby-icon animate-badminton">🏸</span>
-                    <div class="hobby-name">Badminton</div>
-                </div>
-                <div class="hobby">
-                    <span class="hobby-icon animate-skiing">🎿</span>
-                    <div class="hobby-name">Skiing</div>
-                </div>
-                <div class="hobby">
-                    <span class="hobby-icon animate-shooting">🎯</span>
-                    <div class="hobby-name">Shooting</div>
-                </div>
-                <div class="hobby">
-                    <span class="hobby-icon animate-gym">🏋️‍♂️</span>
-                    <div class="hobby-name">Gym</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">&lt;Contact /&gt;</h2>
-            <div class="info">
-                <p>Email: <a href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a></p>
-                <p>Phone: <a href="tel:7788656808">778-865-6808</a></p>
-                <p>LinkedIn: <a href="https://www.linkedin.com/in/weiqi-wang-86bb07171" target="_blank">Profile</a></p>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <script>
-        // Matrix rain
-        const canvas = document.getElementById('matrixCanvas'), ctx = canvas.getContext('2d');
-        let W = canvas.width = window.innerWidth, H = canvas.height = window.innerHeight;
-        const chars = 'LionelWangWeiqiWang王玮麒WangWeiqiリオネル리오넬', fontSize = 16;
-        const cols = Math.floor(W / fontSize), drops = Array(cols).fill(0);
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(42,42,68,0.15)'; ctx.fillRect(0, 0, W, H);
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--neon-cyan').trim();
-            ctx.font = fontSize + 'px monospace';
-            drops.forEach((y, i) => {
-                const text = chars.charAt(Math.random() * chars.length | 0);
-                ctx.fillText(text, i * fontSize, y * fontSize);
-                drops[i] = (y * fontSize > H && Math.random() > 0.975) ? 0 : y + 1;
-            });
-            requestAnimationFrame(drawMatrix);
-        }
-        window.addEventListener('resize', () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
-        drawMatrix();
+        // Sidebar toggle
+        document.querySelector('[data-sidebar-btn]').addEventListener('click', () => {
+            const info = document.querySelector('[data-sidebar]');
+            info.style.display = info.style.display === 'flex' ? 'none' : 'flex';
+        });
 
-        // Menu & typing
-        function toggleMenu() { document.getElementById('nav-links').classList.toggle('open'); }
-        document.querySelectorAll('#nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open')));
-        const phrases = ['Python scripting to automate things', 'EDI & API integrations', 'Responsive website design'];
-        let p = 0, c = 0; const typeEl = document.getElementById('typing');
-        function type() { const str = phrases[p]; typeEl.textContent = str.slice(0, c + 1); c++; if (c < str.length) setTimeout(type, 100); else setTimeout(erase, 2000); }
-        function erase() { const str = phrases[p]; typeEl.textContent = str.slice(0, c - 1); c--; if (c > 0) setTimeout(erase, 50); else { p = (p + 1) % phrases.length; setTimeout(type, 500); } }
-        document.addEventListener('DOMContentLoaded', () => { setTimeout(type, 500); document.querySelectorAll('.bar-inner').forEach(bar => bar.style.width = bar.getAttribute('data-percent')); });
-        // Fade-in
-        const sections = document.querySelectorAll('section');
-        function onScroll() { const Y = window.pageYOffset + window.innerHeight * 0.75; sections.forEach(sec => { if (Y > sec.offsetTop) sec.classList.add('visible'); }); }
-        window.addEventListener('scroll', onScroll); onScroll();
+        // Tab navigation
+        document.querySelectorAll('[data-nav-link]').forEach(btn =>
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-nav-link]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const page = btn.getAttribute('data-nav-link');
+                document.querySelectorAll('article[data-page]').forEach(p => p.classList.remove('active'));
+                document.querySelector(`article[data-page="${page}"]`).classList.add('active');
+            })
+        );
+
+        // Typing effect
+        const phrases = [
+            'IT Systems & Infrastructure Specialist',
+            'Cybersecurity Enthusiast',
+            'API & EDI Integrations',
+            'Web/API Developer'
+        ];
+        let p = 0, c = 0, el = document.getElementById('typing');
+        function type() {
+            const s = phrases[p];
+            el.textContent = s.slice(0, c + 1);
+            if (c < s.length) {
+                c++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+        function erase() {
+            const s = phrases[p];
+            el.textContent = s.slice(0, c - 1);
+            if (c > 0) {
+                c--;
+                setTimeout(erase, 50);
+            } else {
+                p = (p + 1) % phrases.length;
+                setTimeout(type, 500);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => setTimeout(type, 500));
     </script>
 </body>
 
