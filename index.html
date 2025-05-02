@@ -31,10 +31,12 @@
             background: var(--bg-dark);
             color: var(--text-light);
             font-family: var(--font-main);
-            height: 100vh;
-            overflow: hidden;
+            /* allow the page to expand past the viewport */
+            min-height: 100vh;
+            /* enable vertical scrolling */
+            overflow-x: hidden;
+            overflow-y: auto;
             padding: 2rem;
-            display: block;
         }
 
         .container {
