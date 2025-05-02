@@ -60,13 +60,29 @@
 
         .avatar-box {
             position: relative;
+            width: 120px;
+            height: 120px;
         }
 
-        .avatar-box img {
+        .avatar-box .avatar {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 120px;
             height: 120px;
             border-radius: 50%;
             border: 3px solid var(--accent);
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .fade-out {
+            opacity: 0;
+            z-index: 0;
         }
 
         .active-status {
@@ -543,7 +559,8 @@
     <div class="container">
         <aside class="sidebar">
             <div class="avatar-box">
-                <img src="selfie.png" alt="Lionel Wang" />
+                <img id="avatar1" src="selfie.png" alt="Lionel Wang" class="avatar fade-in" />
+                <img id="avatar2" src="selfie2.png" alt="Lionel Wang Sunglasses Off" class="avatar fade-out" />
                 <span class="active-status"></span>
             </div>
             <h1 class="name">Lionel Wang</h1>
@@ -1052,6 +1069,28 @@
             }
             document.addEventListener('DOMContentLoaded', () => setTimeout(type, 500));
         </script>
+        <script>
+            const img1 = document.getElementById('avatar1');
+            const img2 = document.getElementById('avatar2');
+            let showingFirst = true;
+
+            setInterval(() => {
+                if (showingFirst) {
+                    img1.classList.remove('fade-in');
+                    img1.classList.add('fade-out');
+                    img2.classList.remove('fade-out');
+                    img2.classList.add('fade-in');
+                } else {
+                    img1.classList.remove('fade-out');
+                    img1.classList.add('fade-in');
+                    img2.classList.remove('fade-in');
+                    img2.classList.add('fade-out');
+                }
+                showingFirst = !showingFirst;
+            }, 6000);
+        </script>
+
+
 </body>
 
 </html>
