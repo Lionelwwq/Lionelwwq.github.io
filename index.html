@@ -9,7 +9,6 @@
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-
     <style>
         :root {
             --bg-dark: #0f0f1a;
@@ -27,24 +26,36 @@
             padding: 0;
         }
 
+        html,
         body {
-            display: flex;
-            min-height: 100vh;
             background: var(--bg-dark);
             color: var(--text-light);
             font-family: var(--font-main);
+            height: 100vh;
+            overflow: hidden;
+            padding: 2rem;
+            display: block;
         }
 
-        /* Sidebar */
+        .container {
+            display: flex;
+            width: 1300px;
+            gap: 2rem;
+            margin: 0 auto;
+        }
+
         .sidebar {
             width: 280px;
+            height: 85vh;
             background: var(--bg-light);
+            border-radius: 12px;
+            padding: 2rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            /* vertically center */
-            padding: 2rem 1rem;
+            justify-content: flex-start;
+            text-align: center;
+            flex-shrink: 0;
         }
 
         .avatar-box {
@@ -52,8 +63,8 @@
         }
 
         .avatar-box img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 3px solid var(--accent);
         }
@@ -89,34 +100,20 @@
             margin-top: 1rem;
             font-size: 1.4rem;
             font-weight: 600;
-            text-align: center;
         }
 
         .title {
             font-size: 0.9rem;
             color: var(--text-muted);
             margin-bottom: 1rem;
-            text-align: center;
         }
 
         .info_more-btn {
-            background: none;
-            border: none;
-            color: var(--accent);
-            margin-top: 0.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-        }
-
-        .info_more-btn span {
-            margin-right: 0.25rem;
+            display: none !important;
         }
 
         .sidebar-info_more {
-            display: none;
-            width: 100%;
+            display: flex !important;
             flex-direction: column;
             align-items: center;
             margin-top: 1rem;
@@ -157,20 +154,20 @@
 
         .main-content {
             flex: 1;
+            height: 85vh;
             display: flex;
             justify-content: center;
+            overflow: hidden;
         }
 
         .content-card {
             background: var(--bg-card);
-            margin: 2rem auto;
-            max-width: 1000px;
-            width: calc(100% - 4rem);
+            width: 100%;
+            height: 100%;
             border-radius: 8px;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
-            flex: 1;
+            overflow: hidden;
         }
 
         .navbar {
@@ -181,7 +178,7 @@
         .navbar-list {
             list-style: none;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             gap: 1.5rem;
         }
 
@@ -337,257 +334,259 @@
             font-size: 0.85rem;
             color: var(--text-muted);
         }
+
+        article::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        article::-webkit-scrollbar-thumb {
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
     </style>
 </head>
 
 <body>
-    <aside class="sidebar">
-        <div class="avatar-box">
-            <img src="selfie.jpg" alt="Lionel Wang" />
-            <span class="active-status"></span>
-        </div>
-        <h1 class="name">Lionel Wang</h1>
-        <p class="title">Sysadmin & Cybersecurity</p>
-        <button class="info_more-btn" data-sidebar-btn>
-            <span>Show Contacts</span>
-            <ion-icon name="chevron-down"></ion-icon>
-        </button>
-        <div class="sidebar-info_more" data-sidebar>
-            <ul class="contacts-list">
-                <li><ion-icon name="mail-outline"></ion-icon><a
-                        href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a></li>
-                <li><ion-icon name="call-outline"></ion-icon><a href="tel:+17788656808">+1 (778) 865-6808</a></li>
-                <li><ion-icon name="logo-linkedin"></ion-icon><a href="https://linkedin.com/in/weiqi-wang-86bb07171"
-                        target="_blank">LinkedIn</a></li>
-            </ul>
-            <ul class="social-list">
-                <li><a href="https://github.com/lionelwwq" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
-                </li>
-                <li><a href="https://x.com/itzlionel" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a></li>
-            </ul>
-        </div>
-    </aside>
-
-    <div class="main-content">
-        <div class="content-card">
-            <!-- Navbar -->
-            <nav class="navbar">
-                <ul class="navbar-list">
-                    <li><button class="navbar-link active" data-nav-link="about">About</button></li>
-                    <li><button class="navbar-link" data-nav-link="projects">Projects</button></li>
-                    <li><button class="navbar-link" data-nav-link="experience">Experience</button></li>
-                    <li><button class="navbar-link" data-nav-link="hobbies">Hobbies</button></li>
-                    <li><button class="navbar-link" data-nav-link="contact">Contact</button></li>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="avatar-box">
+                <img src="selfie.jpg" alt="Lionel Wang" />
+                <span class="active-status"></span>
+            </div>
+            <h1 class="name">Lionel Wang</h1>
+            <p class="title">Sysadmin & Cybersecurity</p>
+            <div class="sidebar-info_more" data-sidebar>
+                <ul class="contacts-list">
+                    <li><ion-icon name="mail-outline"></ion-icon><a
+                            href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a></li>
+                    <li><ion-icon name="call-outline"></ion-icon><a href="tel:+17788656808">+1 (778) 865-6808</a></li>
+                    <li><ion-icon name="logo-linkedin"></ion-icon><a href="https://linkedin.com/in/weiqi-wang-86bb07171"
+                            target="_blank">LinkedIn</a></li>
                 </ul>
-            </nav>
+                <ul class="social-list">
+                    <li><a href="https://github.com/lionelwwq" target="_blank"><ion-icon
+                                name="logo-github"></ion-icon></a></li>
+                    <li><a href="https://x.com/itzlionel" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
 
-            <!-- About -->
-            <article data-page="about" class="active">
-                <h2 class="section-title">About Me</h2>
-                <div class="typing" id="typing"></div>
-                <p>
-                    Motivated System Administrator with an M.S. in Cybersecurity and a B.S. in IT, with 2+ years
-                    automating servers, integrating APIs, and designing responsive websites.
-                </p>
-            </article>
+        <div class="main-content">
+            <div class="content-card">
+                <!-- Navbar -->
+                <nav class="navbar">
+                    <ul class="navbar-list">
+                        <li><button class="navbar-link active" data-nav-link="about">About</button></li>
+                        <li><button class="navbar-link" data-nav-link="projects">Projects</button></li>
+                        <li><button class="navbar-link" data-nav-link="experience">Experience</button></li>
+                        <li><button class="navbar-link" data-nav-link="hobbies">Hobbies</button></li>
+                        <li><button class="navbar-link" data-nav-link="contact">Contact</button></li>
+                    </ul>
+                </nav>
 
-            <!-- Projects -->
-            <article data-page="projects">
-                <h2 class="section-title">Projects</h2>
-                <div class="projects">
-                    <div class="project-card">
-                        <h3>Email Phishing Detection</h3>
-                        <p>Apps Script + VirusTotal + custom ML logic for Gmail &amp; Sheets.</p>
-                        <div class="tags">
-                            <span class="tag">AppsScript</span>
-                            <span class="tag">ML</span>
-                            <span class="tag">VirusTotal</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>AI Chatbot Assistant</h3>
-                        <p>Built with Python, Flask &amp; OpenAI pulling from trained database.</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Flask</span>
-                            <span class="tag">OpenAI</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>EDI &amp; API Integration</h3>
-                        <p>Robust EDI workflows and REST APIs for order &amp; inventory syncing.</p>
-                        <div class="tags">
-                            <span class="tag">EDI</span>
-                            <span class="tag">API</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Network Monitoring Dashboard</h3>
-                        <p>Real-time network health metrics with Grafana &amp; Python.</p>
-                        <div class="tags">
-                            <span class="tag">Networking</span>
-                            <span class="tag">Grafana</span>
-                            <span class="tag">Python</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Python Tool</h3>
-                        <p>Batch-engineers files: configures, structures, and delivers polished spreadsheet outputs.</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">PDF</span>
-                            <span class="tag">Automation</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Voice Assistant</h3>
-                        <p>Live audio capture, auto-transcription, ChatGPT API Q&amp;A, session logging.</p>
-                        <div class="tags">
-                            <span class="tag">Vosk</span>
-                            <span class="tag">ChatGPTAPI</span>
-                            <span class="tag">PythonGUI</span>
-                            <span class="tag">Automation</span>
-                        </div>
-                    </div>
-                    <div class="project-card iframe-card">
-                        <h3>Aurora Furniture Site</h3>
-                        <iframe src="https://aurorafurnituremfg.ca" title="Aurora Furniture"></iframe>
-                        <div class="tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">API</span>
-                        </div>
-                    </div>
-                    <div class="project-card iframe-card">
-                        <h3>Standard Install Site</h3>
-                        <iframe src="https://www.standardinstall.ca" title="Standard Install"></iframe>
-                        <div class="tags">
-                            <span class="tag">Wix</span>
-                            <span class="tag">Responsive</span>
-                        </div>
-                    </div>
-                    <div class="project-card iframe-card">
-                        <h3>Inventory &amp; Reporting Dashboard</h3>
-                        <iframe src="https://cobra-moved-constantly.ngrok-free.app/html/"
-                            title="Inventory Dashboard"></iframe>
-                        <div class="tags">
-                            <span class="tag">NodeJS</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
+                <!-- About -->
+                <article data-page="about" class="active">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="typing" id="typing"></div>
+                    <p>
+                        Motivated System Administrator with an M.S. in Cybersecurity and a B.S. in IT, with 2+ years
+                        automating servers, integrating APIs, and designing responsive websites.
+                    </p>
+                </article>
 
-            <!-- Experience -->
-            <article data-page="experience">
-                <h2 class="section-title">Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>IT Systems &amp; Infrastructure Specialist</h3>
-                        <div class="meta">Amax Leather &amp; Aurora Furniture MFG | May 2025 – Present</div>
-                        <p>
-                            Lead Windows/Linux server design, enterprise network planning, ERP/WMS SQL &amp; XML
-                            reporting, API/EDI integrations, and cybersecurity programs.
-                        </p>
+                <!-- Projects -->
+                <article data-page="projects">
+                    <h2 class="section-title">Projects</h2>
+                    <div class="projects">
+                        <div class="project-card">
+                            <h3>Email Phishing Detection</h3>
+                            <p>Apps Script + VirusTotal + custom ML logic for Gmail &amp; Sheets.</p>
+                            <div class="tags">
+                                <span class="tag">AppsScript</span>
+                                <span class="tag">ML</span>
+                                <span class="tag">VirusTotal</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>AI Chatbot Assistant</h3>
+                            <p>Built with Python, Flask &amp; OpenAI pulling from trained database.</p>
+                            <div class="tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Flask</span>
+                                <span class="tag">OpenAI</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>EDI &amp; API Integration</h3>
+                            <p>Robust EDI workflows and REST APIs for order &amp; inventory syncing.</p>
+                            <div class="tags">
+                                <span class="tag">EDI</span>
+                                <span class="tag">API</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Network Monitoring Dashboard</h3>
+                            <p>Real-time network health metrics with Grafana &amp; Python.</p>
+                            <div class="tags">
+                                <span class="tag">Networking</span>
+                                <span class="tag">Grafana</span>
+                                <span class="tag">Python</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Python Tool</h3>
+                            <p>Batch-engineers files: configures, structures, and delivers polished spreadsheet outputs.
+                            </p>
+                            <div class="tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">PDF</span>
+                                <span class="tag">Automation</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Voice Assistant</h3>
+                            <p>Live audio capture, auto-transcription, ChatGPT API Q&amp;A, session logging.</p>
+                            <div class="tags">
+                                <span class="tag">Vosk</span>
+                                <span class="tag">ChatGPTAPI</span>
+                                <span class="tag">PythonGUI</span>
+                                <span class="tag">Automation</span>
+                            </div>
+                        </div>
+                        <div class="project-card iframe-card">
+                            <h3>Aurora Furniture Site</h3>
+                            <iframe src="https://aurorafurnituremfg.ca" title="Aurora Furniture"></iframe>
+                            <div class="tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">API</span>
+                            </div>
+                        </div>
+                        <div class="project-card iframe-card">
+                            <h3>Standard Install Site</h3>
+                            <iframe src="https://www.standardinstall.ca" title="Standard Install"></iframe>
+                            <div class="tags">
+                                <span class="tag">Wix</span>
+                                <span class="tag">Responsive</span>
+                            </div>
+                        </div>
+                        <div class="project-card iframe-card">
+                            <h3>Inventory &amp; Reporting Dashboard</h3>
+                            <iframe src="https://cobra-moved-constantly.ngrok-free.app/html/"
+                                title="Inventory Dashboard"></iframe>
+                            <div class="tags">
+                                <span class="tag">NodeJS</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">MySQL</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="timeline-item">
-                        <h3>System Administrator</h3>
-                        <div class="meta">Amax Leather &amp; Aurora Furniture MFG | Aug 2022 – Apr 2025</div>
-                        <p>
-                            Developed JS-based reporting portals, maintained multiple e-commerce sites, wrote
-                            automation scripts, and provided cross-functional IT support.
-                        </p>
+                </article>
+
+                <!-- Experience -->
+                <article data-page="experience">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>IT Systems &amp; Infrastructure Specialist</h3>
+                            <div class="meta">Amax Leather &amp; Aurora Furniture MFG | May 2025 – Present</div>
+                            <p>
+                                Lead Windows/Linux server design, enterprise network planning, ERP/WMS SQL &amp; XML
+                                reporting, API/EDI integrations, and cybersecurity programs.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>System Administrator</h3>
+                            <div class="meta">Amax Leather &amp; Aurora Furniture MFG | Aug 2022 – Apr 2025</div>
+                            <p>
+                                Developed JS-based reporting portals, maintained multiple e-commerce sites, wrote
+                                automation scripts, and provided cross-functional IT support.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Web Developer &amp; Sales</h3>
+                            <div class="meta">Perfect Decor | May 2022 – Mar 2023</div>
+                            <p>
+                                Redesigned websites for UX enhancements, built custom web applications, and managed
+                                visual asset creation to boost engagement.
+                            </p>
+                        </div>
                     </div>
-                    <div class="timeline-item">
-                        <h3>Web Developer &amp; Sales</h3>
-                        <div class="meta">Perfect Decor | May 2022 – Mar 2023</div>
-                        <p>
-                            Redesigned websites for UX enhancements, built custom web applications, and managed
-                            visual asset creation to boost engagement.
-                        </p>
+                </article>
+
+                <!-- Hobbies -->
+                <article data-page="hobbies">
+                    <h2 class="section-title">Hobbies</h2>
+                    <div class="hobbies">
+                        <div class="hobby"><ion-icon name="tennisball-outline"></ion-icon><span>Badminton</span></div>
+                        <div class="hobby"><ion-icon name="snow-outline"></ion-icon><span>Skiing</span></div>
+                        <div class="hobby"><ion-icon name="flask-outline"></ion-icon><span>Shooting</span></div>
+                        <div class="hobby"><ion-icon name="barbell-outline"></ion-icon><span>Gym</span></div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-            <!-- Hobbies -->
-            <article data-page="hobbies">
-                <h2 class="section-title">Hobbies</h2>
-                <div class="hobbies">
-                    <div class="hobby"><ion-icon name="tennisball-outline"></ion-icon><span>Badminton</span></div>
-                    <div class="hobby"><ion-icon name="snow-outline"></ion-icon><span>Skiing</span></div>
-                    <div class="hobby"><ion-icon name="flask-outline"></ion-icon><span>Shooting</span></div>
-                    <div class="hobby"><ion-icon name="barbell-outline"></ion-icon><span>Gym</span></div>
-                </div>
-            </article>
+                <!-- Contact -->
+                <article data-page="contact">
+                    <h2 class="section-title">Contact</h2>
+                    <p>Email: <a href="mailto:lionelwwq@gmail.com" style="color:var(--accent)">lionelwwq@gmail.com</a>
+                    </p>
+                    <p>Phone: <a href="tel:+17788656808" style="color:var(--accent)">+1 (778) 865-6808</a></p>
+                    <p>
+                        LinkedIn:
+                        <a href="https://linkedin.com/in/weiqi-wang-86bb07171" target="_blank"
+                            style="color:var(--accent)">
+                            weiqi-wang-86bb07171
+                        </a>
+                    </p>
+                </article>
 
-            <!-- Contact -->
-            <article data-page="contact">
-                <h2 class="section-title">Contact</h2>
-                <p>Email: <a href="mailto:lionelwwq@gmail.com" style="color:var(--accent)">lionelwwq@gmail.com</a></p>
-                <p>Phone: <a href="tel:+17788656808" style="color:var(--accent)">+1 (778) 865-6808</a></p>
-                <p>
-                    LinkedIn:
-                    <a href="https://linkedin.com/in/weiqi-wang-86bb07171" target="_blank" style="color:var(--accent)">
-                        weiqi-wang-86bb07171
-                    </a>
-                </p>
-            </article>
-
-            <footer>© 2025 Lionel Wang. All rights reserved.</footer>
+                <footer>© 2025 Lionel Wang. All rights reserved.</footer>
+            </div>
         </div>
-    </div>
 
-    <script>
-        // Sidebar toggle
-        document.querySelector('[data-sidebar-btn]').addEventListener('click', () => {
-            const info = document.querySelector('[data-sidebar]');
-            info.style.display = info.style.display === 'flex' ? 'none' : 'flex';
-        });
+        <script>
+            document.querySelectorAll('[data-nav-link]').forEach(btn =>
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('[data-nav-link]').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const page = btn.getAttribute('data-nav-link');
+                    document.querySelectorAll('article[data-page]').forEach(p => p.classList.remove('active'));
+                    document.querySelector(`article[data-page="${page}"]`).classList.add('active');
+                })
+            );
 
-        // Tab navigation
-        document.querySelectorAll('[data-nav-link]').forEach(btn =>
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('[data-nav-link]').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const page = btn.getAttribute('data-nav-link');
-                document.querySelectorAll('article[data-page]').forEach(p => p.classList.remove('active'));
-                document.querySelector(`article[data-page="${page}"]`).classList.add('active');
-            })
-        );
-
-        // Typing effect
-        const phrases = [
-            'IT Systems & Infrastructure Specialist',
-            'Cybersecurity Enthusiast',
-            'API & EDI Integrations',
-            'Web/API Developer'
-        ];
-        let p = 0, c = 0, el = document.getElementById('typing');
-        function type() {
-            const s = phrases[p];
-            el.textContent = s.slice(0, c + 1);
-            if (c < s.length) {
-                c++;
-                setTimeout(type, 100);
-            } else {
-                setTimeout(erase, 2000);
+            const phrases = [
+                'IT Systems & Infrastructure Specialist',
+                'Cybersecurity Enthusiast',
+                'API & EDI Integrations',
+                'Web/API Developer'
+            ];
+            let p = 0, c = 0, el = document.getElementById('typing');
+            function type() {
+                const s = phrases[p];
+                el.textContent = s.slice(0, c + 1);
+                if (c < s.length) {
+                    c++;
+                    setTimeout(type, 100);
+                } else {
+                    setTimeout(erase, 2000);
+                }
             }
-        }
-        function erase() {
-            const s = phrases[p];
-            el.textContent = s.slice(0, c - 1);
-            if (c > 0) {
-                c--;
-                setTimeout(erase, 50);
-            } else {
-                p = (p + 1) % phrases.length;
-                setTimeout(type, 500);
+            function erase() {
+                const s = phrases[p];
+                el.textContent = s.slice(0, c - 1);
+                if (c > 0) {
+                    c--;
+                    setTimeout(erase, 50);
+                } else {
+                    p = (p + 1) % phrases.length;
+                    setTimeout(type, 500);
+                }
             }
-        }
-        document.addEventListener('DOMContentLoaded', () => setTimeout(type, 500));
-    </script>
+            document.addEventListener('DOMContentLoaded', () => setTimeout(type, 500));
+        </script>
 </body>
 
 </html>
