@@ -507,6 +507,35 @@
             font-size: 0.95rem;
             line-height: 1.4;
         }
+
+        .project-card.fullwidth-iframe {
+            width: 100%;
+            margin-bottom: 2rem;
+            padding: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+            background: var(--bg-light);
+        }
+
+        .project-card.fullwidth-iframe h3 {
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .project-card.fullwidth-iframe iframe {
+            width: 100%;
+            height: 480px;
+            border: none;
+            pointer-events: none;
+            border-top: 1px solid #333;
+        }
+
+        .project-card.fullwidth-iframe a {
+            display: block;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -614,42 +643,48 @@
                 <!-- Projects -->
                 <article data-page="projects">
                     <h2 class="section-title">Projects</h2>
+
+                    <!-- Grid layout for smaller projects -->
                     <div class="projects">
                         <div class="project-card">
                             <h3>Email Phishing Detection</h3>
-                            <p>Apps Script + VirusTotal + custom ML logic for Gmail &amp; Sheets.</p>
+                            <p>Apps Script + VirusTotal + custom ML logic for Gmail & Sheets.</p>
                             <div class="tags">
                                 <span class="tag">AppsScript</span>
                                 <span class="tag">ML</span>
                                 <span class="tag">VirusTotal</span>
                             </div>
                         </div>
+
                         <div class="project-card">
                             <h3>AI Chatbot Assistant</h3>
-                            <p>Built with Python, Flask &amp; OpenAI pulling from trained database.</p>
+                            <p>Built with Python, Flask & OpenAI pulling from trained database.</p>
                             <div class="tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">Flask</span>
                                 <span class="tag">OpenAI</span>
                             </div>
                         </div>
+
                         <div class="project-card">
-                            <h3>EDI &amp; API Integration</h3>
-                            <p>Robust EDI workflows and REST APIs for order &amp; inventory syncing.</p>
+                            <h3>EDI & API Integration</h3>
+                            <p>Robust EDI workflows and REST APIs for order & inventory syncing.</p>
                             <div class="tags">
                                 <span class="tag">EDI</span>
                                 <span class="tag">API</span>
                             </div>
                         </div>
+
                         <div class="project-card">
                             <h3>Network Monitoring Dashboard</h3>
-                            <p>Real-time network health metrics with Grafana &amp; Python.</p>
+                            <p>Real-time network health metrics with Grafana & Python.</p>
                             <div class="tags">
                                 <span class="tag">Networking</span>
                                 <span class="tag">Grafana</span>
                                 <span class="tag">Python</span>
                             </div>
                         </div>
+
                         <div class="project-card">
                             <h3>Python Tool</h3>
                             <p>Batch-engineers files: configures, structures, and delivers polished spreadsheet outputs.
@@ -660,9 +695,10 @@
                                 <span class="tag">Automation</span>
                             </div>
                         </div>
+
                         <div class="project-card">
                             <h3>Voice Assistant</h3>
-                            <p>Live audio capture, auto-transcription, ChatGPT API Q&amp;A, session logging.</p>
+                            <p>Live audio capture, auto-transcription, ChatGPT API Q&A, session logging.</p>
                             <div class="tags">
                                 <span class="tag">Vosk</span>
                                 <span class="tag">ChatGPTAPI</span>
@@ -670,36 +706,61 @@
                                 <span class="tag">Automation</span>
                             </div>
                         </div>
-                        <div class="project-card iframe-card">
+                    </div>
+                    <br>
+                    <!-- Full-width website previews -->
+                    <div class="project-card fullwidth-iframe">
+                        <a href="https://aurorafurnituremfg.ca" target="_blank">
                             <h3>Aurora Furniture Site</h3>
-                            <iframe src="https://aurorafurnituremfg.ca" title="Aurora Furniture"></iframe>
-                            <div class="tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">API</span>
-                            </div>
+                            <iframe src="https://aurorafurnituremfg.ca" title="Aurora Furniture Site"></iframe>
+                        </a>
+                        <div class="tags" style="padding: 1rem 1.5rem;">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Responsive</span>
+                            <span class="tag">Forum</span>
+                            <span class="tag">UI/UX</span>
+
                         </div>
-                        <div class="project-card iframe-card">
+                    </div>
+
+                    <div class="project-card fullwidth-iframe">
+                        <a href="https://www.standardinstall.ca" target="_blank">
                             <h3>Standard Install Site</h3>
                             <iframe src="https://www.standardinstall.ca" title="Standard Install"></iframe>
-                            <div class="tags">
-                                <span class="tag">Wix</span>
-                                <span class="tag">Responsive</span>
-                            </div>
+                        </a>
+                        <div class="tags" style="padding: 1rem 1.5rem;">
+                            <span class="tag">Wix Studio</span>
+                            <span class="tag">Custom UI Design</span>
+                            <span class="tag">Content Management</span>
+                            <span class="tag">Responsive Design</span>
+                            <span class="tag">SEO Optimization</span>
+                            <span class="tag">Web Animation</span>
                         </div>
-                        <div class="project-card iframe-card">
-                            <h3>Inventory &amp; Reporting Dashboard</h3>
+                    </div>
+
+                    <div class="project-card fullwidth-iframe">
+                        <a href="https://cobra-moved-constantly.ngrok-free.app/html/" target="_blank">
+                            <h3>Inventory & Reporting Dashboard</h3>
                             <iframe src="https://cobra-moved-constantly.ngrok-free.app/html/"
                                 title="Inventory Dashboard"></iframe>
-                            <div class="tags">
-                                <span class="tag">NodeJS</span>
-                                <span class="tag">Python</span>
-                                <span class="tag">MySQL</span>
-                            </div>
+                        </a>
+                        <div class="tags" style="padding: 1rem 1.5rem;">
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Express</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">REST API</span>
+                            <span class="tag">Excel Automation</span>
+                            <span class="tag">OTP Auth</span>
+                            <span class="tag">Session Management</span>
+                            <span class="tag">Email Integration</span>
+                            <span class="tag">OpenAI</span>
                         </div>
                     </div>
                 </article>
+
 
                 <!-- Experience -->
                 <!-- Resume -->
