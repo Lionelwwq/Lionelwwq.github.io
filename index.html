@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lionel Wang | Portfolio</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="selfie.png" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <style>
@@ -53,7 +53,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             text-align: center;
             flex-shrink: 0;
         }
@@ -103,9 +103,25 @@
         }
 
         .title {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            /* smaller font */
+            font-family: var(--font-type);
+            /* monospace font */
+            color: var(--accent);
             margin-bottom: 1rem;
+            min-height: 1.2em;
+            /* reserve space */
+        }
+
+        .separator {
+            font-weight: 600;
+        }
+
+        .typing {
+            display: inline-block;
         }
 
         .info_more-btn {
@@ -130,6 +146,10 @@
             margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
+        }
+
+        social-list {
+            display: none;
         }
 
         .contacts-list ion-icon,
@@ -208,7 +228,8 @@
 
         h2.section-title {
             font-size: 1.8rem;
-            color: var(--accent);
+            color: #eaeaea;
+            /* subtle white */
             margin-bottom: 1rem;
         }
 
@@ -305,27 +326,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .hobbies {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
 
-        .hobby {
-            text-align: center;
-        }
-
-        .hobby ion-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .hobby span {
-            font-size: 0.95rem;
-        }
 
         .content-card footer {
             background: var(--bg-card);
@@ -446,6 +447,65 @@
             .timeline-item {
                 padding-left: 0.5rem;
             }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #2e2e38;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .service-text h3 {
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+            font-size: 1.2rem;
+        }
+
+        .service-text p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .service-card p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -454,25 +514,27 @@
     <div class="container">
         <aside class="sidebar">
             <div class="avatar-box">
-                <img src="selfie.jpg" alt="Lionel Wang" />
+                <img src="selfie.png" alt="Lionel Wang" />
                 <span class="active-status"></span>
             </div>
             <h1 class="name">Lionel Wang</h1>
-            <p class="title">Sysadmin & Cybersecurity</p>
-            <div class="sidebar-info_more" data-sidebar>
+            <p class="title">
+                <span class="separator">/</span>
+                <span class="typing" id="typing"></span>
+            </p>
+            <div></div>
+            <div class="sidebar-info_more">
                 <ul class="contacts-list">
                     <li><ion-icon name="mail-outline"></ion-icon><a
                             href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a></li>
                     <li><ion-icon name="call-outline"></ion-icon><a href="tel:+17788656808">+1 (778) 865-6808</a></li>
+                    <li><ion-icon name="location-outline"></ion-icon><span>Vancouver, BC</span></li>
                     <li><ion-icon name="logo-linkedin"></ion-icon><a href="https://linkedin.com/in/weiqi-wang-86bb07171"
                             target="_blank">LinkedIn</a></li>
+                    <li><ion-icon name="logo-github"></ion-icon><a href="https://github.com/lionelwwq"
+                            target="_blank">Github</a></li>
                 </ul>
-                <ul class="social-list">
-                    <li><a href="https://github.com/lionelwwq" target="_blank"><ion-icon
-                                name="logo-github"></ion-icon></a></li>
-                    <li><a href="https://x.com/itzlionel" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a>
-                    </li>
-                </ul>
+
             </div>
         </aside>
 
@@ -483,20 +545,70 @@
                     <ul class="navbar-list">
                         <li><button class="navbar-link active" data-nav-link="about">About</button></li>
                         <li><button class="navbar-link" data-nav-link="projects">Projects</button></li>
-                        <li><button class="navbar-link" data-nav-link="experience">Experience</button></li>
-                        <li><button class="navbar-link" data-nav-link="hobbies">Hobbies</button></li>
-                        <li><button class="navbar-link" data-nav-link="contact">Contact</button></li>
+                        <li><button class="navbar-link" data-nav-link="experience">Resume</button></li>
+                        <li><button class="navbar-link" data-nav-link="skills">Skills</button></li>
+                        <li><button class="navbar-link" data-nav-link="certificates">Certificates</button></li>
+
                     </ul>
                 </nav>
 
                 <!-- About -->
                 <article data-page="about" class="active">
                     <h2 class="section-title">About Me</h2>
-                    <div class="typing" id="typing"></div>
-                    <p>
-                        Motivated System Administrator with an M.S. in Cybersecurity and a B.S. in IT, with 2+ years
-                        automating servers, integrating APIs, and designing responsive websites.
+
+                    <p style="color: var(--text-muted);">
+                        A results-driven IT Systems & Infrastructure Specialist with expertise in cybersecurity, ERP/WMS
+                        (Fishbowl),
+                        automation scripting (Python/JS), EDI/API integration, and full-stack web design & development.
+                        Skilled in managing
+                        servers, cloud platforms (AWS/GWS), and building internal tools to streamline operations and
+                        enhance security.
+                        Actively engaged in ethical hacking and bug bounty research to strengthen system integrity.
                     </p>
+                    <p style="color: var(--text-muted);">
+                        If you need a tech-savvy problem-solver to design, secure, and automate your digital
+                        infrastructure, let's connect
+                        and build something impactful.
+                    </p>
+                    <br>
+                    <h2 class="section-title">What i'm doing</h2>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <ion-icon name="server-outline" class="service-icon"></ion-icon>
+                            <div class="service-text">
+                                <h3>System Administration</h3>
+                                <p>Managing Windows/Linux servers, cloud platforms (AWS, Google Workspace, Microsoft
+                                    365), backups, and enterprise networks with a focus on security, reliability, and
+                                    performance.</p>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <ion-icon name="code-slash-outline" class="service-icon"></ion-icon>
+                            <div class="service-text">
+                                <h3>Web Design & Development</h3>
+                                <p>Crafting responsive websites and internal tools with seamless frontend-backend
+                                    integration using modern tech stacks.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <ion-icon name="shield-checkmark-outline" class="service-icon"></ion-icon>
+                            <div class="service-text">
+                                <h3>Cybersecurity & Bug Hunting</h3>
+                                <p>Enhancing system security via audits, DNS/email protection, and hands-on ethical
+                                    hacking and bug bounty testing.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <ion-icon name="settings-outline" class="service-icon"></ion-icon>
+                            <div class="service-text">
+                                <h3>ERP, API & Automation</h3>
+                                <p>Improving operations through ERP integration, API workflows, and custom scripts to
+                                    automate inventory, reporting, and order processing.</p>
+
+                            </div>
+                        </div>
+                    </div>
                 </article>
 
                 <!-- Projects -->
@@ -590,61 +702,249 @@
                 </article>
 
                 <!-- Experience -->
+                <!-- Resume -->
                 <article data-page="experience">
-                    <h2 class="section-title">Experience</h2>
+                    <h2 class="section-title">Resume</h2>
+
+                    <!-- Summary -->
+                    <h3 style="color: var(--accent); margin-top: 2rem;">Education</h3>
                     <div class="timeline">
                         <div class="timeline-item">
-                            <h3>IT Systems &amp; Infrastructure Specialist</h3>
-                            <div class="meta">Amax Leather &amp; Aurora Furniture MFG | May 2025 – Present</div>
+                            <h3>Master of Science in Cybersecurity</h3>
+                            <div class="meta">New York Institute of Technology | Jan 2024 – Dec 2024</div>
                             <p>
-                                Lead Windows/Linux server design, enterprise network planning, ERP/WMS SQL &amp; XML
-                                reporting, API/EDI integrations, and cybersecurity programs.
+                                GPA: 3.74<br>
+                                • Specialized in network security, cryptography, ethical hacking, and defense
+                                strategies.<br>
+                                • Gained hands-on experience in vulnerability scanning and legal compliance.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Bachelor of Information Technology</h3>
+                            <div class="meta">Kwantlen Polytechnic University | Sep 2017 – Dec 2022</div>
+                            <p>
+                                GPA: 3.26 (3.8 in major courses)<br>
+                                • Studied web dev, IoT, project management, and cloud security.<br>
+                                • Completed CO-OP training with practical development and system projects.
+                            </p>
+                        </div>
+                    </div>
+                    <h3 style="color: var(--accent); margin-top: 2rem;">Work Experience</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>IT Systems & Infrastructure Specialist</h3>
+                            <div class="meta">Amax Leather Canada Ltd & Aurora Furniture MFG | May 2025 – Present</div>
+                            <p>
+                                • Lead Windows/Linux server deployments and network infrastructure.<br>
+                                • Managed ERP/WMS systems with reporting automation.<br>
+                                • Designed cybersecurity protocols, implemented data backup, and ensured system
+                                reliability.<br>
+                                • Oversaw API and EDI integrations to streamline inventory/order syncing.
                             </p>
                         </div>
                         <div class="timeline-item">
                             <h3>System Administrator</h3>
-                            <div class="meta">Amax Leather &amp; Aurora Furniture MFG | Aug 2022 – Apr 2025</div>
+                            <div class="meta">Amax Leather Canada Ltd | Aug 2022 – Apr 2025</div>
                             <p>
-                                Developed JS-based reporting portals, maintained multiple e-commerce sites, wrote
-                                automation scripts, and provided cross-functional IT support.
+                                • Maintained server performance and cloud infrastructure (AWS).<br>
+                                • Configured Google Workspace and handled multi-site collaboration.<br>
+                                • Built JS-based dashboards and automation tools for internal use.<br>
+                                • Implemented cybersecurity practices to protect critical data.
                             </p>
                         </div>
                         <div class="timeline-item">
-                            <h3>Web Developer &amp; Sales</h3>
+                            <h3>Website Developer</h3>
                             <div class="meta">Perfect Decor | May 2022 – Mar 2023</div>
                             <p>
-                                Redesigned websites for UX enhancements, built custom web applications, and managed
-                                visual asset creation to boost engagement.
+                                • Redesigned web presence for multiple clients using modern frameworks.<br>
+                                • Built scalable web applications and enhanced UX/UI.<br>
+                                • Created high-quality visual content to elevate brand image.
                             </p>
                         </div>
+                        <div style="margin: 2rem auto 0; text-align: center;">
+                            <a href="Lionel_Wang_Resume.pdf" download
+                                style="display: inline-block; background: var(--accent); color: var(--bg-dark); padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: transform 0.2s ease;">
+                                <ion-icon name="download-outline"
+                                    style="vertical-align: middle; font-size: 1.2rem; margin-right: 0.4rem;"></ion-icon>
+                                Download Resume (PDF)
+                            </a>
+                        </div>
+
                     </div>
+
+                    <!-- Education -->
+
                 </article>
+
 
                 <!-- Hobbies -->
-                <article data-page="hobbies">
-                    <h2 class="section-title">Hobbies</h2>
-                    <div class="hobbies">
-                        <div class="hobby"><ion-icon name="tennisball-outline"></ion-icon><span>Badminton</span></div>
-                        <div class="hobby"><ion-icon name="snow-outline"></ion-icon><span>Skiing</span></div>
-                        <div class="hobby"><ion-icon name="flask-outline"></ion-icon><span>Shooting</span></div>
-                        <div class="hobby"><ion-icon name="barbell-outline"></ion-icon><span>Gym</span></div>
+                <!-- Skills -->
+                <article data-page="skills">
+                    <h2 class="section-title">Skills</h2>
+                    <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+
+                        <div>
+                            <label>Network Security & Intrusion Detection</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 95%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Operating System & Server Management (Linux/Windows)</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 92%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>AWS & Cloud Infrastructure</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 88%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>API / EDI Integration</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 85%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Python & JavaScript (Automation, Web, Scripting)</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 90%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Web & Mobile App Development</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 87%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Database Management (MySQL, SQL Server)</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 82%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Cyber Threat Analysis & Risk Management</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 90%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Technical Support & System Optimization</label>
+                            <div style="background: #2c2c3a; border-radius: 8px;">
+                                <div style="width: 93%; background: var(--accent); height: 10px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </article>
 
+
                 <!-- Contact -->
-                <article data-page="contact">
-                    <h2 class="section-title">Contact</h2>
-                    <p>Email: <a href="mailto:lionelwwq@gmail.com" style="color:var(--accent)">lionelwwq@gmail.com</a>
-                    </p>
-                    <p>Phone: <a href="tel:+17788656808" style="color:var(--accent)">+1 (778) 865-6808</a></p>
-                    <p>
-                        LinkedIn:
-                        <a href="https://linkedin.com/in/weiqi-wang-86bb07171" target="_blank"
-                            style="color:var(--accent)">
-                            weiqi-wang-86bb07171
-                        </a>
-                    </p>
+                <article data-page="certificates">
+                    <h2 class="section-title">Certificates</h2>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+
+                        <!-- NYIT -->
+                        <div
+                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                            <img src="nyit.png" alt="NYIT" style="height: 40px; margin-bottom: 1rem;" />
+                            <h3>Master of Science in Cybersecurity</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">New York Institute of Technology
+                                – Vancouver</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Issued Dec 2024 • Credential ID:
+                                2VU9-7XT8-WEGQ</p>
+                            <img src="nyit-certificate.png" alt="AWS Certificate"
+                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                        </div>
+                        <div
+                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                            <img src="kpu.png" alt="KPU Logo" style="height: 40px; margin-bottom: 1rem;" />
+                            <h3>Bachelor of Technology in Information Technology</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Kwantlen Polytechnic University
+                            </p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Issued Jan 2023</p>
+                            <img src="kpu-certificate.png" alt="KPU Degree"
+                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                        </div>
+                        <!-- AWS -->
+                        <div
+                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                            <img src="aws.png" alt="AWS" style="height: 40px; margin-bottom: 1rem;" />
+                            <h3>AWS Cloud Foundations</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Amazon Web Services (AWS)</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Issued Apr 2024</p>
+                            <img src="aws-foundations.jpeg" alt="AWS Certificate"
+                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                        </div>
+
+                        <!-- Fortinet Google Cloud Security -->
+                        <div
+                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                            <h3>Google Cloud Security 7.6 Administrator</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Feb 2025</p>
+                            <p style="font-size: 0.9rem;">Skills: Google Cloud Platform, Cloud Security</p>
+                            <img src="fortinet-google.png" alt="Certificate"
+                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                        </div>
+
+                        <!-- Fortinet Intro to Cybersecurity -->
+                        <div
+                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                            <h3>Cybersecurity 1.0</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Jan 2025</p>
+                            <p style="font-size: 0.9rem;">Skills: Awareness, Risk Assessment</p>
+                            <img src="fortinet-intro.png" alt="Certificate"
+                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                        </div>
+
+                        <!-- Fortinet Getting Started -->
+                        <div
+                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                            <h3>Cybersecurity 2.0</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Dec 2024</p>
+                            <p style="font-size: 0.9rem;">Skills: Network Security, Threat Analysis</p>
+                            <img src="fortinet-started.png" alt="Certificate"
+                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                        </div>
+
+                        <!-- Fortinet FortiGate -->
+                        <div
+                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                            <h3>FortiGate 7.6 Administrator</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Feb 2025</p>
+                            <p style="font-size: 0.9rem;">Skills: Firewall Administration</p>
+                            <img src="fortigate.png" alt="Certificate"
+                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                        </div>
+
+                    </div>
                 </article>
+
 
                 <footer>© 2025 Lionel Wang. All rights reserved.</footer>
             </div>
@@ -662,12 +962,13 @@
             );
 
             const phrases = [
-                'IT Systems & Infrastructure Specialist',
+                'IT Infrastructure Specialist',
                 'Cybersecurity Enthusiast',
                 'API & EDI Integrations',
                 'Web/API Developer'
             ];
-            let p = 0, c = 0, el = document.getElementById('typing');
+            let p = 0, c = 0;
+            const el = document.getElementById('typing');
             function type() {
                 const s = phrases[p];
                 el.textContent = s.slice(0, c + 1);
@@ -679,9 +980,8 @@
                 }
             }
             function erase() {
-                const s = phrases[p];
-                el.textContent = s.slice(0, c - 1);
                 if (c > 0) {
+                    el.textContent = phrases[p].slice(0, c - 1);
                     c--;
                     setTimeout(erase, 50);
                 } else {
