@@ -24,6 +24,7 @@
 </head>
 
 <body>
+    <div class="noise-overlay"></div>
     <div class="container">
         <!-- ===== Sidebar ===== -->
         <aside class="sidebar">
@@ -98,19 +99,42 @@
 
                 <!-- ===== About ===== -->
                 <article data-page="about" class="active">
-                    <h2 class="section-title">About Me</h2>
+                    <div class="about-hero">
+                        <span class="about-greeting">Hello, I'm</span>
+                        <h2 class="about-name-big">Lionel Wang</h2>
+                        <p class="about-tagline">IT Systems & Infrastructure Specialist who builds AI-powered enterprise solutions</p>
+                    </div>
+
+                    <div class="about-stats-row">
+                        <div class="about-stat">
+                            <span class="about-stat-number" data-count="3">0</span><span class="about-stat-suffix">+</span>
+                            <span class="about-stat-label">Years Experience</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number" data-count="300">0</span><span class="about-stat-suffix">+</span>
+                            <span class="about-stat-label">APIs Built</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number" data-count="10">0</span><span class="about-stat-suffix">+</span>
+                            <span class="about-stat-label">Projects</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number" data-count="7">0</span>
+                            <span class="about-stat-label">Certifications</span>
+                        </div>
+                    </div>
 
                     <p class="about-text">
-                        A results-driven IT Systems & Infrastructure Specialist with deep expertise in
+                        A results-driven specialist with deep expertise in
                         AI/ML-powered automation (OpenAI GPT, function calling, self-learning chatbots),
                         cybersecurity, ERP/WMS systems, and full-stack web development. Experienced in
                         building enterprise-grade AI assistants, intelligent email auto-responders, and
                         knowledge base systems with OpenAI embeddings. Skilled in managing servers, cloud
                         platforms (AWS/GWS), EDI/API integration, and developing internal tools that
-                        streamline operations and enhance security. Actively engaged in ethical hacking
-                        and bug bounty research.
+                        streamline operations and enhance security.
                     </p>
                     <p class="about-cta">
+                        <ion-icon name="rocket-outline"></ion-icon>
                         If you need a tech-savvy problem-solver who can integrate AI into your business
                         workflows, secure your infrastructure, and automate operations &mdash; let's connect
                         and build something impactful.
@@ -376,67 +400,65 @@
                         </div>
                     </div>
 
-                    <!-- Showcase: Aurora Furniture -->
-                    <div class="showcase-card">
-                        <a href="https://aurorafurnituremfg.ca" target="_blank" rel="noopener noreferrer">
-                            <div class="showcase-header">
-                                <h3>Aurora Furniture Website</h3>
-                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
-                            </div>
-                            <div class="showcase-img-wrapper">
-                                <img src="aurora-preview.png" alt="Aurora Furniture Screenshot" class="showcase-img" />
-                            </div>
-                        </a>
-                        <div class="showcase-tags">
-                            <div class="tags">
-                                <span class="tag">HTML5</span>
-                                <span class="tag">CSS3</span>
-                                <span class="tag">Responsive</span>
-                                <span class="tag">Forum</span>
-                                <span class="tag">UI/UX</span>
+                    <h3 class="section-heading">Web Design & Development</h3>
+
+                    <div class="showcase-grid">
+                        <div class="showcase-card">
+                            <a href="https://aurorafurnituremfg.ca" target="_blank" rel="noopener noreferrer">
+                                <div class="showcase-header">
+                                    <h3>Aurora Furniture</h3>
+                                    <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
+                                </div>
+                                <div class="showcase-img-wrapper">
+                                    <img src="aurora-preview.png" alt="Aurora Furniture Screenshot" class="showcase-img" />
+                                </div>
+                            </a>
+                            <div class="showcase-tags">
+                                <div class="tags">
+                                    <span class="tag">HTML5</span>
+                                    <span class="tag">CSS3</span>
+                                    <span class="tag">Responsive</span>
+                                    <span class="tag">UI/UX</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Showcase: Amax Leather -->
-                    <div class="showcase-card">
-                        <a href="https://amaxleather.com" target="_blank" rel="noopener noreferrer">
-                            <div class="showcase-header">
-                                <h3>Amax Leather Website</h3>
-                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
-                            </div>
-                            <div class="showcase-img-wrapper">
-                                <img src="amaxleather-preview.png" alt="Amax Leather Screenshot" class="showcase-img" />
-                            </div>
-                        </a>
-                        <div class="showcase-tags">
-                            <div class="tags">
-                                <span class="tag">HTML5</span>
-                                <span class="tag">CSS3</span>
-                                <span class="tag">Responsive</span>
-                                <span class="tag">UI/UX</span>
-                                <span class="tag">E-commerce</span>
+                        <div class="showcase-card">
+                            <a href="https://amaxleather.com" target="_blank" rel="noopener noreferrer">
+                                <div class="showcase-header">
+                                    <h3>Amax Leather</h3>
+                                    <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
+                                </div>
+                                <div class="showcase-img-wrapper">
+                                    <img src="amaxleather-preview.png" alt="Amax Leather Screenshot" class="showcase-img" />
+                                </div>
+                            </a>
+                            <div class="showcase-tags">
+                                <div class="tags">
+                                    <span class="tag">HTML5</span>
+                                    <span class="tag">CSS3</span>
+                                    <span class="tag">E-commerce</span>
+                                    <span class="tag">UI/UX</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Showcase: Standard Install -->
-                    <div class="showcase-card">
-                        <a href="https://www.standardinstall.ca" target="_blank" rel="noopener noreferrer">
-                            <div class="showcase-header">
-                                <h3>Standard Install Website</h3>
-                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
-                            </div>
-                            <div class="showcase-img-wrapper">
-                                <img src="standardinstall-preview.png" alt="Standard Install Screenshot" class="showcase-img" />
-                            </div>
-                        </a>
-                        <div class="showcase-tags">
-                            <div class="tags">
-                                <span class="tag">Wix Studio</span>
-                                <span class="tag">UI/UX</span>
-                                <span class="tag">Responsive Design</span>
-                                <span class="tag">SEO</span>
+                        <div class="showcase-card">
+                            <a href="https://www.standardinstall.ca" target="_blank" rel="noopener noreferrer">
+                                <div class="showcase-header">
+                                    <h3>Standard Install</h3>
+                                    <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
+                                </div>
+                                <div class="showcase-img-wrapper">
+                                    <img src="standardinstall-preview.png" alt="Standard Install Screenshot" class="showcase-img" />
+                                </div>
+                            </a>
+                            <div class="showcase-tags">
+                                <div class="tags">
+                                    <span class="tag">Wix Studio</span>
+                                    <span class="tag">UI/UX</span>
+                                    <span class="tag">SEO</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -727,23 +749,28 @@
                 const target = document.querySelector(`article[data-page="${page}"]`);
                 if (target) {
                     target.classList.add('active');
+                    // Scroll article to top on tab switch
+                    target.scrollTop = 0;
                     if (page === 'skills') animateSkillBars();
-                    // Trigger stagger animations for cards in the new page
+                    if (page === 'projects') setTimeout(animateCounters, 300);
                     staggerReveal(target);
                 }
             })
         );
 
-        // Stagger reveal animation for child elements
+        // Stagger reveal using CSS classes (doesn't break hover transforms)
         function staggerReveal(container) {
             const items = container.querySelectorAll('.service-card, .project-card, .showcase-card, .cert-card, .timeline-item, .skill-item, .module-item, .stat-item');
             items.forEach((item, i) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
+                item.classList.remove('stagger-visible');
+                item.classList.add('stagger-hidden');
                 setTimeout(() => {
-                    item.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
+                    item.classList.remove('stagger-hidden');
+                    item.classList.add('stagger-visible');
+                    // Clean up classes after animation so hover transforms work normally
+                    setTimeout(() => {
+                        item.classList.remove('stagger-visible');
+                    }, 500);
                 }, 60 * i);
             });
         }
@@ -816,14 +843,18 @@
             });
         }
 
-        // Animated stat counters
+        // Animated stat counters (replayable)
+        const statOriginals = new Map();
+        document.querySelectorAll('.stat-number').forEach(el => {
+            statOriginals.set(el, el.textContent);
+        });
+
         function animateCounters() {
-            document.querySelectorAll('.stat-number').forEach(el => {
-                const target = el.textContent;
-                const num = parseInt(target);
-                if (isNaN(num) || el.dataset.animated) return;
-                el.dataset.animated = 'true';
-                const suffix = target.replace(String(num), '');
+            statOriginals.forEach((original, el) => {
+                const num = parseInt(original);
+                if (isNaN(num)) return;
+                const suffix = original.replace(String(num), '');
+                el.textContent = '0' + suffix;
                 const duration = 1200;
                 const start = performance.now();
                 function tick(now) {
@@ -836,16 +867,6 @@
             });
         }
 
-        // Run counter animation when Projects tab opens
-        const origClick = document.querySelectorAll('[data-nav-link]');
-        origClick.forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (btn.getAttribute('data-nav-link') === 'projects') {
-                    setTimeout(animateCounters, 300);
-                }
-            });
-        });
-
         // Mouse spotlight effect on service cards
         document.querySelectorAll('.service-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -857,12 +878,47 @@
             });
         });
 
-        // Tilt effect on featured project stats
-        document.querySelectorAll('.stat-item').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        // About page stat counters
+        function animateAboutStats() {
+            document.querySelectorAll('.about-stat-number').forEach(el => {
+                const target = parseInt(el.dataset.count);
+                if (isNaN(target) || el.dataset.done) return;
+                el.dataset.done = 'true';
+                const duration = 1500;
+                const start = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(target * eased);
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            });
+        }
+        // Run on load for About page
+        document.addEventListener('DOMContentLoaded', () => setTimeout(animateAboutStats, 600));
+
+        // Certificate lightbox
+        document.querySelectorAll('.cert-image').forEach(img => {
+            img.addEventListener('click', () => {
+                const overlay = document.createElement('div');
+                overlay.className = 'lightbox-overlay';
+                const clone = document.createElement('img');
+                clone.src = img.src;
+                clone.alt = img.alt;
+                overlay.appendChild(clone);
+                document.body.appendChild(overlay);
+                overlay.addEventListener('click', () => {
+                    overlay.style.opacity = '0';
+                    overlay.style.transition = 'opacity 0.2s ease';
+                    setTimeout(() => overlay.remove(), 200);
+                });
             });
         });
+
+        // Dynamic footer year
+        document.querySelector('.footer-accent').parentElement.innerHTML =
+            '&copy; ' + new Date().getFullYear() + ' &mdash; <span class="footer-accent">Lionel Wang</span>. Crafted with precision.';
     </script>
 </body>
 
