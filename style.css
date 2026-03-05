@@ -457,6 +457,11 @@ article::-webkit-scrollbar-thumb:hover {
     gap: 1.25rem;
 }
 
+/* Let the last odd card span full width for a clean look */
+.services-grid .service-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
 .service-card {
     background: var(--bg-light);
     border: 1px solid var(--border-subtle);
