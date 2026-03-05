@@ -526,6 +526,174 @@ article::-webkit-scrollbar-thumb:hover {
     margin-bottom: 0;
 }
 
+/* ===== Featured Project ===== */
+.featured-project {
+    background: var(--bg-light);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient);
+}
+
+.featured-badge {
+    display: inline-block;
+    background: var(--gradient);
+    color: var(--bg-dark);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.85rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.featured-header {
+    margin-bottom: 1.5rem;
+}
+
+.featured-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+}
+
+.featured-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Stats row */
+.featured-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.stat-item {
+    background: rgba(79, 209, 197, 0.06);
+    border: 1px solid var(--border-accent);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    flex: 1;
+    min-width: 80px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+}
+
+/* Module list */
+.featured-modules {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+}
+
+.module-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.85rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+}
+
+.module-item:hover {
+    border-color: var(--border-accent);
+    background: rgba(79, 209, 197, 0.03);
+}
+
+.module-item ion-icon {
+    color: var(--accent);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.module-item strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: var(--text-light);
+}
+
+.module-item span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Tech tags */
+.featured-tech {
+    margin-bottom: 1.5rem;
+}
+
+/* Image link */
+.featured-img-link {
+    display: block;
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+}
+
+.featured-img-link:hover .showcase-img {
+    transform: scale(1.02);
+}
+
+.featured-link-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem;
+    background: linear-gradient(transparent, rgba(10, 10, 20, 0.9));
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.88rem;
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+.featured-img-link:hover .featured-link-overlay {
+    opacity: 1;
+}
+
 /* ===== Projects Grid ===== */
 .projects-grid {
     display: grid;
@@ -940,6 +1108,18 @@ article::-webkit-scrollbar-thumb:hover {
         padding: 0.85rem 1rem;
         font-size: 0.85rem;
     }
+
+    .featured-modules {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-stats {
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        min-width: 70px;
+    }
 }
 
 @media (max-width: 640px) {
@@ -979,5 +1159,17 @@ article::-webkit-scrollbar-thumb:hover {
 
     .timeline {
         padding-left: 1.5rem;
+    }
+
+    .featured-project {
+        padding: 1.25rem;
+    }
+
+    .featured-title {
+        font-size: 1.15rem;
+    }
+
+    .featured-modules {
+        grid-template-columns: 1fr;
     }
 }

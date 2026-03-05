@@ -182,43 +182,146 @@
                 <article data-page="projects">
                     <h2 class="section-title">Projects</h2>
 
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <h3>AmaxBot AI Assistant</h3>
-                            <p>Enterprise AI chatbot powered by GPT-4.1-mini with function calling, self-learning
-                                from user feedback, conversation memory, analytics logging, and chat export via email.</p>
+                    <!-- Featured: Amax Leather ERP System -->
+                    <div class="featured-project">
+                        <div class="featured-badge">Featured Project</div>
+                        <div class="featured-header">
+                            <div>
+                                <h3 class="featured-title">Amax Leather ERP & Report System</h3>
+                                <p class="featured-subtitle">Full-stack enterprise resource planning system built from scratch</p>
+                            </div>
+                        </div>
+
+                        <div class="featured-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">68</span>
+                                <span class="stat-label">Pages</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">300+</span>
+                                <span class="stat-label">API Endpoints</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">4</span>
+                                <span class="stat-label">Databases</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">24</span>
+                                <span class="stat-label">Route Files</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">75</span>
+                                <span class="stat-label">JS Modules</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">20+</span>
+                                <span class="stat-label">AI Tools</span>
+                            </div>
+                        </div>
+
+                        <div class="featured-modules">
+                            <div class="module-item">
+                                <ion-icon name="sparkles-outline"></ion-icon>
+                                <div>
+                                    <strong>AmaxBot AI Assistant</strong>
+                                    <span>GPT-4.1-mini with 20+ function-calling tools, self-learning from thumbs up/down
+                                        feedback, few-shot caching, NL-to-SQL, conversation memory, and chat export via email</span>
+                                </div>
+                            </div>
+                            <div class="module-item">
+                                <ion-icon name="mail-outline"></ion-icon>
+                                <div>
+                                    <strong>AI Email Auto-Responder</strong>
+                                    <span>IMAP monitor polling every 30s with two GPT modes: training (@amaxbot emails
+                                        auto-draft KB articles) and reply (BCC'd emails get AI-generated responses)</span>
+                                </div>
+                            </div>
+                            <div class="module-item">
+                                <ion-icon name="book-outline"></ion-icon>
+                                <div>
+                                    <strong>AI Knowledge Base</strong>
+                                    <span>Bilingual EN/ZH articles with fulltext search, category tree, RBAC permissions,
+                                        email templates with trigger keywords, and file attachments up to 10MB</span>
+                                </div>
+                            </div>
+                            <div class="module-item">
+                                <ion-icon name="cart-outline"></ion-icon>
+                                <div>
+                                    <strong>Order Management</strong>
+                                    <span>EDI hub orders from Costco, Amazon, Shopify, Hydeline with full lifecycle
+                                        tracking, PO grouping, line items, and multi-status workflow</span>
+                                </div>
+                            </div>
+                            <div class="module-item">
+                                <ion-icon name="calculator-outline"></ion-icon>
+                                <div>
+                                    <strong>QuickBooks Connector</strong>
+                                    <span>Auto-sync every 3 hours, CSV export via SaaSAnt email, pre-sync tax/payment
+                                        terms/sales person, sent-order tracking with bulk unsend, full audit trail</span>
+                                </div>
+                            </div>
+                            <div class="module-item">
+                                <ion-icon name="print-outline"></ion-icon>
+                                <div>
+                                    <strong>Print Center & PDF Engine</strong>
+                                    <span>Server-side PDF generation via Puppeteer for invoices, packing slips, SO
+                                        confirmations with customizable templates, company branding, and email delivery</span>
+                                </div>
+                            </div>
+                            <div class="module-item">
+                                <ion-icon name="cube-outline"></ion-icon>
+                                <div>
+                                    <strong>Inventory & Warehouse</strong>
+                                    <span>Multi-warehouse stock tracking, bin-level inventory, lot tracker, adjustments,
+                                        inter-warehouse transfers, receiving, and liquidation management with condition grading</span>
+                                </div>
+                            </div>
+                            <div class="module-item">
+                                <ion-icon name="shield-checkmark-outline"></ion-icon>
+                                <div>
+                                    <strong>Security & Auth</strong>
+                                    <span>Session + OTP 2FA, RBAC (admin/manager/viewer/user), Helmet headers, rate limiting,
+                                        bcrypt hashing, audit logging, and JWT tokens</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="featured-tech">
                             <div class="tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Express</span>
+                                <span class="tag">MySQL (4 DBs)</span>
                                 <span class="tag">OpenAI GPT-4.1</span>
                                 <span class="tag">Function Calling</span>
-                                <span class="tag">Self-Learning</span>
-                                <span class="tag">Node.js</span>
+                                <span class="tag">IMAP / Nodemailer</span>
+                                <span class="tag">Puppeteer</span>
+                                <span class="tag">Passport</span>
+                                <span class="tag">Helmet</span>
+                                <span class="tag">i18n (EN/ZH)</span>
+                                <span class="tag">xlsx</span>
+                                <span class="tag">pdf-lib</span>
+                                <span class="tag">Multer</span>
+                                <span class="tag">node-cron</span>
+                                <span class="tag">Soft UI</span>
+                                <span class="tag">Bootstrap 5</span>
+                                <span class="tag">Chart.js</span>
                             </div>
                         </div>
 
-                        <div class="project-card">
-                            <h3>AI Email Auto-Responder</h3>
-                            <p>IMAP email monitor with GPT-powered auto-replies, training mode that parses
-                                incoming emails into knowledge base articles, and intelligent routing.</p>
-                            <div class="tags">
-                                <span class="tag">OpenAI GPT</span>
-                                <span class="tag">IMAP</span>
-                                <span class="tag">Nodemailer</span>
-                                <span class="tag">NLP</span>
+                        <a href="https://cobra-moved-constantly.ngrok-free.app/html/" target="_blank" rel="noopener noreferrer" class="featured-img-link">
+                            <div class="showcase-img-wrapper">
+                                <img src="inventory-dashboard-preview.png" alt="Amax Leather ERP Dashboard" class="showcase-img" />
                             </div>
-                        </div>
-
-                        <div class="project-card">
-                            <h3>AI Knowledge Base System</h3>
-                            <p>Intelligent KB with OpenAI embeddings, category tree structure, RBAC permissions,
-                                file attachments, and AI-assisted article drafting from email training data.</p>
-                            <div class="tags">
-                                <span class="tag">OpenAI Embeddings</span>
-                                <span class="tag">RBAC</span>
-                                <span class="tag">MySQL</span>
-                                <span class="tag">REST API</span>
+                            <div class="featured-link-overlay">
+                                <span>View Live Demo</span>
+                                <ion-icon name="open-outline"></ion-icon>
                             </div>
-                        </div>
+                        </a>
+                    </div>
 
+                    <h3 class="section-heading">Other Projects</h3>
+
+                    <div class="projects-grid">
                         <div class="project-card">
                             <h3>Email Phishing Detection</h3>
                             <p>Google App Script + VirusTotal + custom ML logic for Gmail & Sheets.</p>
@@ -243,10 +346,11 @@
 
                         <div class="project-card">
                             <h3>EDI & API Integration</h3>
-                            <p>Robust EDI workflows and REST APIs for order & inventory syncing.</p>
+                            <p>Robust EDI workflows and REST APIs for order & inventory syncing across platforms.</p>
                             <div class="tags">
                                 <span class="tag">EDI</span>
-                                <span class="tag">API</span>
+                                <span class="tag">REST API</span>
+                                <span class="tag">Automation</span>
                             </div>
                         </div>
 
@@ -261,42 +365,13 @@
                         </div>
 
                         <div class="project-card">
-                            <h3>Python Tool</h3>
+                            <h3>Python Automation Tool</h3>
                             <p>Batch-engineers files: configures, structures, and delivers polished spreadsheet outputs.</p>
                             <div class="tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">PDF</span>
                                 <span class="tag">Excel</span>
                                 <span class="tag">Automation</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Showcase: Amax Leather ERP & Report System -->
-                    <div class="showcase-card">
-                        <a href="https://cobra-moved-constantly.ngrok-free.app/html/" target="_blank" rel="noopener noreferrer">
-                            <div class="showcase-header">
-                                <h3>Amax Leather ERP & Report System</h3>
-                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
-                            </div>
-                            <div class="showcase-img-wrapper">
-                                <img src="inventory-dashboard-preview.png" alt="Amax Leather ERP Dashboard" class="showcase-img" />
-                            </div>
-                        </a>
-                        <div class="showcase-tags">
-                            <div class="tags">
-                                <span class="tag">OpenAI GPT-4.1</span>
-                                <span class="tag">AI Chatbot</span>
-                                <span class="tag">Node.js</span>
-                                <span class="tag">Express</span>
-                                <span class="tag">MySQL</span>
-                                <span class="tag">30+ Reports</span>
-                                <span class="tag">QuickBooks</span>
-                                <span class="tag">IMAP AI</span>
-                                <span class="tag">Knowledge Base</span>
-                                <span class="tag">Puppeteer PDF</span>
-                                <span class="tag">i18n</span>
-                                <span class="tag">Helmet Security</span>
                             </div>
                         </div>
                     </div>
