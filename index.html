@@ -711,13 +711,13 @@
                     </div>
                 </article>
 
-                <footer>&copy; 2025 <span class="footer-accent">Lionel Wang</span>. All rights reserved.</footer>
+                <footer>&copy; 2025 &mdash; <span class="footer-accent">Lionel Wang</span>. Crafted with precision.</footer>
             </div>
         </div>
     </div>
 
     <script>
-        // Tab Navigation
+        // Tab Navigation with smooth transitions
         document.querySelectorAll('[data-nav-link]').forEach(btn =>
             btn.addEventListener('click', () => {
                 document.querySelectorAll('[data-nav-link]').forEach(b => b.classList.remove('active'));
@@ -727,13 +727,36 @@
                 const target = document.querySelector(`article[data-page="${page}"]`);
                 if (target) {
                     target.classList.add('active');
-                    // Trigger skill bar animation when Skills tab is opened
                     if (page === 'skills') animateSkillBars();
+                    // Trigger stagger animations for cards in the new page
+                    staggerReveal(target);
                 }
             })
         );
 
-        // Typing Animation
+        // Stagger reveal animation for child elements
+        function staggerReveal(container) {
+            const items = container.querySelectorAll('.service-card, .project-card, .showcase-card, .cert-card, .timeline-item, .skill-item, .module-item, .stat-item');
+            items.forEach((item, i) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 60 * i);
+            });
+        }
+
+        // Initial stagger for About page
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const aboutPage = document.querySelector('article[data-page="about"]');
+                if (aboutPage) staggerReveal(aboutPage);
+            }, 400);
+        });
+
+        // Typing Animation with variable speed for natural feel
         const phrases = [
             'AI & ML Integration Specialist',
             'IT Infrastructure Specialist',
@@ -748,9 +771,10 @@
             typingEl.textContent = phrase.slice(0, charIdx + 1);
             if (charIdx < phrase.length) {
                 charIdx++;
-                setTimeout(typeChar, 80);
+                const delay = 50 + Math.random() * 60;
+                setTimeout(typeChar, delay);
             } else {
-                setTimeout(eraseChar, 2200);
+                setTimeout(eraseChar, 2500);
             }
         }
 
@@ -758,14 +782,14 @@
             if (charIdx > 0) {
                 typingEl.textContent = phrases[phraseIdx].slice(0, charIdx - 1);
                 charIdx--;
-                setTimeout(eraseChar, 40);
+                setTimeout(eraseChar, 30);
             } else {
                 phraseIdx = (phraseIdx + 1) % phrases.length;
-                setTimeout(typeChar, 400);
+                setTimeout(typeChar, 500);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => setTimeout(typeChar, 600));
+        document.addEventListener('DOMContentLoaded', () => setTimeout(typeChar, 800));
 
         // Avatar Fade Toggle
         const img1 = document.getElementById('avatar1');
@@ -783,15 +807,62 @@
             showingFirst = !showingFirst;
         }, 6000);
 
-        // Animated Skill Bars
+        // Animated Skill Bars with stagger
         function animateSkillBars() {
-            document.querySelectorAll('.skill-fill').forEach(bar => {
+            document.querySelectorAll('.skill-fill').forEach((bar, i) => {
                 bar.classList.remove('animated');
-                // Force reflow
                 void bar.offsetWidth;
-                bar.classList.add('animated');
+                setTimeout(() => bar.classList.add('animated'), i * 100);
             });
         }
+
+        // Animated stat counters
+        function animateCounters() {
+            document.querySelectorAll('.stat-number').forEach(el => {
+                const target = el.textContent;
+                const num = parseInt(target);
+                if (isNaN(num) || el.dataset.animated) return;
+                el.dataset.animated = 'true';
+                const suffix = target.replace(String(num), '');
+                const duration = 1200;
+                const start = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(num * eased) + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            });
+        }
+
+        // Run counter animation when Projects tab opens
+        const origClick = document.querySelectorAll('[data-nav-link]');
+        origClick.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.getAttribute('data-nav-link') === 'projects') {
+                    setTimeout(animateCounters, 300);
+                }
+            });
+        });
+
+        // Mouse spotlight effect on service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
+        });
+
+        // Tilt effect on featured project stats
+        document.querySelectorAll('.stat-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+            });
+        });
     </script>
 </body>
 
