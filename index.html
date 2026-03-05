@@ -5,589 +5,86 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lionel Wang | Portfolio</title>
+    <title>Lionel Wang | IT Infrastructure & Cybersecurity Portfolio</title>
+    <meta name="description" content="Lionel Wang - IT Systems & Infrastructure Specialist skilled in cybersecurity, cloud platforms, API/EDI integration, and full-stack development based in Vancouver, BC." />
+    <meta name="author" content="Lionel Wang" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lionel Wang | Portfolio" />
+    <meta property="og:description" content="IT Systems & Infrastructure Specialist | Cybersecurity | Full-Stack Developer" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lionelwwq.github.io/" />
+
     <link rel="shortcut icon" href="selfie.png" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <style>
-        :root {
-            --bg-dark: #0f0f1a;
-            --bg-light: #1e1e2f;
-            --bg-card: #1a1a1f;
-            --accent: #4fd1c5;
-            --text-light: #fff;
-            --text-muted: #888;
-            --font-main: 'Inter', sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            background: var(--bg-dark);
-            color: var(--text-light);
-            font-family: var(--font-main);
-            /* allow the page to expand past the viewport */
-            min-height: 100vh;
-            /* enable vertical scrolling */
-            overflow-x: hidden;
-            overflow-y: auto;
-            padding: 2rem;
-        }
-
-        .container {
-            display: flex;
-            width: 1300px;
-            gap: 2rem;
-            margin: 0 auto;
-        }
-
-        .sidebar {
-            width: 280px;
-            height: 85vh;
-            background: var(--bg-light);
-            border-radius: 12px;
-            padding: 2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .avatar-box {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-
-        .avatar-box .avatar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid var(--accent);
-            transition: opacity 1.5s ease-in-out;
-        }
-
-        .fade-in {
-            opacity: 1;
-            z-index: 1;
-        }
-
-        .fade-out {
-            opacity: 0;
-            z-index: 0;
-        }
-
-        .active-status {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 14px;
-            height: 14px;
-            background: #4caf50;
-            border: 2px solid var(--bg-light);
-            border-radius: 50%;
-            box-shadow: 0 0 8px #4caf50, 0 0 15px #4caf50;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 5px #4caf50;
-            }
-
-            50% {
-                box-shadow: 0 0 15px #4caf50;
-            }
-
-            100% {
-                box-shadow: 0 0 5px #4caf50;
-            }
-        }
-
-        .name {
-            margin-top: 1rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .title {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: 0.85rem;
-            /* smaller font */
-            font-family: var(--font-type);
-            /* monospace font */
-            color: var(--accent);
-            margin-bottom: 1rem;
-            min-height: 1.2em;
-            /* reserve space */
-        }
-
-        .separator {
-            font-weight: 600;
-        }
-
-        .typing {
-            display: inline-block;
-        }
-
-        .info_more-btn {
-            display: none !important;
-        }
-
-        .sidebar-info_more {
-            display: flex !important;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 1rem;
-        }
-
-        .contacts-list,
-        .social-list {
-            list-style: none;
-            width: 100%;
-        }
-
-        .contacts-list li,
-        .social-list li {
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-        }
-
-        social-list {
-            display: none;
-        }
-
-        .contacts-list ion-icon,
-        .social-list ion-icon {
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin-right: 0.75rem;
-        }
-
-        .contacts-list a,
-        .social-list a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-
-        .social-list {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .main-content {
-            flex: 1;
-            height: 85vh;
-            display: flex;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .content-card {
-            background: var(--bg-card);
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .navbar {
-            background: var(--bg-card);
-            padding: 1rem 2rem;
-        }
-
-        .navbar-list {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .navbar-link {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1rem;
-            cursor: pointer;
-            padding: 0.25rem;
-        }
-
-        .navbar-link.active {
-            border-bottom: 2px solid var(--accent);
-        }
-
-        .content-card article {
-            display: none;
-            padding: 2rem;
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .content-card article.active {
-            display: block;
-        }
-
-        h2.section-title {
-            font-size: 1.8rem;
-            color: #eaeaea;
-            /* subtle white */
-            margin-bottom: 1rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--bg-light);
-            border-radius: 8px;
-            padding: 1.25rem;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-        }
-
-        .project-card h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .project-card p {
-            margin-bottom: 0.75rem;
-            color: #ccc;
-            font-size: 0.95rem;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: var(--accent);
-            color: var(--text-light);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        .iframe-card iframe {
-            width: 100%;
-            height: 150px;
-            border: none;
-            border-radius: 6px;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 6px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--accent);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            padding-left: 1rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
-        .timeline-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-item .meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-
-
-        .content-card footer {
-            background: var(--bg-card);
-            padding: 1rem 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        article::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        article::-webkit-scrollbar-thumb {
-            background-color: var(--accent);
-            border-radius: 4px;
-        }
-
-        @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-                width: 100%;
-                padding: 1rem;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                gap: 1rem;
-                padding: 1rem;
-                text-align: left;
-            }
-
-            .avatar-box {
-                margin-right: 1rem;
-            }
-
-            .name,
-            .title {
-                margin: 0;
-            }
-
-            .sidebar-info_more {
-                flex: 1 1 100%;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-                margin-top: 1rem;
-            }
-
-            .contacts-list,
-            .social-list {
-                flex: 1 1 100%;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .contacts-list li,
-            .social-list li {
-                margin-bottom: 0.5rem;
-            }
-
-            .main-content {
-                width: 100%;
-                height: auto;
-                margin-top: 1rem;
-            }
-
-            .navbar-list {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: flex-start;
-            }
-
-            .content-card article {
-                padding: 1rem;
-            }
-
-            .projects {
-                grid-template-columns: 1fr;
-            }
-
-            .iframe-card iframe {
-                height: 200px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .sidebar {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .sidebar-info_more {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .contacts-list,
-            .social-list {
-                justify-content: center;
-            }
-
-            .navbar-list {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .project-card {
-                padding: 1rem;
-            }
-
-            .timeline-item {
-                padding-left: 0.5rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .service-card {
-            background: var(--bg-light);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid #2e2e38;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .service-icon {
-            font-size: 2rem;
-            color: var(--accent);
-            flex-shrink: 0;
-            margin-top: 0.2rem;
-        }
-
-        .service-text h3 {
-            color: var(--accent);
-            margin-bottom: 0.25rem;
-            font-size: 1.2rem;
-        }
-
-        .service-text p {
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .service-card h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .service-card p {
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        .project-card.fullwidth-iframe {
-            width: 100%;
-            margin-bottom: 2rem;
-            padding: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-            background: var(--bg-light);
-        }
-
-        .project-card.fullwidth-iframe h3 {
-            padding: 1rem 1.5rem;
-            font-size: 1.2rem;
-            color: var(--text-light);
-        }
-
-        .project-card.fullwidth-iframe iframe {
-            width: 100%;
-            height: 480px;
-            border: none;
-            pointer-events: none;
-            border-top: 1px solid #333;
-        }
-
-        .project-card.fullwidth-iframe a {
-            display: block;
-            text-decoration: none;
-        }
-    </style>
 </head>
 
 <body>
     <div class="container">
+        <!-- ===== Sidebar ===== -->
         <aside class="sidebar">
             <div class="avatar-box">
+                <div class="avatar-ring"></div>
                 <img id="avatar1" src="selfie.png" alt="Lionel Wang" class="avatar fade-in" />
-                <img id="avatar2" src="selfie2.png" alt="Lionel Wang Sunglasses Off" class="avatar fade-out" />
+                <img id="avatar2" src="selfie2.png" alt="Lionel Wang" class="avatar fade-out" />
                 <span class="active-status"></span>
             </div>
+
             <h1 class="name">Lionel Wang</h1>
-            <p class="title">
+
+            <p class="title-wrapper">
                 <span class="separator">/</span>
                 <span class="typing" id="typing"></span>
             </p>
-            <div></div>
-            <div class="sidebar-info_more">
-                <ul class="contacts-list">
-                    <li><ion-icon name="mail-outline"></ion-icon><a
-                            href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a></li>
-                    <li><ion-icon name="call-outline"></ion-icon><a href="tel:+17788656808">+1 (778) 865-6808</a></li>
-                    <li><ion-icon name="location-outline"></ion-icon><span>Vancouver, BC</span></li>
-                    <li><ion-icon name="logo-linkedin"></ion-icon><a href="https://linkedin.com/in/weiqi-wang-86bb07171"
-                            target="_blank">LinkedIn</a></li>
-                    <li><ion-icon name="logo-github"></ion-icon><a href="https://github.com/lionelwwq"
-                            target="_blank">Github</a></li>
-                </ul>
 
-            </div>
+            <div class="sidebar-divider"></div>
+
+            <ul class="contacts-list">
+                <li>
+                    <div class="contact-icon"><ion-icon name="mail-outline"></ion-icon></div>
+                    <div class="contact-info">
+                        <div class="contact-label">Email</div>
+                        <a href="mailto:lionelwwq@gmail.com" class="contact-value">lionelwwq@gmail.com</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon"><ion-icon name="call-outline"></ion-icon></div>
+                    <div class="contact-info">
+                        <div class="contact-label">Phone</div>
+                        <a href="tel:+17788656808" class="contact-value">+1 (778) 865-6808</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon"><ion-icon name="location-outline"></ion-icon></div>
+                    <div class="contact-info">
+                        <div class="contact-label">Location</div>
+                        <span class="contact-value">Vancouver, BC</span>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="social-list">
+                <li>
+                    <a href="https://linkedin.com/in/weiqi-wang-86bb07171" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/lionelwwq" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                        <ion-icon name="logo-github"></ion-icon>
+                    </a>
+                </li>
+            </ul>
         </aside>
 
+        <!-- ===== Main Content ===== -->
         <div class="main-content">
             <div class="content-card">
+
                 <!-- Navbar -->
                 <nav class="navbar">
                     <ul class="navbar-list">
@@ -596,82 +93,87 @@
                         <li><button class="navbar-link" data-nav-link="experience">Resume</button></li>
                         <li><button class="navbar-link" data-nav-link="skills">Skills</button></li>
                         <li><button class="navbar-link" data-nav-link="certificates">Certificates</button></li>
-
                     </ul>
                 </nav>
 
-                <!-- About -->
+                <!-- ===== About ===== -->
                 <article data-page="about" class="active">
                     <h2 class="section-title">About Me</h2>
 
-                    <p style="color: var(--text-muted);">
+                    <p class="about-text">
                         A results-driven IT Systems & Infrastructure Specialist with expertise in cybersecurity,
-                        ERP/WMS,
-                        automation scripting (Python/JS), EDI/API integration, and full-stack web design & development.
-                        Skilled in managing
-                        servers, cloud platforms (AWS/GWS), and building internal tools to streamline operations and
-                        enhance security.
-                        Actively engaged in ethical hacking and bug bounty research to strengthen system integrity.
+                        ERP/WMS, automation scripting (Python/JS), EDI/API integration, and full-stack web
+                        design & development. Skilled in managing servers, cloud platforms (AWS/GWS), and
+                        building internal tools to streamline operations and enhance security. Actively engaged
+                        in ethical hacking and bug bounty research to strengthen system integrity.
                     </p>
-                    <p style="color: var(--text-muted);">
+                    <p class="about-cta">
                         If you need a tech-savvy problem-solver to design, secure, and automate your digital
-                        infrastructure, let's connect
-                        and build something impactful.
+                        infrastructure &mdash; let's connect and build something impactful.
                     </p>
-                    <br>
-                    <h2 class="section-title">What i'm doing</h2>
+
+                    <h3 class="section-heading">What I'm Doing</h3>
+
                     <div class="services-grid">
                         <div class="service-card">
-                            <ion-icon name="server-outline" class="service-icon"></ion-icon>
+                            <div class="service-icon-box">
+                                <ion-icon name="server-outline"></ion-icon>
+                            </div>
                             <div class="service-text">
                                 <h3>System Administration</h3>
-                                <p>Managing Windows/Linux servers, cloud platforms (AWS, Google Workspace, Microsoft
-                                    365), backups, and enterprise networks with a focus on security, reliability, and
-                                    performance.</p>
-
+                                <p>Managing Windows/Linux servers, cloud platforms (AWS, Google Workspace,
+                                    Microsoft 365), backups, and enterprise networks with a focus on security,
+                                    reliability, and performance.</p>
                             </div>
                         </div>
+
                         <div class="service-card">
-                            <ion-icon name="code-slash-outline" class="service-icon"></ion-icon>
+                            <div class="service-icon-box">
+                                <ion-icon name="code-slash-outline"></ion-icon>
+                            </div>
                             <div class="service-text">
                                 <h3>Web Design & Development</h3>
                                 <p>Crafting responsive websites and internal tools with seamless frontend-backend
                                     integration using modern tech stacks.</p>
                             </div>
                         </div>
+
                         <div class="service-card">
-                            <ion-icon name="shield-checkmark-outline" class="service-icon"></ion-icon>
+                            <div class="service-icon-box">
+                                <ion-icon name="shield-checkmark-outline"></ion-icon>
+                            </div>
                             <div class="service-text">
                                 <h3>Cybersecurity & Bug Hunting</h3>
-                                <p>Enhancing system security via audits, DNS/email protection, and hands-on ethical
-                                    hacking and bug bounty testing.</p>
+                                <p>Enhancing system security via audits, DNS/email protection, and hands-on
+                                    ethical hacking and bug bounty testing.</p>
                             </div>
                         </div>
+
                         <div class="service-card">
-                            <ion-icon name="settings-outline" class="service-icon"></ion-icon>
+                            <div class="service-icon-box">
+                                <ion-icon name="settings-outline"></ion-icon>
+                            </div>
                             <div class="service-text">
                                 <h3>ERP, API & Automation</h3>
-                                <p>Improving operations through ERP integration, API workflows, and custom scripts to
-                                    automate inventory, reporting, and order processing.</p>
-
+                                <p>Improving operations through ERP integration, API workflows, and custom
+                                    scripts to automate inventory, reporting, and order processing.</p>
                             </div>
                         </div>
                     </div>
                 </article>
 
-                <!-- Projects -->
+                <!-- ===== Projects ===== -->
                 <article data-page="projects">
                     <h2 class="section-title">Projects</h2>
 
-                    <!-- Grid layout for smaller projects -->
-                    <div class="projects">
+                    <div class="projects-grid">
                         <div class="project-card">
                             <h3>Email Phishing Detection</h3>
                             <p>Google App Script + VirusTotal + custom ML logic for Gmail & Sheets.</p>
                             <div class="tags">
                                 <span class="tag">Google App Script</span>
                                 <span class="tag">ML</span>
-                                <span class="tag">ChatgptAPI</span>
+                                <span class="tag">ChatGPT API</span>
                                 <span class="tag">VirusTotal</span>
                             </div>
                         </div>
@@ -707,8 +209,7 @@
 
                         <div class="project-card">
                             <h3>Python Tool</h3>
-                            <p>Batch-engineers files: configures, structures, and delivers polished spreadsheet outputs.
-                            </p>
+                            <p>Batch-engineers files: configures, structures, and delivers polished spreadsheet outputs.</p>
                             <div class="tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">PDF</span>
@@ -722,404 +223,443 @@
                             <p>Live audio capture, auto-transcription, ChatGPT API Q&A, session logging.</p>
                             <div class="tags">
                                 <span class="tag">Vosk</span>
-                                <span class="tag">ChatGPTAPI</span>
-                                <span class="tag">PythonGUI</span>
+                                <span class="tag">ChatGPT API</span>
+                                <span class="tag">Python GUI</span>
                                 <span class="tag">Automation</span>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <!-- Full-width website previews -->
-                    <div class="project-card fullwidth-iframe">
-                        <a href="https://aurorafurnituremfg.ca" target="_blank"
-                            style="display: block; text-decoration: none;">
-                            <h3 style="padding: 1rem 1.5rem; font-size: 1.2rem; color: var(--text-light);">
-                                Aurora Furniture Website ↗
-                            </h3>
-                            <img src="aurora-preview.png" alt="Aurora Furniture Screenshot"
-                                style="width: 100%; height: auto; display: block; border-top: 1px solid #333; border-radius: 0 0 12px 12px;" />
+
+                    <!-- Showcase: Aurora Furniture -->
+                    <div class="showcase-card">
+                        <a href="https://aurorafurnituremfg.ca" target="_blank" rel="noopener noreferrer">
+                            <div class="showcase-header">
+                                <h3>Aurora Furniture Website</h3>
+                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
+                            </div>
+                            <div class="showcase-img-wrapper">
+                                <img src="aurora-preview.png" alt="Aurora Furniture Screenshot" class="showcase-img" />
+                            </div>
                         </a>
-                        <div class="tags" style="padding: 1rem 1.5rem;">
-                            <span class="tag">HTML5</span>
-                            <span class="tag">CSS3</span>
-                            <span class="tag">Responsive</span>
-                            <span class="tag">Forum</span>
-                            <span class="tag">UI/UX</span>
+                        <div class="showcase-tags">
+                            <div class="tags">
+                                <span class="tag">HTML5</span>
+                                <span class="tag">CSS3</span>
+                                <span class="tag">Responsive</span>
+                                <span class="tag">Forum</span>
+                                <span class="tag">UI/UX</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Amax Leather -->
-                    <div class="project-card fullwidth-iframe">
-                        <a href="https://amaxleather.com" target="_blank"
-                            style="display: block; text-decoration: none;">
-                            <h3 style="padding: 1rem 1.5rem; font-size: 1.2rem; color: var(--text-light);">
-                                Amax Leather Website ↗
-                            </h3>
-                            <img src="amaxleather-preview.png" alt="Amax Leather Screenshot"
-                                style="width: 100%; height: auto; display: block; border-top: 1px solid #333; border-radius: 0 0 12px 12px;" />
+                    <!-- Showcase: Amax Leather -->
+                    <div class="showcase-card">
+                        <a href="https://amaxleather.com" target="_blank" rel="noopener noreferrer">
+                            <div class="showcase-header">
+                                <h3>Amax Leather Website</h3>
+                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
+                            </div>
+                            <div class="showcase-img-wrapper">
+                                <img src="amaxleather-preview.png" alt="Amax Leather Screenshot" class="showcase-img" />
+                            </div>
                         </a>
-                        <div class="tags" style="padding: 1rem 1.5rem;">
-                            <span class="tag">HTML5</span>
-                            <span class="tag">CSS3</span>
-                            <span class="tag">Responsive</span>
-                            <span class="tag">UI/UX</span>
-                            <span class="tag">E-commerce</span>
+                        <div class="showcase-tags">
+                            <div class="tags">
+                                <span class="tag">HTML5</span>
+                                <span class="tag">CSS3</span>
+                                <span class="tag">Responsive</span>
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">E-commerce</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Standard Install -->
-                    <div class="project-card fullwidth-iframe">
-                        <a href="https://www.standardinstall.ca" target="_blank"
-                            style="display: block; text-decoration: none;">
-                            <h3 style="padding: 1rem 1.5rem; font-size: 1.2rem; color: var(--text-light);">
-                                Standard Install Website ↗
-                            </h3>
-                            <img src="standardinstall-preview.png" alt="Standard Install Screenshot"
-                                style="width: 100%; height: auto; display: block; border-top: 1px solid #333; border-radius: 0 0 12px 12px;" />
+                    <!-- Showcase: Standard Install -->
+                    <div class="showcase-card">
+                        <a href="https://www.standardinstall.ca" target="_blank" rel="noopener noreferrer">
+                            <div class="showcase-header">
+                                <h3>Standard Install Website</h3>
+                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
+                            </div>
+                            <div class="showcase-img-wrapper">
+                                <img src="standardinstall-preview.png" alt="Standard Install Screenshot" class="showcase-img" />
+                            </div>
                         </a>
-                        <div class="tags" style="padding: 1rem 1.5rem;">
-                            <span class="tag">Wix Studio</span>
-                            <span class="tag">UI/UX</span>
-                            <span class="tag">Responsive Design</span>
-                            <span class="tag">SEO</span>
+                        <div class="showcase-tags">
+                            <div class="tags">
+                                <span class="tag">Wix Studio</span>
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">Responsive Design</span>
+                                <span class="tag">SEO</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Inventory Dashboard -->
-                    <div class="project-card fullwidth-iframe">
-                        <a href="https://cobra-moved-constantly.ngrok-free.app/html/" target="_blank"
-                            style="display: block; text-decoration: none;">
-                            <h3 style="padding: 1rem 1.5rem; font-size: 1.2rem; color: var(--text-light);">
-                                Inventory Dashboard ↗
-                            </h3>
-                            <img src="inventory-dashboard-preview.png" alt="Inventory Dashboard Screenshot"
-                                style="width: 100%; height: auto; display: block; border-top: 1px solid #333; border-radius: 0 0 12px 12px;" />
+                    <!-- Showcase: Inventory Dashboard -->
+                    <div class="showcase-card">
+                        <a href="https://cobra-moved-constantly.ngrok-free.app/html/" target="_blank" rel="noopener noreferrer">
+                            <div class="showcase-header">
+                                <h3>Inventory Dashboard</h3>
+                                <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
+                            </div>
+                            <div class="showcase-img-wrapper">
+                                <img src="inventory-dashboard-preview.png" alt="Inventory Dashboard Screenshot" class="showcase-img" />
+                            </div>
                         </a>
-                        <div class="tags" style="padding: 1rem 1.5rem;">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">REST API</span>
-                            <span class="tag">Excel Automation</span>
-                            <span class="tag">OTP</span>
-                            <span class="tag">OpenAI</span>
+                        <div class="showcase-tags">
+                            <div class="tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">MySQL</span>
+                                <span class="tag">REST API</span>
+                                <span class="tag">Excel Automation</span>
+                                <span class="tag">OTP</span>
+                                <span class="tag">OpenAI</span>
+                            </div>
                         </div>
                     </div>
-
                 </article>
 
-
-                <!-- Experience -->
-                <!-- Resume -->
+                <!-- ===== Resume ===== -->
                 <article data-page="experience">
                     <h2 class="section-title">Resume</h2>
 
-                    <!-- Summary -->
-                    <h3 style="color: var(--accent); margin-top: 2rem;">Education</h3>
+                    <h3 class="resume-category">
+                        <ion-icon name="school-outline"></ion-icon> Education
+                    </h3>
+
                     <div class="timeline">
                         <div class="timeline-item">
                             <h3>Master of Science in Cybersecurity</h3>
-                            <div class="meta">New York Institute of Technology | Jan 2024 – Dec 2024</div>
+                            <div class="meta">New York Institute of Technology | Jan 2024 &ndash; Dec 2024</div>
                             <p>
                                 GPA: 3.74<br>
-                                • Specialized in network security, cryptography, ethical hacking, and defense
-                                strategies.<br>
-                                • Gained hands-on experience in vulnerability scanning and legal compliance.
+                                Specialized in network security, cryptography, ethical hacking, and defense
+                                strategies. Gained hands-on experience in vulnerability scanning and legal compliance.
                             </p>
                         </div>
                         <div class="timeline-item">
                             <h3>Bachelor of Information Technology</h3>
-                            <div class="meta">Kwantlen Polytechnic University | Sep 2017 – Dec 2022</div>
+                            <div class="meta">Kwantlen Polytechnic University | Sep 2017 &ndash; Dec 2022</div>
                             <p>
                                 GPA: 3.26 (3.8 in major courses)<br>
-                                • Studied web dev, IoT, project management, and cloud security.<br>
-                                • Completed CO-OP training with practical development and system projects.
+                                Studied web development, IoT, project management, and cloud security.
+                                Completed CO-OP training with practical development and system projects.
                             </p>
                         </div>
                     </div>
-                    <h3 style="color: var(--accent); margin-top: 2rem;">Work Experience</h3>
+
+                    <h3 class="resume-category">
+                        <ion-icon name="briefcase-outline"></ion-icon> Work Experience
+                    </h3>
+
                     <div class="timeline">
                         <div class="timeline-item">
                             <h3>IT Systems & Infrastructure Specialist</h3>
-                            <div class="meta">Amax Leather Canada Ltd & Aurora Furniture MFG | May 2025 – Present</div>
+                            <div class="meta">Amax Leather Canada Ltd & Aurora Furniture MFG | May 2025 &ndash; Present</div>
                             <p>
-                                • Lead Windows/Linux server deployments and network infrastructure.<br>
-                                • Managed ERP/WMS systems with reporting automation.<br>
-                                • Designed cybersecurity protocols, implemented data backup, and ensured system
-                                reliability.<br>
-                                • Oversaw API and EDI integrations to streamline inventory/order syncing.
+                                Lead Windows/Linux server deployments and network infrastructure.
+                                Managed ERP/WMS systems with reporting automation.
+                                Designed cybersecurity protocols, implemented data backup, and ensured system
+                                reliability. Oversaw API and EDI integrations to streamline inventory/order syncing.
                             </p>
                         </div>
                         <div class="timeline-item">
                             <h3>System Administrator</h3>
-                            <div class="meta">Amax Leather Canada Ltd | Aug 2022 – Apr 2025</div>
+                            <div class="meta">Amax Leather Canada Ltd | Aug 2022 &ndash; Apr 2025</div>
                             <p>
-                                • Maintained server performance and cloud infrastructure (AWS).<br>
-                                • Configured Google Workspace and handled multi-site collaboration.<br>
-                                • Built JS-based dashboards and automation tools for internal use.<br>
-                                • Implemented cybersecurity practices to protect critical data.
+                                Maintained server performance and cloud infrastructure (AWS).
+                                Configured Google Workspace and handled multi-site collaboration.
+                                Built JS-based dashboards and automation tools for internal use.
+                                Implemented cybersecurity practices to protect critical data.
                             </p>
                         </div>
                         <div class="timeline-item">
                             <h3>Website Developer</h3>
-                            <div class="meta">Perfect Decor | May 2022 – Mar 2023</div>
+                            <div class="meta">Perfect Decor | May 2022 &ndash; Mar 2023</div>
                             <p>
-                                • Redesigned web presence for multiple clients using modern frameworks.<br>
-                                • Built scalable web applications and enhanced UX/UI.<br>
-                                • Created high-quality visual content to elevate brand image.
+                                Redesigned web presence for multiple clients using modern frameworks.
+                                Built scalable web applications and enhanced UX/UI.
+                                Created high-quality visual content to elevate brand image.
                             </p>
                         </div>
-                        <div style="margin: 2rem auto 0; text-align: center;">
-                            <a href="Lionel_Wang_Resume.pdf" download
-                                style="display: inline-block; background: var(--accent); color: var(--bg-dark); padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: transform 0.2s ease;">
-                                <ion-icon name="download-outline"
-                                    style="vertical-align: middle; font-size: 1.2rem; margin-right: 0.4rem;"></ion-icon>
-                                Download Resume (PDF)
-                            </a>
-                        </div>
-
                     </div>
 
-                    <!-- Education -->
-
+                    <div class="resume-actions">
+                        <a href="Lionel_Wang_Resume.pdf" download class="resume-download">
+                            <ion-icon name="download-outline"></ion-icon>
+                            Download Resume (PDF)
+                        </a>
+                    </div>
                 </article>
 
-
-                <!-- Hobbies -->
-                <!-- Skills -->
+                <!-- ===== Skills ===== -->
                 <article data-page="skills">
                     <h2 class="section-title">Skills</h2>
-                    <div style="display: flex; flex-direction: column; gap: 1.2rem;">
 
-                        <div>
-                            <label>Network Security & Intrusion Detection</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 95%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <label>
+                                Network Security & Intrusion Detection
+                                <span class="skill-percent">95%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 95%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>Operating System & Server Management (Linux/Windows)</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 92%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                Technical Support & System Optimization
+                                <span class="skill-percent">93%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 93%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>AWS & Cloud Infrastructure</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 88%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                OS & Server Management (Linux/Windows)
+                                <span class="skill-percent">92%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 92%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>API / EDI Integration</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 85%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                Python & JavaScript (Automation, Web, Scripting)
+                                <span class="skill-percent">90%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 90%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>Python & JavaScript (Automation, Web, Scripting)</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 90%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                Cyber Threat Analysis & Risk Management
+                                <span class="skill-percent">90%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 90%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>Web & Mobile App Development</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 87%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                AWS & Cloud Infrastructure
+                                <span class="skill-percent">88%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 88%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>Database Management (MySQL, SQL Server)</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 82%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                Web & Mobile App Development
+                                <span class="skill-percent">87%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 87%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>Cyber Threat Analysis & Risk Management</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 90%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                API / EDI Integration
+                                <span class="skill-percent">85%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 85%"></div>
                             </div>
                         </div>
 
-                        <div>
-                            <label>Technical Support & System Optimization</label>
-                            <div style="background: #2c2c3a; border-radius: 8px;">
-                                <div style="width: 93%; background: var(--accent); height: 10px; border-radius: 8px;">
-                                </div>
+                        <div class="skill-item">
+                            <label>
+                                Database Management (MySQL, SQL Server)
+                                <span class="skill-percent">82%</span>
+                            </label>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--target-width: 82%"></div>
                             </div>
                         </div>
-
                     </div>
                 </article>
 
-
-                <!-- Contact -->
+                <!-- ===== Certificates ===== -->
                 <article data-page="certificates">
                     <h2 class="section-title">Certificates</h2>
-                    <div
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
 
+                    <div class="certificates-grid">
                         <!-- NYIT -->
-                        <div
-                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
-                            <img src="nyit.png" alt="NYIT" style="height: 40px; margin-bottom: 1rem;" />
+                        <div class="cert-card">
+                            <div class="cert-issuer">
+                                <img src="nyit.png" alt="NYIT" />
+                                <span class="cert-issuer-name">New York Institute of Technology</span>
+                            </div>
                             <h3>Master of Science in Cybersecurity</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">New York Institute of Technology
-                                – Vancouver</p>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Issued Dec 2024 • Credential ID:
-                                2VU9-7XT8-WEGQ</p>
-                            <img src="nyit-certificate.png" alt="AWS Certificate"
-                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                            <p class="cert-meta">Issued Dec 2024</p>
+                            <p class="cert-skills">Credential ID: 2VU9-7XT8-WEGQ</p>
+                            <img src="nyit-certificate.png" alt="NYIT Certificate" class="cert-image" />
                         </div>
-                        <div
-                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
-                            <img src="kpu.png" alt="KPU Logo" style="height: 40px; margin-bottom: 1rem;" />
+
+                        <!-- KPU -->
+                        <div class="cert-card">
+                            <div class="cert-issuer">
+                                <img src="kpu.png" alt="KPU Logo" />
+                                <span class="cert-issuer-name">Kwantlen Polytechnic University</span>
+                            </div>
                             <h3>Bachelor of Technology in Information Technology</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Kwantlen Polytechnic University
-                            </p>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Issued Jan 2023</p>
-                            <img src="kpu-certificate.png" alt="KPU Degree"
-                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                            <p class="cert-meta">Issued Jan 2023</p>
+                            <img src="kpu-certificate.png" alt="KPU Degree" class="cert-image" />
                         </div>
+
                         <!-- AWS -->
-                        <div
-                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
-                            <img src="aws.png" alt="AWS" style="height: 40px; margin-bottom: 1rem;" />
+                        <div class="cert-card">
+                            <div class="cert-issuer">
+                                <img src="aws.png" alt="AWS" />
+                                <span class="cert-issuer-name">Amazon Web Services</span>
+                            </div>
                             <h3>AWS Cloud Foundations</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Amazon Web Services (AWS)</p>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Issued Apr 2024</p>
-                            <img src="aws-foundations.jpeg" alt="AWS Certificate"
-                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                            <p class="cert-meta">Issued Apr 2024</p>
+                            <img src="aws-foundations.jpeg" alt="AWS Certificate" class="cert-image" />
                         </div>
 
                         <!-- Fortinet Google Cloud Security -->
-                        <div
-                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
-                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                        <div class="cert-card">
+                            <div class="cert-issuer">
+                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <span class="cert-issuer-name">Fortinet</span>
+                            </div>
                             <h3>Google Cloud Security 7.6 Administrator</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Feb 2025</p>
-                            <p style="font-size: 0.9rem;">Skills: Google Cloud Platform, Cloud Security</p>
-                            <img src="fortinet-google.png" alt="Certificate"
-                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                            <p class="cert-meta">Issued Feb 2025</p>
+                            <p class="cert-skills">Skills: Google Cloud Platform, Cloud Security</p>
+                            <img src="fortinet-google.png" alt="Certificate" class="cert-image" />
                         </div>
 
-                        <!-- Fortinet Intro to Cybersecurity -->
-                        <div
-                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
-                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                        <!-- Fortinet Intro -->
+                        <div class="cert-card">
+                            <div class="cert-issuer">
+                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <span class="cert-issuer-name">Fortinet</span>
+                            </div>
                             <h3>Cybersecurity 1.0</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Jan 2025</p>
-                            <p style="font-size: 0.9rem;">Skills: Awareness, Risk Assessment</p>
-                            <img src="fortinet-intro.png" alt="Certificate"
-                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                            <p class="cert-meta">Issued Jan 2025</p>
+                            <p class="cert-skills">Skills: Awareness, Risk Assessment</p>
+                            <img src="fortinet-intro.png" alt="Certificate" class="cert-image" />
                         </div>
 
                         <!-- Fortinet Getting Started -->
-                        <div
-                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
-                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                        <div class="cert-card">
+                            <div class="cert-issuer">
+                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <span class="cert-issuer-name">Fortinet</span>
+                            </div>
                             <h3>Cybersecurity 2.0</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Dec 2024</p>
-                            <p style="font-size: 0.9rem;">Skills: Network Security, Threat Analysis</p>
-                            <img src="fortinet-started.png" alt="Certificate"
-                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                            <p class="cert-meta">Issued Dec 2024</p>
+                            <p class="cert-skills">Skills: Network Security, Threat Analysis</p>
+                            <img src="fortinet-started.png" alt="Certificate" class="cert-image" />
                         </div>
 
                         <!-- Fortinet FortiGate -->
-                        <div
-                            style="background: var(--bg-light); padding: 1.25rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.4);">
-                            <img src="fortinet.jpeg" alt="Fortinet" style="height: 40px; margin-bottom: 1rem;" />
+                        <div class="cert-card">
+                            <div class="cert-issuer">
+                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <span class="cert-issuer-name">Fortinet</span>
+                            </div>
                             <h3>FortiGate 7.6 Administrator</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 0.3rem;">Fortinet • Issued Feb 2025</p>
-                            <p style="font-size: 0.9rem;">Skills: Firewall Administration</p>
-                            <img src="fortigate.png" alt="Certificate"
-                                style="margin-top: 0.5rem; max-width: 100%; border-radius: 8px;" />
+                            <p class="cert-meta">Issued Feb 2025</p>
+                            <p class="cert-skills">Skills: Firewall Administration</p>
+                            <img src="fortigate.png" alt="Certificate" class="cert-image" />
                         </div>
-
                     </div>
                 </article>
 
-
-                <footer>© 2025 Lionel Wang. All rights reserved.</footer>
+                <footer>&copy; 2025 <span class="footer-accent">Lionel Wang</span>. All rights reserved.</footer>
             </div>
         </div>
+    </div>
 
-        <script>
-            document.querySelectorAll('[data-nav-link]').forEach(btn =>
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('[data-nav-link]').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const page = btn.getAttribute('data-nav-link');
-                    document.querySelectorAll('article[data-page]').forEach(p => p.classList.remove('active'));
-                    document.querySelector(`article[data-page="${page}"]`).classList.add('active');
-                })
-            );
-
-            const phrases = [
-                'IT Infrastructure Specialist',
-                'Cybersecurity Enthusiast',
-                'API & EDI Integrations',
-                'Web/API Developer'
-            ];
-            let p = 0, c = 0;
-            const el = document.getElementById('typing');
-            function type() {
-                const s = phrases[p];
-                el.textContent = s.slice(0, c + 1);
-                if (c < s.length) {
-                    c++;
-                    setTimeout(type, 100);
-                } else {
-                    setTimeout(erase, 2000);
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('[data-nav-link]').forEach(btn =>
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-nav-link]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const page = btn.getAttribute('data-nav-link');
+                document.querySelectorAll('article[data-page]').forEach(a => a.classList.remove('active'));
+                const target = document.querySelector(`article[data-page="${page}"]`);
+                if (target) {
+                    target.classList.add('active');
+                    // Trigger skill bar animation when Skills tab is opened
+                    if (page === 'skills') animateSkillBars();
                 }
+            })
+        );
+
+        // Typing Animation
+        const phrases = [
+            'IT Infrastructure Specialist',
+            'Cybersecurity Enthusiast',
+            'API & EDI Integrations',
+            'Web/API Developer'
+        ];
+        let phraseIdx = 0, charIdx = 0;
+        const typingEl = document.getElementById('typing');
+
+        function typeChar() {
+            const phrase = phrases[phraseIdx];
+            typingEl.textContent = phrase.slice(0, charIdx + 1);
+            if (charIdx < phrase.length) {
+                charIdx++;
+                setTimeout(typeChar, 80);
+            } else {
+                setTimeout(eraseChar, 2200);
             }
-            function erase() {
-                if (c > 0) {
-                    el.textContent = phrases[p].slice(0, c - 1);
-                    c--;
-                    setTimeout(erase, 50);
-                } else {
-                    p = (p + 1) % phrases.length;
-                    setTimeout(type, 500);
-                }
+        }
+
+        function eraseChar() {
+            if (charIdx > 0) {
+                typingEl.textContent = phrases[phraseIdx].slice(0, charIdx - 1);
+                charIdx--;
+                setTimeout(eraseChar, 40);
+            } else {
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                setTimeout(typeChar, 400);
             }
-            document.addEventListener('DOMContentLoaded', () => setTimeout(type, 500));
-        </script>
-        <script>
-            const img1 = document.getElementById('avatar1');
-            const img2 = document.getElementById('avatar2');
-            let showingFirst = true;
+        }
 
-            setInterval(() => {
-                if (showingFirst) {
-                    img1.classList.remove('fade-in');
-                    img1.classList.add('fade-out');
-                    img2.classList.remove('fade-out');
-                    img2.classList.add('fade-in');
-                } else {
-                    img1.classList.remove('fade-out');
-                    img1.classList.add('fade-in');
-                    img2.classList.remove('fade-in');
-                    img2.classList.add('fade-out');
-                }
-                showingFirst = !showingFirst;
-            }, 6000);
-        </script>
+        document.addEventListener('DOMContentLoaded', () => setTimeout(typeChar, 600));
 
+        // Avatar Fade Toggle
+        const img1 = document.getElementById('avatar1');
+        const img2 = document.getElementById('avatar2');
+        let showingFirst = true;
 
+        setInterval(() => {
+            if (showingFirst) {
+                img1.classList.replace('fade-in', 'fade-out');
+                img2.classList.replace('fade-out', 'fade-in');
+            } else {
+                img1.classList.replace('fade-out', 'fade-in');
+                img2.classList.replace('fade-in', 'fade-out');
+            }
+            showingFirst = !showingFirst;
+        }, 6000);
+
+        // Animated Skill Bars
+        function animateSkillBars() {
+            document.querySelectorAll('.skill-fill').forEach(bar => {
+                bar.classList.remove('animated');
+                // Force reflow
+                void bar.offsetWidth;
+                bar.classList.add('animated');
+            });
+        }
+    </script>
 </body>
 
 </html>
