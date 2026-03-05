@@ -85,6 +85,11 @@
                         <ion-icon name="logo-github"></ion-icon>
                     </a>
                 </li>
+                <li>
+                    <button class="social-link theme-toggle" aria-label="Toggle theme" id="themeToggle">
+                        <ion-icon name="moon-outline" id="themeIcon"></ion-icon>
+                    </button>
+                </li>
             </ul>
         </aside>
 
@@ -194,6 +199,31 @@
                                 <p>ERP/WMS integration, QuickBooks connector, EDI/API workflows, and automated reporting.</p>
                             </div>
                         </div>
+                    </div>
+
+                    <h3 class="section-heading">Currently Learning</h3>
+                    <div class="learning-grid">
+                        <div class="learning-item">
+                            <ion-icon name="cube-outline"></ion-icon>
+                            <span>Kubernetes & Docker</span>
+                        </div>
+                        <div class="learning-item">
+                            <ion-icon name="git-branch-outline"></ion-icon>
+                            <span>RAG Pipelines & LangChain</span>
+                        </div>
+                        <div class="learning-item">
+                            <ion-icon name="cloud-outline"></ion-icon>
+                            <span>Azure Cloud (AZ-900)</span>
+                        </div>
+                        <div class="learning-item">
+                            <ion-icon name="terminal-outline"></ion-icon>
+                            <span>Terraform & IaC</span>
+                        </div>
+                    </div>
+
+                    <h3 class="section-heading">GitHub Activity</h3>
+                    <div class="github-stats">
+                        <img src="https://github-readme-stats.vercel.app/api?username=lionelwwq&show_icons=true&theme=transparent&title_color=4fd1c5&icon_color=4fd1c5&text_color=8888a0&hide_border=true&bg_color=0e0e1a" alt="GitHub Stats" class="github-stats-img" loading="lazy" />
                     </div>
                 </article>
 
@@ -504,6 +534,10 @@
                         </div>
                     </div>
 
+                    <div class="resume-viewer">
+                        <iframe src="Lionel_Wang_Resume.pdf" title="Resume" class="resume-iframe"></iframe>
+                    </div>
+
                     <div class="resume-actions">
                         <a href="Lionel_Wang_Resume.pdf" download class="resume-download">
                             <ion-icon name="download-outline"></ion-icon>
@@ -773,6 +807,11 @@
         </div>
     </div>
 
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <ion-icon name="chevron-up-outline"></ion-icon>
+    </button>
+
     <script>
         // Tab Navigation with smooth transitions
         document.querySelectorAll('[data-nav-link]').forEach(btn =>
@@ -954,6 +993,39 @@
         // Dynamic footer year
         document.querySelector('.footer-accent').parentElement.innerHTML =
             '&copy; ' + new Date().getFullYear() + ' &mdash; <span class="footer-accent">Lionel Wang</span>. Crafted with precision.';
+
+        // Dark/Light Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            if (isLight) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+            updateThemeIcon();
+        });
+
+        function updateThemeIcon() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            themeIcon.setAttribute('name', isLight ? 'sunny-outline' : 'moon-outline');
+        }
+
+        // Scroll to Top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+        });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
 </body>
 

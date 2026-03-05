@@ -1621,6 +1621,163 @@ article::-webkit-scrollbar-thumb:hover {
     font-weight: 500;
 }
 
+/* ===== Currently Learning ===== */
+.learning-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.learning-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: var(--bg-light);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    color: var(--text-subtle);
+    font-weight: 500;
+    transition: border-color var(--transition), transform var(--transition);
+}
+
+.learning-item:hover {
+    border-color: var(--border-accent);
+    transform: translateX(4px);
+}
+
+.learning-item ion-icon {
+    color: var(--accent);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* ===== GitHub Stats ===== */
+.github-stats {
+    background: var(--bg-light);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.github-stats-img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* ===== Resume Viewer ===== */
+.resume-viewer {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bg-light);
+}
+
+.resume-iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+}
+
+/* ===== Scroll to Top ===== */
+.scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-accent);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition), transform var(--transition), background var(--transition), box-shadow var(--transition);
+    z-index: 100;
+    pointer-events: none;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-top:hover {
+    background: var(--accent-glow-strong);
+    box-shadow: 0 4px 20px rgba(79, 209, 197, 0.2);
+}
+
+.scroll-top ion-icon {
+    font-size: 1.3rem;
+}
+
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+}
+
+/* ===== Light Theme ===== */
+[data-theme="light"] {
+    --bg-dark: #f5f5f8;
+    --bg-light: #ffffff;
+    --bg-card: #fafafa;
+    --accent: #0d9488;
+    --accent-alt: #0f766e;
+    --accent-secondary: #7c3aed;
+    --accent-glow: rgba(13, 148, 136, 0.08);
+    --accent-glow-strong: rgba(13, 148, 136, 0.18);
+    --gradient: linear-gradient(135deg, #0d9488, #0f766e, #115e59);
+    --gradient-warm: linear-gradient(135deg, #0d9488, #7c3aed);
+    --text-light: #1a1a2e;
+    --text-muted: #555570;
+    --text-subtle: #3a3a50;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-accent: rgba(13, 148, 136, 0.25);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-accent: 0 4px 20px rgba(13, 148, 136, 0.15);
+}
+
+[data-theme="light"] body::before {
+    background:
+        radial-gradient(ellipse 800px 600px at 15% 20%, rgba(13, 148, 136, 0.05), transparent),
+        radial-gradient(ellipse 600px 600px at 85% 75%, rgba(124, 58, 237, 0.03), transparent),
+        radial-gradient(ellipse 400px 400px at 50% 50%, rgba(13, 148, 136, 0.02), transparent);
+}
+
+[data-theme="light"] .name {
+    background: linear-gradient(135deg, #1a1a2e, #0d9488);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+[data-theme="light"] .about-name-big {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0d9488 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+[data-theme="light"] .github-stats-img {
+    filter: none;
+}
+
 /* ===== Focus Styles ===== */
 .navbar-link:focus-visible,
 .social-link:focus-visible,
@@ -1742,6 +1899,10 @@ article::-webkit-scrollbar-thumb:hover {
     .language-grid {
         flex-wrap: wrap;
     }
+
+    .learning-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 640px) {
@@ -1805,5 +1966,14 @@ article::-webkit-scrollbar-thumb:hover {
 
     .about-name-big {
         font-size: 1.75rem;
+    }
+
+    .resume-iframe {
+        height: 400px;
+    }
+
+    .scroll-top {
+        bottom: 1rem;
+        right: 1rem;
     }
 }
