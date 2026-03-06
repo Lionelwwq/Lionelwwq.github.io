@@ -632,6 +632,24 @@ article::-webkit-scrollbar-thumb:hover {
 /* ===== About Hero ===== */
 .about-hero {
     margin-bottom: 1.75rem;
+    position: relative;
+}
+
+.hero-glow {
+    position: absolute;
+    top: -40px;
+    left: -60px;
+    width: 260px;
+    height: 180px;
+    background: radial-gradient(ellipse, rgba(79, 209, 197, 0.08), rgba(124, 58, 237, 0.05), transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+[data-theme="light"] .hero-glow {
+    background: radial-gradient(ellipse, rgba(13, 148, 136, 0.06), rgba(124, 58, 237, 0.04), transparent 70%);
 }
 
 .about-greeting {
@@ -1141,6 +1159,25 @@ article::-webkit-scrollbar-thumb:hover {
 
 .project-card:hover::before {
     transform: scaleX(1);
+}
+
+.project-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+    font-size: 1.2rem;
+    transition: background var(--transition), transform 0.3s ease;
+}
+
+.project-card:hover .project-icon {
+    background: var(--accent-glow-strong);
+    transform: scale(1.1);
 }
 
 .project-card h3 {
