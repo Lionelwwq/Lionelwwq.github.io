@@ -893,6 +893,24 @@
         </div>
     </div>
 
+    <!-- Interactive Flashlight -->
+    <div class="flashlight" id="flashlight" aria-hidden="true">
+        <div class="flashlight-icon">
+            <ion-icon name="flashlight-outline"></ion-icon>
+        </div>
+        <div class="flashlight-label">Drag me!</div>
+    </div>
+    <div class="flashlight-beam" id="flashlightBeam" aria-hidden="true"></div>
+
+    <!-- Draggable Stickers -->
+    <div class="sticker-tray" id="stickerTray" aria-hidden="true">
+        <div class="sticker" data-sticker>&#x1F680;</div>
+        <div class="sticker" data-sticker>&#x1F4BB;</div>
+        <div class="sticker" data-sticker>&#x1F510;</div>
+        <div class="sticker" data-sticker>&#x26A1;</div>
+        <div class="sticker" data-sticker>&#x1F916;</div>
+    </div>
+
     <!-- Scroll to Top -->
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
         <ion-icon name="chevron-up-outline"></ion-icon>
@@ -1359,6 +1377,121 @@
             const preloader = document.getElementById('preloader');
             preloader.classList.add('loaded');
             setTimeout(() => preloader.remove(), 600);
+        });
+
+        // ===== Draggable Flashlight with Spotlight Beam =====
+        const flashlight = document.getElementById('flashlight');
+        const beam = document.getElementById('flashlightBeam');
+        let flDragging = false, flOn = false, flX = 80, flY = 200;
+
+        function updateFlashlight() {
+            flashlight.style.left = flX + 'px';
+            flashlight.style.top = flY + 'px';
+            if (flOn) {
+                beam.style.left = (flX + 20) + 'px';
+                beam.style.top = (flY + 20) + 'px';
+            }
+        }
+        updateFlashlight();
+
+        flashlight.addEventListener('mousedown', (e) => { flDragging = true; e.preventDefault(); });
+        flashlight.addEventListener('touchstart', (e) => { flDragging = true; e.preventDefault(); }, { passive: false });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!flDragging) return;
+            flX = e.clientX - 20;
+            flY = e.clientY - 20;
+            updateFlashlight();
+        });
+        document.addEventListener('touchmove', (e) => {
+            if (!flDragging) return;
+            const t = e.touches[0];
+            flX = t.clientX - 20;
+            flY = t.clientY - 20;
+            updateFlashlight();
+        }, { passive: false });
+
+        document.addEventListener('mouseup', () => flDragging = false);
+        document.addEventListener('touchend', () => flDragging = false);
+
+        // Double-click to toggle flashlight on/off
+        flashlight.addEventListener('dblclick', () => {
+            flOn = !flOn;
+            flashlight.classList.toggle('active', flOn);
+            beam.classList.toggle('active', flOn);
+            if (flOn) {
+                flashlight.querySelector('.flashlight-label').textContent = 'Double-click to off';
+            } else {
+                flashlight.querySelector('.flashlight-label').textContent = 'Drag me!';
+            }
+            updateFlashlight();
+        });
+
+        // ===== Draggable Stickers =====
+        document.querySelectorAll('[data-sticker]').forEach(sticker => {
+            let dragging = false, startX, startY, origX, origY;
+
+            function onStart(e) {
+                dragging = true;
+                const ev = e.touches ? e.touches[0] : e;
+                const rect = sticker.getBoundingClientRect();
+                startX = ev.clientX - rect.left;
+                startY = ev.clientY - rect.top;
+                sticker.classList.add('dragging');
+                // Move sticker out of tray into body if still in tray
+                if (sticker.parentElement.classList.contains('sticker-tray')) {
+                    origX = rect.left;
+                    origY = rect.top;
+                    sticker.style.position = 'fixed';
+                    sticker.style.left = origX + 'px';
+                    sticker.style.top = origY + 'px';
+                    sticker.style.margin = '0';
+                    document.body.appendChild(sticker);
+                }
+                e.preventDefault();
+            }
+            function onMove(e) {
+                if (!dragging) return;
+                const ev = e.touches ? e.touches[0] : e;
+                sticker.style.left = (ev.clientX - startX) + 'px';
+                sticker.style.top = (ev.clientY - startY) + 'px';
+            }
+            function onEnd() {
+                dragging = false;
+                sticker.classList.remove('dragging');
+            }
+
+            sticker.addEventListener('mousedown', onStart);
+            sticker.addEventListener('touchstart', onStart, { passive: false });
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('mouseup', onEnd);
+            document.addEventListener('touchend', onEnd);
+        });
+
+        // ===== Interactive Tech Stack — click to pop =====
+        document.querySelectorAll('.marquee-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                item.classList.add('pop');
+                setTimeout(() => item.classList.remove('pop'), 400);
+            });
+        });
+
+        // ===== Easter Egg — Konami Code =====
+        const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+        let konamiIdx = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIdx]) {
+                konamiIdx++;
+                if (konamiIdx === konamiCode.length) {
+                    konamiIdx = 0;
+                    document.body.classList.add('easter-egg');
+                    setTimeout(() => document.body.classList.remove('easter-egg'), 3000);
+                }
+            } else {
+                konamiIdx = 0;
+            }
         });
 
         // ===== Service Worker Registration =====
