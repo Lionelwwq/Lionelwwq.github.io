@@ -893,23 +893,8 @@
         </div>
     </div>
 
-    <!-- Interactive Flashlight -->
-    <div class="flashlight" id="flashlight" aria-hidden="true">
-        <div class="flashlight-icon">
-            <ion-icon name="flashlight-outline"></ion-icon>
-        </div>
-        <div class="flashlight-label">Drag me!</div>
-    </div>
-    <div class="flashlight-beam" id="flashlightBeam" aria-hidden="true"></div>
-
-    <!-- Draggable Stickers -->
-    <div class="sticker-tray" id="stickerTray" aria-hidden="true">
-        <div class="sticker" data-sticker>&#x1F680;</div>
-        <div class="sticker" data-sticker>&#x1F4BB;</div>
-        <div class="sticker" data-sticker>&#x1F510;</div>
-        <div class="sticker" data-sticker>&#x26A1;</div>
-        <div class="sticker" data-sticker>&#x1F916;</div>
-    </div>
+    <!-- Copy Toast Notification -->
+    <div class="toast" id="toast" aria-live="polite"></div>
 
     <!-- Scroll to Top -->
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
@@ -1379,118 +1364,110 @@
             setTimeout(() => preloader.remove(), 600);
         });
 
-        // ===== Draggable Flashlight with Spotlight Beam =====
-        const flashlight = document.getElementById('flashlight');
-        const beam = document.getElementById('flashlightBeam');
-        let flDragging = false, flOn = false, flX = 80, flY = 200;
-
-        function updateFlashlight() {
-            flashlight.style.left = flX + 'px';
-            flashlight.style.top = flY + 'px';
-            if (flOn) {
-                beam.style.left = (flX + 20) + 'px';
-                beam.style.top = (flY + 20) + 'px';
-            }
+        // ===== Toast notification helper =====
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('visible');
+            setTimeout(() => toast.classList.remove('visible'), 2000);
         }
-        updateFlashlight();
 
-        flashlight.addEventListener('mousedown', (e) => { flDragging = true; e.preventDefault(); });
-        flashlight.addEventListener('touchstart', (e) => { flDragging = true; e.preventDefault(); }, { passive: false });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!flDragging) return;
-            flX = e.clientX - 20;
-            flY = e.clientY - 20;
-            updateFlashlight();
-        });
-        document.addEventListener('touchmove', (e) => {
-            if (!flDragging) return;
-            const t = e.touches[0];
-            flX = t.clientX - 20;
-            flY = t.clientY - 20;
-            updateFlashlight();
-        }, { passive: false });
-
-        document.addEventListener('mouseup', () => flDragging = false);
-        document.addEventListener('touchend', () => flDragging = false);
-
-        // Double-click to toggle flashlight on/off
-        flashlight.addEventListener('dblclick', () => {
-            flOn = !flOn;
-            flashlight.classList.toggle('active', flOn);
-            beam.classList.toggle('active', flOn);
-            if (flOn) {
-                flashlight.querySelector('.flashlight-label').textContent = 'Double-click to off';
-            } else {
-                flashlight.querySelector('.flashlight-label').textContent = 'Drag me!';
-            }
-            updateFlashlight();
-        });
-
-        // ===== Draggable Stickers =====
-        document.querySelectorAll('[data-sticker]').forEach(sticker => {
-            let dragging = false, startX, startY, origX, origY;
-
-            function onStart(e) {
-                dragging = true;
-                const ev = e.touches ? e.touches[0] : e;
-                const rect = sticker.getBoundingClientRect();
-                startX = ev.clientX - rect.left;
-                startY = ev.clientY - rect.top;
-                sticker.classList.add('dragging');
-                // Move sticker out of tray into body if still in tray
-                if (sticker.parentElement.classList.contains('sticker-tray')) {
-                    origX = rect.left;
-                    origY = rect.top;
-                    sticker.style.position = 'fixed';
-                    sticker.style.left = origX + 'px';
-                    sticker.style.top = origY + 'px';
-                    sticker.style.margin = '0';
-                    document.body.appendChild(sticker);
-                }
+        // ===== Click-to-copy on contact info =====
+        document.querySelectorAll('.contacts-list .contact-value, .contact-card').forEach(el => {
+            const link = el.tagName === 'A' ? el : el.querySelector('a');
+            if (!link) return;
+            const text = link.textContent.trim();
+            // Only add copy for email and phone
+            if (!link.href.startsWith('mailto:') && !link.href.startsWith('tel:')) return;
+            el.style.cursor = 'pointer';
+            el.setAttribute('title', 'Click to copy');
+            el.addEventListener('click', (e) => {
+                // Let the contact-card link still work — copy on the sidebar only
+                if (el.classList.contains('contact-card')) return;
                 e.preventDefault();
-            }
-            function onMove(e) {
-                if (!dragging) return;
-                const ev = e.touches ? e.touches[0] : e;
-                sticker.style.left = (ev.clientX - startX) + 'px';
-                sticker.style.top = (ev.clientY - startY) + 'px';
-            }
-            function onEnd() {
-                dragging = false;
-                sticker.classList.remove('dragging');
-            }
-
-            sticker.addEventListener('mousedown', onStart);
-            sticker.addEventListener('touchstart', onStart, { passive: false });
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('touchmove', onMove, { passive: false });
-            document.addEventListener('mouseup', onEnd);
-            document.addEventListener('touchend', onEnd);
-        });
-
-        // ===== Interactive Tech Stack — click to pop =====
-        document.querySelectorAll('.marquee-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.stopPropagation();
-                item.classList.add('pop');
-                setTimeout(() => item.classList.remove('pop'), 400);
+                navigator.clipboard.writeText(text).then(() => showToast('Copied: ' + text));
             });
         });
 
-        // ===== Easter Egg — Konami Code =====
-        const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-        let konamiIdx = 0;
-        document.addEventListener('keydown', (e) => {
-            if (e.key === konamiCode[konamiIdx]) {
-                konamiIdx++;
-                if (konamiIdx === konamiCode.length) {
-                    konamiIdx = 0;
-                    document.body.classList.add('easter-egg');
-                    setTimeout(() => document.body.classList.remove('easter-egg'), 3000);
-                }
-            } else {
-                konamiIdx = 0;
+        // ===== Expandable timeline items =====
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            const p = item.querySelector('p');
+            if (!p) return;
+            item.classList.add('expandable');
+            item.addEventListener('click', () => {
+                item.classList.toggle('expanded');
+            });
+        });
+
+        // ===== Project card filter by tag =====
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid) {
+            // Collect all unique tags
+            const allTags = new Set();
+            projectsGrid.querySelectorAll('.tag').forEach(t => allTags.add(t.textContent));
+
+            // Build filter bar
+            const filterBar = document.createElement('div');
+            filterBar.className = 'filter-bar';
+            const allBtn = document.createElement('button');
+            allBtn.className = 'filter-btn active';
+            allBtn.textContent = 'All';
+            allBtn.addEventListener('click', () => {
+                filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                allBtn.classList.add('active');
+                projectsGrid.querySelectorAll('.project-card').forEach(c => { c.style.display = ''; c.classList.remove('filter-hidden'); });
+            });
+            filterBar.appendChild(allBtn);
+
+            allTags.forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.textContent = tag;
+                btn.addEventListener('click', () => {
+                    filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    projectsGrid.querySelectorAll('.project-card').forEach(card => {
+                        const cardTags = [...card.querySelectorAll('.tag')].map(t => t.textContent);
+                        if (cardTags.includes(tag)) {
+                            card.style.display = '';
+                            card.classList.remove('filter-hidden');
+                        } else {
+                            card.classList.add('filter-hidden');
+                            setTimeout(() => { if (card.classList.contains('filter-hidden')) card.style.display = 'none'; }, 300);
+                        }
+                    });
+                });
+                filterBar.appendChild(btn);
+            });
+
+            projectsGrid.parentElement.insertBefore(filterBar, projectsGrid);
+        }
+
+        // ===== Skill bars — hover to show detailed tooltip =====
+        const skillDetails = {
+            'AI / ML Integration': 'OpenAI GPT, Embeddings, Function Calling, LangChain',
+            'Network Security': 'Intrusion Detection, Firewall Config, Wireshark, Nmap',
+            'Full-Stack Development': 'Node.js, Express, Python, Flask, React basics',
+            'Server Management': 'Linux, Windows Server, AWS EC2, Docker',
+            'Python & JavaScript': 'Automation, Web Scraping, Scripting, REST APIs',
+            'Threat Analysis': 'Risk Assessment, SIEM, Vulnerability Scanning',
+            'AWS & Cloud Infrastructure': 'EC2, S3, RDS, CloudFront, IAM',
+            'ERP / WMS Integration': 'QuickBooks, EDI, Inventory, Order Management',
+            'API / EDI Integration': 'REST, SOAP, EDI 850/856/810, Webhooks',
+            'Database Management': 'MySQL, SQL Server, Query Optimization, Backups'
+        };
+        document.querySelectorAll('.skill-item').forEach(item => {
+            const label = item.querySelector('label');
+            if (!label) return;
+            const name = label.childNodes[0].textContent.trim();
+            const detail = skillDetails[name];
+            if (detail) {
+                item.setAttribute('title', detail);
+                const tooltip = document.createElement('div');
+                tooltip.className = 'skill-tooltip';
+                tooltip.textContent = detail;
+                item.style.position = 'relative';
+                item.appendChild(tooltip);
             }
         });
 
