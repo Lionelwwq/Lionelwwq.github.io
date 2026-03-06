@@ -551,12 +551,25 @@ article::-webkit-scrollbar-thumb:hover {
     letter-spacing: -0.03em;
     line-height: 1.1;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--text-light) 0%, var(--accent) 100%);
+    background: linear-gradient(
+        90deg,
+        var(--text-light) 0%,
+        var(--accent) 40%,
+        #7c3aed 50%,
+        var(--accent) 60%,
+        var(--text-light) 100%
+    );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    animation: fadeInUp 0.6s ease-out 0.3s both;
+    animation: fadeInUp 0.6s ease-out 0.3s both, nameShimmer 6s ease-in-out infinite 1s;
+}
+
+@keyframes nameShimmer {
+    0%, 100% { background-position: 100% 0; }
+    50% { background-position: -100% 0; }
 }
 
 .about-tagline {
@@ -605,7 +618,7 @@ article::-webkit-scrollbar-thumb:hover {
 
 .about-stat:hover {
     border-color: var(--border-accent);
-    transform: translateY(-3px);
+    transform: perspective(600px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-3px);
     box-shadow: 0 8px 25px rgba(79, 209, 197, 0.1);
 }
 
@@ -669,6 +682,8 @@ article::-webkit-scrollbar-thumb:hover {
     font-weight: 600;
     margin: 2.5rem 0 1.25rem;
     letter-spacing: -0.01em;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--accent);
 }
 
 /* ===== Services Grid ===== */
@@ -718,7 +733,7 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 .service-card:hover {
-    transform: translateY(-6px);
+    transform: perspective(600px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-6px);
     border-color: var(--border-accent);
     box-shadow: var(--shadow-md), 0 0 40px rgba(79, 209, 197, 0.06);
 }
@@ -1020,7 +1035,7 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: perspective(600px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-5px);
     border-color: var(--border-accent);
     box-shadow: var(--shadow-md), 0 0 30px rgba(79, 209, 197, 0.05);
 }
@@ -1268,7 +1283,7 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 .resume-download:hover {
-    transform: translateY(-3px) scale(1.02);
+    transform: translate(var(--mag-x, 0), var(--mag-y, 0)) translateY(-3px) scale(1.02);
     box-shadow: 0 8px 30px rgba(79, 209, 197, 0.35);
 }
 
@@ -1551,7 +1566,7 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 .contact-card:hover {
-    transform: translateY(-4px);
+    transform: perspective(600px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
     border-color: var(--border-accent);
     box-shadow: var(--shadow-md), 0 0 30px rgba(79, 209, 197, 0.05);
 }
@@ -1633,7 +1648,7 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 .contact-cta-btn:hover {
-    transform: translateY(-3px) scale(1.02);
+    transform: translate(var(--mag-x, 0), var(--mag-y, 0)) translateY(-3px) scale(1.02);
     box-shadow: 0 8px 30px rgba(79, 209, 197, 0.35);
 }
 
@@ -1858,6 +1873,7 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 .scroll-top:hover {
+    transform: translate(var(--mag-x, 0), var(--mag-y, 0));
     background: var(--accent-glow-strong);
     box-shadow: 0 4px 20px rgba(79, 209, 197, 0.2);
 }
@@ -1910,7 +1926,15 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 [data-theme="light"] .about-name-big {
-    background: linear-gradient(135deg, #1a1a2e 0%, #0d9488 100%);
+    background: linear-gradient(
+        90deg,
+        #1a1a2e 0%,
+        #0d9488 40%,
+        #7c3aed 50%,
+        #0d9488 60%,
+        #1a1a2e 100%
+    );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

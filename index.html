@@ -866,10 +866,10 @@
                     target.classList.add('active');
                     target.scrollTop = 0;
                     if (page === 'skills') animateSkillBars();
-                    if (page === 'projects') setTimeout(animateCounters, 300);
+                    if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
                     staggerReveal(target);
-                    // Scramble section titles
-                    target.querySelectorAll('.section-title, .section-heading, .resume-category').forEach(el => textScramble(el));
+                    // Scramble section titles (skip elements with child nodes like icons)
+                    target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
                 }
             })
         );
@@ -983,7 +983,28 @@
             });
         }
 
-        // Mouse spotlight + 3D tilt effect on cards
+        // Animated featured project stat counters
+        function animateFeaturedStats() {
+            document.querySelectorAll('.featured-stats .stat-number').forEach(el => {
+                const original = statOriginals.get(el);
+                if (!original) return;
+                const num = parseInt(original);
+                if (isNaN(num)) return;
+                const suffix = original.replace(String(num), '');
+                el.textContent = '0' + suffix;
+                const duration = 1400;
+                const start = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(num * eased) + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            });
+        }
+
+        // Mouse spotlight + 3D tilt effect on cards (using CSS custom properties to avoid transform conflicts)
         document.querySelectorAll('.service-card, .project-card, .about-stat, .contact-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -991,14 +1012,15 @@
                 const y = ((e.clientY - rect.top) / rect.height) * 100;
                 card.style.setProperty('--mouse-x', x + '%');
                 card.style.setProperty('--mouse-y', y + '%');
-
-                // 3D tilt
-                const centerX = (e.clientX - rect.left) / rect.width - 0.5;
-                const centerY = (e.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = `perspective(600px) rotateY(${centerX * 8}deg) rotateX(${-centerY * 8}deg) translateY(-4px)`;
+                // 3D tilt via CSS custom properties (doesn't override hover transforms)
+                const tiltX = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+                const tiltY = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
+                card.style.setProperty('--tilt-x', tiltY + 'deg');
+                card.style.setProperty('--tilt-y', tiltX + 'deg');
             });
             card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
+                card.style.setProperty('--tilt-x', '0deg');
+                card.style.setProperty('--tilt-y', '0deg');
             });
         });
 
@@ -1194,20 +1216,18 @@
         }
         updateCursor();
 
-        // ===== Magnetic Hover on Buttons =====
-        document.querySelectorAll('.social-link, .resume-download, .contact-cta-btn, .scroll-top').forEach(btn => {
+        // ===== Magnetic Hover on Buttons (using CSS vars to avoid transform conflicts) =====
+        document.querySelectorAll('.resume-download, .contact-cta-btn, .scroll-top').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
                 const cx = rect.left + rect.width / 2;
                 const cy = rect.top + rect.height / 2;
-                const dx = (e.clientX - cx) * 0.25;
-                const dy = (e.clientY - cy) * 0.25;
-                btn.style.transform = `translate(${dx}px, ${dy}px)`;
+                btn.style.setProperty('--mag-x', ((e.clientX - cx) * 0.2) + 'px');
+                btn.style.setProperty('--mag-y', ((e.clientY - cy) * 0.2) + 'px');
             });
             btn.addEventListener('mouseleave', () => {
-                btn.style.transform = '';
-                btn.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-                setTimeout(() => btn.style.transition = '', 400);
+                btn.style.setProperty('--mag-x', '0px');
+                btn.style.setProperty('--mag-y', '0px');
             });
         });
 
