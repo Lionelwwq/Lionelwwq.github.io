@@ -31,6 +31,12 @@
 </head>
 
 <body>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <div class="container">
         <!-- ===== Sidebar ===== -->
         <aside class="sidebar">
@@ -858,11 +864,12 @@
                 const target = document.querySelector(`article[data-page="${page}"]`);
                 if (target) {
                     target.classList.add('active');
-                    // Scroll article to top on tab switch
                     target.scrollTop = 0;
                     if (page === 'skills') animateSkillBars();
                     if (page === 'projects') setTimeout(animateCounters, 300);
                     staggerReveal(target);
+                    // Scramble section titles
+                    target.querySelectorAll('.section-title, .section-heading, .resume-category').forEach(el => textScramble(el));
                 }
             })
         );
@@ -1068,6 +1075,151 @@
         });
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== Text Scramble Effect =====
+        const scrambleChars = '!@#$%^&*()_+-=[]{}|;:,./<>?0123456789';
+        function textScramble(el) {
+            const original = el.textContent;
+            let iteration = 0;
+            const interval = setInterval(() => {
+                el.textContent = original.split('').map((char, i) => {
+                    if (i < iteration) return original[i];
+                    if (char === ' ') return ' ';
+                    return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                }).join('');
+                iteration += 1.5;
+                if (iteration >= original.length) {
+                    el.textContent = original;
+                    clearInterval(interval);
+                }
+            }, 30);
+        }
+
+        // ===== Particle Canvas =====
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseCanvas = { x: -200, y: -200 };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('mousemove', (e) => {
+            mouseCanvas.x = e.clientX;
+            mouseCanvas.y = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                // Mouse repulsion
+                const dx = this.x - mouseCanvas.x;
+                const dy = this.y - mouseCanvas.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    const force = (120 - dist) / 120 * 0.8;
+                    this.vx += (dx / dist) * force;
+                    this.vy += (dy / dist) * force;
+                }
+                this.vx *= 0.98;
+                this.vy *= 0.98;
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(79, 209, 197, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            // Draw connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(79, 209, 197, ${0.08 * (1 - dist / 100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ===== Custom Cursor Glow =====
+        const cursorGlow = document.getElementById('cursorGlow');
+        let cursorX = -100, cursorY = -100, glowX = -100, glowY = -100;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+        });
+
+        function updateCursor() {
+            glowX += (cursorX - glowX) * 0.15;
+            glowY += (cursorY - glowY) * 0.15;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(updateCursor);
+        }
+        updateCursor();
+
+        // ===== Magnetic Hover on Buttons =====
+        document.querySelectorAll('.social-link, .resume-download, .contact-cta-btn, .scroll-top').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const dx = (e.clientX - cx) * 0.25;
+                const dy = (e.clientY - cy) * 0.25;
+                btn.style.transform = `translate(${dx}px, ${dy}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+                btn.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                setTimeout(() => btn.style.transition = '', 400);
+            });
+        });
+
+        // ===== Glowing Border Trail on Featured Project =====
+        document.querySelectorAll('.featured-project').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--glow-x', x + 'px');
+                card.style.setProperty('--glow-y', y + 'px');
+            });
         });
     </script>
 </body>
