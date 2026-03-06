@@ -201,6 +201,49 @@
                         </div>
                     </div>
 
+                    <h3 class="section-heading">Tech Stack</h3>
+                    <div class="marquee-wrapper">
+                        <div class="marquee-track">
+                            <span class="marquee-item">Node.js</span>
+                            <span class="marquee-item">Express</span>
+                            <span class="marquee-item">Python</span>
+                            <span class="marquee-item">MySQL</span>
+                            <span class="marquee-item">OpenAI GPT</span>
+                            <span class="marquee-item">AWS</span>
+                            <span class="marquee-item">Docker</span>
+                            <span class="marquee-item">JavaScript</span>
+                            <span class="marquee-item">HTML5 / CSS3</span>
+                            <span class="marquee-item">Bootstrap</span>
+                            <span class="marquee-item">Puppeteer</span>
+                            <span class="marquee-item">Flask</span>
+                            <span class="marquee-item">REST APIs</span>
+                            <span class="marquee-item">EDI</span>
+                            <span class="marquee-item">QuickBooks</span>
+                            <span class="marquee-item">Linux</span>
+                            <span class="marquee-item">Git</span>
+                            <span class="marquee-item">Wireshark</span>
+                            <!-- Duplicate for seamless loop -->
+                            <span class="marquee-item">Node.js</span>
+                            <span class="marquee-item">Express</span>
+                            <span class="marquee-item">Python</span>
+                            <span class="marquee-item">MySQL</span>
+                            <span class="marquee-item">OpenAI GPT</span>
+                            <span class="marquee-item">AWS</span>
+                            <span class="marquee-item">Docker</span>
+                            <span class="marquee-item">JavaScript</span>
+                            <span class="marquee-item">HTML5 / CSS3</span>
+                            <span class="marquee-item">Bootstrap</span>
+                            <span class="marquee-item">Puppeteer</span>
+                            <span class="marquee-item">Flask</span>
+                            <span class="marquee-item">REST APIs</span>
+                            <span class="marquee-item">EDI</span>
+                            <span class="marquee-item">QuickBooks</span>
+                            <span class="marquee-item">Linux</span>
+                            <span class="marquee-item">Git</span>
+                            <span class="marquee-item">Wireshark</span>
+                        </div>
+                    </div>
+
                     <h3 class="section-heading">Currently Learning</h3>
                     <div class="learning-grid">
                         <div class="learning-item">
@@ -933,14 +976,22 @@
             });
         }
 
-        // Mouse spotlight effect on service cards
-        document.querySelectorAll('.service-card').forEach(card => {
+        // Mouse spotlight + 3D tilt effect on cards
+        document.querySelectorAll('.service-card, .project-card, .about-stat, .contact-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = ((e.clientX - rect.left) / rect.width) * 100;
                 const y = ((e.clientY - rect.top) / rect.height) * 100;
                 card.style.setProperty('--mouse-x', x + '%');
                 card.style.setProperty('--mouse-y', y + '%');
+
+                // 3D tilt
+                const centerX = (e.clientX - rect.left) / rect.width - 0.5;
+                const centerY = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(600px) rotateY(${centerX * 8}deg) rotateX(${-centerY * 8}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
             });
         });
 
