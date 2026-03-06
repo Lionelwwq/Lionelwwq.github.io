@@ -1792,8 +1792,32 @@ article::-webkit-scrollbar-thumb:hover {
     color: transparent;
 }
 
-[data-theme="light"] .github-stats-img {
-    filter: none;
+[data-theme="light"] .navbar {
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .navbar-link {
+    color: #555570;
+}
+
+[data-theme="light"] .navbar-link:hover {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .navbar-link.active {
+    color: #0d9488;
+    background: rgba(13, 148, 136, 0.08);
+}
+
+[data-theme="light"] .scroll-top {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .lightbox-overlay {
+    background: rgba(255, 255, 255, 0.92);
 }
 
 /* ===== Focus Styles ===== */
