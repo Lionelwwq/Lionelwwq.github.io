@@ -231,6 +231,12 @@
                         Let's build something together.
                     </p>
 
+                    <a href="3d-scene.html" class="btn-3d-scene">
+                        <ion-icon name="cube-outline"></ion-icon>
+                        Explore in 3D
+                        <span class="btn-3d-badge">NEW</span>
+                    </a>
+
                     <h3 class="section-heading">What I'm Doing</h3>
 
                     <div class="services-grid">
@@ -1400,6 +1406,9 @@
             setTimeout(() => toast.classList.remove('visible'), 2000);
         }
 
+        // ===== Detect touch device =====
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
         // ===== Click-to-copy on contact info =====
         document.querySelectorAll('.contacts-list .contact-value, .contact-card').forEach(el => {
             const link = el.tagName === 'A' ? el : el.querySelector('a');
@@ -1422,6 +1431,7 @@
             const p = item.querySelector('p');
             if (!p) return;
             item.classList.add('expandable');
+            if (isTouch) item.classList.add('touch');
             item.addEventListener('click', () => {
                 item.classList.toggle('expanded');
             });
@@ -1496,8 +1506,23 @@
                 tooltip.textContent = detail;
                 item.style.position = 'relative';
                 item.appendChild(tooltip);
+                // Tap-to-toggle on touch devices
+                if (isTouch) {
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const wasActive = tooltip.classList.contains('touch-show');
+                        document.querySelectorAll('.skill-tooltip.touch-show').forEach(t => t.classList.remove('touch-show'));
+                        if (!wasActive) tooltip.classList.add('touch-show');
+                    });
+                }
             }
         });
+        // Dismiss tooltips on outside tap
+        if (isTouch) {
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.skill-tooltip.touch-show').forEach(t => t.classList.remove('touch-show'));
+            });
+        }
 
         // ===== 1. Scroll Progress Bar =====
         const scrollProgressBar = document.getElementById('scrollProgress');
@@ -1524,6 +1549,7 @@
         moveIndicator();
         navButtons.forEach(btn => btn.addEventListener('click', () => setTimeout(moveIndicator, 10)));
         window.addEventListener('resize', moveIndicator);
+        screen.orientation?.addEventListener('change', () => setTimeout(moveIndicator, 100));
 
         // ===== 3. Ripple click effect =====
         document.querySelectorAll('.navbar-link, .resume-download, .contact-cta-btn, .filter-btn').forEach(el => {
@@ -1595,6 +1621,7 @@
             { label: 'Copy Phone', icon: 'call-outline', action: () => { navigator.clipboard.writeText('+1 (778) 865-6808'); showToast('Copied phone!'); } },
             { label: 'Download Resume', icon: 'download-outline', action: () => { const a = document.createElement('a'); a.href = 'Lionel_Wang_Resume.pdf'; a.download = ''; a.click(); } },
             { label: 'Toggle Theme', icon: 'moon-outline', action: () => themeToggle.click() },
+            { label: 'Explore in 3D', icon: 'cube-outline', action: () => { window.location.href = '3d-scene.html'; } },
         ];
 
         function renderCommands(filter = '') {
@@ -1649,14 +1676,19 @@
 
         // ===== 7. Animated mesh gradient for hero =====
         const heroGlow = document.querySelector('.hero-glow');
-        if (heroGlow) {
-            let hue = 0;
+        if (heroGlow && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            let hue = 0, meshRAF;
             function animateMesh() {
                 hue = (hue + 0.3) % 360;
                 heroGlow.style.background = `radial-gradient(ellipse at 30% 50%, hsla(${hue}, 60%, 50%, 0.08), hsla(${hue + 60}, 50%, 40%, 0.05), transparent 70%)`;
-                requestAnimationFrame(animateMesh);
+                meshRAF = requestAnimationFrame(animateMesh);
             }
             animateMesh();
+            // Pause when tab is hidden to save battery
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) { cancelAnimationFrame(meshRAF); }
+                else { animateMesh(); }
+            });
         }
 
         // ===== 8. Parallax on scroll =====

@@ -797,6 +797,73 @@ article::-webkit-scrollbar-thumb:hover {
     margin-top: 2px;
 }
 
+/* ===== 3D Scene Button ===== */
+.btn-3d-scene {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, rgba(79, 209, 197, 0.12), rgba(124, 58, 237, 0.12));
+    border: 1px solid rgba(79, 209, 197, 0.3);
+    border-radius: var(--radius-sm);
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-3d-scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent), #7c3aed);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 0;
+}
+
+.btn-3d-scene > * {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-3d-scene:hover {
+    border-color: transparent;
+    color: #06060e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(79, 209, 197, 0.3), 0 0 40px rgba(79, 209, 197, 0.1);
+}
+
+.btn-3d-scene:hover::before {
+    opacity: 1;
+}
+
+.btn-3d-scene ion-icon {
+    font-size: 1.2rem;
+}
+
+.btn-3d-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.45rem;
+    background: linear-gradient(135deg, var(--accent), #7c3aed);
+    color: #06060e;
+    border-radius: 4px;
+    line-height: 1;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
 .section-heading {
     font-size: 1.35rem;
     font-weight: 600;
@@ -2329,6 +2396,40 @@ article::-webkit-scrollbar-thumb:hover {
         bottom: 1rem;
         right: 1rem;
     }
+
+    /* Mobile: bigger touch targets for accent dots */
+    .accent-dot {
+        width: 28px;
+        height: 28px;
+    }
+
+    .accent-picker {
+        gap: 0.6rem;
+    }
+
+    /* Mobile: bigger filter buttons */
+    .filter-btn {
+        padding: 0.55rem 1rem;
+        font-size: 0.82rem;
+    }
+
+    /* Mobile: cmd trigger min touch size */
+    .cmd-trigger {
+        min-width: 40px;
+        min-height: 40px;
+        justify-content: center;
+    }
+
+    /* Mobile: toast above browser chrome */
+    .toast {
+        bottom: 4rem;
+    }
+
+    /* Mobile: skill tooltip tap-friendly */
+    .skill-tooltip {
+        white-space: normal;
+        max-width: 200px;
+    }
 }
 
 /* ===== Scroll Progress Bar ===== */
@@ -2675,6 +2776,10 @@ article::-webkit-scrollbar-thumb:hover {
     opacity: 0;
 }
 
+.timeline-item.expandable.touch p::after {
+    content: '...tap to expand';
+}
+
 [data-theme="light"] .timeline-item.expandable p::after {
     background: linear-gradient(90deg, transparent, #ffffff 40%);
 }
@@ -2749,7 +2854,8 @@ article::-webkit-scrollbar-thumb:hover {
     box-shadow: var(--shadow-md);
 }
 
-.skill-item:hover .skill-tooltip {
+.skill-item:hover .skill-tooltip,
+.skill-tooltip.touch-show {
     opacity: 1;
     transform: translateY(0);
 }

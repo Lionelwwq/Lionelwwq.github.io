@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Navigator | Lionel Wang</title>
+    <link rel="shortcut icon" href="selfie.png" type="image/png" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #06060e;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            cursor: default;
+        }
+
+        #canvas3d {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+        }
+
+        /* HUD overlay */
+        .hud {
+            position: fixed;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hud-top {
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .hud-logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #f0f0f5;
+            letter-spacing: 0.04em;
+            text-shadow: 0 0 20px rgba(79, 209, 197, 0.4);
+        }
+
+        .hud-logo span {
+            color: #4fd1c5;
+        }
+
+        .hud-back {
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(79, 209, 197, 0.1);
+            border: 1px solid rgba(79, 209, 197, 0.25);
+            color: #4fd1c5;
+            padding: 0.55rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hud-back:hover {
+            background: rgba(79, 209, 197, 0.2);
+            border-color: rgba(79, 209, 197, 0.5);
+            box-shadow: 0 0 20px rgba(79, 209, 197, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .hud-back svg {
+            width: 16px; height: 16px;
+        }
+
+        .hud-bottom {
+            bottom: 0; left: 0; right: 0;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .hud-hint {
+            font-size: 0.8rem;
+            color: rgba(136, 136, 160, 0.7);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            animation: hintPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Tooltip that follows cursor on hover */
+        .hover-label {
+            position: fixed;
+            z-index: 20;
+            pointer-events: none;
+            background: rgba(6, 6, 14, 0.85);
+            border: 1px solid rgba(79, 209, 197, 0.4);
+            color: #4fd1c5;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(79, 209, 197, 0.15);
+            white-space: nowrap;
+        }
+
+        .hover-label.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading screen */
+        .loader {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: #06060e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader.done {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-ring {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(79, 209, 197, 0.15);
+            border-top-color: #4fd1c5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-text {
+            color: #8888a0;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile instructions */
+        @media (max-width: 768px) {
+            .hud-top { padding: 0.8rem 1rem; }
+            .hud-logo { font-size: 0.95rem; }
+            .hud-back { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+            .hud-hint { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+    <div class="loader-ring"></div>
+    <div class="loader-text">INITIALIZING 3D ENVIRONMENT</div>
+</div>
+
+<div class="hud hud-top">
+    <div class="hud-logo"><span>&lt;</span> Lionel Wang <span>/&gt;</span></div>
+    <a href="index.html" class="hud-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Back to Portfolio
+    </a>
+</div>
+
+<div class="hud hud-bottom">
+    <div class="hud-hint">Click a panel to navigate &mdash; Drag to orbit &mdash; Scroll to zoom</div>
+</div>
+
+<div class="hover-label" id="hoverLabel"></div>
+
+<canvas id="canvas3d"></canvas>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ===== Scene Setup =====
+const canvas = document.getElementById('canvas3d');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x06060e);
+scene.fog = new THREE.FogExp2(0x06060e, 0.018);
+
+const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(0, 2, 14);
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.maxDistance = 25;
+controls.minDistance = 6;
+controls.maxPolarAngle = Math.PI * 0.75;
+controls.minPolarAngle = Math.PI * 0.15;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.3;
+controls.enablePan = false;
+
+// ===== Lighting =====
+const ambientLight = new THREE.AmbientLight(0x1a1a2e, 0.6);
+scene.add(ambientLight);
+
+const mainLight = new THREE.PointLight(0x4fd1c5, 2.5, 40);
+mainLight.position.set(0, 6, 0);
+scene.add(mainLight);
+
+const purpleLight = new THREE.PointLight(0x7c3aed, 1.5, 30);
+purpleLight.position.set(-8, 3, -5);
+scene.add(purpleLight);
+
+const blueLight = new THREE.PointLight(0x3b82f6, 1.2, 25);
+blueLight.position.set(8, -2, 5);
+scene.add(blueLight);
+
+// ===== Grid Floor =====
+const gridHelper = new THREE.GridHelper(60, 60, 0x1a3a3a, 0x0a1a1a);
+gridHelper.position.y = -3;
+gridHelper.material.opacity = 0.4;
+gridHelper.material.transparent = true;
+scene.add(gridHelper);
+
+// Ground plane with subtle glow
+const groundGeo = new THREE.PlaneGeometry(80, 80);
+const groundMat = new THREE.MeshStandardMaterial({
+    color: 0x06060e,
+    roughness: 0.9,
+    metalness: 0.1,
+    transparent: true,
+    opacity: 0.8
+});
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -3.01;
+scene.add(ground);
+
+// ===== Sections Data =====
+const sections = [
+    { name: 'About',        icon: 'person',   hash: '#about',        color: 0x4fd1c5, desc: 'Who I am' },
+    { name: 'Projects',     icon: 'code',     hash: '#projects',     color: 0x7c3aed, desc: 'What I built' },
+    { name: 'Resume',       icon: 'document', hash: '#experience',   color: 0x3b82f6, desc: 'My journey' },
+    { name: 'Skills',       icon: 'chart',    hash: '#skills',       color: 0xf59e0b, desc: 'My expertise' },
+    { name: 'Certificates', icon: 'ribbon',   hash: '#certificates', color: 0xef4444, desc: 'Credentials' },
+    { name: 'Contact',      icon: 'chat',     hash: '#contact',      color: 0x10b981, desc: 'Get in touch' },
+];
+
+// ===== Create Holographic Panels =====
+const clickables = [];
+const panelGroup = new THREE.Group();
+scene.add(panelGroup);
+
+function createHoloPanel(section, index) {
+    const group = new THREE.Group();
+    const total = sections.length;
+    const angle = (index / total) * Math.PI * 2 - Math.PI / 2;
+    const radius = 7;
+
+    group.position.set(
+        Math.cos(angle) * radius,
+        Math.sin(index * 0.5) * 0.8,
+        Math.sin(angle) * radius
+    );
+
+    // Make panel face center
+    group.lookAt(0, group.position.y, 0);
+
+    const color = new THREE.Color(section.color);
+
+    // Main panel - frosted glass look
+    const panelW = 2.6, panelH = 3.2;
+    const panelGeo = new THREE.PlaneGeometry(panelW, panelH, 1, 1);
+    const panelMat = new THREE.MeshPhysicalMaterial({
+        color: 0x0a0a1a,
+        roughness: 0.2,
+        metalness: 0.5,
+        transparent: true,
+        opacity: 0.7,
+        side: THREE.DoubleSide,
+        emissive: color,
+        emissiveIntensity: 0.05,
+    });
+    const panel = new THREE.Mesh(panelGeo, panelMat);
+    group.add(panel);
+
+    // Glowing border frame
+    const borderGeo = new THREE.EdgesGeometry(new THREE.PlaneGeometry(panelW + 0.06, panelH + 0.06));
+    const borderMat = new THREE.LineBasicMaterial({ color: section.color, transparent: true, opacity: 0.6 });
+    const border = new THREE.LineSegments(borderGeo, borderMat);
+    border.position.z = 0.01;
+    group.add(border);
+
+    // Inner accent line at top
+    const accentGeo = new THREE.PlaneGeometry(panelW - 0.3, 0.03);
+    const accentMat = new THREE.MeshBasicMaterial({ color: section.color, transparent: true, opacity: 0.8 });
+    const accent = new THREE.Mesh(accentGeo, accentMat);
+    accent.position.set(0, panelH / 2 - 0.3, 0.02);
+    group.add(accent);
+
+    // Create text using canvas texture
+    const textCanvas = document.createElement('canvas');
+    textCanvas.width = 512;
+    textCanvas.height = 640;
+    const ctx = textCanvas.getContext('2d');
+
+    // Icon circle
+    ctx.beginPath();
+    ctx.arc(256, 180, 55, 0, Math.PI * 2);
+    ctx.strokeStyle = `#${color.getHexString()}`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Icon symbol
+    ctx.fillStyle = `#${color.getHexString()}`;
+    ctx.font = '600 40px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const icons = { person: '\u{1F464}', code: '\u{2B22}', document: '\u{1F4C4}', chart: '\u{1F4CA}', ribbon: '\u{1F3C5}', chat: '\u{1F4AC}' };
+    // Use simple geometric shapes instead of emoji for cross-platform
+    ctx.font = 'bold 32px monospace';
+    const symbols = { person: 'USR', code: 'DEV', document: 'CV', chart: 'SKL', ribbon: 'CRT', chat: 'MSG' };
+    ctx.fillText(symbols[section.icon] || '?', 256, 180);
+
+    // Section name
+    ctx.fillStyle = '#f0f0f5';
+    ctx.font = '700 42px Inter, sans-serif';
+    ctx.fillText(section.name, 256, 320);
+
+    // Description
+    ctx.fillStyle = '#8888a0';
+    ctx.font = '400 26px Inter, sans-serif';
+    ctx.fillText(section.desc, 256, 380);
+
+    // "CLICK TO OPEN" label
+    ctx.fillStyle = `#${color.getHexString()}`;
+    ctx.font = '500 20px Inter, monospace';
+    ctx.globalAlpha = 0.6;
+    ctx.fillText('[ ENTER ]', 256, 480);
+    ctx.globalAlpha = 1;
+
+    // Corner decorations
+    ctx.strokeStyle = `#${color.getHexString()}`;
+    ctx.lineWidth = 2;
+    ctx.globalAlpha = 0.4;
+    const m = 30, s = 20;
+    // Top-left
+    ctx.beginPath(); ctx.moveTo(m, m + s); ctx.lineTo(m, m); ctx.lineTo(m + s, m); ctx.stroke();
+    // Top-right
+    ctx.beginPath(); ctx.moveTo(512 - m, m + s); ctx.lineTo(512 - m, m); ctx.lineTo(512 - m - s, m); ctx.stroke();
+    // Bottom-left
+    ctx.beginPath(); ctx.moveTo(m, 640 - m - s); ctx.lineTo(m, 640 - m); ctx.lineTo(m + s, 640 - m); ctx.stroke();
+    // Bottom-right
+    ctx.beginPath(); ctx.moveTo(512 - m, 640 - m - s); ctx.lineTo(512 - m, 640 - m); ctx.lineTo(512 - m - s, 640 - m); ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    const texture = new THREE.CanvasTexture(textCanvas);
+    texture.minFilter = THREE.LinearFilter;
+    const textGeo = new THREE.PlaneGeometry(panelW - 0.15, panelH - 0.15);
+    const textMat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
+    const textMesh = new THREE.Mesh(textGeo, textMat);
+    textMesh.position.z = 0.03;
+    group.add(textMesh);
+
+    // Floating point light in front of panel
+    const panelLight = new THREE.PointLight(section.color, 0.5, 5);
+    panelLight.position.set(0, 0, 1.5);
+    group.add(panelLight);
+
+    // Store metadata
+    group.userData = {
+        section,
+        baseY: group.position.y,
+        phaseOffset: index * 1.2,
+        panel,
+        border,
+        panelMat,
+        borderMat,
+        panelLight,
+    };
+
+    panelGroup.add(group);
+    clickables.push(panel);
+    panel.userData.parentGroup = group;
+
+    return group;
+}
+
+sections.forEach((s, i) => createHoloPanel(s, i));
+
+// ===== Central Hologram Core =====
+const coreGroup = new THREE.Group();
+scene.add(coreGroup);
+
+// Wireframe icosahedron
+const icoGeo = new THREE.IcosahedronGeometry(1.2, 1);
+const icoWireMat = new THREE.MeshBasicMaterial({
+    color: 0x4fd1c5,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.25
+});
+const icoWire = new THREE.Mesh(icoGeo, icoWireMat);
+coreGroup.add(icoWire);
+
+// Inner glowing sphere
+const innerGeo = new THREE.SphereGeometry(0.5, 32, 32);
+const innerMat = new THREE.MeshBasicMaterial({
+    color: 0x4fd1c5,
+    transparent: true,
+    opacity: 0.15
+});
+const innerSphere = new THREE.Mesh(innerGeo, innerMat);
+coreGroup.add(innerSphere);
+
+// Outer ring
+const ringGeo = new THREE.TorusGeometry(2, 0.02, 16, 100);
+const ringMat = new THREE.MeshBasicMaterial({ color: 0x4fd1c5, transparent: true, opacity: 0.3 });
+const ring1 = new THREE.Mesh(ringGeo, ringMat);
+ring1.rotation.x = Math.PI / 2;
+coreGroup.add(ring1);
+
+const ring2 = new THREE.Mesh(ringGeo.clone(), ringMat.clone());
+ring2.rotation.x = Math.PI / 3;
+ring2.rotation.y = Math.PI / 4;
+ring2.material.color = new THREE.Color(0x7c3aed);
+ring2.material.opacity = 0.2;
+coreGroup.add(ring2);
+
+coreGroup.position.y = 0.5;
+
+// ===== Particles =====
+const particleCount = 600;
+const pGeo = new THREE.BufferGeometry();
+const pPositions = new Float32Array(particleCount * 3);
+const pOpacities = new Float32Array(particleCount);
+
+for (let i = 0; i < particleCount; i++) {
+    pPositions[i * 3] = (Math.random() - 0.5) * 50;
+    pPositions[i * 3 + 1] = (Math.random() - 0.5) * 30;
+    pPositions[i * 3 + 2] = (Math.random() - 0.5) * 50;
+    pOpacities[i] = Math.random();
+}
+
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+const pMat = new THREE.PointsMaterial({
+    color: 0x4fd1c5,
+    size: 0.06,
+    transparent: true,
+    opacity: 0.5,
+    sizeAttenuation: true
+});
+const particleSystem = new THREE.Points(pGeo, pMat);
+scene.add(particleSystem);
+
+// ===== Connecting Lines from Core to Panels =====
+panelGroup.children.forEach(pg => {
+    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0.5, 0),
+        pg.position.clone()
+    ]);
+    const lineMat = new THREE.LineBasicMaterial({
+        color: pg.userData.section.color,
+        transparent: true,
+        opacity: 0.08
+    });
+    const line = new THREE.Line(lineGeo, lineMat);
+    scene.add(line);
+    pg.userData.connectionLine = line;
+    pg.userData.lineGeo = lineGeo;
+});
+
+// ===== Raycasting & Interaction =====
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2(-10, -10);
+const hoverLabel = document.getElementById('hoverLabel');
+let hoveredPanel = null;
+
+canvas.addEventListener('mousemove', (e) => {
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+    // Update label position
+    hoverLabel.style.left = (e.clientX + 16) + 'px';
+    hoverLabel.style.top = (e.clientY - 10) + 'px';
+});
+
+canvas.addEventListener('mouseleave', () => {
+    mouse.x = -10;
+    mouse.y = -10;
+});
+
+canvas.addEventListener('click', () => {
+    if (hoveredPanel) {
+        const section = hoveredPanel.userData.section;
+        window.location.href = 'index.html' + section.hash;
+    }
+});
+
+// Touch support
+canvas.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+}, { passive: true });
+
+canvas.addEventListener('touchend', () => {
+    if (hoveredPanel) {
+        const section = hoveredPanel.userData.section;
+        window.location.href = 'index.html' + section.hash;
+    }
+});
+
+// ===== Resize =====
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ===== Animation Loop =====
+const clock = new THREE.Clock();
+
+function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    const dt = clock.getDelta();
+
+    controls.update();
+
+    // Animate central core
+    icoWire.rotation.x = t * 0.15;
+    icoWire.rotation.y = t * 0.2;
+    innerSphere.scale.setScalar(1 + Math.sin(t * 2) * 0.1);
+    innerMat.opacity = 0.12 + Math.sin(t * 3) * 0.05;
+    ring1.rotation.z = t * 0.3;
+    ring2.rotation.z = -t * 0.2;
+
+    // Subtle main light pulse
+    mainLight.intensity = 2.5 + Math.sin(t * 1.5) * 0.3;
+
+    // Animate panels
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(clickables, false);
+    const hitPanel = intersects.length > 0 ? intersects[0].object : null;
+
+    let newHovered = null;
+
+    panelGroup.children.forEach(pg => {
+        const d = pg.userData;
+        const isHit = hitPanel && hitPanel.userData.parentGroup === pg;
+
+        // Floating motion
+        pg.position.y = d.baseY + Math.sin(t * 0.8 + d.phaseOffset) * 0.25;
+
+        // Update connection line endpoint
+        if (d.lineGeo) {
+            const positions = d.lineGeo.attributes.position.array;
+            positions[3] = pg.position.x;
+            positions[4] = pg.position.y;
+            positions[5] = pg.position.z;
+            d.lineGeo.attributes.position.needsUpdate = true;
+        }
+
+        // Hover effects
+        const targetOpacity = isHit ? 0.9 : 0.7;
+        const targetEmissive = isHit ? 0.2 : 0.05;
+        const targetBorder = isHit ? 1 : 0.6;
+        const targetLightIntensity = isHit ? 1.5 : 0.5;
+
+        d.panelMat.opacity += (targetOpacity - d.panelMat.opacity) * 0.1;
+        d.panelMat.emissiveIntensity += (targetEmissive - d.panelMat.emissiveIntensity) * 0.1;
+        d.borderMat.opacity += (targetBorder - d.borderMat.opacity) * 0.1;
+        d.panelLight.intensity += (targetLightIntensity - d.panelLight.intensity) * 0.1;
+
+        // Scale on hover
+        const targetScale = isHit ? 1.08 : 1;
+        pg.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.08);
+
+        if (isHit) {
+            newHovered = pg;
+            canvas.style.cursor = 'pointer';
+        }
+    });
+
+    if (newHovered !== hoveredPanel) {
+        hoveredPanel = newHovered;
+        if (hoveredPanel) {
+            hoverLabel.textContent = hoveredPanel.userData.section.name + ' — ' + hoveredPanel.userData.section.desc;
+            hoverLabel.classList.add('visible');
+        } else {
+            hoverLabel.classList.remove('visible');
+            canvas.style.cursor = 'default';
+        }
+    }
+
+    // Animate particles
+    const pPos = pGeo.attributes.position.array;
+    for (let i = 0; i < particleCount; i++) {
+        pPos[i * 3 + 1] += Math.sin(t + i) * 0.002;
+        pPos[i * 3] += Math.cos(t * 0.5 + i * 0.1) * 0.001;
+    }
+    pGeo.attributes.position.needsUpdate = true;
+
+    renderer.render(scene, camera);
+}
+
+// ===== Start =====
+animate();
+setTimeout(() => document.getElementById('loader').classList.add('done'), 800);
+</script>
+
+</body>
+</html>
