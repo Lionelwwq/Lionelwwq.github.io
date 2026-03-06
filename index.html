@@ -23,6 +23,9 @@
     <meta name="twitter:image" content="https://lionelwwq.github.io/selfie.png" />
 
     <link rel="shortcut icon" href="selfie.png" type="image/png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#4fd1c5" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,6 +72,15 @@
 
     <!-- Skip to Content (Accessibility) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Noscript Fallback -->
+    <noscript>
+        <style>
+            .preloader { display: none !important; }
+            article[data-page] { display: block !important; opacity: 1 !important; }
+            #particleCanvas, .cursor-glow { display: none !important; }
+        </style>
+    </noscript>
 
     <!-- Particle Canvas -->
     <canvas id="particleCanvas" aria-hidden="true"></canvas>
@@ -893,45 +905,71 @@
     </button>
 
     <script>
-        // Tab Navigation with crossfade transitions
-        document.querySelectorAll('[data-nav-link]').forEach(btn =>
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('[data-nav-link]').forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-selected', 'false');
-                });
-                btn.classList.add('active');
-                btn.setAttribute('aria-selected', 'true');
-                const page = btn.getAttribute('data-nav-link');
+        // ===== Tab Navigation with crossfade, hash routing, and keyboard support =====
+        const navButtons = document.querySelectorAll('[data-nav-link]');
+        const validPages = [...navButtons].map(b => b.getAttribute('data-nav-link'));
 
-                // Crossfade: fade out current, fade in new
-                const current = document.querySelector('article[data-page].active');
-                const target = document.querySelector(`article[data-page="${page}"]`);
-                if (current && current !== target) {
-                    current.classList.add('fade-out-tab');
-                    setTimeout(() => {
-                        current.classList.remove('active', 'fade-out-tab');
-                        if (target) {
-                            target.classList.add('active', 'fade-in-tab');
-                            target.scrollTop = 0;
-                            if (page === 'skills') animateSkillBars();
-                            if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
-                            staggerReveal(target);
-                            target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
-                            setTimeout(() => target.classList.remove('fade-in-tab'), 300);
-                        }
-                    }, 150);
-                } else if (target && !target.classList.contains('active')) {
-                    target.classList.add('active', 'fade-in-tab');
-                    target.scrollTop = 0;
-                    if (page === 'skills') animateSkillBars();
-                    if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
-                    staggerReveal(target);
-                    target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
-                    setTimeout(() => target.classList.remove('fade-in-tab'), 300);
-                }
-            })
-        );
+        function switchTab(page, pushHash = true) {
+            if (!validPages.includes(page)) return;
+            navButtons.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            const btn = document.querySelector(`[data-nav-link="${page}"]`);
+            if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+
+            const current = document.querySelector('article[data-page].active');
+            const target = document.querySelector(`article[data-page="${page}"]`);
+            if (current && current !== target) {
+                current.classList.add('fade-out-tab');
+                setTimeout(() => {
+                    current.classList.remove('active', 'fade-out-tab');
+                    if (target) {
+                        target.classList.add('active', 'fade-in-tab');
+                        target.scrollTop = 0;
+                        if (page === 'skills') animateSkillBars();
+                        if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
+                        staggerReveal(target);
+                        target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
+                        setTimeout(() => target.classList.remove('fade-in-tab'), 300);
+                    }
+                }, 150);
+            } else if (target && !target.classList.contains('active')) {
+                target.classList.add('active', 'fade-in-tab');
+                target.scrollTop = 0;
+                if (page === 'skills') animateSkillBars();
+                if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
+                staggerReveal(target);
+                target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
+                setTimeout(() => target.classList.remove('fade-in-tab'), 300);
+            }
+            if (pushHash) history.replaceState(null, '', '#' + page);
+        }
+
+        navButtons.forEach(btn => btn.addEventListener('click', () => switchTab(btn.getAttribute('data-nav-link'))));
+
+        // Hash routing: load correct tab from URL
+        function handleHash() {
+            const hash = location.hash.slice(1);
+            if (hash && validPages.includes(hash)) switchTab(hash, false);
+        }
+        window.addEventListener('hashchange', handleHash);
+        document.addEventListener('DOMContentLoaded', handleHash);
+
+        // Keyboard navigation: arrow keys between tabs
+        document.querySelector('.navbar-list').addEventListener('keydown', (e) => {
+            const tabs = [...navButtons];
+            const idx = tabs.indexOf(document.activeElement);
+            if (idx === -1) return;
+            let next = -1;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (idx + 1) % tabs.length;
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (idx - 1 + tabs.length) % tabs.length;
+            if (next !== -1) {
+                e.preventDefault();
+                tabs[next].focus();
+                tabs[next].click();
+            }
+        });
 
         // Stagger reveal using CSS classes (doesn't break hover transforms)
         function staggerReveal(container) {
@@ -956,6 +994,21 @@
                 const aboutPage = document.querySelector('article[data-page="about"]');
                 if (aboutPage) staggerReveal(aboutPage);
             }, 400);
+        });
+
+        // ===== Scroll-triggered reveals via IntersectionObserver =====
+        const scrollRevealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scroll-visible');
+                    scrollRevealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.services-grid, .projects-grid, .showcase-grid, .certificates-grid, .contact-grid, .featured-project, .about-stats-row, .timeline, .skills-grid, .language-grid, .learning-grid, .contact-cta').forEach(el => {
+            el.classList.add('scroll-hidden');
+            scrollRevealObserver.observe(el);
         });
 
         // Typing Animation with variable speed for natural feel
@@ -1299,6 +1352,12 @@
                 card.style.setProperty('--glow-x', x + 'px');
                 card.style.setProperty('--glow-y', y + 'px');
             });
+        });
+
+        // ===== Image skeleton removal on load =====
+        document.querySelectorAll('.showcase-img, .cert-image').forEach(img => {
+            if (img.complete) img.setAttribute('complete', '');
+            else img.addEventListener('load', () => img.setAttribute('complete', ''));
         });
 
         // ===== Preloader =====
