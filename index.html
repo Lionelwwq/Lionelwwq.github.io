@@ -23,19 +23,58 @@
     <meta name="twitter:image" content="https://lionelwwq.github.io/selfie.png" />
 
     <link rel="shortcut icon" href="selfie.png" type="image/png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#4fd1c5" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Lionel Wang",
+        "url": "https://lionelwwq.github.io",
+        "jobTitle": "IT Systems & Infrastructure Specialist",
+        "description": "Specialist in AI-powered automation, cybersecurity, ERP/WMS systems, and full-stack development based in Vancouver, BC.",
+        "email": "lionelwwq@gmail.com",
+        "telephone": "+17788656808",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Vancouver",
+            "addressRegion": "BC",
+            "addressCountry": "CA"
+        },
+        "sameAs": [
+            "https://github.com/lionelwwq",
+            "https://www.linkedin.com/in/lionelwwq"
+        ],
+        "knowsAbout": ["AI", "Machine Learning", "Cybersecurity", "Cloud Infrastructure", "Full-Stack Development", "ERP Systems"]
+    }
+    </script>
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-ring"></div>
+            <span class="preloader-text">LW</span>
+        </div>
+    </div>
+
+    <!-- Skip to Content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Particle Canvas -->
-    <canvas id="particleCanvas"></canvas>
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
     <!-- Custom Cursor -->
-    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
     <div class="container">
         <!-- ===== Sidebar ===== -->
@@ -100,23 +139,23 @@
         </aside>
 
         <!-- ===== Main Content ===== -->
-        <div class="main-content">
+        <div class="main-content" id="main-content" role="main">
             <div class="content-card">
 
                 <!-- Navbar -->
-                <nav class="navbar">
-                    <ul class="navbar-list">
-                        <li><button class="navbar-link active" data-nav-link="about"><ion-icon name="person-outline"></ion-icon><span>About</span></button></li>
-                        <li><button class="navbar-link" data-nav-link="projects"><ion-icon name="code-slash-outline"></ion-icon><span>Projects</span></button></li>
-                        <li><button class="navbar-link" data-nav-link="experience"><ion-icon name="document-text-outline"></ion-icon><span>Resume</span></button></li>
-                        <li><button class="navbar-link" data-nav-link="skills"><ion-icon name="bar-chart-outline"></ion-icon><span>Skills</span></button></li>
-                        <li><button class="navbar-link" data-nav-link="certificates"><ion-icon name="ribbon-outline"></ion-icon><span>Certificates</span></button></li>
-                        <li><button class="navbar-link" data-nav-link="contact"><ion-icon name="chatbubble-outline"></ion-icon><span>Contact</span></button></li>
+                <nav class="navbar" aria-label="Main navigation">
+                    <ul class="navbar-list" role="tablist">
+                        <li role="presentation"><button class="navbar-link active" data-nav-link="about" role="tab" aria-selected="true" aria-controls="page-about"><ion-icon name="person-outline"></ion-icon><span>About</span></button></li>
+                        <li role="presentation"><button class="navbar-link" data-nav-link="projects" role="tab" aria-selected="false" aria-controls="page-projects"><ion-icon name="code-slash-outline"></ion-icon><span>Projects</span></button></li>
+                        <li role="presentation"><button class="navbar-link" data-nav-link="experience" role="tab" aria-selected="false" aria-controls="page-experience"><ion-icon name="document-text-outline"></ion-icon><span>Resume</span></button></li>
+                        <li role="presentation"><button class="navbar-link" data-nav-link="skills" role="tab" aria-selected="false" aria-controls="page-skills"><ion-icon name="bar-chart-outline"></ion-icon><span>Skills</span></button></li>
+                        <li role="presentation"><button class="navbar-link" data-nav-link="certificates" role="tab" aria-selected="false" aria-controls="page-certificates"><ion-icon name="ribbon-outline"></ion-icon><span>Certificates</span></button></li>
+                        <li role="presentation"><button class="navbar-link" data-nav-link="contact" role="tab" aria-selected="false" aria-controls="page-contact"><ion-icon name="chatbubble-outline"></ion-icon><span>Contact</span></button></li>
                     </ul>
                 </nav>
 
                 <!-- ===== About ===== -->
-                <article data-page="about" class="active">
+                <article data-page="about" id="page-about" role="tabpanel" class="active">
                     <div class="about-hero">
                         <span class="about-greeting">Hello, I'm</span>
                         <h2 class="about-name-big">Lionel Wang</h2>
@@ -273,7 +312,7 @@
                 </article>
 
                 <!-- ===== Projects ===== -->
-                <article data-page="projects">
+                <article data-page="projects" id="page-projects" role="tabpanel">
                     <h2 class="section-title">Projects</h2>
 
                     <!-- Featured: Amax Leather ERP System -->
@@ -527,7 +566,7 @@
                 </article>
 
                 <!-- ===== Resume ===== -->
-                <article data-page="experience">
+                <article data-page="experience" id="page-experience" role="tabpanel">
                     <h2 class="section-title">Resume</h2>
 
                     <h3 class="resume-category">
@@ -592,7 +631,7 @@
                 </article>
 
                 <!-- ===== Skills ===== -->
-                <article data-page="skills">
+                <article data-page="skills" id="page-skills" role="tabpanel">
                     <h2 class="section-title">Skills</h2>
 
                     <div class="skills-grid">
@@ -711,14 +750,14 @@
                 </article>
 
                 <!-- ===== Certificates ===== -->
-                <article data-page="certificates">
+                <article data-page="certificates" id="page-certificates" role="tabpanel">
                     <h2 class="section-title">Certificates</h2>
 
                     <div class="certificates-grid">
                         <!-- NYIT -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="nyit.png" alt="NYIT" />
+                                <img src="nyit.png" alt="NYIT" loading="lazy" />
                                 <span class="cert-issuer-name">New York Institute of Technology</span>
                             </div>
                             <h3>Master of Science in Cybersecurity</h3>
@@ -730,7 +769,7 @@
                         <!-- KPU -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="kpu.png" alt="KPU Logo" />
+                                <img src="kpu.png" alt="KPU Logo" loading="lazy" />
                                 <span class="cert-issuer-name">Kwantlen Polytechnic University</span>
                             </div>
                             <h3>Bachelor of Technology in Information Technology</h3>
@@ -741,7 +780,7 @@
                         <!-- AWS -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="aws.png" alt="AWS" />
+                                <img src="aws.png" alt="AWS" loading="lazy" />
                                 <span class="cert-issuer-name">Amazon Web Services</span>
                             </div>
                             <h3>AWS Cloud Foundations</h3>
@@ -752,7 +791,7 @@
                         <!-- Fortinet Google Cloud Security -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>Google Cloud Security 7.6 Administrator</h3>
@@ -764,7 +803,7 @@
                         <!-- Fortinet Intro -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>Cybersecurity 1.0</h3>
@@ -776,7 +815,7 @@
                         <!-- Fortinet Getting Started -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>Cybersecurity 2.0</h3>
@@ -788,7 +827,7 @@
                         <!-- Fortinet FortiGate -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>FortiGate 7.6 Administrator</h3>
@@ -800,7 +839,7 @@
                 </article>
 
                 <!-- ===== Contact ===== -->
-                <article data-page="contact">
+                <article data-page="contact" id="page-contact" role="tabpanel">
                     <h2 class="section-title">Contact</h2>
 
                     <div class="contact-grid">
@@ -854,22 +893,42 @@
     </button>
 
     <script>
-        // Tab Navigation with smooth transitions
+        // Tab Navigation with crossfade transitions
         document.querySelectorAll('[data-nav-link]').forEach(btn =>
             btn.addEventListener('click', () => {
-                document.querySelectorAll('[data-nav-link]').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('[data-nav-link]').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-selected', 'false');
+                });
                 btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
                 const page = btn.getAttribute('data-nav-link');
-                document.querySelectorAll('article[data-page]').forEach(a => a.classList.remove('active'));
+
+                // Crossfade: fade out current, fade in new
+                const current = document.querySelector('article[data-page].active');
                 const target = document.querySelector(`article[data-page="${page}"]`);
-                if (target) {
-                    target.classList.add('active');
+                if (current && current !== target) {
+                    current.classList.add('fade-out-tab');
+                    setTimeout(() => {
+                        current.classList.remove('active', 'fade-out-tab');
+                        if (target) {
+                            target.classList.add('active', 'fade-in-tab');
+                            target.scrollTop = 0;
+                            if (page === 'skills') animateSkillBars();
+                            if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
+                            staggerReveal(target);
+                            target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
+                            setTimeout(() => target.classList.remove('fade-in-tab'), 300);
+                        }
+                    }, 150);
+                } else if (target && !target.classList.contains('active')) {
+                    target.classList.add('active', 'fade-in-tab');
                     target.scrollTop = 0;
                     if (page === 'skills') animateSkillBars();
                     if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
                     staggerReveal(target);
-                    // Scramble section titles (skip elements with child nodes like icons)
                     target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
+                    setTimeout(() => target.classList.remove('fade-in-tab'), 300);
                 }
             })
         );
@@ -1241,6 +1300,18 @@
                 card.style.setProperty('--glow-y', y + 'px');
             });
         });
+
+        // ===== Preloader =====
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('loaded');
+            setTimeout(() => preloader.remove(), 600);
+        });
+
+        // ===== Service Worker Registration =====
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
     </script>
 </body>
 

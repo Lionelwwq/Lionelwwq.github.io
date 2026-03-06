@@ -1,0 +1,21 @@
+{
+    "name": "Lionel Wang | Portfolio",
+    "short_name": "Lionel Wang",
+    "description": "IT Systems & Infrastructure Specialist | AI & ML Integration | Cybersecurity | Full-Stack Developer",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#06060e",
+    "theme_color": "#4fd1c5",
+    "icons": [
+        {
+            "src": "selfie.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "selfie.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
