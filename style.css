@@ -104,13 +104,13 @@
 }
 
 @keyframes fadeOutTab {
-    from { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-    to { opacity: 0; transform: translateY(-12px) scale(0.99); filter: blur(2px); }
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-10px) scale(0.99); }
 }
 
 @keyframes fadeInTab {
-    from { opacity: 0; transform: translateY(16px) scale(0.99); filter: blur(2px); }
-    to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    from { opacity: 0; transform: translateY(14px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* ===== Particle Canvas ===== */
@@ -119,7 +119,6 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    will-change: transform;
 }
 
 /* ===== Custom Cursor ===== */
@@ -197,9 +196,7 @@ img {
     image-rendering: auto;
 }
 
-img[loading="lazy"] {
-    content-visibility: auto;
-}
+/* loading="lazy" handles lazy loading natively */
 
 /* ===== Layout ===== */
 .container {
@@ -795,84 +792,6 @@ article::-webkit-scrollbar-thumb:hover {
     font-size: 1.3rem;
     flex-shrink: 0;
     margin-top: 2px;
-}
-
-/* ===== Sidebar Actions ===== */
-.sidebar-actions {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-/* ===== 3D Scene Button ===== */
-.btn-3d-scene {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1rem;
-    background: linear-gradient(135deg, rgba(79, 209, 197, 0.12), rgba(124, 58, 237, 0.12));
-    border: 1px solid rgba(79, 209, 197, 0.3);
-    border-radius: var(--radius-sm);
-    color: var(--accent);
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-}
-
-.btn-3d-scene::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--accent), #7c3aed);
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    z-index: 0;
-}
-
-.btn-3d-scene > * {
-    position: relative;
-    z-index: 1;
-}
-
-.btn-3d-scene:hover {
-    border-color: transparent;
-    color: #06060e;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(79, 209, 197, 0.3), 0 0 40px rgba(79, 209, 197, 0.1);
-}
-
-.btn-3d-scene:hover::before {
-    opacity: 1;
-}
-
-.btn-3d-scene ion-icon {
-    font-size: 1.2rem;
-}
-
-.btn-3d-badge {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 0.15rem 0.45rem;
-    background: linear-gradient(135deg, var(--accent), #7c3aed);
-    color: #06060e;
-    border-radius: 4px;
-    line-height: 1;
-    animation: badgePulse 2s ease-in-out infinite;
-}
-
-@keyframes badgePulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
 }
 
 .section-heading {
@@ -1733,6 +1652,41 @@ article::-webkit-scrollbar-thumb:hover {
     cursor: zoom-in;
 }
 
+.cert-image:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 1;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.lightbox-close:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
 /* ===== Footer ===== */
 .content-card footer {
     background: var(--bg-card);
@@ -2119,8 +2073,8 @@ article::-webkit-scrollbar-thumb:hover {
     --gradient: linear-gradient(135deg, #0d9488, #0f766e, #115e59);
     --gradient-warm: linear-gradient(135deg, #0d9488, #7c3aed);
     --text-light: #1a1a2e;
-    --text-muted: #555570;
-    --text-subtle: #3a3a50;
+    --text-muted: #4a4a60;
+    --text-subtle: #333348;
     --border-subtle: rgba(0, 0, 0, 0.08);
     --border-accent: rgba(13, 148, 136, 0.25);
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -2481,10 +2435,6 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 /* ===== Navbar Sliding Indicator ===== */
-.navbar-list {
-    position: relative;
-}
-
 .nav-indicator {
     position: absolute;
     bottom: 0;
@@ -2493,6 +2443,7 @@ article::-webkit-scrollbar-thumb:hover {
     border-radius: 2px;
     transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1;
+    pointer-events: none;
 }
 
 /* ===== Ripple Click Effect ===== */
@@ -2776,47 +2727,6 @@ article::-webkit-scrollbar-thumb:hover {
 
 .contacts-list .contact-value[title]:hover::after {
     opacity: 1;
-}
-
-/* ===== Expandable Timeline Items ===== */
-.timeline-item.expandable {
-    cursor: pointer;
-}
-
-.timeline-item.expandable p {
-    max-height: 1.6em;
-    overflow: hidden;
-    position: relative;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.timeline-item.expandable p::after {
-    content: '...click to expand';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding-left: 2rem;
-    background: linear-gradient(90deg, transparent, var(--bg-card) 40%);
-    color: var(--accent);
-    font-size: 0.75rem;
-    font-weight: 500;
-    transition: opacity 0.3s ease;
-}
-
-.timeline-item.expanded p {
-    max-height: 200px;
-}
-
-.timeline-item.expanded p::after {
-    opacity: 0;
-}
-
-.timeline-item.expandable.touch p::after {
-    content: '...tap to expand';
-}
-
-[data-theme="light"] .timeline-item.expandable p::after {
-    background: linear-gradient(90deg, transparent, #ffffff 40%);
 }
 
 /* ===== Project Filter Bar ===== */
@@ -3334,7 +3244,7 @@ article::-webkit-scrollbar-thumb:hover {
     .about-text,
     .about-cta,
     .services-grid,
-    .marquee-container,
+    .marquee-wrapper,
     .learning-grid {
         display: none !important;
     }

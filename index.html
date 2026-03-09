@@ -17,7 +17,7 @@
     <meta property="og:image" content="https://lionelwwq.github.io/selfie.png" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Lionel Wang | Portfolio" />
     <meta name="twitter:description" content="IT Systems & Infrastructure Specialist | AI & ML Integration | Cybersecurity | Full-Stack Developer" />
     <meta name="twitter:image" content="https://lionelwwq.github.io/selfie.png" />
@@ -27,7 +27,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#4fd1c5" />
+    <meta name="theme-color" content="#0d9488" />
+    <link rel="canonical" href="https://lionelwwq.github.io/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
@@ -54,7 +55,7 @@
         },
         "sameAs": [
             "https://github.com/lionelwwq",
-            "https://www.linkedin.com/in/lionelwwq"
+            "https://linkedin.com/in/weiqi-wang-86bb07171"
         ],
         "knowsAbout": ["AI", "Machine Learning", "Cybersecurity", "Cloud Infrastructure", "Full-Stack Development", "ERP Systems"]
     }
@@ -86,14 +87,14 @@
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
     <!-- Command Palette -->
-    <div class="cmd-overlay" id="cmdOverlay">
+    <div class="cmd-overlay" id="cmdOverlay" role="dialog" aria-modal="true" aria-label="Command palette">
         <div class="cmd-palette" id="cmdPalette">
             <div class="cmd-input-wrap">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command... (sections, actions)" autocomplete="off" />
+                <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command... (sections, actions)" autocomplete="off" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-controls="cmdResults" />
                 <kbd>ESC</kbd>
             </div>
-            <div class="cmd-results" id="cmdResults"></div>
+            <div class="cmd-results" id="cmdResults" role="listbox"></div>
         </div>
     </div>
 
@@ -108,22 +109,22 @@
         <aside class="sidebar">
             <div class="avatar-box">
                 <div class="avatar-ring"></div>
-                <img id="avatar1" src="selfie.png" alt="Lionel Wang" class="avatar fade-in" />
-                <img id="avatar2" src="selfie2.png" alt="Lionel Wang" class="avatar fade-out" />
+                <img id="avatar1" src="selfie.png" alt="Lionel Wang" class="avatar fade-in" width="400" height="400" />
+                <img id="avatar2" src="selfie2.png" alt="Lionel Wang" class="avatar fade-out" width="400" height="400" loading="lazy" />
                 <span class="active-status"></span>
             </div>
 
             <h1 class="name">Lionel Wang</h1>
 
-            <button class="hire-badge" id="hireBadge" onclick="switchTab('contact')">
+            <button class="hire-badge" id="hireBadge">
                 <span class="hire-dot"></span>
                 Available for Hire
             </button>
 
-            <p class="title-wrapper">
-                <span class="separator">/</span>
-                <span class="typing" id="typing"></span>
-            </p>
+            <div class="title-wrapper" aria-label="IT Systems & Infrastructure Specialist">
+                <span class="separator" aria-hidden="true">/</span>
+                <span class="typing" id="typing" aria-hidden="true"></span>
+            </div>
 
             <div class="sidebar-divider"></div>
 
@@ -177,8 +178,6 @@
                 <button class="accent-dot" data-accent="#3b82f6" style="--dot-color: #3b82f6" aria-label="Blue accent"></button>
             </div>
 
-            <div class="sidebar-actions">
-            </div>
         </aside>
 
         <!-- ===== Main Content ===== -->
@@ -194,8 +193,8 @@
                         <li role="presentation"><button class="navbar-link" data-nav-link="skills" role="tab" aria-selected="false" aria-controls="page-skills"><ion-icon name="bar-chart-outline"></ion-icon><span>Skills</span></button></li>
                         <li role="presentation"><button class="navbar-link" data-nav-link="certificates" role="tab" aria-selected="false" aria-controls="page-certificates"><ion-icon name="ribbon-outline"></ion-icon><span>Certificates</span></button></li>
                         <li role="presentation"><button class="navbar-link" data-nav-link="contact" role="tab" aria-selected="false" aria-controls="page-contact"><ion-icon name="chatbubble-outline"></ion-icon><span>Contact</span></button></li>
-                        <div class="nav-indicator" id="navIndicator"></div>
                     </ul>
+                    <div class="nav-indicator" id="navIndicator"></div>
                     <button class="cmd-trigger" id="cmdTrigger" aria-label="Open command palette">
                         <ion-icon name="search-outline"></ion-icon>
                         <kbd>Ctrl+K</kbd>
@@ -482,7 +481,7 @@
 
                         <a href="https://reports.amaxleather.com" target="_blank" rel="noopener noreferrer" class="featured-img-link">
                             <div class="showcase-img-wrapper">
-                                <img src="erp-login-preview.png" alt="Amax Leather ERP System" class="showcase-img" loading="lazy" />
+                                <img src="erp-login-preview.png" alt="Amax Leather ERP System" class="showcase-img" loading="lazy" width="1200" height="750" />
                             </div>
                             <div class="featured-link-overlay">
                                 <span>View Live System</span>
@@ -563,7 +562,7 @@
                                     <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
                                 </div>
                                 <div class="showcase-img-wrapper">
-                                    <img src="aurora-preview.png" alt="Aurora Furniture Screenshot" class="showcase-img" loading="lazy" />
+                                    <img src="aurora-preview.png" alt="Aurora Furniture Screenshot" class="showcase-img" loading="lazy" width="1200" height="677" />
                                 </div>
                             </a>
                             <div class="showcase-tags">
@@ -583,7 +582,7 @@
                                     <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
                                 </div>
                                 <div class="showcase-img-wrapper">
-                                    <img src="amaxleather-preview.png" alt="Amax Leather Screenshot" class="showcase-img" loading="lazy" />
+                                    <img src="amaxleather-preview.png" alt="Amax Leather Screenshot" class="showcase-img" loading="lazy" width="1200" height="677" />
                                 </div>
                             </a>
                             <div class="showcase-tags">
@@ -603,7 +602,7 @@
                                     <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
                                 </div>
                                 <div class="showcase-img-wrapper">
-                                    <img src="standardinstall-preview.png" alt="Standard Install Screenshot" class="showcase-img" loading="lazy" />
+                                    <img src="standardinstall-preview.png" alt="Standard Install Screenshot" class="showcase-img" loading="lazy" width="1200" height="679" />
                                 </div>
                             </a>
                             <div class="showcase-tags">
@@ -865,83 +864,83 @@
                         <!-- NYIT -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="nyit.png" alt="NYIT" loading="lazy" />
+                                <img src="nyit.png" alt="NYIT" loading="lazy" width="204" height="192" />
                                 <span class="cert-issuer-name">New York Institute of Technology</span>
                             </div>
                             <h3>Master of Science in Cybersecurity</h3>
                             <p class="cert-meta">Issued Dec 2024</p>
                             <p class="cert-skills">Credential ID: 2VU9-7XT8-WEGQ</p>
-                            <img src="nyit-certificate.png" alt="NYIT Certificate" class="cert-image" loading="lazy" />
+                            <img src="nyit-certificate.png" alt="NYIT Certificate" class="cert-image" loading="lazy" width="646" height="445" tabindex="0" role="button" aria-label="View NYIT certificate full size" />
                         </div>
 
                         <!-- KPU -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="kpu.png" alt="KPU Logo" loading="lazy" />
+                                <img src="kpu.png" alt="KPU Logo" loading="lazy" width="180" height="180" />
                                 <span class="cert-issuer-name">Kwantlen Polytechnic University</span>
                             </div>
                             <h3>Bachelor of Technology in Information Technology</h3>
                             <p class="cert-meta">Issued Jan 2023</p>
-                            <img src="kpu-certificate.png" alt="KPU Degree" class="cert-image" loading="lazy" />
+                            <img src="kpu-certificate.png" alt="KPU Degree" class="cert-image" loading="lazy" width="621" height="710" tabindex="0" role="button" aria-label="View KPU degree full size" />
                         </div>
 
                         <!-- AWS -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="aws.png" alt="AWS" loading="lazy" />
+                                <img src="aws.png" alt="AWS" loading="lazy" width="225" height="225" />
                                 <span class="cert-issuer-name">Amazon Web Services</span>
                             </div>
                             <h3>AWS Cloud Foundations</h3>
                             <p class="cert-meta">Issued Apr 2024</p>
-                            <img src="aws-foundations.jpeg" alt="AWS Certificate" class="cert-image" loading="lazy" />
+                            <img src="aws-foundations.jpeg" alt="AWS Certificate" class="cert-image" loading="lazy" width="174" height="174" tabindex="0" role="button" aria-label="View AWS certificate full size" />
                         </div>
 
                         <!-- Fortinet Google Cloud Security -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" width="225" height="225" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>Google Cloud Security 7.6 Administrator</h3>
                             <p class="cert-meta">Issued Feb 2025</p>
                             <p class="cert-skills">Skills: Google Cloud Platform, Cloud Security</p>
-                            <img src="fortinet-google.png" alt="Certificate" class="cert-image" loading="lazy" />
+                            <img src="fortinet-google.png" alt="Fortinet Google Cloud Security Certificate" class="cert-image" loading="lazy" width="806" height="586" tabindex="0" role="button" aria-label="View certificate full size" />
                         </div>
 
                         <!-- Fortinet Intro -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" width="225" height="225" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>Cybersecurity 1.0</h3>
                             <p class="cert-meta">Issued Jan 2025</p>
                             <p class="cert-skills">Skills: Awareness, Risk Assessment</p>
-                            <img src="fortinet-intro.png" alt="Certificate" class="cert-image" loading="lazy" />
+                            <img src="fortinet-intro.png" alt="Fortinet Cybersecurity 1.0 Certificate" class="cert-image" loading="lazy" width="806" height="586" tabindex="0" role="button" aria-label="View certificate full size" />
                         </div>
 
                         <!-- Fortinet Getting Started -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" width="225" height="225" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>Cybersecurity 2.0</h3>
                             <p class="cert-meta">Issued Dec 2024</p>
                             <p class="cert-skills">Skills: Network Security, Threat Analysis</p>
-                            <img src="fortinet-started.png" alt="Certificate" class="cert-image" loading="lazy" />
+                            <img src="fortinet-started.png" alt="Fortinet Cybersecurity 2.0 Certificate" class="cert-image" loading="lazy" width="806" height="586" tabindex="0" role="button" aria-label="View certificate full size" />
                         </div>
 
                         <!-- Fortinet FortiGate -->
                         <div class="cert-card">
                             <div class="cert-issuer">
-                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" />
+                                <img src="fortinet.jpeg" alt="Fortinet" loading="lazy" width="225" height="225" />
                                 <span class="cert-issuer-name">Fortinet</span>
                             </div>
                             <h3>FortiGate 7.6 Administrator</h3>
                             <p class="cert-meta">Issued Feb 2025</p>
                             <p class="cert-skills">Skills: Firewall Administration</p>
-                            <img src="fortigate.png" alt="Certificate" class="cert-image" loading="lazy" />
+                            <img src="fortigate.png" alt="FortiGate Administrator Certificate" class="cert-image" loading="lazy" width="806" height="586" tabindex="0" role="button" aria-label="View certificate full size" />
                         </div>
                     </div>
                 </article>
@@ -985,6 +984,7 @@
                         <h3 class="section-heading">Send a Message</h3>
                         <!-- Replace YOUR_FORM_ID with your Formspree form ID from https://formspree.io -->
                         <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+                            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="contactName">Name</label>
@@ -1076,6 +1076,10 @@
         }
 
         navButtons.forEach(btn => btn.addEventListener('click', () => switchTab(btn.getAttribute('data-nav-link'))));
+
+        // Hire badge → Contact tab
+        const hireBadgeBtn = document.getElementById('hireBadge');
+        if (hireBadgeBtn) hireBadgeBtn.addEventListener('click', () => switchTab('contact'));
 
         // Hash routing: load correct tab from URL
         function handleHash() {
@@ -1285,22 +1289,38 @@
         // Run on load for About page
         document.addEventListener('DOMContentLoaded', () => setTimeout(animateAboutStats, 600));
 
-        // Certificate lightbox
-        document.querySelectorAll('.cert-image').forEach(img => {
-            img.addEventListener('click', () => {
-                const overlay = document.createElement('div');
-                overlay.className = 'lightbox-overlay';
-                const clone = document.createElement('img');
-                clone.src = img.src;
-                clone.alt = img.alt;
-                overlay.appendChild(clone);
-                document.body.appendChild(overlay);
-                overlay.addEventListener('click', () => {
-                    overlay.style.opacity = '0';
-                    overlay.style.transition = 'opacity 0.2s ease';
-                    setTimeout(() => overlay.remove(), 200);
-                });
+        // Certificate lightbox with keyboard support
+        function openLightbox(img) {
+            const overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-label', 'Certificate preview');
+            const clone = document.createElement('img');
+            clone.src = img.src;
+            clone.alt = img.alt;
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+            overlay.appendChild(clone);
+            overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            function closeLightbox() {
+                overlay.style.opacity = '0';
+                overlay.style.transition = 'opacity 0.2s ease';
+                setTimeout(() => overlay.remove(), 200);
+                img.focus();
+            }
+            overlay.addEventListener('click', (e) => { if (e.target === overlay || e.target === closeBtn) closeLightbox(); });
+            closeBtn.addEventListener('click', closeLightbox);
+            document.addEventListener('keydown', function esc(e) {
+                if (e.key === 'Escape') { closeLightbox(); document.removeEventListener('keydown', esc); }
             });
+            closeBtn.focus();
+        }
+        document.querySelectorAll('.cert-image').forEach(img => {
+            img.addEventListener('click', () => openLightbox(img));
+            img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(img); } });
         });
 
         // Dynamic footer year
@@ -1311,7 +1331,7 @@
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
         const saved = localStorage.getItem('theme');
-        if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        if (saved !== 'dark') document.documentElement.setAttribute('data-theme', 'light');
         updateThemeIcon();
 
         themeToggle.addEventListener('click', () => {
@@ -1360,6 +1380,7 @@
         }
 
         // ===== Particle Canvas =====
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -1377,6 +1398,7 @@
             mouseCanvas.y = e.clientY;
         });
 
+        if (!prefersReducedMotion) {
         class Particle {
             constructor() {
                 this.reset();
@@ -1390,7 +1412,6 @@
                 this.opacity = Math.random() * 0.4 + 0.1;
             }
             update() {
-                // Mouse repulsion
                 const dx = this.x - mouseCanvas.x;
                 const dy = this.y - mouseCanvas.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
@@ -1419,7 +1440,6 @@
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
-            // Draw connections
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
@@ -1438,6 +1458,7 @@
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
+        } // end reduced motion check
 
         // ===== Custom Cursor Glow =====
         const cursorGlow = document.getElementById('cursorGlow');
@@ -1521,17 +1542,6 @@
                 if (el.classList.contains('contact-card')) return;
                 e.preventDefault();
                 navigator.clipboard.writeText(text).then(() => showToast('Copied: ' + text));
-            });
-        });
-
-        // ===== Expandable timeline items =====
-        document.querySelectorAll('.timeline-item').forEach(item => {
-            const p = item.querySelector('p');
-            if (!p) return;
-            item.classList.add('expandable');
-            if (isTouch) item.classList.add('touch');
-            item.addEventListener('click', () => {
-                item.classList.toggle('expanded');
             });
         });
 
@@ -1638,11 +1648,11 @@
         function moveIndicator() {
             const active = document.querySelector('.navbar-link.active');
             if (!active || !navIndicator) return;
-            const list = document.querySelector('.navbar-list');
-            const listRect = list.getBoundingClientRect();
+            const navbar = document.querySelector('.navbar');
+            const navRect = navbar.getBoundingClientRect();
             const btnRect = active.getBoundingClientRect();
             navIndicator.style.width = btnRect.width + 'px';
-            navIndicator.style.left = (btnRect.left - listRect.left) + 'px';
+            navIndicator.style.left = (btnRect.left - navRect.left) + 'px';
         }
         moveIndicator();
         navButtons.forEach(btn => btn.addEventListener('click', () => setTimeout(moveIndicator, 10)));
@@ -1877,7 +1887,7 @@
 
         // ===== Service Worker Registration =====
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(() => {});
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
         }
     </script>
 </body>
