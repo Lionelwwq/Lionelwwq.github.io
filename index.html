@@ -115,6 +115,11 @@
 
             <h1 class="name">Lionel Wang</h1>
 
+            <button class="hire-badge" id="hireBadge" onclick="switchTab('contact')">
+                <span class="hire-dot"></span>
+                Available for Hire
+            </button>
+
             <p class="title-wrapper">
                 <span class="separator">/</span>
                 <span class="typing" id="typing"></span>
@@ -620,16 +625,37 @@
                         <ion-icon name="school-outline"></ion-icon> Education
                     </h3>
 
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <h3>Master of Science in Cybersecurity</h3>
-                            <div class="meta">New York Institute of Technology | Jan 2024 &ndash; Dec 2024</div>
-                            <p>GPA: 3.74 &mdash; Network security, cryptography, ethical hacking.</p>
+                    <div class="timeline-v2" id="timelineEdu">
+                        <div class="tl-line"><div class="tl-line-fill"></div></div>
+
+                        <div class="tl-item" data-year="2024">
+                            <div class="tl-dot"><ion-icon name="school-outline"></ion-icon></div>
+                            <div class="tl-card">
+                                <div class="tl-date">Jan 2024 &ndash; Dec 2024</div>
+                                <h3>Master of Science in Cybersecurity</h3>
+                                <div class="tl-org">New York Institute of Technology</div>
+                                <p>GPA: 3.74 &mdash; Network security, cryptography, ethical hacking, digital forensics.</p>
+                                <div class="tl-tags">
+                                    <span class="tag">Network Security</span>
+                                    <span class="tag">Cryptography</span>
+                                    <span class="tag">Ethical Hacking</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="timeline-item">
-                            <h3>Bachelor of Information Technology</h3>
-                            <div class="meta">Kwantlen Polytechnic University | Sep 2017 &ndash; Dec 2022</div>
-                            <p>GPA: 3.26 (3.8 in majors) &mdash; Web dev, IoT, cloud security. CO-OP completed.</p>
+
+                        <div class="tl-item" data-year="2017">
+                            <div class="tl-dot"><ion-icon name="school-outline"></ion-icon></div>
+                            <div class="tl-card">
+                                <div class="tl-date">Sep 2017 &ndash; Dec 2022</div>
+                                <h3>Bachelor of Information Technology</h3>
+                                <div class="tl-org">Kwantlen Polytechnic University</div>
+                                <p>GPA: 3.26 (3.8 in majors) &mdash; Web dev, IoT, cloud security. CO-OP completed.</p>
+                                <div class="tl-tags">
+                                    <span class="tag">Web Dev</span>
+                                    <span class="tag">IoT</span>
+                                    <span class="tag">Cloud Security</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -637,21 +663,66 @@
                         <ion-icon name="briefcase-outline"></ion-icon> Work Experience
                     </h3>
 
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <h3>IT Systems & Infrastructure Specialist</h3>
-                            <div class="meta">Amax Leather Canada Ltd & Aurora Furniture MFG | May 2025 &ndash; Present</div>
-                            <p>Built 68-page ERP from scratch with AI chatbot, email auto-responder, and QuickBooks/EDI integration.</p>
+                    <div class="timeline-v2" id="timelineWork">
+                        <div class="tl-line"><div class="tl-line-fill"></div></div>
+
+                        <div class="tl-item current" data-year="2025">
+                            <div class="tl-dot pulse"><ion-icon name="briefcase-outline"></ion-icon></div>
+                            <div class="tl-card">
+                                <span class="tl-badge-current">Current</span>
+                                <div class="tl-date">May 2025 &ndash; Present</div>
+                                <h3>IT Systems & Infrastructure Specialist</h3>
+                                <div class="tl-org">Amax Leather Canada Ltd & Aurora Furniture MFG</div>
+                                <p>Built 68-page ERP from scratch with AI chatbot, email auto-responder, and QuickBooks/EDI integration. Managed full IT infrastructure across two companies.</p>
+                                <div class="tl-highlights">
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> 68-page ERP system from scratch</div>
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> AI chatbot with 20+ function-calling tools</div>
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> QuickBooks & EDI integration</div>
+                                </div>
+                                <div class="tl-tags">
+                                    <span class="tag">Node.js</span>
+                                    <span class="tag">OpenAI</span>
+                                    <span class="tag">MySQL</span>
+                                    <span class="tag">EDI</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="timeline-item">
-                            <h3>System Administrator</h3>
-                            <div class="meta">Amax Leather Canada Ltd | Aug 2022 &ndash; Apr 2025</div>
-                            <p>AWS infrastructure, automation tools, OpenAI-integrated apps, and cybersecurity hardening.</p>
+
+                        <div class="tl-item" data-year="2022">
+                            <div class="tl-dot"><ion-icon name="server-outline"></ion-icon></div>
+                            <div class="tl-card">
+                                <div class="tl-date">Aug 2022 &ndash; Apr 2025</div>
+                                <h3>System Administrator</h3>
+                                <div class="tl-org">Amax Leather Canada Ltd</div>
+                                <p>AWS infrastructure, automation tools, OpenAI-integrated apps, and cybersecurity hardening.</p>
+                                <div class="tl-highlights">
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> AWS cloud infrastructure management</div>
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> OpenAI-integrated internal tools</div>
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> Cybersecurity hardening & audits</div>
+                                </div>
+                                <div class="tl-tags">
+                                    <span class="tag">AWS</span>
+                                    <span class="tag">Python</span>
+                                    <span class="tag">Linux</span>
+                                    <span class="tag">Security</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="timeline-item">
-                            <h3>Website Developer</h3>
-                            <div class="meta">Perfect Decor | May 2022 &ndash; Mar 2023</div>
-                            <p>Custom websites and web apps with modern UX/UI design.</p>
+
+                        <div class="tl-item" data-year="2022">
+                            <div class="tl-dot"><ion-icon name="code-slash-outline"></ion-icon></div>
+                            <div class="tl-card">
+                                <div class="tl-date">May 2022 &ndash; Mar 2023</div>
+                                <h3>Website Developer</h3>
+                                <div class="tl-org">Perfect Decor</div>
+                                <p>Custom websites and web apps with modern UX/UI design. Delivered responsive, SEO-optimized sites.</p>
+                                <div class="tl-tags">
+                                    <span class="tag">HTML/CSS</span>
+                                    <span class="tag">JavaScript</span>
+                                    <span class="tag">UI/UX</span>
+                                    <span class="tag">SEO</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -910,6 +981,36 @@
                         </a>
                     </div>
 
+                    <div class="contact-form-section">
+                        <h3 class="section-heading">Send a Message</h3>
+                        <!-- Replace YOUR_FORM_ID with your Formspree form ID from https://formspree.io -->
+                        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactName">Name</label>
+                                    <input type="text" id="contactName" name="name" required placeholder="Your name" autocomplete="name" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactEmail">Email</label>
+                                    <input type="email" id="contactEmail" name="email" required placeholder="you@example.com" autocomplete="email" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactSubject">Subject</label>
+                                <input type="text" id="contactSubject" name="subject" placeholder="What's this about?" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage">Message</label>
+                                <textarea id="contactMessage" name="message" rows="5" required placeholder="Tell me about your project or opportunity..."></textarea>
+                            </div>
+                            <button type="submit" class="contact-submit-btn" id="contactSubmitBtn">
+                                <ion-icon name="paper-plane-outline"></ion-icon>
+                                <span>Send Message</span>
+                            </button>
+                            <div class="form-status" id="formStatus"></div>
+                        </form>
+                    </div>
+
                     <div class="contact-cta">
                         <p>Open to full-time roles, freelance, and collaboration.</p>
                         <a href="mailto:lionelwwq@gmail.com" class="contact-cta-btn">
@@ -1001,7 +1102,7 @@
 
         // Stagger reveal using CSS classes (doesn't break hover transforms)
         function staggerReveal(container) {
-            const items = container.querySelectorAll('.service-card, .project-card, .showcase-card, .cert-card, .timeline-item, .skill-item, .module-item, .stat-item, .contact-card, .language-item');
+            const items = container.querySelectorAll('.service-card, .project-card, .showcase-card, .cert-card, .timeline-item, .tl-item, .skill-item, .module-item, .stat-item, .contact-card, .language-item');
             items.forEach((item, i) => {
                 item.classList.remove('stagger-visible');
                 item.classList.add('stagger-hidden');
@@ -1034,7 +1135,7 @@
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-        document.querySelectorAll('.services-grid, .projects-grid, .showcase-grid, .certificates-grid, .contact-grid, .featured-project, .about-stats-row, .timeline, .skills-grid, .language-grid, .learning-grid, .contact-cta').forEach(el => {
+        document.querySelectorAll('.services-grid, .projects-grid, .showcase-grid, .certificates-grid, .contact-grid, .featured-project, .about-stats-row, .timeline, .timeline-v2, .skills-grid, .language-grid, .learning-grid, .contact-cta, .contact-form-section').forEach(el => {
             el.classList.add('scroll-hidden');
             scrollRevealObserver.observe(el);
         });
@@ -1357,7 +1458,7 @@
         updateCursor();
 
         // ===== Magnetic Hover on Buttons (using CSS vars to avoid transform conflicts) =====
-        document.querySelectorAll('.resume-download, .contact-cta-btn, .scroll-top').forEach(btn => {
+        document.querySelectorAll('.resume-download, .contact-cta-btn, .contact-submit-btn, .scroll-top').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
                 const cx = rect.left + rect.width / 2;
@@ -1549,7 +1650,7 @@
         screen.orientation?.addEventListener('change', () => setTimeout(moveIndicator, 100));
 
         // ===== 3. Ripple click effect =====
-        document.querySelectorAll('.navbar-link, .resume-download, .contact-cta-btn, .filter-btn').forEach(el => {
+        document.querySelectorAll('.navbar-link, .resume-download, .contact-cta-btn, .contact-submit-btn, .filter-btn').forEach(el => {
             el.addEventListener('click', function(e) {
                 const ripple = document.createElement('span');
                 ripple.className = 'ripple';
@@ -1697,6 +1798,82 @@
                 if (glow) glow.style.marginTop = `${y * 0.02}px`;
             });
         });
+
+        // ===== Timeline V2 Animation =====
+        function animateTimeline(container) {
+            if (!container) return;
+            const fill = container.querySelector('.tl-line-fill');
+            const items = container.querySelectorAll('.tl-item');
+            if (fill) {
+                fill.style.height = '0%';
+                void fill.offsetWidth;
+                fill.style.transition = 'height 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+                fill.style.height = '100%';
+            }
+            items.forEach((item, i) => {
+                item.classList.remove('tl-visible');
+                setTimeout(() => item.classList.add('tl-visible'), 200 + i * 250);
+            });
+        }
+
+        // Observe timelines for scroll-triggered animation
+        const tlObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateTimeline(entry.target);
+                    tlObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.timeline-v2').forEach(tl => tlObserver.observe(tl));
+
+        // Also trigger when switching to resume tab
+        const origSwitchTab = switchTab;
+        switchTab = function(page, pushHash) {
+            origSwitchTab(page, pushHash);
+            if (page === 'experience') {
+                setTimeout(() => {
+                    document.querySelectorAll('.timeline-v2').forEach(tl => animateTimeline(tl));
+                }, 200);
+            }
+        };
+
+        // ===== Contact Form Submission =====
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('contactSubmitBtn');
+                const status = document.getElementById('formStatus');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
+                btn.disabled = true;
+
+                try {
+                    const resp = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (resp.ok) {
+                        status.textContent = 'Message sent successfully!';
+                        status.className = 'form-status success';
+                        contactForm.reset();
+                        showToast('Message sent!');
+                    } else {
+                        throw new Error('Failed');
+                    }
+                } catch {
+                    status.textContent = 'Something went wrong. Please try email instead.';
+                    status.className = 'form-status error';
+                }
+
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                setTimeout(() => { status.textContent = ''; status.className = 'form-status'; }, 5000);
+            });
+        }
 
         // ===== Service Worker Registration =====
         if ('serviceWorker' in navigator) {
