@@ -5237,61 +5237,8 @@ html.reduced-motion .arch-fig .arch-line {
     max-width: 68ch;
 }
 
-/* ---- Case study: progressive disclosure ------------------------------------
-   The four case cards carry the real depth of this page, and reading all of it
-   made the Projects tab a 12,000px scroll. Situation / Built / Outcome stay
-   visible; the decisions and the hindsight sit behind a native <details>, which
-   keeps keyboard access, find-in-page and screen-reader semantics without JS. */
-.case-more {
-    border-top: 1px solid var(--border-subtle);
-}
-
-.case-more-sum {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-    padding: 0.55rem 0;
-    cursor: pointer;
-    list-style: none;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--accent-text, var(--accent));
-    transition: color 0.18s ease;
-}
-
-/* Safari/older WebKit still draw the default triangle without this. */
-.case-more-sum::-webkit-details-marker { display: none; }
-.case-more-sum::marker { content: ''; }
-
-.case-more-sum:hover .case-more-txt { text-decoration: underline; }
-
-.case-more-sum ion-icon {
-    flex: 0 0 auto;
-    font-size: 1rem;
-    transition: transform 0.2s ease;
-}
-
-.case-more[open] > .case-more-sum ion-icon { transform: rotate(180deg); }
-
-.case-more-sum:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 4px;
-}
-
-/* The wrapper exists so the first row inside the panel does not draw a second
-   rule directly under the summary. */
-.case-more-body > .case-row:first-child {
-    border-top: none;
-    padding-top: 0.1rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .case-more-sum ion-icon { transition: none; }
-}
-
-/* No print rules here on purpose: the print stylesheet above shows only the
-   Resume tab, so a case study never reaches paper. Printing this page is meant
-   to produce the resume; the PDF download is the other way to get it. */
+/* The case studies used to hide their engineering decisions behind a native
+   <details>. The cards are now three short rows each, so there is nothing left
+   to disclose and the .case-more rules were removed with them.
+   No print rules here on purpose either: the print stylesheet above shows only
+   the Resume tab, so a case study never reaches paper. */

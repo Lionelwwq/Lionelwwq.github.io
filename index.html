@@ -242,103 +242,22 @@
                     </div>
 
                     <p class="about-text">
-                        I am an IT systems and infrastructure engineer in Greater Vancouver. For the last four years
-                        I have worked inside two furniture manufacturing companies &mdash; first keeping the servers,
-                        network and mail estate alive, then building the software that runs on top of them. Today I am
-                        the only engineer on a platform of roughly 230,000 lines that both companies use to do their
-                        day, and I own all of it: the schema, the backend, the front end, the deployment and the pager.
+                        I am an IT systems and infrastructure engineer in Greater Vancouver. I started in 2022 as a
+                        system administrator at a furniture manufacturer. Since 2025 I have been the sole engineer of
+                        the ERP and automation platform two furniture manufacturing companies run their day on, across
+                        274 tables and four databases. I own the schema, the backend, the front end and the deploys.
                     </p>
                     <p class="about-text">
-                        That path matters more than the job title. I did not arrive as a developer handed a
-                        specification. I arrived as the administrator watching people key the same order into three
-                        systems and lose an afternoon to it. So the work starts from the operation rather than the
-                        ticket: sit with whoever does the task, find where the time actually goes, remove that.
-                        Then run the result in production &mdash; which is a very effective way to stop shipping
-                        designs that were only convenient to write.
-                    </p>
-                    <p class="about-text">
-                        What I am good at is the unglamorous middle. Data models that survive contact with reality.
-                        Integrations that can be retried without doing damage. Access control enforced in one place
-                        instead of remembered in fifty. I work in Node, Express and MySQL, ship every screen in both
-                        English and Chinese, and increasingly build language models into the parts of the job that
-                        used to be reading and re-typing. My MSc is in cybersecurity, which mostly shows up day to day
-                        as a habit of asking what happens when the input is hostile.
-                    </p>
-                    <p class="about-text">
-                        I am open to work where one person owns a system end to end rather than a slice of one:
-                        platform engineering, integrations, internal tooling, infrastructure. Everything on this page
-                        is production work, and I am glad to walk through any of it &mdash; including the parts I would
-                        build differently today.
+                        My work is data models, integrations that survive being retried, and access control enforced
+                        in one place. I build in Node, Express and MySQL, ship every screen in English and Chinese,
+                        and put language models into the parts of the job that used to be re-typing. I am open to
+                        platform, integration and internal tooling roles where one person owns the system.
                     </p>
 
                     <p class="about-cta">
                         <ion-icon name="rocket-outline"></ion-icon>
                         Let's build something together.
                     </p>
-
-                    <h3 class="section-heading">How I Work</h3>
-
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <div class="service-icon-box">
-                                <ion-icon name="people-outline"></ion-icon>
-                            </div>
-                            <div class="service-text">
-                                <h3>Start at the desk, not the spec</h3>
-                                <p>The requirement is almost never the real problem. I watch the task being done first, because the expensive part is usually a step nobody thought to mention.</p>
-                            </div>
-                        </div>
-
-                        <div class="service-card">
-                            <div class="service-icon-box">
-                                <ion-icon name="repeat-outline"></ion-icon>
-                            </div>
-                            <div class="service-text">
-                                <h3>Safe to run twice</h3>
-                                <p>Anything that talks to another system will be re-run &mdash; by a retry, a double click, or a person who is not sure it worked. So it is keyed and idempotent by construction rather than by care.</p>
-                            </div>
-                        </div>
-
-                        <div class="service-card">
-                            <div class="service-icon-box">
-                                <ion-icon name="speedometer-outline"></ion-icon>
-                            </div>
-                            <div class="service-text">
-                                <h3>Measure instead of estimate</h3>
-                                <p>Every timing bug I have shipped came from a guess that was close enough until it wasn't. Where a real number can be measured, the code measures it.</p>
-                            </div>
-                        </div>
-
-                        <div class="service-card">
-                            <div class="service-icon-box">
-                                <ion-icon name="lock-closed-outline"></ion-icon>
-                            </div>
-                            <div class="service-text">
-                                <h3>One place for each rule</h3>
-                                <p>Permission checks, tenancy scoping and audit logging live in shared helpers. A rule copied into fifty files is a rule that is already wrong in three of them.</p>
-                            </div>
-                        </div>
-
-                        <div class="service-card">
-                            <div class="service-icon-box">
-                                <ion-icon name="pulse-outline"></ion-icon>
-                            </div>
-                            <div class="service-text">
-                                <h3>Fail loudly, degrade quietly</h3>
-                                <p>A new path should never be able to make the old one worse. New work falls back to the behaviour it replaced, and anything that fails silently gets an alert with a name on it.</p>
-                            </div>
-                        </div>
-
-                        <div class="service-card">
-                            <div class="service-icon-box">
-                                <ion-icon name="build-outline"></ion-icon>
-                            </div>
-                            <div class="service-text">
-                                <h3>Ship it, then carry it</h3>
-                                <p>I run what I build: deploys, monitoring, the 3 a.m. version of the problem. Owning the operation is what keeps the design honest.</p>
-                            </div>
-                        </div>
-                    </div>
 
                     <h3 class="section-heading">What I'm Doing</h3>
 
@@ -474,26 +393,13 @@
                         </div>
 
                         <p class="featured-narrative">
-                            <strong>In plain language:</strong> &ldquo;ERP&rdquo; is just the name for the software a
-                            company runs its whole day on. Amax Leather Canada and Aurora Furniture MFG make and sell
-                            furniture, and everything that happens between someone placing an order and a sofa arriving
-                            at a home has to be written down somewhere &mdash; this platform is that somewhere: one
-                            website, one login, where staff take the order, check whether the piece is on the warehouse
-                            floor or still on a ship, print the shipping and customs paperwork, and hand the figures to
-                            the accounting system so nobody types them a second time. Before it, that work lived across
-                            spreadsheets, email threads and a great deal of re-keying, and two people could easily get
-                            two different answers to the same question. Now there is one place the answer comes from,
-                            and the steps that used to be re-typing happen on their own.
-                        </p>
-
-                        <p class="featured-narrative">
-                            One Node/Express platform behind one login and one permission model: order hub, inventory,
-                            warehouse documents, EDI, accounting sync, a customer-facing dealer portal and an in-house
-                            GPT assistant. I own the schema, the backend, the front end, the deploy and the pager &mdash;
-                            77 route files and 24 services behind 1,048 REST endpoints, bilingual EN/ZH end to end.
-                            The primary database sits overseas, a few hundred milliseconds round-trip from the AWS host,
-                            so most of the real engineering is query batching, a local read mirror and cache strategy
-                            rather than CRUD.
+                            <strong>What it is:</strong> one website and one login where staff take an order,
+                            check whether the piece is on the warehouse floor or still on a ship, print the
+                            shipping and customs paperwork, and hand the figures to accounting without anyone
+                            re-typing them. Behind it: <strong>one Node/Express codebase, one permission model,
+                            77 route files, 24 services, bilingual EN/ZH</strong>. The primary database sits
+                            overseas, a few hundred milliseconds round-trip, so the real work is query batching,
+                            a local read mirror and caching rather than CRUD.
                         </p>
 
                         <div class="featured-stats">
@@ -520,65 +426,6 @@
                             <div class="stat-item">
                                 <span class="stat-number">124</span>
                                 <span class="stat-label">Permission Checks</span>
-                            </div>
-                        </div>
-
-                        <div class="featured-modules">
-                            <div class="module-item">
-                                <ion-icon name="sparkles-outline"></ion-icon>
-                                <div>
-                                    <strong>AmaxBot</strong>
-                                    <span>GPT assistant on two surfaces: chat UI with 55 function-calling tools, plus an IMAP bot answering 27 email commands</span>
-                                </div>
-                            </div>
-                            <div class="module-item">
-                                <ion-icon name="storefront-outline"></ion-icon>
-                                <div>
-                                    <strong>Dealer Portal</strong>
-                                    <span>Live customer-facing portal for the dealer network, per-dealer catalog, branding and price lists</span>
-                                </div>
-                            </div>
-                            <div class="module-item">
-                                <ion-icon name="swap-horizontal-outline"></ion-icon>
-                                <div>
-                                    <strong>EDI integration</strong>
-                                    <span>SOAP integration pulling partner purchase orders and returning acknowledgements, ASNs and invoices</span>
-                                </div>
-                            </div>
-                            <div class="module-item">
-                                <ion-icon name="calculator-outline"></ion-icon>
-                                <div>
-                                    <strong>Accounting connector hub</strong>
-                                    <span>6 connectors, 42 APIs, daily auto-sync across two company books, failure alerting</span>
-                                </div>
-                            </div>
-                            <div class="module-item">
-                                <ion-icon name="document-attach-outline"></ion-icon>
-                                <div>
-                                    <strong>Warehouse Documents</strong>
-                                    <span>8 document types, Excel/PDF generation, 5 email flows, Lacey Act compliance</span>
-                                </div>
-                            </div>
-                            <div class="module-item">
-                                <ion-icon name="library-outline"></ion-icon>
-                                <div>
-                                    <strong>Knowledge Base</strong>
-                                    <span>Published articles with fulltext search feeding the bot, plus a credit and training engine</span>
-                                </div>
-                            </div>
-                            <div class="module-item">
-                                <ion-icon name="chatbubbles-outline"></ion-icon>
-                                <div>
-                                    <strong>Storefront Live Chat</strong>
-                                    <span>Public storefront chat with AI answers and hand-off to a human when it should stop guessing</span>
-                                </div>
-                            </div>
-                            <div class="module-item">
-                                <ion-icon name="analytics-outline"></ion-icon>
-                                <div>
-                                    <strong>Reporting &amp; Analytics</strong>
-                                    <span>Sales, inventory and container reporting, incl. the month-end valuation pack the bank receives</span>
-                                </div>
                             </div>
                         </div>
 
@@ -777,9 +624,8 @@
                             <figcaption class="featured-shot-cap">The sign-in screen &mdash; the way staff get in, and the only screen I can show</figcaption>
                         </figure>
                         <p class="featured-shots-note">
-                            One screenshot only, deliberately. Everything else in this platform sits behind
-                            that sign-in because it reads live company data, and none of it is mine to publish.
-                            The diagram above and the sandbox below are how I can show the work instead.
+                            One screenshot only. Everything past that sign-in reads live company data and is
+                            not mine to publish, so the diagram above and the sandbox below stand in for it.
                         </p>
                     </div>
 
@@ -792,27 +638,17 @@
                             <h4 class="sbx-title" id="sbxTitle">Watch it pick a tool, call it, and answer</h4>
                             <p class="sbx-lede">
                                 Most assistant demos print a reply and hide the work. This one shows the routing
-                                decision, the tool call with its real argument shape, the rows that come back, and
-                                only then the written answer &mdash; because the pipeline is the part a screenshot
-                                cannot show you.
+                                decision, the tool call with its real argument shape, and the rows that come back.
                             </p>
+
                         </div>
 
                         <p class="sbx-notice">
                             <ion-icon name="flask-outline" aria-hidden="true"></ion-icon>
-                            <span><strong>This is a sandbox.</strong> It runs entirely in your browser on canned
-                            sample data &mdash; fictional customers, invented order numbers, no network calls, no
-                            database. The production assistant sits behind a login and reads live company data,
-                            which is exactly why it is not wired to a public page.</span>
+                            <span><strong>This is a sandbox.</strong> It runs in your browser on canned sample
+                            data &mdash; fictional customers, no network calls, no database. The real assistant sits
+                            behind a login and reads live company data.</span>
                         </p>
-
-                        <ul class="sbx-receipts">
-                            <li><strong>5/8 &rarr; 8/8</strong><span>questions answered, keyword &rarr; hybrid</span></li>
-                            <li><strong>3/3</strong><span>Chinese questions where keyword returned 0 rows</span></li>
-                            <li><strong>26 &rarr; 110</strong><span>articles &rarr; embedded chunks</span></li>
-                            <li><strong>$0.0005</strong><span>per full index rebuild</span></li>
-                        </ul>
-                        <p class="sbx-receipts-note">Measured on the real system on 2026-09-02, the day the hybrid search shipped.</p>
 
                         <div class="sbx-chips" role="group" aria-label="Sample questions &mdash; choose one to run it">
                             <button type="button" class="sbx-chip" data-sbx="orders">
@@ -914,10 +750,11 @@
         <h3 class="kbs-title" id="kbsTitle">Keyword search vs. semantic search</h3>
         <p class="kbs-lede">
             The knowledge base behind AmaxBot was searched with MariaDB <code>FULLTEXT</code>.
-            Chinese was completely unsearchable, and English questions phrased the way people
-            actually phrase them came back wrong. I shipped a hybrid embeddings&nbsp;+&nbsp;<code>FULLTEXT</code>
-            layer and ran both paths against the same eight staff questions.
+            Chinese was unsearchable and English phrasing came back wrong. I shipped a hybrid
+            embeddings&nbsp;+&nbsp;<code>FULLTEXT</code> layer and ran both paths against the same
+            eight staff questions.
         </p>
+
     </div>
 
     <p class="kbs-honesty">
@@ -946,9 +783,8 @@
     </div>
 
     <p class="kbs-caveat">
-        Those two numbers are deliberately not the same measure. <em>Returned any rows</em> is a low
-        bar &mdash; on one of the five, the rows keyword search returned were the wrong article,
-        which is worse than returning nothing. The hybrid column counts only the correct article.
+        Not the same measure. <em>Returned any rows</em> is a low bar: on one of the five the rows
+        were the wrong article. The hybrid column counts only the correct article.
     </p>
 
     <div class="kbs-pick">
@@ -997,26 +833,6 @@
 
     <p class="kbs-sr" data-kbs-live role="status" aria-live="polite"></p>
 
-    <h4 class="kbs-sub">Why Chinese returned nothing &mdash; two independent causes</h4>
-    <div class="kbs-why">
-        <div class="kbs-cause">
-            <span class="kbs-cause-n" aria-hidden="true">01</span>
-            <div>
-                <strong>No CJK tokenizer</strong>
-                <span>MariaDB <code>FULLTEXT</code> splits on whitespace. Chinese has none, so a whole
-                question arrives as one unmatchable token.</span>
-            </div>
-        </div>
-        <div class="kbs-cause">
-            <span class="kbs-cause-n" aria-hidden="true">02</span>
-            <div>
-                <strong>The Chinese columns were never indexed</strong>
-                <span><code>title_zh</code> and <code>content_zh</code> were not in the <code>FULLTEXT</code>
-                index at all. Even a working tokenizer would have had nothing to read.</span>
-            </div>
-        </div>
-    </div>
-
     <p class="kbs-foot">
         <span><strong>26</strong> published articles</span>
         <span><strong>110</strong> chunks</span>
@@ -1037,37 +853,16 @@
                                 <span class="case-tag">AI / Node</span>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Situation</span>
-                                <p class="case-v">The answers to the questions staff asked IT all day &mdash; where is this order, do we have stock, what does this account owe &mdash; lived in four databases nobody outside IT could query. Every question became an interruption, and the answer came back hours later as a screenshot.</p>
+                                <span class="case-k">Problem</span>
+                                <p class="case-v">Where is this order, do we have stock, what does this account owe &mdash; the answers lived in four databases nobody outside IT could query. Every question became an interruption answered hours later by screenshot.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">One assistant on two surfaces sharing one accuracy layer: a chat UI with 55 function-calling tools, and a 3,300-line IMAP service that watches a shared mailbox, answers 27 <code>@amaxbot_*</code> email commands, auto-replies from the knowledge base and mails a daily operations digest. Both surfaces answer through the same tools, the same role checks and the same reply audit as the web UI &mdash; the email path exists because it reaches the people who never log in at all.</p>
-                            </div>
-                            <details class="case-more">
-                                <summary class="case-more-sum"><span class="case-more-txt">3 engineering decisions, and what I would change</span><ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon></summary>
-                                <div class="case-more-body">
-                            <div class="case-row">
-                                <span class="case-k">Decision 1</span>
-                                <p class="case-v"><em>Filter the tool catalog before serialising it, not after.</em> A non-admin&rsquo;s request is assembled from a list with every write tool already removed &mdash; SKU create/update/delete, order writes, price changes, workflow execution &mdash; so the model cannot call what was never in its context. That is a stronger guarantee than trusting it to refuse, and it survives a prompt-injection attempt in a forwarded email, because there is nothing to inject <em>toward</em>. The same pass drops rarely-used specialist tools unless the message mentions their subject; the common tools are never droppable, so the gate can cost a niche lookup at worst, never a routine one.</p>
+                                <p class="case-v">One assistant on two surfaces sharing one accuracy layer: a chat UI with 55 function-calling tools, and a 3,300-line IMAP service answering 27 <code>@amaxbot_*</code> email commands from a shared mailbox.</p>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Decision 2</span>
-                                <p class="case-v"><em>Enforce account scope on tool output, never in the prompt.</em> A dealer- or rep-scoped session runs every tool result through a filter that deletes rows naming an account outside that session&rsquo;s allowed set before the model sees them, blanks an entire result that belongs to someone else, and logs the removal as a scope violation. Product and stock tools are exempt by name because their rows carry no account at all. The filter is one extracted function rather than a step in the main loop, specifically so the self-repair pass runs it too &mdash; an earlier version repaired an answer by calling tools directly and handed back exactly the rows the main loop strips.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Decision 3</span>
-                                <p class="case-v"><em>Audit the draft reply deterministically, then make the model go and measure.</em> A shared module checks every draft for identifiers the tools never returned, counts that appear nowhere in the tool output, and denials of existence nothing actually verified. A flagged draft is not simply blocked: the specific defect is handed back with instructions to re-check it, because sending the right answer beats withholding the wrong one. Permission refusals are explicitly excluded &mdash; &ldquo;that account is outside the ones assigned to you&rdquo; is a <em>correct</em> answer that no amount of re-querying will change, and flagging it was burning a model round on most refusals.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Hindsight</span>
-                                <p class="case-v">The repeat-answer cache. It began as string similarity over previous questions and then grew a rule for every wrong answer it produced: never cache a time-relative question, never cache one containing an order or SKU identifier, never serve a reply whose text looks like an entity card. Every one of those is a guess about the prose after the fact. Cacheability is a property of the <em>tool</em> that produced the answer, so the tool should declare whether its output is live data and the cache should read that flag &mdash; instead of pattern-matching the reply and hoping.</p>
-                            </div>
-                                </div>
-                            </details>
-                            <div class="case-row">
-                                <span class="case-k">Outcome</span>
-                                <p class="case-v">Staff self-serve from the ERP by chat or by plain email, in English or Chinese, through the same permission model the web UI uses &mdash; no second data path that quietly routes around RBAC.</p>
+                                <span class="case-k">Result</span>
+                                <p class="case-v">Staff self-serve from the ERP by chat or plain email, in English or Chinese. The tool catalogue is filtered by role <em>before</em> the model ever sees it, so a non-admin request cannot contain a write tool.</p>
                             </div>
                         </article>
 
@@ -1078,37 +873,16 @@
                                 <span class="case-tag">SOAP / Accounting</span>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Situation</span>
-                                <p class="case-v">Purchase orders arrived from trading partners over EDI, and the same orders and supplier bills were then re-typed by hand into two separate accounting companies. Every re-key was a chance to transpose a figure, and nobody found those mistakes until month-end close.</p>
+                                <span class="case-k">Problem</span>
+                                <p class="case-v">Purchase orders arrived from trading partners over EDI, then the same orders and supplier bills were re-typed by hand into two accounting companies. Nobody caught a transposed figure until month-end close.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">Two halves that meet inside the ERP. Inbound: a SOAP client against an EDI provider that pulls purchase orders and returns acknowledgements, advance ship notices and invoices. Outbound: an accounting hub of 6 connectors and 42 APIs on a daily schedule, pushing sales documents and supplier bills into two accounting companies with a per-pipeline sent-ledger and failure alerting behind it.</p>
-                            </div>
-                            <details class="case-more">
-                                <summary class="case-more-sum"><span class="case-more-txt">3 engineering decisions, and what I would change</span><ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon></summary>
-                                <div class="case-more-body">
-                            <div class="case-row">
-                                <span class="case-k">Decision 1</span>
-                                <p class="case-v"><em>Store the original document beside the mapped columns.</em> The provider&rsquo;s pull is a server-side cursor: the first call returns a batch plus a more-records flag, and the continuation call takes no offset &mdash; it advances a cursor held in the authenticated session, so the whole cursor has to be drained inside one login or the place is lost. Once a document has been handed over it is no longer &ldquo;new&rdquo;, which means a mapping bug found a week later cannot be repaired by pulling it again. So every order and every line is written with its raw payload next to the parsed columns, and the table is uniquely keyed on partner plus PO number so a re-pull updates instead of duplicating. Re-mapping became a local replay rather than a phone call asking a partner to resend.</p>
+                                <p class="case-v">Inbound, a SOAP client against an EDI provider that pulls purchase orders and returns acknowledgements, ship notices and invoices. Outbound, an accounting hub of 6 connectors and 42 APIs pushing sales documents and supplier bills on a daily schedule.</p>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Decision 2</span>
-                                <p class="case-v"><em>Make idempotency a soft-flagged ledger, not a delete.</em> Each outbound pipeline keeps a ledger of what it has sent, keyed by order or PO number, and the export query excludes anything currently active in it &mdash; so a double-click, a re-run or a retry cannot post the same document twice. A rollback flips the row inactive rather than removing it, which makes the document eligible again while preserving who sent it, when, and in which batch. That distinction is the whole point: a batch the accounting importer rejects <em>has</em> to be un-flagged, or those documents stay marked as sent forever and are never retried.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Decision 3</span>
-                                <p class="case-v"><em>The importer answers asynchronously by email, so the failure path is an inbox.</em> Imports are accepted and validated later, with the verdict arriving as a message &mdash; which makes the integration exactly as reliable as whatever reads that message. The same IMAP service that runs the assistant matches the importer&rsquo;s failure notices, parses the file name and the per-row success and error counts, un-marks the affected batch so the next scheduled push retries it on its own, and raises an alert naming what will and will not retry. Two guards make it survivable: the block runs <em>ahead</em> of message de-duplication, because every retry notice is a fresh message with its own id, and identical alerts are collapsed to one per cooldown window &mdash; a single case-variant SKU once slipped the already-sent check and generated 65 alerts in a day.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Hindsight</span>
-                                <p class="case-v">Four pipelines grew four near-identical sent-ledger tables and four copies of the mark-and-rollback logic, so every bug found in one had to be re-fixed in the other three. One ledger with a pipeline column and one shared helper would have cost an afternoon and saved all of it. And one pipeline marks documents as sent <em>before</em> dispatch rather than on acknowledgement &mdash; which is precisely the failure the alerting then had to be built to catch. Mark on acknowledgement.</p>
-                            </div>
-                                </div>
-                            </details>
-                            <div class="case-row">
-                                <span class="case-k">Outcome</span>
-                                <p class="case-v">Partner orders reach the ERP and both accounting companies without re-keying, resends are safe by construction rather than by care, and an import failure surfaces the same day as an alert with the affected rows already re-queued &mdash; instead of being discovered at close.</p>
+                                <span class="case-k">Result</span>
+                                <p class="case-v">Partner orders reach the ERP and both accounting companies without re-keying. Every push is <em>idempotent</em>, keyed on the document number, so a resend cannot double-post, and a rejected batch is un-flagged and retried automatically.</p>
                             </div>
                         </article>
 
@@ -1119,78 +893,36 @@
                                 <span class="case-tag">Embeddings / RRF</span>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Situation</span>
-                                <p class="case-v">The knowledge base behind the assistant was searched with a single MariaDB <code>FULLTEXT</code> match, which only finds literal words &mdash; &ldquo;my couch arrived scratched&rdquo; never reached the damage-claim article. For Chinese it was not weak, it was dead: <code>FULLTEXT</code> splits on whitespace and Chinese has none, so a whole question arrives as one unmatchable token, and the Chinese title and body columns were not in the index at all.</p>
+                                <span class="case-k">Problem</span>
+                                <p class="case-v">The knowledge base was searched with a single MariaDB <code>FULLTEXT</code> match, which finds only literal words. Chinese was not weak but dead: no CJK tokenizer, so a whole question arrives as one unmatchable token.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">A retrieval layer that embeds every article once, in chunks, and fuses vector similarity with the existing <code>FULLTEXT</code> query at request time. 26 published articles become 110 chunks; the vectors are 0.64&nbsp;MB and a full rebuild costs about five hundredths of a cent. Chunk zero of every article is always a card &mdash; title, type, tags, summary &mdash; because a short question matches that card far better than any window of body text, and body chunks are prefixed with the title so a window never loses its subject. English and Chinese are chunked and embedded as separate documents rather than concatenated.</p>
-                            </div>
-                            <details class="case-more">
-                                <summary class="case-more-sum"><span class="case-more-txt">3 engineering decisions, and what I would change</span><ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon></summary>
-                                <div class="case-more-body">
-                            <div class="case-row">
-                                <span class="case-k">Decision 1</span>
-                                <p class="case-v"><em>No vector database.</em> The production MariaDB predates the <code>VECTOR</code> type, and the honest measurement was that the entire index is 0.64&nbsp;MB. Vectors are stored as raw little-endian <code>Float32</code> blobs in an ordinary table, loaded into one flat <code>Float32Array</code> for cache locality, and scored with a dot product in Node; per-article scores are max-pooled rather than averaged, so one strongly matching passage carries its article instead of being diluted by the article&rsquo;s length. A vector service would have been more infrastructure to run, monitor and deploy than the data it holds &mdash; even at twenty times this corpus it is roughly 12&nbsp;MB and a cent to rebuild.</p>
+                                <p class="case-v">A retrieval layer that embeds 26 published articles as 110 chunks and fuses vector similarity with the existing <code>FULLTEXT</code> query by reciprocal-rank fusion. No vector database &mdash; the whole index is 0.64&nbsp;MB, scored in Node.</p>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Decision 2</span>
-                                <p class="case-v"><em>Fuse, never replace &mdash; and make the new path incapable of making search worse.</em> Both legs run in parallel and are combined by reciprocal-rank fusion under a cosine floor that discards weak semantic hits as noise; fusion rewards a document both legs like while still letting one excellent list win, which is only safe because the floor keeps junk out of the lists in the first place. Every semantic step is wrapped so a missing key, a rate limit, a timeout, an absent table or a corrupt vector falls straight through to the exact <code>FULLTEXT</code> query that ran before the rewrite, and with the flag off the embedding API is never called at all. One bug that path taught me: both legs are fetched at four times the caller&rsquo;s limit so fusion has candidates to work with, so the fallback must trim back to the requested limit &mdash; without that, a timed-out semantic leg quietly returned twelve loosely-related articles to a caller that asked for three.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Decision 3</span>
-                                <p class="case-v"><em>Treat cold start as a race, not a wait.</em> The vectors live in the same overseas database as everything else, and loading them on the first question did not reliably fit inside the query deadline, so the first real questions after every deploy were timing out for no good reason. The load is now raced against a short grace period: win it and that question gets the semantic leg; lose it and that <em>one</em> question is answered from <code>FULLTEXT</code> while the load finishes in the background, so every question after it is fast. The loaded index is then revalidated against a cheap stamp query &mdash; row count, max id, max timestamp &mdash; at most once a minute, because a round trip to that database costs more than the comparison it saves.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Hindsight</span>
-                                <p class="case-v">Chunk hashes bind model, dimensions, language, position and text, so swapping the embedding model invalidates the affected rows automatically and no migration is ever written &mdash; that I would keep exactly. What I would change is the measurement. The head-to-head was eight real staff questions: enough to prove Chinese was broken, nowhere near enough to tune anything. Before I touch the fusion weights or the cosine floor again I would build a proper labelled question set and re-run it on every change, instead of judging by eye.</p>
-                            </div>
-                                </div>
-                            </details>
-                            <div class="case-row">
-                                <span class="case-k">Outcome</span>
-                                <p class="case-v">On the recorded run of eight staff questions the old path returned rows for five &mdash; and on one of those five the rows were the wrong article, which is worse than returning nothing. The hybrid returned the correct article for all eight, including three Chinese questions that had previously returned nothing at all. It ships behind a flag and degrades to the old query on any failure, so the worst case is the behaviour it replaced.</p>
+                                <span class="case-k">Result</span>
+                                <p class="case-v">On eight real staff questions the old path returned rows for five &mdash; one of them the wrong article &mdash; and the hybrid returned the correct article for all eight, including three Chinese questions that had returned nothing at all. It ships behind a flag and degrades to the old query.</p>
                             </div>
                         </article>
 
                         <article class="case-card">
                             <div class="case-head">
                                 <ion-icon name="film-outline"></ion-icon>
-                                <h4>Social Video Maker &mdash; script to vertical video, nothing paid in the chain</h4>
+                                <h4>Social Video Maker &mdash; script to vertical video</h4>
                                 <span class="case-tag">FFmpeg / TTS</span>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Situation</span>
-                                <p class="case-v">Marketing wanted a steady stream of Mandarin short-form video, with no per-video budget and no editor to put in the loop. The requirement was a finished, publishable 1080&times;1920 file produced from pasted script text in a single pass.</p>
+                                <span class="case-k">Problem</span>
+                                <p class="case-v">Marketing wanted a steady stream of Mandarin short-form video with no per-video budget and no editor in the loop &mdash; a publishable 1080&times;1920 file produced from pasted script text in a single pass.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">A standalone Node app: text-to-speech narration, b-roll selection, Ken Burns motion, a circle-masked talking-head overlay whose mouth is driven by measured audio amplitude, burned-in captions, FFmpeg assembly, and live progress streamed to the browser. Every service in the chain is a free one &mdash; which is not a footnote but the constraint that shapes the design, because free endpoints fail quietly rather than loudly, so the pipeline is built to measure instead of assume.</p>
-                            </div>
-                            <details class="case-more">
-                                <summary class="case-more-sum"><span class="case-more-txt">3 engineering decisions, and what I would change</span><ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon></summary>
-                                <div class="case-more-body">
-                            <div class="case-row">
-                                <span class="case-k">Decision 1</span>
-                                <p class="case-v"><em>Build the pauses out of audio, because the engine will not build them out of markup.</em> The free speech endpoint silently returns zero bytes for any SSML containing a <code>&lt;break&gt;</code> tag &mdash; no error, just an empty stream &mdash; and does the same for inputs past roughly 800 characters. So pacing is constructed the other way round: the script is split at punctuation, each fragment is synthesised as its own call, and cached silence files are spliced between them with the gap chosen by punctuation class &mdash; 380&nbsp;ms after a sentence, 180&nbsp;ms after a clause, 500&nbsp;ms at a paragraph, 120&nbsp;ms at a single line break. That last class exists because treating every visual line as a paragraph put half a second between them, and in a script written one clause per line dead air came to dominate the audio. Fragments are then regrouped up to the size limit to avoid a handshake per clause &mdash; but never glued across a sentence break, or the pause they were built for disappears.</p>
+                                <p class="case-v">A standalone Node app: text-to-speech narration, b-roll with Ken Burns motion, an amplitude-driven talking-head overlay, burned-in captions and FFmpeg assembly, with live progress streamed to the browser. Every service in the chain is free.</p>
                             </div>
                             <div class="case-row">
-                                <span class="case-k">Decision 2</span>
-                                <p class="case-v"><em>Measure the audio; never estimate it.</em> Caption timing was first derived from character counts and it drifted, because digits, punctuation and rare words all take longer to speak than their length implies and the error accumulates until the words on screen are a full sentence behind the voice. Now each synthesised group is probed for its real duration before the audio is concatenated, and that timeline is what the caption builder rides, so the error can never grow past one sentence. Uploaded human narration has no synthesis timeline to use, so there the caption boundaries snap to the nearest detected silence of at least a quarter second &mdash; which is exactly where a speaker ends a sentence.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Decision 3</span>
-                                <p class="case-v"><em>Copy streams when the parameters agree; re-encode only when they do not.</em> Long scripts are split, rendered as segments and merged, and the merge is where the time goes. Each input is probed first, and when codec, resolution, frame rate and sample rate all match, the segments are joined through the concat demuxer with <code>-c copy</code> &mdash; a file operation rather than a second full encode. When they disagree it falls back to the concat filter and normalises everything to the project&rsquo;s standard. The intro-card path deliberately uses the filter even where copying looks possible: the demuxer needs matching streams on both inputs and a still cover has no audio track at all, so the cover is given a silent track and pushed through the filter, rather than shipping a file that plays in some players and not others.</p>
-                            </div>
-                            <div class="case-row">
-                                <span class="case-k">Hindsight</span>
-                                <p class="case-v">There are two timelines in this pipeline. The captions ride measured audio, but the b-roll cuts are still spaced by character count, and every sync bug I have fixed has been at the seam between the two. The right shape is one timeline object, built once from the measured audio and consumed by captions, cuts and the avatar alike &mdash; instead of two estimates that agree right up until they don&rsquo;t.</p>
-                            </div>
-                                </div>
-                            </details>
-                            <div class="case-row">
-                                <span class="case-k">Outcome</span>
-                                <p class="case-v">A publish-ready vertical video from pasted text in one pass, with nothing paid anywhere in the chain, and a 130-case unit suite plus HTTP route tests that boot the app on an ephemeral port. The whole suite runs with no network and no quota, so the parts most likely to break &mdash; a free endpoint changing its behaviour under you &mdash; are the parts under test.</p>
+                                <span class="case-k">Result</span>
+                                <p class="case-v">The free speech endpoint returns zero bytes for SSML pauses, so pacing is built from spliced silence and caption timing rides <em>measured</em> audio. Publish-ready video in one pass, covered by a 130-case unit suite.</p>
                             </div>
                         </article>
 
@@ -1202,7 +934,7 @@
                         <div class="project-card">
                             <div class="project-icon"><ion-icon name="shield-checkmark-outline"></ion-icon></div>
                             <h3>Email Phishing Detection</h3>
-                            <p>Screens incoming mail inside the mailbox itself: a Google Apps Script runs on a timed trigger, checks links and attachments against a reputation service, and has a language model read the message the way a person would &mdash; the pretext, the forged urgency, the mismatch between display name and sending domain &mdash; which is the half that header rules miss. The target is the message that passes every header check and is still a fake invoice &mdash; the one a human is expected to catch on a busy morning.</p>
+                            <p>A Google Apps Script on a timed trigger checks links and attachments against a reputation service and has a language model read the message for pretext.</p>
                             <div class="tags">
                                 <span class="tag">Google App Script</span>
                                 <span class="tag">ML</span>
@@ -1214,7 +946,7 @@
                         <div class="project-card">
                             <div class="project-icon"><ion-icon name="mic-outline"></ion-icon></div>
                             <h3>Voice Assistant</h3>
-                            <p>A Python desktop tool that transcribes speech as it happens and answers questions about what it just heard. Recognition runs locally through Vosk, so the audio never leaves the machine and the transcript keeps working with the network down; only a question and the text it refers to are ever sent anywhere. The UI shows partial results while a sentence is still being spoken and only commits the line once the recogniser marks the utterance final &mdash; the difference between a caption that stutters and one you can read.</p>
+                            <p>A Python desktop tool that transcribes speech live through Vosk running on the machine, then answers questions about what it just heard.</p>
                             <div class="tags">
                                 <span class="tag">Vosk</span>
                                 <span class="tag">ChatGPT API</span>
@@ -1226,7 +958,7 @@
                         <div class="project-card">
                             <div class="project-icon"><ion-icon name="swap-horizontal-outline"></ion-icon></div>
                             <h3>EDI &amp; API Integration</h3>
-                            <p>The connector work either side of the flagship pipeline: order and stock feeds moving between the ERP, marketplace back-ends and warehouse systems over REST, scheduled file drops and EDI documents, all normalised into one internal order shape so downstream code never has to learn which channel a document arrived on. Every feed writes as an upsert keyed on the partner&rsquo;s own document number, because the one guarantee no external feed ever offers is exactly-once delivery &mdash; replaying the same file has to produce the same result.</p>
+                            <p>Order and stock feeds between the ERP, marketplace back ends and warehouse systems, normalised into one order shape, upserts keyed on the partner&rsquo;s document number.</p>
                             <div class="tags">
                                 <span class="tag">EDI</span>
                                 <span class="tag">REST API</span>
@@ -1237,7 +969,7 @@
                         <div class="project-card">
                             <div class="project-icon"><ion-icon name="pulse-outline"></ion-icon></div>
                             <h3>Network Monitoring</h3>
-                            <p>Reachability and health monitoring for office and warehouse networking: scripted probes collect link, latency and service-availability metrics on a schedule, and Grafana renders them as dashboards a non-engineer can read at a glance. The value is less the graph than the baseline behind it: knowing what normal latency looks like on a link is what turns an outage into something obvious rather than something argued about.</p>
+                            <p>Scripted probes collect link, latency and service-availability metrics on a schedule, rendered as Grafana dashboards a non-engineer can read at a glance.</p>
                             <div class="tags">
                                 <span class="tag">Networking</span>
                                 <span class="tag">Grafana</span>
@@ -1248,12 +980,58 @@
                         <div class="project-card">
                             <div class="project-icon"><ion-icon name="cog-outline"></ion-icon></div>
                             <h3>Python Automation</h3>
-                            <p>The batch-processing utilities behind the recurring reporting work: walk a folder of supplier PDFs and spreadsheets, pull the tables out, reconcile them against what the system says, and emit a formatted workbook. The output is a workbook rather than a console report because the people who act on it live in Excel &mdash; a disputed line has to be traceable back to the document it came from, which is a reporting requirement long before it is a code one.</p>
+                            <p>Walks a folder of supplier PDFs and spreadsheets, pulls the tables out, reconciles them against the system and emits a formatted Excel workbook.</p>
                             <div class="tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">PDF</span>
                                 <span class="tag">Excel</span>
                                 <span class="tag">Automation</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon"><ion-icon name="chatbubbles-outline"></ion-icon></div>
+                            <h3>Desktop Chat Assistant</h3>
+                            <p>A Python desktop app that watches an instant-messaging client, reads the conversation with a vision model and drafts a reply for a human to approve.</p>
+                            <div class="tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Claude API</span>
+                                <span class="tag">Vision</span>
+                                <span class="tag">Automation</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon"><ion-icon name="videocam-outline"></ion-icon></div>
+                            <h3>CCTV Archiver</h3>
+                            <p>Pulls recordings off a Hikvision NVR on a schedule and files them to Amazon S3, with a token-gated API and per-camera links mailed out.</p>
+                            <div class="tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Automation</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon"><ion-icon name="newspaper-outline"></ion-icon></div>
+                            <h3>Bilingual News Digest</h3>
+                            <p>A Node service that gathers industry news on a daily cron, summarises it in English and Chinese and mails the digest, with its own web UI.</p>
+                            <div class="tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Cron</span>
+                                <span class="tag">ChatGPT API</span>
+                                <span class="tag">i18n</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon"><ion-icon name="browsers-outline"></ion-icon></div>
+                            <h3>Browser Automation</h3>
+                            <p>Playwright scripts that sign in to partner web portals and upload the inventory feed that used to be posted by hand, roughly 177 rows a run.</p>
+                            <div class="tags">
+                                <span class="tag">Playwright</span>
+                                <span class="tag">Automation</span>
+                                <span class="tag">REST API</span>
                             </div>
                         </div>
                     </div>
