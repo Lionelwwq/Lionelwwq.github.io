@@ -14,16 +14,16 @@
     <meta property="og:description" content="Sole engineer of a ~230,000-line ERP and automation platform — 1,048 REST endpoints, 274 tables, 38 GPT function-calling tools — running two companies daily." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lionelwwq.github.io/" />
-    <meta property="og:image" content="https://lionelwwq.github.io/erp-tearsheets-preview.png" />
-    <meta property="og:image:width" content="1400" />
-    <meta property="og:image:height" content="875" />
-    <meta property="og:image:alt" content="A page of the ERP platform: searchable product tearsheets" />
+    <meta property="og:image" content="https://lionelwwq.github.io/erp-login-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="750" />
+    <meta property="og:image:alt" content="The ERP platform sign-in screen" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Lionel Wang | Full-Stack &amp; Platform Engineer" />
     <meta name="twitter:description" content="Sole engineer of a ~230,000-line ERP and automation platform — 1,048 REST endpoints, 274 tables, 38 GPT function-calling tools — running two companies daily." />
-    <meta name="twitter:image" content="https://lionelwwq.github.io/erp-tearsheets-preview.png" />
+    <meta name="twitter:image" content="https://lionelwwq.github.io/erp-login-preview.png" />
 
     <link rel="shortcut icon" href="selfie.png" type="image/png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
@@ -301,7 +301,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>ERP & Automation</h3>
-                                <p>ERP/WMS systems, QuickBooks sync, EDI workflows, and automated reporting.</p>
+                                <p>ERP and warehouse systems, accounting sync, EDI workflows, and automated reporting.</p>
                             </div>
                         </div>
                     </div>
@@ -413,7 +413,7 @@
                                 <span class="stat-label">Front-End Pages</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-number">20,878</span>
+                                <span class="stat-number">20k+</span>
                                 <span class="stat-label">Orders in Hub</span>
                             </div>
                             <div class="stat-item">
@@ -440,15 +440,15 @@
                             <div class="module-item">
                                 <ion-icon name="swap-horizontal-outline"></ion-icon>
                                 <div>
-                                    <strong>TrueCommerce EDI</strong>
-                                    <span>SOAP integration pulling retailer POs and returning acknowledgements, ASNs and invoices</span>
+                                    <strong>EDI integration</strong>
+                                    <span>SOAP integration pulling partner purchase orders and returning acknowledgements, ASNs and invoices</span>
                                 </div>
                             </div>
                             <div class="module-item">
                                 <ion-icon name="calculator-outline"></ion-icon>
                                 <div>
-                                    <strong>QuickBooks Connector Hub</strong>
-                                    <span>6 connectors, 42 APIs, daily auto-sync across two QB companies, failure alerting</span>
+                                    <strong>Accounting connector hub</strong>
+                                    <span>6 connectors, 42 APIs, daily auto-sync across two company books, failure alerting</span>
                                 </div>
                             </div>
                             <div class="module-item">
@@ -513,12 +513,12 @@
         use: a staff web UI of 150 pages, a dealer portal with 30 accounts, storefront chat, and an
         email bot that answers 36 commands. Below them, six subsystems: AmaxBot with 38 chat tools
         and 36 email commands; a knowledge-base search that combines embeddings with FULLTEXT over
-        110 chunks; a QuickBooks hub of 6 connectors and 42 APIs; the dealer portal; TrueCommerce EDI
+        110 chunks; an accounting hub of 6 connectors and 42 APIs; the dealer portal; EDI
         over SOAP carrying purchase orders, shipping notices and invoices; and warehouse documents
         covering 8 document types including Lacey Act compliance. Those sit on one Express and
         Node.js application layer exposing 1,048 REST endpoints behind 124 permission checks, in
         English and Chinese. At the base, four MySQL databases holding 274 tables, including the
-        order hub with 20,878 orders.</desc>
+        order hub carrying tens of thousands of orders.</desc>
 
       <!-- ============ band backgrounds ============ -->
       <rect class="arch-band" x="8" y="8"   width="584" height="118" rx="14"/>
@@ -602,7 +602,7 @@
       </g>
       <g class="arch-group t2">
         <rect class="arch-node" x="402" y="202" width="181" height="76" rx="11"/>
-        <text class="arch-t" x="492.5" y="230">QuickBooks Hub</text>
+        <text class="arch-t" x="492.5" y="230">Accounting Hub</text>
         <text class="arch-m" x="492.5" y="250">6 connectors</text>
         <text class="arch-m" x="492.5" y="266">42 APIs</text>
       </g>
@@ -614,7 +614,7 @@
       </g>
       <g class="arch-group t2">
         <rect class="arch-node" x="209" y="290" width="181" height="76" rx="11"/>
-        <text class="arch-t" x="299.5" y="318">TrueCommerce EDI</text>
+        <text class="arch-t" x="299.5" y="318">Partner EDI</text>
         <text class="arch-m" x="299.5" y="338">over SOAP</text>
         <text class="arch-m" x="299.5" y="354">POs · ASN · invoices</text>
       </g>
@@ -657,7 +657,7 @@
         <text class="arch-db-label" x="517.5" y="645">MySQL</text>
       </g>
 
-      <text class="arch-m arch-m--foot" x="300" y="672">order hub · 20,878 orders</text>
+      <text class="arch-m arch-m--foot" x="300" y="672">order hub · 20k+ orders</text>
     </svg>
   </div>
   <p class="arch-hint" aria-hidden="true">Scroll the diagram sideways to see all four columns.</p>
@@ -677,20 +677,11 @@
                                     <ion-icon name="open-outline"></ion-icon>
                                 </div>
                             </a>
-                            <a href="https://reports.amaxleather.com/teasheet" target="_blank" rel="noopener noreferrer" class="featured-img-link">
-                                <div class="showcase-img-wrapper">
-                                    <img src="erp-tearsheets-preview.png" alt="The public product tearsheet page: a searchable grid of 199 spec-sheet PDFs filtered by brand" class="showcase-img" loading="lazy" width="1400" height="875" />
-                                </div>
-                                <div class="featured-link-overlay">
-                                    <span>Public tearsheets &mdash; open this one</span>
-                                    <ion-icon name="open-outline"></ion-icon>
-                                </div>
-                            </a>
                         </div>
                         <p class="featured-shots-note">
-                            The tearsheet page is genuinely public &mdash; 199 spec sheets, searchable, no login &mdash;
-                            so you can click straight into a real page of the platform. Everything else sits behind
-                            the sign-in on the left, because it reads live customer data.
+                            One screenshot only, deliberately. Everything else in this platform sits behind
+                            that sign-in because it reads live company data, and none of it is mine to publish.
+                            The diagram above and the sandbox below are how I can show the work instead.
                         </p>
                     </div>
 
@@ -968,16 +959,16 @@
                         <article class="case-card">
                             <div class="case-head">
                                 <ion-icon name="swap-horizontal-outline"></ion-icon>
-                                <h4>EDI &amp; QuickBooks &mdash; the integration layer</h4>
+                                <h4>EDI &amp; accounting &mdash; the integration layer</h4>
                                 <span class="case-tag">SOAP / Accounting</span>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Problem</span>
-                                <p class="case-v">Retailer POs arrived over EDI, then finance re-typed the same orders and bills into two separate QuickBooks companies by hand.</p>
+                                <p class="case-v">Purchase orders arrived over EDI, then finance re-typed the same orders and bills into two separate sets of books by hand.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">A TrueCommerce SOAP client that pulls purchase orders and returns acknowledgements, advance ship notices and invoices, feeding a QuickBooks connector hub &mdash; 6 connectors, 42 APIs, daily auto-sync, failure alerting.</p>
+                                <p class="case-v">A SOAP client for the partner EDI network that pulls purchase orders and returns acknowledgements, advance ship notices and invoices, feeding an accounting connector hub &mdash; 6 connectors, 42 APIs, daily auto-sync, failure alerting.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Engineering</span>
@@ -985,7 +976,7 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Outcome</span>
-                                <p class="case-v">Retailer orders land in the ERP and reach both QuickBooks companies without re-keying, and a failure surfaces as an email alert the same day instead of at month-end close.</p>
+                                <p class="case-v">Partner orders land in the ERP and reach both sets of books without re-keying, and a failure surfaces as an email alert the same day instead of at month-end close.</p>
                             </div>
                         </article>
 
@@ -1197,11 +1188,11 @@
                                 <div class="tl-date">May 2025 &ndash; Present</div>
                                 <h3>IT Systems & Infrastructure Specialist</h3>
                                 <div class="tl-org">Amax Leather Canada Ltd & Aurora Furniture MFG</div>
-                                <p>Sole engineer of the ERP and automation platform both companies run on: 1,048 REST endpoints, 274 MySQL tables, 150 pages, ~230,000 lines in production &mdash; plus the in-house GPT assistant, the EDI and QuickBooks integrations and the dealer portal.</p>
+                                <p>Sole engineer of the ERP and automation platform both companies run on: 1,048 REST endpoints, 274 MySQL tables, 150 pages, ~230,000 lines in production &mdash; plus the in-house GPT assistant, the EDI and accounting integrations and the dealer portal.</p>
                                 <div class="tl-highlights">
                                     <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> ~230,000-line platform, 1,048 REST endpoints</div>
                                     <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> AmaxBot: 38 function-calling tools + 36 email commands</div>
-                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> TrueCommerce EDI (SOAP) + 42-API QuickBooks hub</div>
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> Partner EDI over SOAP + a 42-API accounting hub</div>
                                 </div>
                                 <div class="tl-tags">
                                     <span class="tag">Node.js</span>
@@ -1798,7 +1789,7 @@
 
         // Animated stat counters (replayable, comma- and suffix-safe).
         // The old version did parseInt(original) + replace(String(num),'') for the
-        // suffix, so "1,048" counted to 1 with a stray ",048" suffix and "20,878"
+        // suffix, so "1,048" counted to 1 with a stray ",048" suffix and a comma-grouped number
         // stopped at 20. Pull the numeric run with a regex, strip commas for the
         // maths, and re-group with toLocaleString only when the source had them.
         const statOriginals = new Map();
@@ -2724,7 +2715,7 @@ const SBX_SCENARIOS = [
             rows: [
                 ['1', 'Warranty, Damage Claims & Returns Policy', '0.81', '—', '0.81'],
                 ['2', 'Shipping, Delivery & Order Hold Policy', '0.62', '—', '0.62'],
-                ['3', 'SOP — Mathis Home Direct Container', '0.41', '0.18', '0.44']
+                ['3', 'SOP — Direct Container Shipping', '0.41', '0.18', '0.44']
             ]
         },
         answer: 'Yes — change-of-mind returns are covered in Warranty, Damage Claims & Returns Policy, and ' +
@@ -2736,7 +2727,7 @@ const SBX_SCENARIOS = [
             label: 'Measured head-to-head, 2026-09-02 — real system, not sample data',
             columns: ['Question asked', 'Keyword (FULLTEXT)', 'Hybrid (embeddings + FULLTEXT)'],
             rows: [
-                ["can I send it back if I just don't like it", 'SOP — Mathis Home Direct Container · wrong', 'Warranty, Damage Claims & Returns Policy · right'],
+                ["can I send it back if I just don't like it", 'SOP — Direct Container Shipping · wrong', 'Warranty, Damage Claims & Returns Policy · right'],
                 ['what is inside the seat cushions', 'answered', 'answered — cushion article ranked first']
             ],
             foot: 'Across 8 real questions: keyword answered 5, hybrid answered 8. Corpus: 26 published ' +
@@ -3354,8 +3345,8 @@ const KBS_RUN = {
             gloss: null,
             keyword: {
                 outcome: 'wrong',
-                rows: [{ title: 'Standard Operating Procedure — Mathis Home Direct Container', tag: 'Wrong article' }],
-                note: 'It returned rows, which is the failure that hurts: a container SOP, matched on surface words instead of intent.'
+                rows: [{ title: 'Standard Operating Procedure — Direct Container Shipping', tag: 'Wrong article' }],
+                note: 'It returned rows, which is the failure that hurts: a shipping SOP, matched on surface words instead of intent.'
             },
             hybrid: {
                 outcome: 'hit',
