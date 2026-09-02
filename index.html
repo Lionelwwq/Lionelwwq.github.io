@@ -44,7 +44,16 @@
         "name": "Lionel Wang",
         "url": "https://lionelwwq.github.io",
         "jobTitle": "IT Systems & Infrastructure Specialist",
-        "description": "Specialist in AI-powered automation, cybersecurity, ERP/WMS systems, and full-stack development based in Vancouver, BC.",
+        "description": "Full-stack and platform engineer. Sole engineer of a ~230,000-line ERP and automation platform — 1,048 REST endpoints, 274 MySQL tables, an in-house GPT assistant with 38 function-calling tools — that two Canadian furniture companies run their daily operations on.",
+        "image": "https://lionelwwq.github.io/selfie.png",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Amax Leather Canada Ltd."
+        },
+        "alumniOf": [
+            { "@type": "CollegeOrUniversity", "name": "New York Institute of Technology" },
+            { "@type": "CollegeOrUniversity", "name": "Kwantlen Polytechnic University" }
+        ],
         "email": "lionelwwq@gmail.com",
         "telephone": "+17788656808",
         "address": {
@@ -495,15 +504,6 @@
                         <a href="https://reports.amaxleather.com" target="_blank" rel="noopener noreferrer" class="featured-img-link">
                             <div class="showcase-img-wrapper">
                                 <img src="erp-login-preview.png" alt="Amax Leather ERP Platform" class="showcase-img" loading="lazy" width="1200" height="750" />
-                            </div>
-                            <div class="featured-link-overlay">
-                                <span>View Live System</span>
-                                <ion-icon name="open-outline"></ion-icon>
-                            </div>
-                        </a>
-                        <a href="https://reports.amaxleather.com" target="_blank" rel="noopener noreferrer" class="featured-img-link">
-                            <div class="showcase-img-wrapper">
-                                <img src="erp-login-preview.png" alt="Amax Leather ERP System" class="showcase-img" loading="lazy" width="1200" height="750" />
                             </div>
                             <div class="featured-link-overlay">
                                 <span>View Live System</span>
@@ -1165,8 +1165,8 @@
         function observeReveals(root) {
             const scope = root || document;
             const targets = scope.querySelectorAll(
-                '.featured-project, .case-card, .project-card, .service-card, .showcase-item, ' +
-                '.tl-item, .cert-card, .skill-group, .about-stat, .section-heading'
+                '.featured-project, .case-card, .project-card, .service-card, .showcase-card, ' +
+                '.tl-item, .cert-card, .skill-item, .about-stat, .section-heading'
             );
             targets.forEach((el, i) => {
                 if (el.dataset.revealBound) return;
@@ -1182,8 +1182,15 @@
         const navButtons = document.querySelectorAll('[data-nav-link]');
         const validPages = [...navButtons].map(b => b.getAttribute('data-nav-link'));
 
+        // Handle for the in-flight crossfade. Clicking a second tab inside the
+        // 150ms fade used to leave BOTH panels displayed: the pending timeout
+        // still held a reference to the first `current` and removed .active from
+        // it long after a third panel had been shown. 2026-09-02 audit.
+        let _tabFadeTimer = null;
+
         function switchTab(page, pushHash = true) {
             if (!validPages.includes(page)) return;
+            if (_tabFadeTimer) { clearTimeout(_tabFadeTimer); _tabFadeTimer = null; }
             navButtons.forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
@@ -1195,11 +1202,18 @@
             const target = document.querySelector(`article[data-page="${page}"]`);
             if (current && current !== target) {
                 current.classList.add('fade-out-tab');
-                setTimeout(() => {
+                _tabFadeTimer = setTimeout(() => {
+                    _tabFadeTimer = null;
+                    // Deactivate EVERY panel, not just the one captured when this
+                    // timer was scheduled — that is what left two on screen.
+                    document.querySelectorAll('article[data-page].active').forEach(a => {
+                        if (a !== target) a.classList.remove('active', 'fade-out-tab', 'fade-in-tab');
+                    });
                     current.classList.remove('active', 'fade-out-tab');
                     if (target) {
                         target.classList.add('active', 'fade-in-tab');
                         target.scrollTop = 0;
+                        window.scrollTo({ top: 0 });   // the window scrolls, not the panel
                         if (page === 'skills') animateSkillBars();
                         if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
                         staggerReveal(target);
@@ -1211,6 +1225,7 @@
             } else if (target && !target.classList.contains('active')) {
                 target.classList.add('active', 'fade-in-tab');
                 target.scrollTop = 0;
+                window.scrollTo({ top: 0 });
                 if (page === 'skills') animateSkillBars();
                 if (page === 'projects') { setTimeout(animateCounters, 300); setTimeout(animateFeaturedStats, 300); }
                 staggerReveal(target);
@@ -1218,6 +1233,9 @@
                 target.querySelectorAll('.section-title, .section-heading').forEach(el => textScramble(el));
                 setTimeout(() => target.classList.remove('fade-in-tab'), 300);
             }
+            // Move the underline from the ROUTER, not from the button's click
+            // handler — hash navigation and the command palette also change tabs.
+            try { moveIndicator(); } catch (_) {}
             if (pushHash) history.replaceState(null, '', '#' + page);
         }
 
@@ -1453,7 +1471,14 @@
             overlay.appendChild(clone);
             overlay.appendChild(closeBtn);
             document.body.appendChild(overlay);
+            // The Escape listener used to remove itself only on the Escape path,
+            // so closing by click or by the X button leaked one listener per open
+            // and a later Escape anywhere on the page pulled focus to a removed
+            // image. Unbind in closeLightbox, which every close path goes through.
+            // 2026-09-02 audit.
+            function onKey(e) { if (e.key === 'Escape') closeLightbox(); }
             function closeLightbox() {
+                document.removeEventListener('keydown', onKey);
                 overlay.style.opacity = '0';
                 overlay.style.transition = 'opacity 0.2s ease';
                 setTimeout(() => overlay.remove(), 200);
@@ -1461,9 +1486,7 @@
             }
             overlay.addEventListener('click', (e) => { if (e.target === overlay || e.target === closeBtn) closeLightbox(); });
             closeBtn.addEventListener('click', closeLightbox);
-            document.addEventListener('keydown', function esc(e) {
-                if (e.key === 'Escape') { closeLightbox(); document.removeEventListener('keydown', esc); }
-            });
+            document.addEventListener('keydown', onKey);
             closeBtn.focus();
         }
         document.querySelectorAll('.cert-image').forEach(img => {
@@ -1493,6 +1516,8 @@
                 localStorage.setItem('theme', 'light');
             }
             updateThemeIcon();
+            // Let the accent picker re-derive a readable value for the new theme.
+            window.dispatchEvent(new Event('themechange'));
         });
 
         function updateThemeIcon() {
@@ -1512,9 +1537,16 @@
         // ===== Text Scramble Effect =====
         const scrambleChars = '!@#$%^&*()_+-=[]{}|;:,./<>?0123456789';
         function textScramble(el) {
-            const original = el.textContent;
+            // Re-entrancy guard. The original read el.textContent live, so a second
+            // run that started while the first was mid-scramble captured SCRAMBLED
+            // text as its "original" and restored that — the heading stayed
+            // corrupted for the rest of the session. Cache the true text once and
+            // cancel any run still in flight. 2026-09-02 audit.
+            if (el._scrambleTimer) { clearInterval(el._scrambleTimer); el._scrambleTimer = null; }
+            if (!el.dataset.scrambleText) el.dataset.scrambleText = el.textContent;
+            const original = el.dataset.scrambleText;
             let iteration = 0;
-            const interval = setInterval(() => {
+            const interval = el._scrambleTimer = setInterval(() => {
                 el.textContent = original.split('').map((char, i) => {
                     if (i < iteration) return original[i];
                     if (char === ' ') return ' ';
@@ -1524,6 +1556,7 @@
                 if (iteration >= original.length) {
                     el.textContent = original;
                     clearInterval(interval);
+                    el._scrambleTimer = null;
                 }
             }, 30);
         }
@@ -1785,12 +1818,16 @@
         const scrollProgressBar = document.getElementById('scrollProgress');
         const activeArticle = () => document.querySelector('article[data-page].active');
         function updateScrollProgress() {
-            const art = activeArticle();
-            if (!art) return;
-            const pct = art.scrollHeight <= art.clientHeight ? 0 : art.scrollTop / (art.scrollHeight - art.clientHeight);
+            const de = document.documentElement;
+            const max = de.scrollHeight - de.clientHeight;
+            const pct = max <= 0 ? 0 : Math.min(1, Math.max(0, de.scrollTop / max));
             scrollProgressBar.style.transform = `scaleX(${pct})`;
         }
-        document.querySelectorAll('article[data-page]').forEach(a => a.addEventListener('scroll', updateScrollProgress));
+        // The panels never scroll — .content-card uses min-height, so each article is
+// exactly as tall as its content and the WINDOW is what scrolls. Bound to the
+// articles, this bar sat at scaleX(0) for the whole session. 2026-09-02 audit.
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+window.addEventListener('resize', updateScrollProgress);
 
         // ===== 2. Navbar sliding indicator =====
         const navIndicator = document.getElementById('navIndicator');
@@ -1840,13 +1877,24 @@
                 const color = dot.dataset.accent;
                 document.querySelectorAll('.accent-dot').forEach(d => d.classList.remove('active'));
                 dot.classList.add('active');
-                document.documentElement.style.setProperty('--accent', color);
-                document.documentElement.style.setProperty('--accent-alt', color);
-                document.documentElement.style.setProperty('--accent-glow', color.replace(')', ', 0.12)').replace('rgb', 'rgba').replace('#', ''));
-                // Simple hex to rgba
+
+                // 2026-09-02 audit: these are written as INLINE styles on <html>,
+                // which outrank the [data-theme="light"] block in style.css. The
+                // dark-tuned accents therefore survived into the light theme,
+                // where #4fd1c5 on #fafafa measures 1.79:1 — text that is very
+                // hard to read. Darken the picked hue for light mode so accent
+                // TEXT stays legible, while borders/glows keep the vivid colour.
                 const r = parseInt(color.slice(1,3), 16);
                 const g = parseInt(color.slice(3,5), 16);
                 const b = parseInt(color.slice(5,7), 16);
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                const darken = (v, f) => Math.max(0, Math.round(v * f));
+                const readable = isLight
+                    ? `rgb(${darken(r, 0.62)}, ${darken(g, 0.62)}, ${darken(b, 0.62)})`
+                    : color;
+                document.documentElement.style.setProperty('--accent', readable);
+                document.documentElement.style.setProperty('--accent-text', readable);
+                document.documentElement.style.setProperty('--accent-alt', readable);
                 document.documentElement.style.setProperty('--accent-glow', `rgba(${r},${g},${b},0.12)`);
                 document.documentElement.style.setProperty('--accent-glow-strong', `rgba(${r},${g},${b},0.3)`);
                 document.documentElement.style.setProperty('--border-accent', `rgba(${r},${g},${b},0.2)`);
@@ -1857,11 +1905,24 @@
             });
         });
         // Restore saved accent
-        const savedAccent = localStorage.getItem('accent');
-        if (savedAccent) {
-            const dot = document.querySelector(`.accent-dot[data-accent="${savedAccent}"]`);
+        function reapplyAccent() {
+            const savedAccent = localStorage.getItem('accent');
+            const dot = savedAccent
+                ? document.querySelector(`.accent-dot[data-accent="${savedAccent}"]`)
+                : null;
             if (dot) dot.click();
+            else {
+                // No custom accent: drop any inline overrides so the stylesheet's
+                // per-theme accent applies cleanly.
+                ['--accent', '--accent-text', '--accent-alt', '--accent-glow', '--accent-glow-strong',
+                 '--border-accent', '--shadow-accent', '--gradient', '--gradient-warm']
+                    .forEach(p => document.documentElement.style.removeProperty(p));
+            }
         }
+        reapplyAccent();
+        // Re-derive on every theme switch — the same hue needs a darker value on
+        // light backgrounds to stay readable.
+        window.addEventListener('themechange', reapplyAccent);
 
         // ===== 6. Command Palette (Ctrl+K) =====
         const cmdOverlay = document.getElementById('cmdOverlay');

@@ -3488,7 +3488,8 @@ textarea:focus-visible,
 [tabindex]:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 4px;
+    /* No border-radius here: an outline already follows the element's own
+       radius, and forcing 4px squared off the round social buttons. */
 }
 
 ::selection { background: var(--accent); color: #06060e; }
@@ -3500,11 +3501,83 @@ textarea:focus-visible,
         transform: none !important;
         transition: none !important;
     }
-    .stat-item:hover, .module-item:hover, .case-study:hover, .tag:hover { transform: none; }
+    .stat-item:hover, .module-item:hover, .case-card:hover, .tag:hover { transform: none; }
 }
 html.reduced-motion .reveal,
 html.reduced-motion .reveal.is-revealed {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+}
+
+
+/* ============================================================================
+   2026-09-02 audit fixes — contrast, print, and the nested-article overrides
+   ========================================================================== */
+
+/* The page router hides every <article> in .content-card and shows the active
+   tab. Scoping it to DIRECT children lets nested semantic <article> elements
+   (the case studies) behave normally instead of inheriting display:none and
+   overflow:auto, which turned each card into a two-axis scroll container. */
+.content-card > article { }
+.content-card article.case-card {
+    display: block;
+    overflow: visible;
+    flex: none;
+    padding: 1.25rem 1.35rem;
+}
+@media (max-width: 580px) {
+    .content-card article.case-card { padding: 1rem 1.05rem; }
+}
+
+/* .case-row:first-of-type never matched — .case-head is the first child, so the
+   first row always drew a divider directly under the header. */
+.case-head + .case-row { border-top: none; padding-top: 0; }
+
+/* Light theme: #0d9488 is only 3.59:1 on #fafafa, which fails AA for text.
+   Keep it for borders, bars and glows; give TEXT its own darker token. */
+/* Declaration ORDER matters: :root and [data-theme="light"] have identical
+   specificity, so the light override must come SECOND or the generic
+   fallback wins and the token stays at the low-contrast accent. */
+:root { --accent-text: var(--accent); }
+[data-theme="light"] {
+    --accent-text: #0a5f55;   /* 5.6:1 on #fafafa — AA for normal text */
+}
+[data-theme="light"] .case-k,
+[data-theme="light"] .case-tag,
+[data-theme="light"] .tl-date,
+[data-theme="light"] .about-cta,
+[data-theme="light"] .skill-percent,
+[data-theme="light"] .resume-category,
+[data-theme="light"] .case-v code,
+[data-theme="light"] .about-greeting { color: var(--accent-text); }
+
+/* Print: JS-applied hiding classes were never reset, so a printed page dropped
+   the whole work timeline and every revealed card. And the dark palette was
+   carried onto white paper. Both fixed here. */
+@media print {
+    :root,
+    [data-theme="light"] {
+        --bg-dark: #fff; --bg-light: #fff; --bg-card: #fff;
+        --text-light: #111; --text-subtle: #222; --text-muted: #444;
+        --accent: #0b6b60; --accent-text: #0b6b60;
+        --border-subtle: rgba(0, 0, 0, 0.18);
+        --border-accent: rgba(0, 0, 0, 0.28);
+        --shadow-md: none; --shadow-accent: none;
+    }
+    .scroll-hidden,
+    .stagger-hidden,
+    .reveal,
+    .reveal.is-revealed,
+    .tl-item,
+    .timeline-v2,
+    .tl-line-fill,
+    .case-card,
+    .featured-project {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        visibility: visible !important;
+    }
+    .content-card article { overflow: visible !important; }
 }

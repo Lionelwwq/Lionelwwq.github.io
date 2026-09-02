@@ -1,10 +1,10 @@
 {
-    "name": "Lionel Wang | Portfolio",
+    "name": "Lionel Wang | Full-Stack & Platform Engineer",
     "short_name": "Lionel Wang",
-    "description": "IT Systems & Infrastructure Specialist | AI & ML Integration | Cybersecurity | Full-Stack Developer",
+    "description": "Sole engineer of a ~230,000-line ERP and automation platform — 1,048 REST endpoints, 274 tables, 38 GPT function-calling tools — running two companies daily.",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#06060e",
+    "background_color": "#f5f5f8",
     "theme_color": "#4fd1c5",
     "icons": [
         {
