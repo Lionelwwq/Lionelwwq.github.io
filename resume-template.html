@@ -2,215 +2,428 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- Source of truth for Lionel_Wang_Resume.pdf. Rendered to A4 with puppeteer;
-     keep the content within one page (~1123px) when editing.
-     STYLE NOTE: this deliberately matches the ORIGINAL resume exactly — Roboto,
-     neutral greys, an #f5f5f5 header on a #ccc rule, #999 section underlines and
-     the original type scale. Only the CONTENT was updated. Do not introduce
-     accent colours or shrink the type to make room; cut words instead. -->
+<!-- Source of truth for Lionel_Wang_Resume.pdf. Rendered to A4 with puppeteer
+     (format 'A4', zero margins). Print lays out at 96dpi, so the page box is
+     794 x 1123 CSS px = 595.5 x 842 pt, the template's scale. Measured in that
+     box: exactly 1 page, content ends at 1103px, 20px clear of the bottom edge.
+     LAYOUT: a single vertical axis at --rail carries the dates, project names
+     and skill labels; the body column is the same width in every section. DOM
+     order is name -> summary -> experience -> projects -> skills -> education,
+     so an ATS parser reads it correctly even though the dates sit on the left.
+     COLOUR: one accent (--accent), on structure and numerals only, never on
+     body text. If you add content, cut words elsewhere; do not shrink the type
+     scale, and re-measure — the page is full. -->
 <meta name="robots" content="noindex, nofollow">
-<title>Weiqi Wang — Resume</title>
+<title>Weiqi Wang &mdash; Resume</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  @page { size: A4; margin: 0; }
+
+  :root {
+    --ink:     #14181d;
+    --body:    #2b3138;
+    --mute:    #59616a;
+    --faint:   #868e97;
+    --rule:    #d5dce3;
+    --accent:  #1b4b72;
+    --rail:    88px;
+    --gap:     16px;
+  }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
   body {
     font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-    font-size: 8.5pt;
-    color: #1a1a1a;
-    line-height: 1.35;
-    padding: 0;
-    width: 595.5px;
-    height: 842px;
-    overflow: hidden;
+    font-size: 8.3pt;
+    line-height: 1.4;
+    color: var(--body);
+    background: #fff;
+    width: 100%;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 16px 36px 8px;
-    background: #f5f5f5;
-    border-bottom: 2px solid #ccc;
+  .sheet {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 44px 20px;
+  }
+  /* At the real A4 print box (794px wide) the sheet is pinned to exactly one
+     page. Below that the guard lifts, so a different render scale overflows
+     visibly onto a second page instead of silently clipping the last lines. */
+  @media (min-width: 700px) {
+    .sheet { height: 100vh; overflow: hidden; }
+  }
+
+  /* ── Masthead ─────────────────────────────────────────── */
+  .masthead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 26px;
+    padding-bottom: 9px;
+    border-bottom: 1.5px solid var(--ink);
   }
   .name {
-    font-size: 20pt;
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-size: 25pt;
     font-weight: 700;
-    color: #222;
-    margin-bottom: 1px;
+    line-height: 1.02;
+    letter-spacing: -0.6px;
+    color: var(--ink);
   }
-  .title {
-    font-size: 9.5pt;
-    font-weight: 500;
-    color: #444;
+  .role {
+    margin-top: 4px;
+    font-size: 8.1pt;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 4px;
+    letter-spacing: 2.4px;
+    color: var(--accent);
   }
   .contact {
-    font-size: 8pt;
-    color: #555;
+    text-align: right;
+    font-size: 7.8pt;
+    line-height: 1.58;
+    color: var(--mute);
+  }
+  .contact a { color: var(--mute); text-decoration: none; }
+  .contact .strong { color: var(--ink); font-weight: 500; }
+
+  /* ── Lede ─────────────────────────────────────────────── */
+  .lede {
+    margin: 11px 0 12px;
+    font-size: 9pt;
+    line-height: 1.48;
+    color: var(--body);
+  }
+  .lede strong { font-weight: 700; color: var(--ink); }
+
+  /* ── Figures band ─────────────────────────────────────── */
+  .figures {
+    display: flex;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 6px 0 5px;
+  }
+  .fig {
+    flex: 1 1 0;
+    padding-left: 13px;
+    border-left: 1px solid var(--rule);
+  }
+  .fig:first-child { padding-left: 0; border-left: 0; }
+  .fig-n {
+    display: block;
+    font-size: 13pt;
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.3px;
+    color: var(--accent);
+  }
+  .fig-l {
+    display: block;
+    margin-top: 1px;
+    font-size: 6.3pt;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--faint);
+  }
+
+  /* ── Section headings ─────────────────────────────────── */
+  .sec { margin-top: 12px; }
+  .sec-h {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 7px;
+    font-size: 8.2pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.4px;
+    color: var(--ink);
+  }
+  .sec-h::after {
+    content: '';
+    flex: 1 1 auto;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent) 0 24px, var(--rule) 24px);
+  }
+
+  /* ── Rail grid: one vertical axis for the whole page ──── */
+  .row {
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    column-gap: var(--gap);
+    align-items: start;
+  }
+  .rail { grid-column: 1; text-align: right; }
+
+  /* ── Experience ───────────────────────────────────────── */
+  .entry { margin-bottom: 8px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry .job-title {
+    grid-column: 2; grid-row: 1;
+    font-size: 9.4pt;
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--ink);
+  }
+  .entry .when {
+    grid-column: 1; grid-row: 1 / span 2;
+    font-size: 7.3pt;
+    font-weight: 500;
+    line-height: 1.28;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--faint);
+    text-align: right;
+    padding-top: 2px;
+  }
+  .entry .org {
+    grid-column: 2; grid-row: 2;
+    margin-top: 1px;
+    font-size: 8.2pt;
+    font-weight: 500;
+    color: var(--mute);
+  }
+  .entry ul {
+    grid-column: 2; grid-row: 3;
+    margin-top: 4px;
+    list-style: none;
+  }
+  .entry li {
+    position: relative;
+    padding-left: 12px;
+    margin-bottom: 2.5px;
+    font-size: 8.3pt;
     line-height: 1.4;
   }
-  .contact a { color: #333; text-decoration: none; }
-
-  /* Main content */
-  .content {
-    padding: 5px 36px 6px;
+  .entry li:last-child { margin-bottom: 0; }
+  .entry li::before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 0.5em;
+    width: 3.2px;
+    height: 3.2px;
+    border-radius: 50%;
+    background: var(--accent);
   }
+  .entry li strong { font-weight: 700; color: var(--ink); }
 
-  /* Summary */
-  .summary {
-    font-size: 8pt;
-    color: #333;
-    margin-bottom: 3px;
-    line-height: 1.35;
-  }
-
-  /* Section */
-  .section-title {
-    font-size: 10.5pt;
+  /* ── Projects ─────────────────────────────────────────── */
+  .def { margin-bottom: 4px; }
+  .def:last-child { margin-bottom: 0; }
+  .def .rail {
+    font-size: 8.2pt;
     font-weight: 700;
-    color: #222;
-    border-bottom: 1.5px solid #999;
-    padding-bottom: 1px;
-    margin-bottom: 3px;
-    margin-top: 4px;
+    line-height: 1.28;
+    color: var(--ink);
+  }
+  .def .txt {
+    grid-column: 2;
+    font-size: 8.3pt;
+    line-height: 1.4;
   }
 
-  /* Experience */
-  .job { margin-bottom: 3px; }
-  .job-header { display: flex; justify-content: space-between; align-items: baseline; }
-  .job-title { font-weight: 700; font-size: 8.5pt; text-transform: uppercase; }
-  .job-date { font-size: 8pt; color: #555; white-space: nowrap; }
-  .job-company { font-size: 8pt; color: #555; margin-bottom: 1px; }
-  .job ul { padding-left: 14px; margin: 0; }
-  .job li { font-size: 7.9pt; margin-bottom: 0; color: #222; line-height: 1.3; }
-
-  /* Skills */
-  .skills-text {
+  /* ── Skills ───────────────────────────────────────────── */
+  .skill { margin-bottom: 3px; }
+  .skill:last-child { margin-bottom: 0; }
+  .skill .rail {
     font-size: 8pt;
-    color: #222;
-    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+  .skill .txt {
+    grid-column: 2;
+    font-size: 8.2pt;
+    line-height: 1.4;
+    color: var(--body);
   }
 
-  /* Education */
-  .edu { margin-bottom: 2px; }
-  .edu-header { display: flex; justify-content: space-between; align-items: baseline; }
-  .edu-degree { font-weight: 700; font-size: 8.5pt; }
-  .edu-date { font-size: 8pt; color: #555; }
-  .edu-school { font-size: 8pt; color: #555; font-style: italic; }
-  .edu ul { padding-left: 14px; margin: 0; }
-  .edu li { font-size: 7.8pt; color: #333; line-height: 1.3; margin-bottom: 0; }
+  /* ── Education ────────────────────────────────────────── */
+  .edu { margin-bottom: 4px; }
+  .edu .rail {
+    font-size: 7.3pt;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--faint);
+    padding-top: 2px;
+  }
+  .edu .deg {
+    grid-column: 2;
+    font-size: 8.8pt;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.22;
+  }
+  .edu .school {
+    grid-column: 2;
+    font-size: 8.2pt;
+    color: var(--mute);
+    line-height: 1.36;
+  }
+  .certs { margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--rule); }
+  .certs .rail {
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.2px;
+    line-height: 1.4;
+  }
+  .certs .txt {
+    grid-column: 2;
+    font-size: 8.2pt;
+    line-height: 1.4;
+    color: var(--body);
+  }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="name">Weiqi (Lionel) Wang</div>
-  <div class="title">IT Systems &amp; Infrastructure Specialist</div>
-  <div class="contact">
-    <a href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a> |
-    <a href="https://www.linkedin.com/in/weiqi-wang-86bb07171">https://www.linkedin.com/in/weiqi-wang-86bb07171</a><br>
-    Greater Vancouver, BC, Canada | (778) 865-6808 | <a href="https://lionelwwq.github.io/">lionelwwq.github.io</a>
-  </div>
-</div>
+<main class="sheet">
 
-<div class="content">
+  <header class="masthead">
+    <div>
+      <h1 class="name">Weiqi (Lionel) Wang</h1>
+      <div class="role">IT Systems &amp; Infrastructure Specialist</div>
+    </div>
+    <div class="contact">
+      <span class="strong">Greater Vancouver, BC, Canada</span><br>
+      (778) 865-6808 &nbsp;&middot;&nbsp; <a href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a><br>
+      <a href="https://lionelwwq.github.io/">lionelwwq.github.io</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/weiqi-wang-86bb07171">linkedin.com/in/weiqi-wang-86bb07171</a>
+    </div>
+  </header>
 
-<p class="summary">
-  Full-stack engineer who designed, built and operates a ~230,000-line ERP and automation platform &mdash; 1,048 REST endpoints,
-  274 MySQL tables, 150 pages, 20,878 orders &mdash; that Amax Leather Canada and Aurora Furniture MFG run their daily operations on.
-  Ships the whole stack: TrueCommerce EDI and QuickBooks integrations, warehouse and compliance document pipelines, a dealer portal
-  serving 30 accounts, and an in-house GPT assistant with 38 function-calling tools staff use daily. Master&rsquo;s in Cybersecurity, AWS and Fortinet certified.
-</p>
+  <p class="lede">
+    <strong>Sole engineer</strong> of the ~230,000-line ERP and automation platform Amax Leather Canada and Aurora Furniture MFG
+    run their daily operations on &mdash; schema, backend, front end, deployments and the pager. Ships the whole stack: an in-house
+    GPT assistant, EDI and accounting integrations, compliance document pipelines and a multi-tenant dealer portal.
+  </p>
 
-<div class="section-title">Work Experience</div>
+  <section class="figures">
+    <div class="fig"><span class="fig-n">~230,000</span><span class="fig-l">Lines in production</span></div>
+    <div class="fig"><span class="fig-n">1,048</span><span class="fig-l">REST endpoints</span></div>
+    <div class="fig"><span class="fig-n">274</span><span class="fig-l">MySQL tables</span></div>
+    <div class="fig"><span class="fig-n">150</span><span class="fig-l">Front-end pages</span></div>
+    <div class="fig"><span class="fig-n">124</span><span class="fig-l">Permission checks</span></div>
+  </section>
 
-<div class="job">
-  <div class="job-header">
-    <span class="job-title">IT Systems &amp; Infrastructure Specialist</span>
-    <span class="job-date">May 2025 &ndash; Present</span>
-  </div>
-  <div class="job-company">Amax Leather Canada Ltd. &amp; Aurora Furniture MFG | Delta, BC</div>
-  <ul>
-    <li>Architected and solely built the ERP platform two operating companies run on daily: 77 Node.js/Express route modules, 1,048 REST endpoints, 150 pages, 139 front-end JS modules &mdash; ~230,000 lines in production.</li>
-    <li>Designed the data layer across 4 MySQL databases and 274 tables, fronting the overseas primary with a local read mirror to keep reporting responsive; 20,878 orders flow through the unified order hub.</li>
-    <li>Built AmaxBot, an in-house GPT assistant: a function-calling chat UI (38 tools) plus a 3,300-line IMAP email bot serving 36 staff email commands, knowledge-base auto-replies and a daily operations digest.</li>
-    <li>Integrated the platform with partners &mdash; TrueCommerce EDI over SOAP (retailer POs, acknowledgements, ASNs, invoices) and a QuickBooks hub of 6 connectors and 42 APIs with daily auto-sync and failure alerting.</li>
-    <li>Launched a customer-facing dealer portal for 30 dealer accounts with per-dealer catalogs, price lists, branding and photo-upload warranty claims on a tenancy model isolating each dealer's data.</li>
-    <li>Enforced role-based access control through 124 permission checks, delivered every page bilingually (EN/ZH), and run the servers, deployments, 726 operational scripts and the AWS footprint.</li>
-  </ul>
-</div>
+  <section class="sec">
+    <h2 class="sec-h">Experience</h2>
 
-<div class="job">
-  <div class="job-header">
-    <span class="job-title">System Administrator</span>
-    <span class="job-date">Aug 2022 &ndash; Apr 2025</span>
-  </div>
-  <div class="job-company">Amax Leather Canada Ltd. | Delta, BC</div>
-  <ul>
-    <li>Ran the server, network and Google Workspace estate and maintained AWS infrastructure (EC2, S3, IAM) for internal applications, reporting and backups.</li>
-    <li>Hardened email and DNS with SPF/DKIM/DMARC, ran security audits and phishing defence, and tightened account and access controls across the organisation.</li>
-    <li>Built the first OpenAI-integrated internal tools and maintained the API and EDI links between ERP, warehouse and partner systems.</li>
-  </ul>
-</div>
+    <article class="entry row">
+      <h3 class="job-title">IT Systems &amp; Infrastructure Specialist</h3>
+      <div class="when">May 2025 &ndash;<br>Present</div>
+      <div class="org">Amax Leather Canada Ltd. &amp; Aurora Furniture MFG &nbsp;&middot;&nbsp; Delta, BC</div>
+      <ul>
+        <li>Sole engineer of the ERP platform two operating companies run on daily: 77 Node/Express route modules, 1,048 REST endpoints, 24 services, 150 pages and 139 front-end JS modules &mdash; ~230,000 lines in production.</li>
+        <li>Designed the data layer across 4 MySQL databases and 274 tables. The primary sits overseas on a slow link, so batching, a local read mirror and caching &mdash; not CRUD &mdash; are the real work; tens of thousands of orders flow through it.</li>
+        <li>Built <strong>AmaxBot</strong>, an in-house GPT assistant: a chat UI with 55 function-calling tools plus a 3,300-line IMAP bot serving 27 email commands, knowledge-base auto-replies and a daily digest. Its tool catalog is filtered by role before it reaches the model, so a non-admin request never contains a write tool.</li>
+        <li>Shipped hybrid semantic + full-text knowledge-base search over 26 articles; on eight real questions answers rose from 5/8 to 8/8, and three Chinese ones the old keyword index could not read went from zero results to correct.</li>
+        <li>Integrated the platform outward: EDI over SOAP with an EDI provider (purchase orders, acknowledgements, ASNs, invoices) and an accounting hub of 6 connectors and 42 APIs; pushes are idempotent, so a resend cannot double-post.</li>
+        <li>Enforced role-based access control through 124 permission checks, shipped every page bilingually (EN/ZH), and run the servers, deployments, monitoring, 726 operational scripts and the AWS footprint.</li>
+      </ul>
+    </article>
 
-<div class="job">
-  <div class="job-header">
-    <span class="job-title">Website Developer</span>
-    <span class="job-date">May 2022 &ndash; Mar 2023</span>
-  </div>
-  <div class="job-company">Perfect Decor | Burnaby, BC</div>
-  <ul>
-    <li>Designed and built custom client websites and web applications end to end, from layout through deployment.</li>
-    <li>Added features and responsive redesigns to existing client sites, improving usability on mobile.</li>
-  </ul>
-</div>
+    <article class="entry row">
+      <h3 class="job-title">System Administrator</h3>
+      <div class="when">Aug 2022 &ndash;<br>Apr 2025</div>
+      <div class="org">Amax Leather Canada Ltd. &nbsp;&middot;&nbsp; Delta, BC</div>
+      <ul>
+        <li>Ran the server, network and Google Workspace estate plus the AWS footprint (EC2, S3, IAM) behind internal apps.</li>
+        <li>Hardened email and DNS with SPF/DKIM/DMARC, ran security audits, phishing defence and FortiGate firewalls.</li>
+        <li>Built the first LLM-integrated internal tools and maintained the API and EDI links to warehouse and partners.</li>
+      </ul>
+    </article>
 
-<div class="section-title">Selected Projects</div>
-<div class="skills-text">
-  <strong>AmaxBot &mdash; in-house GPT assistant.</strong> Chat UI with 38 function-calling tools plus a 3,300-line IMAP bot answering 36 staff email commands. The hard part is turning free-text email into safe, scoped database reads &mdash; tool schemas and permission checks keep the model inside what the sender may see.<br>
-  <strong>Dealer Portal + EDI / QuickBooks integration.</strong> Public portal for 30 dealer accounts wired to TrueCommerce EDI (SOAP) and a 6-connector, 42-API QuickBooks hub. The hard part is reconciling three systems that disagree &mdash; idempotent syncs, failure alerting and an audit trail.<br>
-  <strong>Social Video Maker.</strong> Standalone Node app turning a Mandarin script into a finished 9:16 social video &mdash; text-to-speech, imagery, burned-in subtitles and FFmpeg assembly.
-</div>
+    <article class="entry row">
+      <h3 class="job-title">Website Developer</h3>
+      <div class="when">May 2022 &ndash;<br>Mar 2023</div>
+      <div class="org">Perfect Decor &nbsp;&middot;&nbsp; Burnaby, BC</div>
+      <ul>
+        <li>Built custom client websites and web applications end to end, from layout through deployment.</li>
+        <li>Added features and responsive redesigns to existing client sites, improving usability on mobile.</li>
+      </ul>
+    </article>
+  </section>
 
-<div class="section-title">Core Skills</div>
-<div class="skills-text">
-  <strong>Languages:</strong> JavaScript (ES2020+), Node.js, Python, SQL, HTML5, CSS3, Bash / PowerShell<br>
-  <strong>Backend:</strong> Express, REST API design (1,048 endpoints), node-cron schedulers, IMAP/SMTP, SOAP &amp; EDI, Puppeteer, Playwright<br>
-  <strong>Frontend:</strong> Vanilla-JS SPA architecture, shared design system &amp; component CSS, Bootstrap, bilingual i18n (EN/ZH), PWA / service workers<br>
-  <strong>Data:</strong> MySQL schema design (274 tables), query optimisation, read-mirror replication, Excel/CSV pipelines, operational and financial reporting<br>
-  <strong>Cloud &amp; Infrastructure:</strong> AWS (EC2, S3, IAM), Windows &amp; Linux server administration, PM2, deployments, monitoring, Google Workspace<br>
-  <strong>AI:</strong> OpenAI GPT function calling (38 tools), NL-to-SQL, knowledge-base retrieval, prompt design, OCR matching, TTS + FFmpeg pipelines<br>
-  <strong>Security:</strong> RBAC (124 permission checks), OTP / 2FA, session &amp; CSRF handling, SPF/DKIM/DMARC, FortiGate administration, security auditing
-</div>
+  <section class="sec">
+    <h2 class="sec-h">Selected Projects</h2>
 
-<div class="section-title">Education</div>
+    <div class="def row">
+      <div class="rail">Dealer Portal</div>
+      <div class="txt">Public-facing portal for the dealer network: per-dealer catalogs, price lists, branding and photo-upload claims. The hard part is tenancy &mdash; every query is scoped so one account can never read another's data.</div>
+    </div>
+    <div class="def row">
+      <div class="rail">Warehouse Docs</div>
+      <div class="txt">Eight document types with Excel and PDF generation, five email flows and timber-legality compliance, driven off the same order hub the rest of the platform reads &mdash; one source of truth, no re-keying.</div>
+    </div>
+    <div class="def row">
+      <div class="rail">Social Video</div>
+      <div class="txt">Standalone Node app that turns a Mandarin script into a finished 9:16 social video: text-to-speech, imagery, burned-in subtitles and FFmpeg assembly, with subtitle timing aligned to the synthesised speech.</div>
+    </div>
+  </section>
 
-<div class="edu">
-  <div class="edu-header">
-    <span class="edu-degree">Master of Science in Cybersecurity</span>
-    <span class="edu-date">Dec 2024</span>
-  </div>
-  <div class="edu-school">New York Institute of Technology &mdash; network security, cryptography, ethical hacking</div>
-</div>
+  <section class="sec">
+    <h2 class="sec-h">Core Skills</h2>
 
-<div class="edu">
-  <div class="edu-header">
-    <span class="edu-degree">Bachelor of Technology in Information Technology (CO-OP)</span>
-    <span class="edu-date">Jan 2023</span>
-  </div>
-  <div class="edu-school">Kwantlen Polytechnic University &mdash; 3.8 GPA in major | web application development, cloud &amp; website security</div>
-</div>
+    <div class="skill row">
+      <div class="rail">Languages</div>
+      <div class="txt">JavaScript (ES2020+), Node.js, Python, SQL, HTML5, CSS3, Bash / PowerShell</div>
+    </div>
+    <div class="skill row">
+      <div class="rail">Backend</div>
+      <div class="txt">Express, REST API design (1,048 endpoints), 24 services / 22 utils, node-cron, IMAP &amp; SMTP, SOAP &amp; EDI, Puppeteer</div>
+    </div>
+    <div class="skill row">
+      <div class="rail">Front End</div>
+      <div class="txt">Vanilla-JS SPA architecture, shared design system &amp; component CSS, Bootstrap, bilingual i18n (EN/ZH), PWA</div>
+    </div>
+    <div class="skill row">
+      <div class="rail">Data</div>
+      <div class="txt">MySQL schema design (274 tables), query optimisation, read-mirror replication, caching, Excel/CSV pipelines</div>
+    </div>
+    <div class="skill row">
+      <div class="rail">AI</div>
+      <div class="txt">LLM function calling (55 tools), role-scoped tool catalogs, embeddings &amp; hybrid retrieval, NL-to-SQL, OCR</div>
+    </div>
+    <div class="skill row">
+      <div class="rail">Cloud &amp; Infra</div>
+      <div class="txt">AWS (EC2, S3, IAM), Windows &amp; Linux administration, PM2, deployments, monitoring, 726 operational scripts</div>
+    </div>
+    <div class="skill row">
+      <div class="rail">Security</div>
+      <div class="txt">RBAC (124 permission checks), OTP / 2FA, session &amp; CSRF handling, SPF/DKIM/DMARC, FortiGate, auditing</div>
+    </div>
+  </section>
 
-<div class="edu">
-  <div class="edu-school" style="font-style: normal; color: #222;">
-    <strong>Certifications:</strong> AWS Cloud Foundations &middot; Fortinet FortiGate 7.6 Administrator &middot; Fortinet Google Cloud Security 7.6 Administrator &middot; Fortinet Certified Associate Cybersecurity 1.0 &middot; Fortinet Cybersecurity 2.0
-  </div>
-</div>
+  <section class="sec">
+    <h2 class="sec-h">Education &amp; Certification</h2>
 
-</div>
+    <div class="edu row">
+      <div class="rail">Dec 2024</div>
+      <div class="deg">Master of Science in Cybersecurity</div>
+      <div class="school">New York Institute of Technology &mdash; network security, cryptography, ethical hacking</div>
+    </div>
+    <div class="edu row">
+      <div class="rail">Jan 2023</div>
+      <div class="deg">Bachelor of Technology in Information Technology (CO-OP)</div>
+      <div class="school">Kwantlen Polytechnic University &mdash; 3.8 GPA in major; web application development, cloud &amp; website security</div>
+    </div>
+    <div class="certs row">
+      <div class="rail">Certifications</div>
+      <div class="txt">AWS Cloud Foundations &nbsp;&middot;&nbsp; Fortinet FortiGate 7.6 Administrator &nbsp;&middot;&nbsp; Fortinet Google Cloud Security 7.6 Administrator &nbsp;&middot;&nbsp; Fortinet Certified Associate Cybersecurity 1.0 &nbsp;&middot;&nbsp; Fortinet Cybersecurity 2.0</div>
+    </div>
+  </section>
+
+</main>
 
 </body>
 </html>

@@ -5209,6 +5209,26 @@ html.reduced-motion .arch-fig .arch-line {
     margin-top: 1rem;
 }
 .featured-shots .featured-img-link { margin: 0; }
+/* The shot is no longer a link, so nothing should hint that clicking it does
+   something. The caption is a real caption now, readable without a mouse. */
+.featured-shots .featured-img-link:hover .showcase-img { transform: none; }
+/* There is one screenshot now, not two, so the auto-fit grid was splitting the
+   row between the image and its caption. Single column: the shot gets the full
+   width and the caption sits under it. */
+.featured-shots { grid-template-columns: 1fr; }
+/* .showcase-img-wrapper crops to 180px for the small web-design cards, where a
+   slow pan reveals the rest. At full width that crop cuts the sign-in card in
+   half, so the flagship shot shows whole. */
+.featured-shots .showcase-img-wrapper { height: auto; border-top: none; }
+.featured-shots .showcase-img { display: block; transition: none; }
+.featured-shot-cap {
+    grid-column: 1 / -1;
+    margin: 0.55rem 0 0;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
 .featured-shots-note {
     margin: 0.7rem 0 0;
     font-size: 0.8rem;
@@ -5216,3 +5236,62 @@ html.reduced-motion .arch-fig .arch-line {
     color: var(--text-muted);
     max-width: 68ch;
 }
+
+/* ---- Case study: progressive disclosure ------------------------------------
+   The four case cards carry the real depth of this page, and reading all of it
+   made the Projects tab a 12,000px scroll. Situation / Built / Outcome stay
+   visible; the decisions and the hindsight sit behind a native <details>, which
+   keeps keyboard access, find-in-page and screen-reader semantics without JS. */
+.case-more {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.case-more-sum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.55rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--accent-text, var(--accent));
+    transition: color 0.18s ease;
+}
+
+/* Safari/older WebKit still draw the default triangle without this. */
+.case-more-sum::-webkit-details-marker { display: none; }
+.case-more-sum::marker { content: ''; }
+
+.case-more-sum:hover .case-more-txt { text-decoration: underline; }
+
+.case-more-sum ion-icon {
+    flex: 0 0 auto;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.case-more[open] > .case-more-sum ion-icon { transform: rotate(180deg); }
+
+.case-more-sum:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* The wrapper exists so the first row inside the panel does not draw a second
+   rule directly under the summary. */
+.case-more-body > .case-row:first-child {
+    border-top: none;
+    padding-top: 0.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .case-more-sum ion-icon { transition: none; }
+}
+
+/* No print rules here on purpose: the print stylesheet above shows only the
+   Resume tab, so a case study never reaches paper. Printing this page is meant
+   to produce the resume; the PDF download is the other way to get it. */
