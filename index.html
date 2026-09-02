@@ -14,13 +14,16 @@
     <meta property="og:description" content="Sole engineer of a ~230,000-line ERP and automation platform — 1,048 REST endpoints, 274 tables, 38 GPT function-calling tools — running two companies daily." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lionelwwq.github.io/" />
-    <meta property="og:image" content="https://lionelwwq.github.io/selfie.png" />
+    <meta property="og:image" content="https://lionelwwq.github.io/erp-tearsheets-preview.png" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="875" />
+    <meta property="og:image:alt" content="A page of the ERP platform: searchable product tearsheets" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Lionel Wang | Full-Stack &amp; Platform Engineer" />
     <meta name="twitter:description" content="Sole engineer of a ~230,000-line ERP and automation platform — 1,048 REST endpoints, 274 tables, 38 GPT function-calling tools — running two companies daily." />
-    <meta name="twitter:image" content="https://lionelwwq.github.io/selfie.png" />
+    <meta name="twitter:image" content="https://lionelwwq.github.io/erp-tearsheets-preview.png" />
 
     <link rel="shortcut icon" href="selfie.png" type="image/png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
@@ -501,16 +504,438 @@
                             </div>
                         </div>
 
-                        <a href="https://reports.amaxleather.com" target="_blank" rel="noopener noreferrer" class="featured-img-link">
-                            <div class="showcase-img-wrapper">
-                                <img src="erp-login-preview.png" alt="Amax Leather ERP Platform" class="showcase-img" loading="lazy" width="1200" height="750" />
-                            </div>
-                            <div class="featured-link-overlay">
-                                <span>View Live System</span>
-                                <ion-icon name="open-outline"></ion-icon>
-                            </div>
-                        </a>
+<figure class="arch-fig" aria-labelledby="archCaption">
+  <div class="arch-scroll">
+    <svg class="arch-svg" viewBox="0 0 600 700" role="img"
+         aria-labelledby="archTitle archDesc" xmlns="http://www.w3.org/2000/svg">
+      <title id="archTitle">Architecture of the Amax Leather ERP platform</title>
+      <desc id="archDesc">A four-tier request and response stack. At the top, four surfaces people
+        use: a staff web UI of 150 pages, a dealer portal with 30 accounts, storefront chat, and an
+        email bot that answers 36 commands. Below them, six subsystems: AmaxBot with 38 chat tools
+        and 36 email commands; a knowledge-base search that combines embeddings with FULLTEXT over
+        110 chunks; a QuickBooks hub of 6 connectors and 42 APIs; the dealer portal; TrueCommerce EDI
+        over SOAP carrying purchase orders, shipping notices and invoices; and warehouse documents
+        covering 8 document types including Lacey Act compliance. Those sit on one Express and
+        Node.js application layer exposing 1,048 REST endpoints behind 124 permission checks, in
+        English and Chinese. At the base, four MySQL databases holding 274 tables, including the
+        order hub with 20,878 orders.</desc>
+
+      <!-- ============ band backgrounds ============ -->
+      <rect class="arch-band" x="8" y="8"   width="584" height="118" rx="14"/>
+      <rect class="arch-band" x="8" y="170" width="584" height="202" rx="14"/>
+      <rect class="arch-band" x="8" y="416" width="584" height="90"  rx="14"/>
+      <rect class="arch-band" x="8" y="550" width="584" height="140" rx="14"/>
+
+      <!-- ============ connectors ============
+           Wires stop on the band boundaries, never on the boxes, so no line can
+           ever cross a tier caption. pathLength="1" normalises every segment so
+           the draw-in runs at one visual rate regardless of real length. -->
+      <g class="arch-wires" fill="none">
+        <!-- surfaces -> subsystems -->
+        <line class="arch-line w1" pathLength="1" x1="82.5"  y1="126" x2="82.5"  y2="144"/>
+        <line class="arch-line w1" pathLength="1" x1="227.5" y1="126" x2="227.5" y2="144"/>
+        <line class="arch-line w1" pathLength="1" x1="372.5" y1="126" x2="372.5" y2="144"/>
+        <line class="arch-line w1" pathLength="1" x1="517.5" y1="126" x2="517.5" y2="144"/>
+        <line class="arch-line arch-line--bus w1" pathLength="1" x1="82.5" y1="144" x2="517.5" y2="144"/>
+        <line class="arch-line w1" pathLength="1" x1="106.5" y1="144" x2="106.5" y2="170"/>
+        <line class="arch-line w1" pathLength="1" x1="299.5" y1="144" x2="299.5" y2="170"/>
+        <line class="arch-line w1" pathLength="1" x1="492.5" y1="144" x2="492.5" y2="170"/>
+
+        <!-- subsystems -> application layer -->
+        <line class="arch-line w2" pathLength="1" x1="106.5" y1="372" x2="106.5" y2="394"/>
+        <line class="arch-line w2" pathLength="1" x1="299.5" y1="372" x2="299.5" y2="394"/>
+        <line class="arch-line w2" pathLength="1" x1="492.5" y1="372" x2="492.5" y2="394"/>
+        <line class="arch-line arch-line--bus w2" pathLength="1" x1="106.5" y1="394" x2="492.5" y2="394"/>
+        <line class="arch-line w2" pathLength="1" x1="300" y1="394" x2="300" y2="416"/>
+
+        <!-- application layer -> data -->
+        <line class="arch-line w3" pathLength="1" x1="300" y1="506" x2="300" y2="528"/>
+        <line class="arch-line arch-line--bus w3" pathLength="1" x1="82.5" y1="528" x2="517.5" y2="528"/>
+        <line class="arch-line w3" pathLength="1" x1="82.5"  y1="528" x2="82.5"  y2="550"/>
+        <line class="arch-line w3" pathLength="1" x1="227.5" y1="528" x2="227.5" y2="550"/>
+        <line class="arch-line w3" pathLength="1" x1="372.5" y1="528" x2="372.5" y2="550"/>
+        <line class="arch-line w3" pathLength="1" x1="517.5" y1="528" x2="517.5" y2="550"/>
+      </g>
+
+      <!-- ============ tier 1 — surfaces ============ -->
+      <text class="arch-cap" x="20" y="30">SURFACES<tspan class="arch-cap-sub" dx="10">four ways in</tspan></text>
+
+      <g class="arch-group t1">
+        <rect class="arch-node" x="16"  y="40" width="133" height="78" rx="11"/>
+        <text class="arch-t" x="82.5" y="66">Staff UI</text>
+        <text class="arch-m" x="82.5" y="102">150 pages</text>
+      </g>
+      <g class="arch-group t1">
+        <rect class="arch-node" x="161" y="40" width="133" height="78" rx="11"/>
+        <text class="arch-t" x="227.5" y="66">Dealer</text>
+        <text class="arch-t" x="227.5" y="82">Portal</text>
+        <text class="arch-m" x="227.5" y="102">30 accounts</text>
+      </g>
+      <g class="arch-group t1">
+        <rect class="arch-node" x="306" y="40" width="133" height="78" rx="11"/>
+        <text class="arch-t" x="372.5" y="66">Storefront</text>
+        <text class="arch-t" x="372.5" y="82">Chat</text>
+        <text class="arch-m" x="372.5" y="102">live</text>
+      </g>
+      <g class="arch-group t1">
+        <rect class="arch-node" x="451" y="40" width="133" height="78" rx="11"/>
+        <text class="arch-t" x="517.5" y="66">Email Bot</text>
+        <text class="arch-m" x="517.5" y="102">36 commands</text>
+      </g>
+
+      <!-- ============ tier 2 — subsystems ============ -->
+      <text class="arch-cap" x="20" y="192">SUBSYSTEMS<tspan class="arch-cap-sub" dx="10">six of them</tspan></text>
+
+      <g class="arch-group t2">
+        <rect class="arch-node arch-node--hi" x="16" y="202" width="181" height="76" rx="11"/>
+        <text class="arch-t arch-t--hi" x="106.5" y="230">AmaxBot</text>
+        <text class="arch-m" x="106.5" y="250">38 chat tools</text>
+        <text class="arch-m" x="106.5" y="266">36 email commands</text>
+      </g>
+      <g class="arch-group t2">
+        <rect class="arch-node arch-node--hi" x="209" y="202" width="181" height="76" rx="11"/>
+        <rect class="arch-chip-bg" x="344" y="210" width="34" height="15" rx="7.5"/>
+        <text class="arch-chip" x="361" y="221">NEW</text>
+        <text class="arch-t arch-t--hi" x="299.5" y="230">KB Search</text>
+        <text class="arch-m" x="299.5" y="250">hybrid embeddings</text>
+        <text class="arch-m" x="299.5" y="266">FULLTEXT · 110 chunks</text>
+      </g>
+      <g class="arch-group t2">
+        <rect class="arch-node" x="402" y="202" width="181" height="76" rx="11"/>
+        <text class="arch-t" x="492.5" y="230">QuickBooks Hub</text>
+        <text class="arch-m" x="492.5" y="250">6 connectors</text>
+        <text class="arch-m" x="492.5" y="266">42 APIs</text>
+      </g>
+      <g class="arch-group t2">
+        <rect class="arch-node" x="16" y="290" width="181" height="76" rx="11"/>
+        <text class="arch-t" x="106.5" y="318">Dealer Portal</text>
+        <text class="arch-m" x="106.5" y="338">30 accounts</text>
+        <text class="arch-m" x="106.5" y="354">orders · claims</text>
+      </g>
+      <g class="arch-group t2">
+        <rect class="arch-node" x="209" y="290" width="181" height="76" rx="11"/>
+        <text class="arch-t" x="299.5" y="318">TrueCommerce EDI</text>
+        <text class="arch-m" x="299.5" y="338">over SOAP</text>
+        <text class="arch-m" x="299.5" y="354">POs · ASN · invoices</text>
+      </g>
+      <g class="arch-group t2">
+        <rect class="arch-node" x="402" y="290" width="181" height="76" rx="11"/>
+        <text class="arch-t" x="492.5" y="318">Warehouse Docs</text>
+        <text class="arch-m" x="492.5" y="338">8 document types</text>
+        <text class="arch-m" x="492.5" y="354">Lacey Act compliance</text>
+      </g>
+
+      <!-- ============ tier 3 — application layer ============ -->
+      <text class="arch-cap" x="20" y="438">APPLICATION LAYER</text>
+      <g class="arch-group t3">
+        <rect class="arch-node arch-node--bar" x="16" y="448" width="568" height="52" rx="11"/>
+        <text class="arch-t arch-t--lg" x="300" y="472">Express · Node.js</text>
+        <text class="arch-m" x="300" y="490">1,048 REST endpoints · 124 permission checks · EN / ZH</text>
+      </g>
+
+      <!-- ============ tier 4 — data ============ -->
+      <text class="arch-cap" x="20" y="572">DATA<tspan class="arch-cap-sub" dx="10">4 MySQL databases · 274 tables</tspan></text>
+
+      <g class="arch-group t4">
+        <path class="arch-db-body" d="M53.5 590 V 624 A 29 7.5 0 0 0 111.5 624 V 590 Z"/>
+        <ellipse class="arch-db-top" cx="82.5" cy="590" rx="29" ry="7.5"/>
+        <text class="arch-db-label" x="82.5" y="645">MySQL</text>
+      </g>
+      <g class="arch-group t4">
+        <path class="arch-db-body" d="M198.5 590 V 624 A 29 7.5 0 0 0 256.5 624 V 590 Z"/>
+        <ellipse class="arch-db-top" cx="227.5" cy="590" rx="29" ry="7.5"/>
+        <text class="arch-db-label" x="227.5" y="645">MySQL</text>
+      </g>
+      <g class="arch-group t4">
+        <path class="arch-db-body" d="M343.5 590 V 624 A 29 7.5 0 0 0 401.5 624 V 590 Z"/>
+        <ellipse class="arch-db-top" cx="372.5" cy="590" rx="29" ry="7.5"/>
+        <text class="arch-db-label" x="372.5" y="645">MySQL</text>
+      </g>
+      <g class="arch-group t4">
+        <path class="arch-db-body" d="M488.5 590 V 624 A 29 7.5 0 0 0 546.5 624 V 590 Z"/>
+        <ellipse class="arch-db-top" cx="517.5" cy="590" rx="29" ry="7.5"/>
+        <text class="arch-db-label" x="517.5" y="645">MySQL</text>
+      </g>
+
+      <text class="arch-m arch-m--foot" x="300" y="672">order hub · 20,878 orders</text>
+    </svg>
+  </div>
+  <p class="arch-hint" aria-hidden="true">Scroll the diagram sideways to see all four columns.</p>
+  <figcaption class="arch-caption" id="archCaption">
+    Request and response flow through the platform &mdash; surfaces on top, four MySQL databases at
+    the base.
+  </figcaption>
+</figure>
+
+                        <div class="featured-shots">
+                            <a href="https://reports.amaxleather.com" target="_blank" rel="noopener noreferrer" class="featured-img-link">
+                                <div class="showcase-img-wrapper">
+                                    <img src="erp-login-preview.png" alt="The ERP sign-in screen, with account login and email one-time-password options" class="showcase-img" loading="lazy" width="1200" height="750" />
+                                </div>
+                                <div class="featured-link-overlay">
+                                    <span>Sign-in &mdash; the way staff get in</span>
+                                    <ion-icon name="open-outline"></ion-icon>
+                                </div>
+                            </a>
+                            <a href="https://reports.amaxleather.com/teasheet" target="_blank" rel="noopener noreferrer" class="featured-img-link">
+                                <div class="showcase-img-wrapper">
+                                    <img src="erp-tearsheets-preview.png" alt="The public product tearsheet page: a searchable grid of 199 spec-sheet PDFs filtered by brand" class="showcase-img" loading="lazy" width="1400" height="875" />
+                                </div>
+                                <div class="featured-link-overlay">
+                                    <span>Public tearsheets &mdash; open this one</span>
+                                    <ion-icon name="open-outline"></ion-icon>
+                                </div>
+                            </a>
+                        </div>
+                        <p class="featured-shots-note">
+                            The tearsheet page is genuinely public &mdash; 199 spec sheets, searchable, no login &mdash;
+                            so you can click straight into a real page of the platform. Everything else sits behind
+                            the sign-in on the left, because it reads live customer data.
+                        </p>
                     </div>
+
+                    <h3 class="section-heading">Try It &mdash; AmaxBot Sandbox</h3>
+
+                    <section class="sbx" id="amaxbotSandbox" aria-labelledby="sbxTitle">
+
+                        <div class="sbx-head">
+                            <span class="sbx-eyebrow"><ion-icon name="sparkles-outline" aria-hidden="true"></ion-icon>AmaxBot &middot; interactive</span>
+                            <h4 class="sbx-title" id="sbxTitle">Watch it pick a tool, call it, and answer</h4>
+                            <p class="sbx-lede">
+                                Most assistant demos print a reply and hide the work. This one shows the routing
+                                decision, the tool call with its real argument shape, the rows that come back, and
+                                only then the written answer &mdash; because the pipeline is the part a screenshot
+                                cannot show you.
+                            </p>
+                        </div>
+
+                        <p class="sbx-notice">
+                            <ion-icon name="flask-outline" aria-hidden="true"></ion-icon>
+                            <span><strong>This is a sandbox.</strong> It runs entirely in your browser on canned
+                            sample data &mdash; fictional customers, invented order numbers, no network calls, no
+                            database. The production assistant sits behind a login and reads live company data,
+                            which is exactly why it is not wired to a public page.</span>
+                        </p>
+
+                        <ul class="sbx-receipts">
+                            <li><strong>5/8 &rarr; 8/8</strong><span>questions answered, keyword &rarr; hybrid</span></li>
+                            <li><strong>3/3</strong><span>Chinese questions where keyword returned 0 rows</span></li>
+                            <li><strong>26 &rarr; 110</strong><span>articles &rarr; embedded chunks</span></li>
+                            <li><strong>$0.0005</strong><span>per full index rebuild</span></li>
+                        </ul>
+                        <p class="sbx-receipts-note">Measured on the real system on 2026-09-02, the day the hybrid search shipped.</p>
+
+                        <div class="sbx-chips" role="group" aria-label="Sample questions &mdash; choose one to run it">
+                            <button type="button" class="sbx-chip" data-sbx="orders">
+                                <span class="sbx-chip-tool">tool_get_orders</span>
+                                <span class="sbx-chip-q">Open orders for a dealer</span>
+                            </button>
+                            <button type="button" class="sbx-chip" data-sbx="stock">
+                                <span class="sbx-chip-tool">tool_check_stock</span>
+                                <span class="sbx-chip-q">Stock left on a SKU</span>
+                            </button>
+                            <button type="button" class="sbx-chip" data-sbx="ar">
+                                <span class="sbx-chip-tool">tool_get_ar_aging</span>
+                                <span class="sbx-chip-q">Who is past due</span>
+                            </button>
+                            <button type="button" class="sbx-chip" data-sbx="shipment">
+                                <span class="sbx-chip-tool">tool_track_shipment</span>
+                                <span class="sbx-chip-q">Where is this order</span>
+                            </button>
+                            <button type="button" class="sbx-chip" data-sbx="container">
+                                <span class="sbx-chip-tool">tool_get_container</span>
+                                <span class="sbx-chip-q">Containers landing this month</span>
+                            </button>
+                            <button type="button" class="sbx-chip" data-sbx="kb_en">
+                                <span class="sbx-chip-tool">tool_search_kb</span>
+                                <span class="sbx-chip-q">A policy question, badly worded</span>
+                            </button>
+                            <button type="button" class="sbx-chip" data-sbx="kb_zh">
+                                <span class="sbx-chip-tool">tool_search_kb</span>
+                                <span class="sbx-chip-q">&#20013;&#25991;&#25552;&#38382; &mdash; the same bot, in Chinese</span>
+                            </button>
+                            <button type="button" class="sbx-chip" data-sbx="refuse">
+                                <span class="sbx-chip-tool">no tool &mdash; refuses</span>
+                                <span class="sbx-chip-q">Ask it to do something it must not</span>
+                            </button>
+                        </div>
+
+                        <div class="sbx-console">
+
+                            <div class="sbx-bar">
+                                <span class="sbx-bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="sbx-bar-name">amaxbot &mdash; sandbox session</span>
+                                <span class="sbx-bar-badge">sample data</span>
+                                <button type="button" class="sbx-clear" id="sbxClear" hidden>Clear</button>
+                            </div>
+
+                            <div class="sbx-transcript" id="sbxTranscript" role="log" aria-live="polite"
+                                 aria-relevant="additions" aria-label="Sandbox transcript" tabindex="0">
+
+                                <div class="sbx-empty" id="sbxEmpty">
+                                    <span class="sbx-empty-icon" aria-hidden="true"><ion-icon name="terminal-outline"></ion-icon></span>
+                                    <p class="sbx-empty-title">Nothing has run yet</p>
+                                    <p class="sbx-empty-sub">
+                                        Pick a question above, or type your own below. Start with the one that made
+                                        the whole search rewrite worth doing:
+                                    </p>
+                                    <button type="button" class="sbx-empty-btn" data-sbx="kb_en">
+                                        <ion-icon name="play-outline" aria-hidden="true"></ion-icon>
+                                        <span>&ldquo;can I send it back if I just don&rsquo;t like it&rdquo;</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <form class="sbx-form" id="sbxForm" autocomplete="off" novalidate>
+                                <label class="sbx-sr-only" for="sbxInput">Ask the sandbox a question</label>
+                                <ion-icon class="sbx-form-icon" name="chatbubble-ellipses-outline" aria-hidden="true"></ion-icon>
+                                <input class="sbx-input" id="sbxInput" name="q" type="text" maxlength="140"
+                                       placeholder="Ask in your own words &mdash; or try &#36864;&#36135;&#25919;&#31574;&#26159;&#20160;&#20040;" />
+                                <button class="sbx-send" type="submit">
+                                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+                                    <span class="sbx-sr-only">Send question</span>
+                                </button>
+                            </form>
+
+                        </div>
+
+                        <p class="sbx-foot">
+                            Free text is keyword-matched to the nearest of the eight sample questions, and the panel
+                            tells you plainly when it cannot find one. There is no model running on this page.
+                        </p>
+
+                        <p class="sbx-sr-only" id="sbxStatus" role="status" aria-live="polite"></p>
+
+                    </section>
+
+<!-- ===== Semantic KB search — recorded head-to-head =====
+     Goes in the Projects tab, directly after the .featured-project block and
+     before <h3 class="section-heading">Case Studies</h3>. It is evidence about
+     the flagship, so it sits with the flagship.
+     The question chips and both result columns are built by the JS block from
+     KBS_RUN; everything else here is static so the finding survives without JS. -->
+<section class="kbs" id="kbsearch" aria-labelledby="kbsTitle">
+
+    <div class="kbs-head">
+        <span class="kbs-badge">
+            <span class="kbs-badge-dot" aria-hidden="true"></span>
+            Recorded run &middot; 2 Sep 2026
+        </span>
+        <h3 class="kbs-title" id="kbsTitle">Keyword search vs. semantic search</h3>
+        <p class="kbs-lede">
+            The knowledge base behind AmaxBot was searched with MariaDB <code>FULLTEXT</code>.
+            Chinese was completely unsearchable, and English questions phrased the way people
+            actually phrase them came back wrong. I shipped a hybrid embeddings&nbsp;+&nbsp;<code>FULLTEXT</code>
+            layer and ran both paths against the same eight staff questions.
+        </p>
+    </div>
+
+    <p class="kbs-honesty">
+        <ion-icon name="document-text-outline" aria-hidden="true"></ion-icon>
+        <span>
+            <strong>This is a replay of one measured run, not a live query.</strong>
+            Every question and every article title below is a verbatim record of what the two
+            search paths returned on 2 September 2026. The knowledge base itself is behind a
+            login and holds customer data, so nothing on this page talks to it.
+        </span>
+    </p>
+
+    <div class="kbs-score">
+        <div class="kbs-score-card is-before">
+            <span class="kbs-score-num"><span data-kbs-count="5">5</span><span class="kbs-score-den">/8</span></span>
+            <span class="kbs-score-label">Keyword search returned any rows at all</span>
+        </div>
+        <div class="kbs-score-card is-after">
+            <span class="kbs-score-num"><span data-kbs-count="8">8</span><span class="kbs-score-den">/8</span></span>
+            <span class="kbs-score-label">Hybrid search returned the correct article</span>
+        </div>
+        <div class="kbs-score-card is-before">
+            <span class="kbs-score-num"><span data-kbs-count="0">0</span><span class="kbs-score-den">/3</span></span>
+            <span class="kbs-score-label">Chinese questions keyword search could answer</span>
+        </div>
+    </div>
+
+    <p class="kbs-caveat">
+        Those two numbers are deliberately not the same measure. <em>Returned any rows</em> is a low
+        bar &mdash; on one of the five, the rows keyword search returned were the wrong article,
+        which is worse than returning nothing. The hybrid column counts only the correct article.
+    </p>
+
+    <div class="kbs-pick">
+        <h4 class="kbs-sub" id="kbsPickLabel">Pick a question from the run</h4>
+        <div class="kbs-list" data-kbs-list role="radiogroup" aria-labelledby="kbsPickLabel"></div>
+        <p class="kbs-shown">
+            Five of the eight questions had their result pairs recorded verbatim; those five are
+            the ones shown. The other three were English questions both paths returned rows for.
+        </p>
+        <noscript>
+            <p class="kbs-shown">
+                The interactive replay needs JavaScript. The result stands without it:
+                keyword search returned rows for 5 of 8 questions and zero rows for all 3 Chinese
+                ones; the hybrid returned the correct article for 8 of 8.
+            </p>
+        </noscript>
+    </div>
+
+    <div class="kbs-board" data-kbs-board>
+
+        <section class="kbs-col" data-kbs-col="keyword" aria-labelledby="kbsColOld">
+            <header class="kbs-col-head">
+                <div class="kbs-col-id">
+                    <h4 class="kbs-col-title" id="kbsColOld">Keyword search</h4>
+                    <p class="kbs-col-sub">MariaDB <code>FULLTEXT</code></p>
+                </div>
+                <span class="kbs-col-tag">Before</span>
+            </header>
+            <div class="kbs-scan" aria-hidden="true"><span></span></div>
+            <div class="kbs-results" data-kbs-results="keyword"></div>
+        </section>
+
+        <section class="kbs-col" data-kbs-col="hybrid" aria-labelledby="kbsColNew">
+            <header class="kbs-col-head">
+                <div class="kbs-col-id">
+                    <h4 class="kbs-col-title" id="kbsColNew">Hybrid search</h4>
+                    <p class="kbs-col-sub">Embeddings + <code>FULLTEXT</code></p>
+                </div>
+                <span class="kbs-col-tag is-after">After</span>
+            </header>
+            <div class="kbs-scan" aria-hidden="true"><span></span></div>
+            <div class="kbs-results" data-kbs-results="hybrid"></div>
+        </section>
+
+    </div>
+
+    <p class="kbs-sr" data-kbs-live role="status" aria-live="polite"></p>
+
+    <h4 class="kbs-sub">Why Chinese returned nothing &mdash; two independent causes</h4>
+    <div class="kbs-why">
+        <div class="kbs-cause">
+            <span class="kbs-cause-n" aria-hidden="true">01</span>
+            <div>
+                <strong>No CJK tokenizer</strong>
+                <span>MariaDB <code>FULLTEXT</code> splits on whitespace. Chinese has none, so a whole
+                question arrives as one unmatchable token.</span>
+            </div>
+        </div>
+        <div class="kbs-cause">
+            <span class="kbs-cause-n" aria-hidden="true">02</span>
+            <div>
+                <strong>The Chinese columns were never indexed</strong>
+                <span><code>title_zh</code> and <code>content_zh</code> were not in the <code>FULLTEXT</code>
+                index at all. Even a working tokenizer would have had nothing to read.</span>
+            </div>
+        </div>
+    </div>
+
+    <p class="kbs-foot">
+        <span><strong>26</strong> published articles</span>
+        <span><strong>110</strong> chunks</span>
+        <span><strong>0.64&nbsp;MB</strong> of vectors</span>
+        <span><strong>$0.0005</strong> per full rebuild</span>
+    </p>
+
+</section>
 
                     <h3 class="section-heading">Case Studies</h3>
 
@@ -1165,7 +1590,7 @@
         function observeReveals(root) {
             const scope = root || document;
             const targets = scope.querySelectorAll(
-                '.featured-project, .case-card, .project-card, .service-card, .showcase-card, ' +
+                '.featured-project, .sbx, .case-card, .project-card, .service-card, .showcase-card, ' +
                 '.tl-item, .cert-card, .skill-item, .about-stat, .section-heading'
             );
             targets.forEach((el, i) => {
@@ -2130,6 +2555,1149 @@ window.addEventListener('resize', updateScrollProgress);
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js').catch(() => {});
         }
+
+
+        /* ===== AmaxBot sandbox — canned scenarios, runs entirely in the browser.
+           The panel states this plainly; see .sbx-notice in the markup above. ===== */
+/* ============================================================================
+   AmaxBot Sandbox — canned scenarios
+   ----------------------------------------------------------------------------
+   Every row below is INVENTED SAMPLE DATA: fictional customers, fictional order
+   numbers, fictional balances. Nothing here touches a network or a database.
+   The only real results in this file are the knowledge-base blocks marked
+   `measured`, which come from a live head-to-head run on 2026-09-02.
+
+   Per scenario:
+     match  — keywords for the free-text matcher (substring, so CJK works too)
+     strong — decisive keywords, weighted higher; used to break near-ties
+   ========================================================================== */
+const SBX_SCENARIOS = [
+
+    {
+        id: 'orders',
+        tool: 'tool_get_orders',
+        chip: 'Open orders for a dealer',
+        q: 'Show me open orders for Brightwood Furnishings',
+        match: ['open order', 'orders', 'order list', 'outstanding order', 'what orders',
+                'unshipped', 'order hub', 'sales order', 'order status'],
+        strong: ['open orders', 'brightwood'],
+        why: 'The question names a customer and an order state. That is a filtered read of the order hub, ' +
+             'not a search — so the router fills customer and status in as arguments instead of handing the ' +
+             'whole sentence to a text match and hoping.',
+        args: { customer: 'Brightwood Furnishings', status: 'open', date_from: '2026-08-01', limit: 5 },
+        result: {
+            meta: '4 rows · sample data',
+            columns: ['Order #', 'PO', 'Ordered', 'Lines', 'Value', 'Status'],
+            rows: [
+                ['SO-20402', 'BW-88104', '2026-08-05', '9', '$27,640.00', 'Ready to ship'],
+                ['SO-20471', 'BW-88213', '2026-08-19', '6', '$14,280.00', 'Picking'],
+                ['SO-20455', 'BW-88190', '2026-08-14', '2', '$3,915.00', 'Awaiting stock'],
+                ['SO-20388', 'BW-88077', '2026-07-31', '1', '$1,120.00', 'On hold — credit']
+            ]
+        },
+        answer: 'Brightwood has 4 open orders worth $46,955. SO-20402 is the big one — 9 lines, $27,640, ' +
+                'picked and ready to ship. SO-20455 is short on stock. SO-20388 is sitting on a credit hold, ' +
+                'so the warehouse cannot touch it until finance releases it, and releasing it is not something ' +
+                'I can do.'
+    },
+
+    {
+        id: 'stock',
+        tool: 'tool_check_stock',
+        chip: 'Stock left on a SKU',
+        q: 'How many HYD-3200 recliners do we have left?',
+        match: ['stock', 'inventory', 'on hand', 'on-hand', 'available', 'availability', 'quantity', 'qty',
+                'left', 'recliner', '库存', '还有多少'],
+        strong: ['hyd-3200', 'hyd 3200', 'in stock', 'how many'],
+        why: 'A quantity question about one SKU. Stock is split across two warehouses plus containers on the ' +
+             'water, and only this tool nets on-hand against committed — a raw count would over-promise and ' +
+             'someone would sell air.',
+        args: { sku: 'HYD-3200-CHAR', warehouse: 'ALL', include_committed: true, include_in_transit: true },
+        result: {
+            meta: '3 rows · sample data',
+            columns: ['Location', 'On hand', 'Committed', 'Available', 'Reference'],
+            rows: [
+                ['CA — Delta, BC', '48', '31', '17', '—'],
+                ['US — Ontario, CA', '12', '12', '0', '—'],
+                ['In transit', '160', '0', '160', 'CTR-4471 · ETA 2026-09-18']
+            ]
+        },
+        answer: '17 units are actually free to sell, all of them in Delta. Ontario shows 12 on hand but every ' +
+                'one is committed to an open order, so treat it as zero. Another 160 are on the water in ' +
+                'CTR-4471, ETA Sep 18. If a US order needs the SKU before that date, transfer from Delta — ' +
+                'do not promise against the container.'
+    },
+
+    {
+        id: 'ar',
+        tool: 'tool_get_ar_aging',
+        chip: 'Who is past due',
+        q: 'Who is more than 60 days past due?',
+        match: ['ar aging', 'owes', 'owe us', 'money', 'collections', 'unpaid', 'outstanding balance',
+                'invoice', 'account', '60 days', '90 days', '应收'],
+        strong: ['past due', 'overdue', 'aging', 'receivable'],
+        why: 'Aging buckets are a finance read. The router picks the bucket the question actually asked for ' +
+             '(60+) rather than pulling every open invoice and trusting the model to filter afterwards.',
+        args: { company: 'US', bucket: '60+', min_balance: 500, sort: 'balance_desc' },
+        result: {
+            meta: '3 rows · sample data',
+            columns: ['Customer', '61–90', '90+', 'Past 60 total', 'Oldest invoice'],
+            rows: [
+                ['Northgate Home Outfitters', '$18,420', '$6,900', '$25,320', '2026-05-22'],
+                ['Cedar & Vale Home', '$4,180', '$11,750', '$15,930', '2026-04-30'],
+                ['Pinecrest Interiors', '$7,265', '$0', '$7,265', '2026-06-11']
+            ]
+        },
+        answer: 'Three accounts, $48,515 past 60 days. Chase Cedar & Vale first — smaller balance, but ' +
+                '$11,750 of it is already past 90 and the oldest invoice dates to April 30, which is the ' +
+                'number that actually ages badly. Northgate is larger and newer. I can draft the reminder ' +
+                'emails; putting an account on credit hold is a finance action in the ERP, not mine.'
+    },
+
+    {
+        id: 'shipment',
+        tool: 'tool_track_shipment',
+        chip: 'Where is this order',
+        q: 'Where is order SO-20402 right now?',
+        match: ['shipment', 'shipping status', 'delivered', 'delivery date', 'carrier', 'pro number',
+                'in transit', 'out for delivery', 'eta for order', '到哪了'],
+        strong: ['so-20402', 'so 20402', 'where is', 'tracking', 'track'],
+        why: 'A "where is it" question about one order number. The order reader would return a status code; ' +
+             'only the tracking tool joins carrier events onto it, so that is what gets called.',
+        args: { order_no: 'SO-20402', include_legs: true },
+        result: {
+            meta: '3 legs · sample data',
+            columns: ['Leg', 'Carrier', 'Reference', 'Status', 'Updated'],
+            rows: [
+                ['Warehouse', 'Delta, BC', 'PICK-20402', 'Picked, staged', '2026-09-01 16:40'],
+                ['Line haul', 'Sample Freight Lines', 'PRO 774-0192', 'In transit — Sumas, WA', '2026-09-02 06:15'],
+                ['Delivery', 'Sample Freight Lines', 'PRO 774-0192', 'Scheduled 2026-09-04', '2026-09-02 06:15']
+            ]
+        },
+        answer: 'SO-20402 left Delta yesterday at 16:40 and cleared Sumas at 06:15 this morning on ' +
+                'PRO 774-0192. Delivery is scheduled for Sep 4. No exception is posted on the lane, so that ' +
+                'date should hold — if you need it firmer than "should", the carrier has to confirm it.'
+    },
+
+    {
+        id: 'container',
+        tool: 'tool_get_container',
+        chip: 'Containers landing this month',
+        q: 'Which containers land this month?',
+        match: ['containers', 'voyage', 'arriving', 'arrive', 'inbound', 'port', 'land this month',
+                'ctr-', 'ocean freight', 'sea freight'],
+        strong: ['container', 'vessel', '集装箱'],
+        why: '"This month" is a date range over inbound freight. The router resolves the range from today ' +
+             'rather than leaving the model to guess the boundaries — a wrong month here returns a perfectly ' +
+             'plausible, completely useless answer.',
+        args: { status: 'in_transit', eta_from: '2026-09-01', eta_to: '2026-09-30', limit: 5 },
+        result: {
+            meta: '3 rows · sample data',
+            columns: ['Container', 'Voyage', 'Port', 'ETD', 'ETA', 'Cartons'],
+            rows: [
+                ['CTR-4468', 'Sample Carrier VOY-116W', 'Vancouver', '2026-08-02', '2026-09-09', '388'],
+                ['CTR-4471', 'Sample Carrier VOY-118E', 'Los Angeles', '2026-08-08', '2026-09-18', '412'],
+                ['CTR-4474', 'Sample Carrier VOY-121E', 'Los Angeles', '2026-08-15', '2026-09-26', '455']
+            ]
+        },
+        answer: 'Three land in September: CTR-4468 into Vancouver on the 9th, then CTR-4471 (LA, 18th) and ' +
+                'CTR-4474 (LA, 26th). CTR-4471 carries the HYD-3200 replenishment, so anything promised on ' +
+                'that SKU before the 18th has to come out of Delta stock instead.'
+    },
+
+    {
+        id: 'kb_en',
+        tool: 'tool_search_kb',
+        chip: 'A policy question, badly worded',
+        q: "can I send it back if I just don't like it",
+        match: ['send back', 'return it', 'return', 'returns', 'policy', "don't like", 'dont like',
+                'take it back', 'give it back', 'exchange', 'warranty', 'cushions', 'seat cushion',
+                'what is inside', 'knowledge base', 'article'],
+        strong: ['send it back', 'return policy', 'refund', 'change of mind', 'cushion'],
+        why: 'No SKU, no order number, no customer — a policy question, so it routes to the knowledge base. ' +
+             'Notice what the sentence does NOT contain: the words return, refund, or policy. That is exactly ' +
+             'where the old keyword search fell over.',
+        args: { query: "can I send it back if I just don't like it", mode: 'hybrid', lang: 'auto', top_k: 3 },
+        result: {
+            meta: 'illustrative scores — the article ranking is from the real 2026-09-02 run',
+            columns: ['#', 'Article', 'Vector', 'FULLTEXT', 'Hybrid'],
+            rows: [
+                ['1', 'Warranty, Damage Claims & Returns Policy', '0.81', '—', '0.81'],
+                ['2', 'Shipping, Delivery & Order Hold Policy', '0.62', '—', '0.62'],
+                ['3', 'SOP — Mathis Home Direct Container', '0.41', '0.18', '0.44']
+            ]
+        },
+        answer: 'Yes — change-of-mind returns are covered in Warranty, Damage Claims & Returns Policy, and ' +
+                'that is the article I would quote back.\n\n' +
+                'This is the question worth watching, though. It never says return, refund or policy, so the ' +
+                'old keyword search matched on "send" and "back" and confidently handed over a container SOP. ' +
+                'The embedding matches what the sentence means instead of which letters it contains.',
+        measured: {
+            label: 'Measured head-to-head, 2026-09-02 — real system, not sample data',
+            columns: ['Question asked', 'Keyword (FULLTEXT)', 'Hybrid (embeddings + FULLTEXT)'],
+            rows: [
+                ["can I send it back if I just don't like it", 'SOP — Mathis Home Direct Container · wrong', 'Warranty, Damage Claims & Returns Policy · right'],
+                ['what is inside the seat cushions', 'answered', 'answered — cushion article ranked first']
+            ],
+            foot: 'Across 8 real questions: keyword answered 5, hybrid answered 8. Corpus: 26 published ' +
+                  'articles → 110 chunks, 0.64 MB of vectors, $0.0005 per full rebuild.'
+        }
+    },
+
+    {
+        id: 'kb_zh',
+        tool: 'tool_search_kb',
+        chip: '中文提问 — the same bot, in Chinese',
+        q: '沙发到货的时候有破损怎么办',
+        match: ['损坏', '政策', '怎么办', '到货', '过敏', '保修', '中文', 'chinese', 'damage claim', 'claim'],
+        strong: ['沙发', '破损', '退货', '羽绒', 'arrived damaged', 'damaged on arrival'],
+        why: 'Two independent reasons this used to return nothing: MariaDB ships no CJK tokeniser, and the ' +
+             'title_zh / content_zh columns were never added to the FULLTEXT index at all. The embedding is ' +
+             'language-agnostic, so a Chinese question retrieves the English article.',
+        args: { query: '沙发到货的时候有破损怎么办', mode: 'hybrid', lang: 'zh', top_k: 3 },
+        result: {
+            meta: 'illustrative vector scores — the FULLTEXT column is the real result',
+            columns: ['#', 'Article', 'Vector', 'FULLTEXT', 'Hybrid'],
+            rows: [
+                ['1', 'Warranty, Damage Claims & Returns Policy', '0.77', '0 rows', '0.77'],
+                ['2', 'Shipping, Delivery & Order Hold Policy', '0.58', '0 rows', '0.58']
+            ]
+        },
+        answer: '到货破损属于《Warranty, Damage Claims & Returns Policy》这篇文章的范围 —— 理赔步骤和需要提供的' +
+                '照片都写在里面。\n\n' +
+                '(EN) Delivery damage is covered by the Warranty, Damage Claims & Returns Policy article. The ' +
+                'part to notice is the FULLTEXT column: not a bad ranking — zero rows. Chinese-speaking staff ' +
+                'and customers had a knowledge base they could not search at all.',
+        measured: {
+            label: 'Measured head-to-head, 2026-09-02 — real system, not sample data',
+            columns: ['Question asked', 'Keyword (FULLTEXT)', 'Hybrid (embeddings + FULLTEXT)'],
+            rows: [
+                ['沙发到货的时候有破损怎么办', '0 rows', 'Warranty, Damage Claims & Returns Policy'],
+                ['退货政策是什么', '0 rows', 'Shipping, Delivery & Order Hold Policy'],
+                ['客户对羽绒过敏可以吗', '0 rows', 'Cushion Construction — Down/Feather Content']
+            ],
+            foot: 'All 3 Chinese questions: keyword search returned zero rows; hybrid returned the correct ' +
+                  'article every time.'
+        }
+    },
+
+    {
+        id: 'refuse',
+        tool: null,
+        chip: 'Ask it to do something it must not',
+        q: "Raise Northgate's credit limit to $250,000",
+        match: ['raise the limit', 'change the price', 'remove', 'update', 'set the', 'change the',
+                'modify', 'add a customer', 'create an order', 'mark as paid'],
+        strong: ['credit limit', 'delete', 'cancel', 'override', 'write off', 'approve', 'discount',
+                 'drop table', 'truncate', 'insert into', 'update set'],
+        why: 'This is a write, not a read. The tool catalog is filtered by role BEFORE it is serialised to ' +
+             'the model, so a read-only session is never shown a write tool. The model cannot call what it ' +
+             'was never handed — a stronger guarantee than trusting it to decline.',
+        policy: {
+            label: 'Catalog handed to this session',
+            rows: [
+                ['Read tools', 'visible'],
+                ['Write tools', 'not in the catalog'],
+                ['Ad-hoc SQL tool', 'not in the catalog'],
+                ['Executed', 'nothing']
+            ],
+            note: 'Credit limits and holds change on the ERP customer screen, where the edit leaves an audit ' +
+                  'row against your user.'
+        },
+        answer: 'I cannot do that one — and not because a filter caught it on the way out. A credit-limit ' +
+                'change is a write, and this session was only ever handed read tools, so there was nothing ' +
+                'to call.\n\n' +
+                'What I can do instead: pull Northgate\'s aging, payment history and open orders so whoever ' +
+                'owns the decision has the numbers in front of them. The change itself goes through the ERP ' +
+                'customer screen, and it gets stamped with your user.'
+    }
+
+];
+
+
+/* ============================================================================
+   AmaxBot Sandbox — driver
+   ----------------------------------------------------------------------------
+   No libraries, no fetch, no timers left running. Every string that comes from
+   the scenario data is written with textContent, never innerHTML, so the panel
+   cannot be broken by its own content. Clicking a second question mid-run does
+   not queue up or interleave: the in-flight run is flushed to completion
+   instantly and the new one starts on a clean transcript state.
+   ========================================================================== */
+(function initAmaxbotSandbox() {
+    const panel = document.getElementById('amaxbotSandbox');
+    if (!panel || typeof SBX_SCENARIOS === 'undefined') return;
+
+    const transcript = document.getElementById('sbxTranscript');
+    const emptyState = document.getElementById('sbxEmpty');
+    const form       = document.getElementById('sbxForm');
+    const input      = document.getElementById('sbxInput');
+    const statusEl   = document.getElementById('sbxStatus');
+    const clearBtn   = document.getElementById('sbxClear');
+
+    // The page owns one reduced-motion flag; read it live, but survive alone.
+    const reduced = () => (typeof PREFERS_REDUCED_MOTION !== 'undefined')
+        ? PREFERS_REDUCED_MOTION
+        : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const byId = Object.create(null);
+    SBX_SCENARIOS.forEach(s => { byId[s.id] = s; });
+    const COUNT = SBX_SCENARIOS.length;
+
+    /* ---------- DOM helpers (text only — never innerHTML with data) -------- */
+    function el(tag, cls, text) {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text !== undefined && text !== null) n.textContent = String(text);
+        return n;
+    }
+    function ico(name) {
+        const i = document.createElement('ion-icon');
+        i.setAttribute('name', name);
+        i.setAttribute('aria-hidden', 'true');
+        return i;
+    }
+
+    /* ---------- run state ------------------------------------------------- */
+    let runId = 0;
+    let queue = [];                 // beats still to fire for the active run
+    const timers = [];
+    let typingNode = null;
+
+    function clearTimers() { while (timers.length) clearTimeout(timers.pop()); }
+
+    // Flush = play out every remaining beat right now, in order. A cancelled
+    // run therefore leaves a COMPLETE transcript entry behind, never a stump.
+    function flushQueue() {
+        clearTimers();
+        const rest = queue;
+        queue = [];
+        rest.forEach(b => { if (!b.done) { b.done = true; b.fn(true); } });
+        removeTyping();
+        panel.classList.remove('is-running');
+    }
+
+    function schedule(beats, myRun) {
+        queue = beats;
+        if (reduced()) {                       // full bypass: everything at once
+            beats.forEach(b => { b.done = true; b.fn(true); });
+            queue = [];
+            finish(myRun);
+            return;
+        }
+        let t = 0;
+        beats.forEach(b => {
+            t += b.delay;
+            timers.push(setTimeout(() => {
+                if (myRun !== runId) return;
+                b.done = true;
+                b.fn(false);
+                stick();
+            }, t));
+        });
+        timers.push(setTimeout(() => { if (myRun === runId) finish(myRun); }, t + 100));
+    }
+
+    function finish(myRun) {
+        if (myRun !== runId) return;
+        queue = [];
+        panel.classList.remove('is-running');
+        say('Answer ready.');
+    }
+
+    function say(msg) { if (statusEl) statusEl.textContent = msg; }
+
+    // Scroll the transcript only. Never the window — that would yank the page
+    // out from under someone reading further down.
+    function stick() {
+        transcript.scrollTo({
+            top: transcript.scrollHeight,
+            behavior: reduced() ? 'auto' : 'smooth'
+        });
+    }
+
+    // Append INTO the turn wrapper, not the transcript root — otherwise every
+    // node is moved back out of its turn and both the turn divider and the
+    // Clear button (which removes .sbx-turn) stop working.
+    function add(node, instant, parent) {
+        (parent || transcript).appendChild(node);
+        if (instant || reduced()) { node.classList.add('is-in'); return; }
+        requestAnimationFrame(() => node.classList.add('is-in'));
+    }
+
+    /* ---------- typing indicator ------------------------------------------ */
+    function showTyping(label) {
+        removeTyping();
+        typingNode = el('div', 'sbx-typing is-in');
+        typingNode.setAttribute('aria-hidden', 'true');
+        const dots = el('span', 'sbx-typing-dots');
+        dots.appendChild(el('i')); dots.appendChild(el('i')); dots.appendChild(el('i'));
+        typingNode.appendChild(dots);
+        typingNode.appendChild(el('span', 'sbx-typing-label', label));
+        transcript.appendChild(typingNode);
+    }
+    function removeTyping() {
+        if (typingNode && typingNode.parentNode) typingNode.parentNode.removeChild(typingNode);
+        typingNode = null;
+    }
+
+    /* ---------- builders -------------------------------------------------- */
+    function turnNode() {
+        const t = el('div', 'sbx-turn');
+        t.setAttribute('role', 'group');
+        return t;
+    }
+
+    function userBubble(text, matchedTo) {
+        const wrap = el('div', 'sbx-row sbx-row--user sbx-anim');
+        const b = el('div', 'sbx-bubble sbx-bubble--user');
+        b.appendChild(el('span', 'sbx-who', 'You'));
+        b.appendChild(el('p', 'sbx-bubble-text', text));
+        wrap.appendChild(b);
+        if (matchedTo) {
+            const note = el('p', 'sbx-matched');
+            note.appendChild(ico('git-compare-outline'));
+            note.appendChild(el('span', null, 'Not understood — matched to the nearest sample question: “' + matchedTo + '”'));
+            wrap.appendChild(note);
+        }
+        return wrap;
+    }
+
+    function step(n, label, tone) {
+        const wrap = el('div', 'sbx-step sbx-anim' + (tone ? ' sbx-step--' + tone : ''));
+        const head = el('div', 'sbx-step-head');
+        head.appendChild(el('span', 'sbx-step-n', n));
+        head.appendChild(el('h5', 'sbx-step-label', label));
+        wrap.appendChild(head);
+        const body = el('div', 'sbx-step-body');
+        wrap.appendChild(body);
+        return { wrap: wrap, body: body };
+    }
+
+    function toolPill(name) {
+        const p = el('span', 'sbx-pill');
+        p.appendChild(ico('construct-outline'));
+        p.appendChild(el('code', null, name));
+        return p;
+    }
+
+    function argsBlock(tool, args) {
+        const pre = el('pre', 'sbx-code');
+        pre.setAttribute('tabindex', '0');
+        pre.setAttribute('role', 'group');
+        pre.setAttribute('aria-label', 'Tool call arguments');
+        const code = el('code');
+        code.appendChild(el('span', 'sbx-tk-fn', tool));
+        code.appendChild(el('span', 'sbx-tk-p', '({'));
+        const keys = Object.keys(args);
+        keys.forEach((k, i) => {
+            code.appendChild(document.createTextNode('\n  '));
+            code.appendChild(el('span', 'sbx-tk-k', k));
+            code.appendChild(el('span', 'sbx-tk-p', ': '));
+            const v = args[k];
+            if (typeof v === 'number')       code.appendChild(el('span', 'sbx-tk-n', String(v)));
+            else if (typeof v === 'boolean') code.appendChild(el('span', 'sbx-tk-b', String(v)));
+            else                             code.appendChild(el('span', 'sbx-tk-s', '"' + String(v) + '"'));
+            if (i < keys.length - 1) code.appendChild(el('span', 'sbx-tk-p', ','));
+        });
+        code.appendChild(document.createTextNode('\n'));
+        code.appendChild(el('span', 'sbx-tk-p', '})'));
+        pre.appendChild(code);
+        return pre;
+    }
+
+    function tableBlock(spec, caption) {
+        const scroll = el('div', 'sbx-tablewrap');
+        scroll.setAttribute('tabindex', '0');
+        scroll.setAttribute('role', 'group');
+        scroll.setAttribute('aria-label', caption || 'Result rows');
+        const table = el('table', 'sbx-table');
+        if (caption) table.appendChild(el('caption', 'sbx-sr-only', caption));
+        const thead = el('thead');
+        const hr = el('tr');
+        spec.columns.forEach(c => {
+            const th = el('th', null, c);
+            th.setAttribute('scope', 'col');
+            hr.appendChild(th);
+        });
+        thead.appendChild(hr);
+        table.appendChild(thead);
+        const tbody = el('tbody');
+        spec.rows.forEach(r => {
+            const tr = el('tr');
+            r.forEach((cell, i) => {
+                const td = el(i === 0 ? 'th' : 'td', null, cell);
+                if (i === 0) td.setAttribute('scope', 'row');
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        scroll.appendChild(table);
+        return scroll;
+    }
+
+    function metaLine(text) {
+        const p = el('p', 'sbx-meta');
+        p.appendChild(ico('information-circle-outline'));
+        p.appendChild(el('span', null, text));
+        return p;
+    }
+
+    function answerBubble(text) {
+        const wrap = el('div', 'sbx-row sbx-row--bot sbx-anim');
+        const b = el('div', 'sbx-bubble sbx-bubble--bot');
+        const who = el('span', 'sbx-who');
+        who.appendChild(ico('sparkles-outline'));
+        who.appendChild(el('span', null, 'AmaxBot'));
+        b.appendChild(who);
+        String(text).split('\n\n').forEach(par => {
+            if (par.trim()) b.appendChild(el('p', 'sbx-bubble-text', par.trim()));
+        });
+        wrap.appendChild(b);
+        return wrap;
+    }
+
+    function measuredBlock(m) {
+        const box = el('div', 'sbx-measured sbx-anim');
+        const head = el('p', 'sbx-measured-head');
+        head.appendChild(ico('flash-outline'));
+        head.appendChild(el('span', null, m.label));
+        box.appendChild(head);
+        box.appendChild(tableBlock(m, m.label));
+        if (m.foot) box.appendChild(el('p', 'sbx-measured-foot', m.foot));
+        return box;
+    }
+
+    function policyBlock(p) {
+        const box = el('div', 'sbx-policy');
+        box.appendChild(el('p', 'sbx-policy-head', p.label));
+        const list = el('dl', 'sbx-policy-list');
+        p.rows.forEach(r => {
+            list.appendChild(el('dt', null, r[0]));
+            list.appendChild(el('dd', null, r[1]));
+        });
+        box.appendChild(list);
+        if (p.note) box.appendChild(el('p', 'sbx-policy-note', p.note));
+        return box;
+    }
+
+    function chipButton(sc, cls) {
+        const b = el('button', cls || 'sbx-chip');
+        b.type = 'button';
+        b.setAttribute('data-sbx', sc.id);
+        b.appendChild(el('span', 'sbx-chip-tool', sc.tool || 'no tool — refuses'));
+        b.appendChild(el('span', 'sbx-chip-q', sc.chip));
+        return b;
+    }
+
+    /* ---------- the honest miss ------------------------------------------- */
+    function missBubble(raw) {
+        const wrap = el('div', 'sbx-row sbx-row--bot sbx-anim');
+        const b = el('div', 'sbx-bubble sbx-bubble--bot sbx-bubble--miss');
+        const who = el('span', 'sbx-who');
+        who.appendChild(ico('help-circle-outline'));
+        who.appendChild(el('span', null, 'Sandbox'));
+        b.appendChild(who);
+        b.appendChild(el('p', 'sbx-bubble-text',
+            'This sandbox knows ' + COUNT + ' sample questions, and “' + raw + '” is not close to any of them.'));
+        b.appendChild(el('p', 'sbx-bubble-text',
+            'There is no model running on this page and no database behind it — these are canned transcripts. ' +
+            'The real assistant answers open questions against live data, behind a login. Try one of these:'));
+        const chips = el('div', 'sbx-chips sbx-chips--inline');
+        SBX_SCENARIOS.forEach(sc => chips.appendChild(chipButton(sc, 'sbx-chip sbx-chip--sm')));
+        b.appendChild(chips);
+        wrap.appendChild(b);
+        return wrap;
+    }
+
+    /* ---------- matching --------------------------------------------------- */
+    // Latin text is tokenised on whitespace; CJK has no spaces, so keywords are
+    // tested as substrings too. Both paths feed one score.
+    function normalize(s) {
+        return String(s).toLowerCase()
+            .replace(/[.,/#!$%^&*;:{}=_`~()?'"“”‘’\[\]<>|\\]/g, ' ')
+            .replace(/[、。，！？；：（）《》「」【】]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function scoreOf(q, sc) {
+        let score = 0;
+        (sc.strong || []).forEach(kw => {              // decisive terms break near-ties
+            const k = normalize(kw);
+            if (k && q.indexOf(k) !== -1) score += 5;
+        });
+        for (let i = 0; i < sc.match.length; i++) {
+            const k = normalize(sc.match[i]);
+            if (k && q.indexOf(k) !== -1) score += (k.length >= 4 ? 3 : 2);
+        }
+        const target = normalize(sc.q) + ' ' + normalize(sc.chip) + ' ' + (sc.tool || '');
+        let overlap = 0;
+        q.split(' ').forEach(w => { if (w.length > 3 && target.indexOf(w) !== -1) overlap++; });
+        return score + Math.min(overlap, 4);
+    }
+
+    function bestMatch(raw) {
+        const q = normalize(raw);
+        if (!q) return null;
+        let best = null, top = 0, second = 0;
+        SBX_SCENARIOS.forEach(sc => {
+            const s = scoreOf(q, sc);
+            if (s > top) { second = top; top = s; best = sc; }
+            else if (s > second) { second = s; }
+        });
+        return top >= 4 ? best : null;
+    }
+
+    /* ---------- the run ---------------------------------------------------- */
+    function hideEmpty() {
+        if (emptyState && !emptyState.hidden) emptyState.hidden = true;
+        if (clearBtn) clearBtn.hidden = false;
+    }
+
+    function run(sc, typedText) {
+        flushQueue();
+        runId += 1;
+        const myRun = runId;
+        hideEmpty();
+        panel.classList.add('is-running');
+        say('AmaxBot is working on: ' + sc.q);
+
+        const turn = turnNode();
+        turn.setAttribute('aria-label', 'Question: ' + sc.q);
+        transcript.appendChild(turn);
+
+        const beats = [];
+        const push = (delay, fn) => beats.push({ delay: delay, fn: fn, done: false });
+
+        // 0 — the question. The "matched to" note appears whenever the visitor
+        // typed something that is not verbatim the sample question, because the
+        // panel did not understand them — it found a neighbour.
+        const paraphrased = typedText && normalize(typedText) !== normalize(sc.q);
+        push(0, instant => {
+            const n = userBubble(typedText || sc.q, paraphrased ? sc.q : null);
+            add(n, instant, turn);
+            if (!instant) showTyping('routing…');
+        });
+
+        // 1 — routing decision
+        push(560, instant => {
+            removeTyping();
+            const s = step('1', 'Model picks a tool', sc.tool ? null : 'warn');
+            if (sc.tool) s.body.appendChild(toolPill(sc.tool));
+            else {
+                const p = el('span', 'sbx-pill sbx-pill--warn');
+                p.appendChild(ico('lock-closed-outline'));
+                p.appendChild(el('code', null, 'no tool available'));
+                s.body.appendChild(p);
+            }
+            s.body.appendChild(el('p', 'sbx-why', sc.why));
+            add(s.wrap, instant, turn);
+        });
+
+        if (sc.tool) {
+            // 2 — the call
+            push(620, instant => {
+                const s = step('2', 'Tool call');
+                s.body.appendChild(argsBlock(sc.tool, sc.args));
+                add(s.wrap, instant, turn);
+                if (!instant) showTyping('running ' + sc.tool + '…');
+            });
+
+            // 3 — rows back
+            push(760, instant => {
+                removeTyping();
+                const s = step('3', 'Result');
+                s.body.appendChild(tableBlock(sc.result, 'Sample rows returned by ' + sc.tool));
+                s.body.appendChild(metaLine(sc.result.meta));
+                add(s.wrap, instant, turn);
+                if (!instant) showTyping('writing the answer…');
+            });
+        } else {
+            // 2 — why nothing ran
+            push(620, instant => {
+                const s = step('2', 'Nothing executed', 'warn');
+                s.body.appendChild(policyBlock(sc.policy));
+                add(s.wrap, instant, turn);
+                if (!instant) showTyping('writing the answer…');
+            });
+        }
+
+        // 4 — the written answer
+        push(720, instant => {
+            removeTyping();
+            const s = step(sc.tool ? '4' : '3', 'Answer');
+            s.body.appendChild(answerBubble(sc.answer));
+            add(s.wrap, instant, turn);
+        });
+
+        if (sc.measured) {
+            push(320, instant => {
+                const n = measuredBlock(sc.measured);
+                add(n, instant, turn);
+            });
+        }
+
+        schedule(beats, myRun);
+    }
+
+    function runById(id, typedText) {
+        const sc = byId[id];
+        if (sc) run(sc, typedText);
+    }
+
+    /* ---------- wiring ----------------------------------------------------- */
+    // One delegated listener, so chips rendered later (inside a miss reply)
+    // work with no extra binding and nothing to leak.
+    panel.addEventListener('click', e => {
+        const btn = e.target.closest('[data-sbx]');
+        if (!btn || !panel.contains(btn)) return;
+        e.preventDefault();
+        runById(btn.getAttribute('data-sbx'));
+    });
+
+    if (form) {
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const raw = (input.value || '').trim().slice(0, 140);
+            if (!raw) { input.focus(); return; }
+            input.value = '';
+            const sc = bestMatch(raw);
+            if (sc) { run(sc, raw); return; }
+
+            // no match — say so, plainly
+            flushQueue();
+            runId += 1;
+            const myRun = runId;
+            hideEmpty();
+            panel.classList.add('is-running');
+            say('No sample question matched.');
+            const turn = turnNode();
+            transcript.appendChild(turn);
+            schedule([
+                { delay: 0,   done: false, fn: instant => { add(userBubble(raw, null), instant, turn); if (!instant) showTyping('searching sample questions…'); } },
+                { delay: 520, done: false, fn: instant => { removeTyping(); add(missBubble(raw), instant, turn); } }
+            ], myRun);
+        });
+
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { input.value = ''; input.blur(); }
+        });
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            flushQueue();
+            runId += 1;
+            transcript.querySelectorAll('.sbx-turn').forEach(n => n.remove());
+            if (emptyState) emptyState.hidden = false;
+            clearBtn.hidden = true;
+            say('Transcript cleared.');
+            transcript.scrollTop = 0;
+        });
+    }
+})();
+
+
+
+        /* ===== KB search comparison — a REPLAY of the measured 2026-09-02 run. =====
+           Nothing is queried here; the panel says so. ===== */
+// ===== Semantic KB search — the recorded run =====
+// Every field below is a verbatim record of one measured head-to-head executed
+// against the live knowledge base on 2026-09-02: the same eight staff questions
+// sent through the old MariaDB FULLTEXT path and the new hybrid embeddings +
+// FULLTEXT path. Nothing here is illustrative and nothing is rounded.
+//
+// A note on the headline, because the two numbers do not mean the same thing:
+//   keywordReturnedRows = 5/8 — the old search returned ANY rows for five
+//                               questions. On at least one of those five the
+//                               rows it returned were the wrong article.
+//   hybridCorrect       = 8/8 — the new search returned the CORRECT article.
+// Conflating "returned something" with "answered" would overstate the old
+// search, so the UI labels them separately.
+const KBS_RUN = {
+    date: '2026-09-02',
+    // 8 questions were run; 5 of them have their result pairs recorded verbatim
+    // and those 5 are the ones shown. The other 3 were English questions that
+    // both paths returned rows for; their transcripts were not kept.
+    total: 8,
+    recorded: 5,
+    score: {
+        keywordReturnedRows: 5,
+        hybridCorrect: 8,
+        zhTotal: 3,
+        zhKeywordZero: 3
+    },
+    corpus: {
+        articles: 26,
+        chunks: 110,
+        vectorMb: 0.64,
+        rebuildUsd: 0.0005
+    },
+    // The two independent root causes for Chinese returning nothing.
+    causes: [
+        {
+            title: 'No CJK tokenizer',
+            body: 'MariaDB FULLTEXT splits on whitespace. Chinese has none, so a whole question arrives as one unmatchable token.'
+        },
+        {
+            title: 'The Chinese columns were never indexed',
+            body: 'title_zh and content_zh were not in the FULLTEXT index at all. Even a working tokenizer would have had nothing to read.'
+        }
+    ],
+    queries: [
+        {
+            id: 'q1',
+            lang: 'en',
+            text: "can I send it back if I just don't like it",
+            gloss: null,
+            keyword: {
+                outcome: 'wrong',
+                rows: [{ title: 'Standard Operating Procedure — Mathis Home Direct Container', tag: 'Wrong article' }],
+                note: 'It returned rows, which is the failure that hurts: a container SOP, matched on surface words instead of intent.'
+            },
+            hybrid: {
+                outcome: 'hit',
+                rows: [{ title: 'Warranty, Damage Claims & Returns Policy', tag: 'Correct' }],
+                note: 'The question and the article share almost no literal words. Matched on meaning.'
+            }
+        },
+        {
+            id: 'q2',
+            lang: 'zh',
+            text: '沙发到货的时候有破损怎么办',
+            gloss: 'what do I do if the sofa arrives damaged',
+            keyword: {
+                outcome: 'none',
+                rows: [],
+                note: 'Zero rows — one unmatchable token, against columns that were not in the index.'
+            },
+            hybrid: {
+                outcome: 'hit',
+                rows: [{ title: 'Warranty, Damage Claims & Returns Policy', tag: 'Correct' }],
+                note: 'Embeddings are language-agnostic: the Chinese question lands next to the English article.'
+            }
+        },
+        {
+            id: 'q3',
+            lang: 'zh',
+            text: '退货政策是什么',
+            gloss: 'what is the return policy',
+            keyword: {
+                outcome: 'none',
+                rows: [],
+                note: 'Zero rows.'
+            },
+            hybrid: {
+                outcome: 'hit',
+                rows: [{ title: 'Shipping, Delivery & Order Hold Policy', tag: 'Correct' }],
+                note: 'The article staff actually need for this one — return windows live inside the shipping and hold policy.'
+            }
+        },
+        {
+            id: 'q4',
+            lang: 'zh',
+            text: '客户对羽绒过敏可以吗',
+            gloss: 'a customer is allergic to down — is that a problem?',
+            keyword: {
+                outcome: 'none',
+                rows: [],
+                note: 'Zero rows.'
+            },
+            hybrid: {
+                outcome: 'hit',
+                rows: [{ title: 'Cushion Construction — Down/Feather Content', tag: 'Correct' }],
+                note: 'An allergy question resolved to a materials spec. No shared vocabulary whatsoever.'
+            }
+        },
+        {
+            id: 'q5',
+            lang: 'en',
+            text: 'what is inside the seat cushions',
+            gloss: null,
+            keyword: {
+                outcome: 'hit',
+                rows: [{ title: 'Cushion Construction — Down/Feather Content', tag: 'Found it' }],
+                note: 'The shape keyword search is genuinely good at: question and article share literal words.'
+            },
+            hybrid: {
+                outcome: 'hit',
+                rows: [{ title: 'Cushion Construction — Down/Feather Content', tag: 'Ranked first' }],
+                note: 'Same article, ranked first. The hybrid keeps the cases FULLTEXT already won.'
+            }
+        }
+    ]
+};
+
+(function initKbSearchDemo() {
+    // KBS_RUN is a `const` declared by the data block, which must sit ABOVE this
+    // one in the same <script>. A `typeof` guard would not help here: touching a
+    // const before its declaration throws rather than reporting "undefined".
+    const root = document.getElementById('kbsearch');
+    if (!root) return;
+
+    const list     = root.querySelector('[data-kbs-list]');
+    const board    = root.querySelector('[data-kbs-board]');
+    const colOld   = root.querySelector('[data-kbs-col="keyword"]');
+    const colNew   = root.querySelector('[data-kbs-col="hybrid"]');
+    const resOld   = root.querySelector('[data-kbs-results="keyword"]');
+    const resNew   = root.querySelector('[data-kbs-results="hybrid"]');
+    const liveEl   = root.querySelector('[data-kbs-live]');
+    if (!list || !board || !colOld || !colNew || !resOld || !resNew) return;
+
+    // Read reduced motion from the page global when it exists so this module
+    // follows the same source of truth as the rest of the site, and fall back
+    // to its own query if this block is ever lifted somewhere else.
+    const motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const reducedMotion = () =>
+        (typeof PREFERS_REDUCED_MOTION !== 'undefined') ? PREFERS_REDUCED_MOTION : motionMq.matches;
+
+    const chips = [];
+    let currentId = null;
+    let hasRun = false;
+    let runToken = 0;
+    const timers = [];
+
+    const clearTimers = () => { while (timers.length) clearTimeout(timers.pop()); };
+    const later = (fn, ms) => { timers.push(setTimeout(fn, ms)); };
+    const findQuery = id => KBS_RUN.queries.find(q => q.id === id) || null;
+
+    // ---- Build the question selector from the data, so markup and data can
+    // ---- never drift apart.
+    KBS_RUN.queries.forEach((q, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'kbs-q';
+        btn.setAttribute('role', 'radio');
+        btn.setAttribute('aria-checked', i === 0 ? 'true' : 'false');
+        btn.tabIndex = i === 0 ? 0 : -1;
+        btn.dataset.kbsQ = q.id;
+
+        const lang = document.createElement('span');
+        lang.className = 'kbs-q-lang' + (q.lang === 'zh' ? ' is-zh' : '');
+        lang.textContent = q.lang === 'zh' ? '中文' : 'EN';
+
+        const body = document.createElement('span');
+        body.className = 'kbs-q-body';
+
+        const text = document.createElement('span');
+        text.className = 'kbs-q-text';
+        if (q.lang === 'zh') text.lang = 'zh';
+        text.textContent = q.text;
+        body.appendChild(text);
+
+        if (q.gloss) {
+            const gloss = document.createElement('span');
+            gloss.className = 'kbs-q-gloss';
+            gloss.textContent = q.gloss;
+            body.appendChild(gloss);
+        }
+
+        btn.append(lang, body);
+        btn.addEventListener('click', () => { hasRun = true; select(q.id, true); });
+        list.appendChild(btn);
+        chips.push(btn);
+    });
+
+    // ---- Roving focus: a radiogroup is driven with arrows, not with Tab.
+    list.addEventListener('keydown', e => {
+        const keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'];
+        if (!keys.includes(e.key)) return;
+        e.preventDefault();
+        const i = chips.findIndex(c => c.dataset.kbsQ === currentId);
+        let next;
+        if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = chips.length - 1;
+        else {
+            const step = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+            next = (i + step + chips.length) % chips.length;
+        }
+        hasRun = true;
+        select(chips[next].dataset.kbsQ, true);
+        chips[next].focus();
+    });
+
+    // ---- Rendering ---------------------------------------------------------
+    function buildRow(row, side) {
+        const el = document.createElement('div');
+        el.className = 'kbs-row is-enter';
+
+        const icon = document.createElement('span');
+        icon.className = 'kbs-row-icon';
+        icon.setAttribute('aria-hidden', 'true');
+
+        const title = document.createElement('span');
+        title.className = 'kbs-row-title';
+        title.textContent = row.title;     // textContent, so an "&" in a title is never an escaping bug
+
+        const tag = document.createElement('span');
+        tag.className = 'kbs-row-tag';
+        tag.textContent = row.tag;
+
+        el.append(icon, title, tag);
+        el.dataset.side = side;
+        return el;
+    }
+
+    function buildEmpty() {
+        const el = document.createElement('div');
+        el.className = 'kbs-empty is-enter';
+
+        const big = document.createElement('span');
+        big.className = 'kbs-empty-num';
+        big.textContent = '0';
+
+        const label = document.createElement('span');
+        label.className = 'kbs-empty-label';
+        label.textContent = 'rows returned';
+
+        el.append(big, label);
+        return el;
+    }
+
+    function paint(col, container, result, animate) {
+        col.classList.toggle('is-empty', result.outcome === 'none');
+        col.classList.toggle('is-wrong', result.outcome === 'wrong');
+        col.classList.toggle('is-hit', result.outcome === 'hit');
+
+        const parts = [];
+        if (result.outcome === 'none') {
+            parts.push(buildEmpty());
+        } else {
+            result.rows.forEach(r => parts.push(buildRow(r, result.outcome)));
+        }
+
+        const note = document.createElement('p');
+        note.className = 'kbs-note is-enter';
+        note.textContent = result.note;
+        parts.push(note);
+
+        parts.forEach((el, i) => {
+            if (animate) el.style.transitionDelay = (i * 70) + 'ms';
+            container.appendChild(el);
+        });
+
+        if (!animate) {
+            parts.forEach(el => { el.classList.remove('is-enter'); el.style.transitionDelay = ''; });
+            return;
+        }
+        // Two frames: one for the browser to accept the start state, one to
+        // transition away from it. A single rAF drops the animation in Safari.
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            parts.forEach(el => el.classList.remove('is-enter'));
+        }));
+    }
+
+    function announce(q) {
+        if (!liveEl) return;
+        const say = side => side.outcome === 'none'
+            ? 'returned 0 rows'
+            : 'returned ' + side.rows.map(r => r.title).join(', ') + ' (' + side.rows[0].tag + ')';
+        liveEl.textContent =
+            'Question: ' + (q.gloss || q.text) + '. Keyword search ' + say(q.keyword) +
+            '. Hybrid search ' + say(q.hybrid) + '.';
+    }
+
+    function select(id, animate) {
+        const q = findQuery(id);
+        if (!q) return;
+        currentId = id;
+
+        chips.forEach(c => {
+            const on = c.dataset.kbsQ === id;
+            c.classList.toggle('is-active', on);
+            c.setAttribute('aria-checked', on ? 'true' : 'false');
+            c.tabIndex = on ? 0 : -1;
+        });
+
+        // Invalidate anything still in flight from a previous question.
+        runToken += 1;
+        const token = runToken;
+        clearTimers();
+        resOld.replaceChildren();
+        resNew.replaceChildren();
+
+        if (!animate || reducedMotion()) {
+            board.classList.remove('is-running');
+            colOld.classList.remove('is-scanning');
+            colNew.classList.remove('is-scanning');
+            paint(colOld, resOld, q.keyword, false);
+            paint(colNew, resNew, q.hybrid, false);
+            announce(q);
+            return;
+        }
+
+        board.classList.add('is-running');
+        colOld.classList.add('is-scanning');
+        colNew.classList.add('is-scanning');
+
+        // Staggered only so the two columns read as two separate searches.
+        // These are presentation delays; the run recorded no timings and the
+        // UI therefore claims none.
+        later(() => {
+            if (token !== runToken) return;
+            colOld.classList.remove('is-scanning');
+            paint(colOld, resOld, q.keyword, true);
+        }, 420);
+
+        later(() => {
+            if (token !== runToken) return;
+            colNew.classList.remove('is-scanning');
+            board.classList.remove('is-running');
+            paint(colNew, resNew, q.hybrid, true);
+            announce(q);
+        }, 720);
+    }
+
+    // ---- Headline counters, matching the easing the rest of the site uses.
+    function countUp(el, target, duration) {
+        if (reducedMotion()) { el.textContent = String(target); return; }
+        const start = performance.now();
+        (function tick(now) {
+            const p = Math.min((now - start) / duration, 1);
+            el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+            if (p < 1) requestAnimationFrame(tick);
+        })(start);
+    }
+
+    function countScores() {
+        root.querySelectorAll('[data-kbs-count]').forEach(el => {
+            if (el.dataset.kbsDone) return;
+            el.dataset.kbsDone = '1';
+            const n = parseInt(el.dataset.kbsCount, 10);
+            if (!isNaN(n)) countUp(el, n, 1100);
+        });
+    }
+
+    // ---- First paint. The demo lives in a tab that is usually not active on
+    // ---- load, so the opening run is deferred until it is actually on screen.
+    function firstRun() {
+        if (hasRun) return;
+        hasRun = true;
+        select(KBS_RUN.queries[0].id, true);
+        countScores();
+    }
+
+    if ('IntersectionObserver' in window && !reducedMotion()) {
+        // threshold stays near zero: a card taller than the viewport would
+        // never satisfy a larger one, and the demo would sit empty forever.
+        const io = new IntersectionObserver(entries => {
+            for (const entry of entries) {
+                if (!entry.isIntersecting) continue;
+                io.disconnect();
+                firstRun();
+            }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
+        io.observe(root);
+    } else {
+        firstRun();
+    }
+
+    // Render the resting state immediately as well, so the columns are never
+    // blank for a reader who arrives before the observer fires.
+    select(KBS_RUN.queries[0].id, false);
+})();
     </script>
 </body>
 
