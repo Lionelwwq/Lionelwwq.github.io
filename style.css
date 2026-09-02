@@ -3299,3 +3299,212 @@ article::-webkit-scrollbar-thumb:hover {
         display: none;
     }
 }
+
+/* ============================================================================
+   2026-09 rework — narrative, case studies, scroll reveal, interaction polish
+   Appended so the cascade wins over the older rules above without editing them.
+   ========================================================================== */
+
+/* ---- Featured project narrative ---- */
+.featured-narrative {
+    position: relative;
+    z-index: 1;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text-subtle);
+    margin: 14px 0 20px;
+    max-width: 68ch;
+}
+.featured-narrative strong { color: var(--text-light); font-weight: 600; }
+
+/* ---- Case studies ---- */
+/* The page router hides every <article> inside .content-card and shows only the
+   active tab (.content-card article { display:none }). The case studies are
+   semantically articles too, so without this they inherit that rule and collapse
+   to zero height — visible in the DOM, invisible on screen. */
+.content-card article.case-card {
+    display: block;
+    /* also re-assert padding: the responsive rules set .content-card article
+       padding at 1.75rem / 1.25rem, which would override the card's own. */
+    padding: 1.25rem 1.35rem;
+}
+@media (max-width: 580px) {
+    .content-card article.case-card { padding: 1rem 1.05rem; }
+}
+/* ===== Featured narrative ===== */
+.featured-narrative {
+    position: relative;
+    z-index: 1;
+    max-width: 72ch;
+    margin: 0 0 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: var(--text-subtle);
+}
+
+/* ===== Case studies ===== */
+.case-list {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2.25rem;
+}
+
+.case-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.case-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-accent);
+}
+
+.case-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.9rem;
+}
+
+.case-head ion-icon {
+    font-size: 1.2rem;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.case-head h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    line-height: 1.35;
+}
+
+.case-tag {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.case-row {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 0.5rem 1rem;
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.case-row:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.case-k {
+    padding-top: 0.15rem;
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.case-v {
+    margin: 0;
+    font-size: 0.83rem;
+    line-height: 1.7;
+    color: var(--text-subtle);
+}
+
+.case-v em {
+    color: var(--text-light);
+    font-style: normal;
+    font-weight: 600;
+}
+
+.case-v code {
+    padding: 0.05rem 0.32rem;
+    border: 1px solid var(--border-accent);
+    border-radius: 4px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.78em;
+    white-space: nowrap;
+}
+
+@media (max-width: 580px) {
+    .case-row {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+    }
+
+    .case-tag {
+        display: none;
+    }
+}
+
+/* ---- Scroll reveal ---- */
+/* Elements start slightly low and transparent, then settle once. The transform
+   is the only animated property besides opacity, so this never triggers layout. */
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    will-change: opacity, transform;
+}
+.reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+                transform 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+    will-change: auto;
+}
+
+/* ---- Interaction polish ---- */
+.stat-item { transition: transform var(--transition), border-color var(--transition); }
+.stat-item:hover { transform: translateY(-2px); border-color: var(--border-accent); }
+
+.module-item { transition: transform var(--transition), border-color var(--transition); }
+.module-item:hover { transform: translateX(3px); border-color: var(--border-accent); }
+
+.tag { transition: transform var(--transition), color var(--transition), border-color var(--transition); }
+.tag:hover { transform: translateY(-1px); color: var(--accent); border-color: var(--border-accent); }
+
+/* Focus must always be visible, and must not be the hover style. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+::selection { background: var(--accent); color: #06060e; }
+
+/* ---- Respect the OS setting: no motion, nothing hidden ---- */
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.is-revealed {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    .stat-item:hover, .module-item:hover, .case-study:hover, .tag:hover { transform: none; }
+}
+html.reduced-motion .reveal,
+html.reduced-motion .reveal.is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}

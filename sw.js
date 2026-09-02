@@ -1,4 +1,5 @@
-const CACHE_NAME = 'lionel-portfolio-v1';
+// Bump this on EVERY static-file change or returning visitors keep the old page.
+const CACHE_NAME = 'lionel-portfolio-v2-2026-09-02';
 const ASSETS = [
     '/',
     '/index.html',
