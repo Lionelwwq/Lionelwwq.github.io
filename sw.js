@@ -1,5 +1,5 @@
 // Bump this on EVERY static-file change or returning visitors keep the old page.
-const CACHE_NAME = 'lionel-portfolio-v10-2026-09-02';
+const CACHE_NAME = 'lionel-portfolio-v11-2026-09-02';
 // Only same-origin files the shell needs to paint. Cross-origin assets (the
 // unpkg ionicons module, Google Fonts) are deliberately NOT precached: a single
 // failed request rejects cache.addAll() and the whole install aborts, which is
@@ -7,7 +7,9 @@ const CACHE_NAME = 'lionel-portfolio-v10-2026-09-02';
 const ASSETS = [
     '/',
     '/index.html',
-    '/style.css',
+    // versioned to match the <link> in the page: a stale entry for the
+    // old URL can never satisfy a request for the new one
+    '/style.css?v=10',
     '/manifest.json',
     '/selfie.png',
     '/selfie2.png',

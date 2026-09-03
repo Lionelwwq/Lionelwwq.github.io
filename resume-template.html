@@ -287,7 +287,7 @@
         <li>Sole engineer of the ERP platform both companies run on daily: <strong>1,048 REST endpoints</strong> across 77 Node/Express modules, 150 pages, 4 MySQL databases and <strong>274 tables</strong>, bilingual EN/ZH, ~230,000 lines in production. The primary database sits overseas, so batching, a local read mirror and caching &mdash; not CRUD &mdash; are the real work.</li>
         <li>Built <strong>AmaxBot</strong>, an in-house GPT assistant: a chat UI with 55 function-calling tools plus a 3,300-line IMAP service answering 27 email commands. Its tool catalog is filtered by role before it reaches the model, so a non-admin request never contains a write tool.</li>
         <li>Integrated the platform outward &mdash; EDI over SOAP with an EDI provider (POs, acknowledgments, ASNs, invoices) and an accounting hub of 6 connectors and 42 APIs. Every push is idempotent and keyed on the document number, so a resend cannot double-post.</li>
-        <li>Own production: Windows and Linux servers, the AWS footprint, deployments, monitoring, backups and 726 operational scripts, with access enforced through 124 role-based permission checks.</li>
+        <li>Own production and its security posture: Windows and Linux servers, the AWS footprint, deployments, monitoring, backups and 726 operational scripts &mdash; with access enforced through <strong>124 role-based permission checks</strong>, OTP / two-factor sign-in, session and CSRF handling, and audit logging on every write.</li>
       </ul>
     </article>
 
@@ -299,7 +299,7 @@
         <li>Administered the server estate &mdash; Windows and Linux, virtualization, storage, backup and restore &mdash; and the office and warehouse network across FortiGate firewalls, VPN, switching and Wi-Fi.</li>
         <li>Ran Google Workspace for the group (accounts, groups, shared drives, endpoint and mobile policy) and the DNS estate; hardened mail with SPF, DKIM and DMARC and added ML-assisted phishing screening.</li>
         <li>Built and maintained the AWS footprint (EC2, S3, IAM) behind internal applications, plus the API and EDI links to the warehouse and trading partners and the databases behind them.</li>
-        <li>Ran security audits, vulnerability remediation and data-protection work, and provided day-to-day technical support and incident response for staff across offices and warehouses.</li>
+        <li>Ran the security programme &mdash; FortiGate firewall policy and VPN, endpoint hardening, phishing defence, vulnerability scanning and remediation, access reviews and compliance auditing &mdash; plus incident response and day-to-day technical support for staff across offices and warehouses.</li>
       </ul>
     </article>
 
@@ -319,15 +319,15 @@
 
     <div class="def row">
       <div class="rail">Dealer Portal</div>
-      <div class="txt">Customer-facing portal for the dealer network: per-dealer catalogs, price lists, branding and photo-upload claims. Every query is tenancy-scoped, so one account can never read another's data.</div>
+      <div class="txt">Customer-facing portal for the dealer network &mdash; catalogs, price lists, branding, photo-upload claims &mdash; with every query tenancy-scoped.</div>
     </div>
     <div class="def row">
       <div class="rail">Warehouse Docs</div>
-      <div class="txt">Eight document types with Excel and PDF generation, five email flows and timber-legality compliance, all driven off the same order hub the rest of the platform reads.</div>
+      <div class="txt">Eight document types with Excel and PDF generation, five email flows and timber-legality compliance, off one order hub.</div>
     </div>
     <div class="def row">
       <div class="rail">Social Video</div>
-      <div class="txt">Standalone Node app that turns a Mandarin script into a finished 9:16 video: text-to-speech, imagery, burned-in subtitles and FFmpeg assembly, with caption timing aligned to measured audio.</div>
+      <div class="txt">Node app turning a Mandarin script into a finished 9:16 video: speech, imagery, burned-in subtitles, FFmpeg assembly.</div>
     </div>
   </section>
 
