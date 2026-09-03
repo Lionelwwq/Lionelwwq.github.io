@@ -3515,7 +3515,6 @@ html.reduced-motion .reveal.is-revealed {
     transition: none !important;
 }
 
-
 /* ============================================================================
    2026-09-02 audit fixes — contrast, print, and the nested-article overrides
    ========================================================================== */
@@ -3586,7 +3585,6 @@ html.reduced-motion .reveal.is-revealed {
     }
     .content-card article { overflow: visible !important; }
 }
-
 
 /* ============================================================================
    AmaxBot Sandbox
@@ -4342,16 +4340,11 @@ html.reduced-motion .sbx-typing-dots i { animation: none; opacity: 0.7; }
     .sbx-anim { opacity: 1 !important; transform: none !important; }
 }
 
-
 /* A CSS `display` value beats the [hidden] attribute, so any element the JS
    hides with `el.hidden = true` stays on screen unless display:none is
    re-asserted. This bit the sandbox empty state, which kept sitting above the
    transcript after a question had already run. 2026-09-02. */
 [hidden] { display: none !important; }
-
-
-
-
 
 /* ============================================================================
    Semantic KB search — recorded head-to-head
@@ -4952,259 +4945,11 @@ html.reduced-motion .kbs-col.is-scanning .kbs-scan span { animation: none; opaci
     .kbs-board { grid-template-columns: repeat(2, 1fr); }
 }
 
-
-
-
-
-
-
-/* ============================================================================
-   Architecture diagram — inline SVG, no library, no external font.
-   Every colour resolves from the site's existing tokens, so the light theme
-   is handled by [data-theme="light"] flipping those tokens. Nothing here
-   needs a second theme block.
-
-   Base state is FULLY VISIBLE. The draw-in is purely additive and only runs
-   once an ancestor gains .is-revealed, so if IntersectionObserver never fires
-   (or JS is off) the diagram still renders complete.
-   ========================================================================= */
-
-.arch-fig {
-    margin: 0 0 1.75rem;
-    padding: 1.25rem 1.25rem 1rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-}
-
-/* On a phone the available width inside the card is ~270px. Scaling a
-   600-unit viewBox into that puts the small labels near 6px, which is not
-   readable. The SVG therefore holds a floor width and the wrapper scrolls;
-   .arch-hint tells the reader that is what is happening. */
-.arch-scroll {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    /* Keeps the scrollbar from covering the last row of labels. */
-    padding-bottom: 2px;
-}
-
-.arch-svg {
-    display: block;
-    width: 100%;
-    min-width: 420px;
-    height: auto;
-    /* Self-contained: never depends on the webfont having loaded. */
-    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
-    color: var(--accent);
-    -webkit-font-smoothing: antialiased;
-}
-
-.arch-hint {
-    display: none;
-    margin-top: 0.6rem;
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    opacity: 0.85;
-}
-
-.arch-caption {
-    margin-top: 0.9rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--border-subtle);
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: var(--text-muted);
-}
-
-/* ---- bands ---- */
-.arch-band {
-    fill: var(--bg-light);
-    stroke: var(--border-subtle);
-    stroke-width: 1;
-}
-
-/* ---- tier captions ---- */
-.arch-cap {
-    fill: var(--text-light);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.1px;
-}
-
-.arch-cap-sub {
-    fill: var(--text-muted);
-    font-size: 12.5px;
-    font-weight: 500;
-    letter-spacing: 0;
-}
-
-/* ---- nodes ---- */
-.arch-node {
-    fill: var(--bg-card);
-    stroke: var(--border-subtle);
-    stroke-width: 1;
-}
-
-/* AmaxBot and KB Search — the two the page actually demos. */
-.arch-node--hi {
-    fill: var(--accent-glow);
-    stroke: currentColor;          /* currentColor === --accent, set on .arch-svg */
-    stroke-width: 1.5;
-}
-
-.arch-node--bar {
-    fill: var(--accent-glow);
-    stroke: var(--border-accent);
-}
-
-.arch-t {
-    fill: var(--text-light);
-    font-size: 15.5px;
-    font-weight: 700;
-    text-anchor: middle;
-}
-
-.arch-t--hi { fill: currentColor; }
-
-.arch-t--lg { font-size: 19px; }
-
-.arch-m {
-    fill: var(--text-muted);
-    font-size: 12.5px;
-    font-weight: 500;
-    text-anchor: middle;
-}
-
-.arch-m--foot { fill: var(--text-subtle); }
-
-/* ---- "NEW" chip on KB Search ---- */
-.arch-chip-bg { fill: var(--accent-secondary); }
-
-.arch-chip {
-    fill: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-anchor: middle;
-}
-
-/* ---- database cylinders ---- */
-.arch-db-body {
-    fill: var(--bg-card);
-    stroke: var(--border-accent);
-    stroke-width: 1.25;
-}
-
-.arch-db-top {
-    fill: var(--accent-glow);
-    stroke: currentColor;
-    stroke-width: 1.25;
-}
-
-.arch-db-label {
-    fill: var(--text-subtle);
-    font-size: 13px;
-    font-weight: 600;
-    text-anchor: middle;
-}
-
-/* ---- connectors ---- */
-.arch-line {
-    stroke: var(--border-accent);
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    /* pathLength="1" on every line makes one dash unit == the whole segment,
-       so short drops and long buses draw at the same visual rate. */
-    stroke-dasharray: 1;
-    stroke-dashoffset: 0;
-}
-
-.arch-line--bus { stroke-width: 1.75; }
-
 /* ============================================================================
    Draw-in. Additive only: `backwards` fill supplies the hidden start state
    during the delay, and the element returns to its visible base state after.
    ========================================================================= */
 
-@keyframes archNodeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: none; }
-}
-
-@keyframes archDraw {
-    from { stroke-dashoffset: 1; }
-    to   { stroke-dashoffset: 0; }
-}
-
-@keyframes archBandIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* One rule per tier. `.arch-fig.is-revealed` covers the figure being observed
-   directly; `.is-revealed .arch-fig` covers it riding along inside an ancestor
-   the site already observes (e.g. .featured-project). */
-.arch-fig.is-revealed .arch-band,
-.is-revealed .arch-fig .arch-band {
-    animation: archBandIn 420ms ease both;
-}
-
-.arch-fig.is-revealed .arch-group,
-.is-revealed .arch-fig .arch-group {
-    animation: archNodeIn 460ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
-    animation-delay: var(--arch-d, 0ms);
-}
-
-.arch-fig.is-revealed .arch-line,
-.is-revealed .arch-fig .arch-line {
-    animation: archDraw 520ms cubic-bezier(0.65, 0, 0.35, 1) backwards;
-    animation-delay: var(--arch-d, 0ms);
-}
-
-/* Tier stagger — top of the stack downward, wires trailing each tier. */
-.arch-group.t1 { --arch-d:  60ms; }
-.arch-line.w1  { --arch-d: 220ms; }
-.arch-group.t2 { --arch-d: 300ms; }
-.arch-line.w2  { --arch-d: 460ms; }
-.arch-group.t3 { --arch-d: 540ms; }
-.arch-line.w3  { --arch-d: 660ms; }
-.arch-group.t4 { --arch-d: 740ms; }
-
-/* ---- Reduced motion: land on the finished state, never hide anything ---- */
-@media (prefers-reduced-motion: reduce) {
-    .arch-fig .arch-band,
-    .arch-fig .arch-group,
-    .arch-fig .arch-line {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-        stroke-dashoffset: 0 !important;
-    }
-}
-
-html.reduced-motion .arch-fig .arch-band,
-html.reduced-motion .arch-fig .arch-group,
-html.reduced-motion .arch-fig .arch-line {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    stroke-dashoffset: 0 !important;
-}
-
-/* ---- Narrow screens ---- */
-@media (max-width: 620px) {
-    /* Reclaim the padding the diagram would otherwise lose to the card. */
-    .arch-fig { padding: 0.9rem 0.75rem 0.8rem; }
-    .arch-hint { display: block; }
-}
-
-@media print {
-    .arch-fig { break-inside: avoid; }
-    .arch-scroll { overflow: visible; }
-    .arch-svg { min-width: 0; }
-}
 /* Two product shots side by side under the flagship. The second one is a page a
    visitor can actually open, which is worth more than a second decorative image. */
 .featured-shots {

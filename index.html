@@ -36,7 +36,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css?v=10" />
+    <link rel="stylesheet" href="style.css?v=12" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
     <!-- JSON-LD Structured Data -->
@@ -431,153 +431,6 @@
                             </div>
                         </div>
 
-<figure class="arch-fig" aria-labelledby="archCaption">
-  <div class="arch-scroll">
-    <svg class="arch-svg" viewBox="0 0 600 628" role="img"
-         aria-labelledby="archTitle archDesc" xmlns="http://www.w3.org/2000/svg">
-      <title id="archTitle">Architecture of the Amax Leather ERP platform</title>
-      <desc id="archDesc">A four-tier request and response stack. At the top, four surfaces people
-        use: a staff web UI of 150 pages, a multi-tenant dealer portal, storefront chat, and an
-        email bot that answers 27 commands. Below them, six subsystems: AmaxBot with 55 chat tools
-        and 27 email commands; a knowledge-base search that combines embeddings with FULLTEXT over
-        110 chunks; an accounting hub of 6 connectors and 42 APIs; the dealer portal; EDI
-        over SOAP carrying purchase orders, shipping notices and invoices; and warehouse documents
-        covering 8 document types including Lacey Act compliance. Those sit on one Express and
-        Node.js application layer exposing 1,048 REST endpoints behind 124 permission checks, in
-        English and Chinese. At the base, four MySQL databases holding 274 tables, including the
-        order hub carrying tens of thousands of orders.</desc>
-
-      <!-- ============ band backgrounds ============ -->
-      <rect class="arch-band" x="8" y="8"   width="584" height="118" rx="14"/>
-      <rect class="arch-band" x="8" y="170" width="584" height="202" rx="14"/>
-      <rect class="arch-band" x="8" y="416" width="584" height="90"  rx="14"/>
-      <rect class="arch-band" x="8" y="550" width="584" height="68"  rx="14"/>
-
-      <!-- ============ connectors ============
-           Wires stop on the band boundaries, never on the boxes, so no line can
-           ever cross a tier caption. pathLength="1" normalises every segment so
-           the draw-in runs at one visual rate regardless of real length. -->
-      <g class="arch-wires" fill="none">
-        <!-- surfaces -> subsystems -->
-        <line class="arch-line w1" pathLength="1" x1="82.5"  y1="126" x2="82.5"  y2="144"/>
-        <line class="arch-line w1" pathLength="1" x1="227.5" y1="126" x2="227.5" y2="144"/>
-        <line class="arch-line w1" pathLength="1" x1="372.5" y1="126" x2="372.5" y2="144"/>
-        <line class="arch-line w1" pathLength="1" x1="517.5" y1="126" x2="517.5" y2="144"/>
-        <line class="arch-line arch-line--bus w1" pathLength="1" x1="82.5" y1="144" x2="517.5" y2="144"/>
-        <line class="arch-line w1" pathLength="1" x1="106.5" y1="144" x2="106.5" y2="170"/>
-        <line class="arch-line w1" pathLength="1" x1="299.5" y1="144" x2="299.5" y2="170"/>
-        <line class="arch-line w1" pathLength="1" x1="492.5" y1="144" x2="492.5" y2="170"/>
-
-        <!-- subsystems -> application layer -->
-        <line class="arch-line w2" pathLength="1" x1="106.5" y1="372" x2="106.5" y2="394"/>
-        <line class="arch-line w2" pathLength="1" x1="299.5" y1="372" x2="299.5" y2="394"/>
-        <line class="arch-line w2" pathLength="1" x1="492.5" y1="372" x2="492.5" y2="394"/>
-        <line class="arch-line arch-line--bus w2" pathLength="1" x1="106.5" y1="394" x2="492.5" y2="394"/>
-        <line class="arch-line w2" pathLength="1" x1="300" y1="394" x2="300" y2="416"/>
-
-        <!-- application layer -> data -->
-        <line class="arch-line w3" pathLength="1" x1="300" y1="506" x2="300" y2="528"/>
-        <line class="arch-line arch-line--bus w3" pathLength="1" x1="82.5" y1="528" x2="517.5" y2="528"/>
-        <line class="arch-line w3" pathLength="1" x1="82.5"  y1="528" x2="82.5"  y2="550"/>
-        <line class="arch-line w3" pathLength="1" x1="227.5" y1="528" x2="227.5" y2="550"/>
-        <line class="arch-line w3" pathLength="1" x1="372.5" y1="528" x2="372.5" y2="550"/>
-        <line class="arch-line w3" pathLength="1" x1="517.5" y1="528" x2="517.5" y2="550"/>
-      </g>
-
-      <!-- ============ tier 1 — surfaces ============ -->
-      <text class="arch-cap" x="20" y="30">SURFACES<tspan class="arch-cap-sub" dx="10">four ways in</tspan></text>
-
-      <g class="arch-group t1">
-        <rect class="arch-node" x="16"  y="40" width="133" height="78" rx="11"/>
-        <text class="arch-t" x="82.5" y="66">Staff UI</text>
-        <text class="arch-m" x="82.5" y="102">150 pages</text>
-      </g>
-      <g class="arch-group t1">
-        <rect class="arch-node" x="161" y="40" width="133" height="78" rx="11"/>
-        <text class="arch-t" x="227.5" y="66">Dealer</text>
-        <text class="arch-t" x="227.5" y="82">Portal</text>
-        <text class="arch-m" x="227.5" y="102">multi-tenant</text>
-      </g>
-      <g class="arch-group t1">
-        <rect class="arch-node" x="306" y="40" width="133" height="78" rx="11"/>
-        <text class="arch-t" x="372.5" y="66">Storefront</text>
-        <text class="arch-t" x="372.5" y="82">Chat</text>
-        <text class="arch-m" x="372.5" y="102">live</text>
-      </g>
-      <g class="arch-group t1">
-        <rect class="arch-node" x="451" y="40" width="133" height="78" rx="11"/>
-        <text class="arch-t" x="517.5" y="66">Email Bot</text>
-        <text class="arch-m" x="517.5" y="102">27 commands</text>
-      </g>
-
-      <!-- ============ tier 2 — subsystems ============ -->
-      <text class="arch-cap" x="20" y="192">SUBSYSTEMS<tspan class="arch-cap-sub" dx="10">six of them</tspan></text>
-
-      <g class="arch-group t2">
-        <rect class="arch-node arch-node--hi" x="16" y="202" width="181" height="76" rx="11"/>
-        <text class="arch-t arch-t--hi" x="106.5" y="230">AmaxBot</text>
-        <text class="arch-m" x="106.5" y="250">55 chat tools</text>
-        <text class="arch-m" x="106.5" y="266">27 email commands</text>
-      </g>
-      <g class="arch-group t2">
-        <rect class="arch-node arch-node--hi" x="209" y="202" width="181" height="76" rx="11"/>
-        <text class="arch-t arch-t--hi" x="299.5" y="230">KB Search</text>
-        <text class="arch-m" x="299.5" y="250">hybrid embeddings</text>
-        <text class="arch-m" x="299.5" y="266">FULLTEXT · 110 chunks</text>
-      </g>
-      <g class="arch-group t2">
-        <rect class="arch-node" x="402" y="202" width="181" height="76" rx="11"/>
-        <text class="arch-t" x="492.5" y="230">Accounting Hub</text>
-        <text class="arch-m" x="492.5" y="250">6 connectors</text>
-        <text class="arch-m" x="492.5" y="266">42 APIs</text>
-      </g>
-      <g class="arch-group t2">
-        <rect class="arch-node" x="16" y="290" width="181" height="76" rx="11"/>
-        <text class="arch-t" x="106.5" y="318">Dealer Portal</text>
-        <text class="arch-m" x="106.5" y="338">per-dealer catalogs</text>
-        <text class="arch-m" x="106.5" y="354">orders · claims</text>
-      </g>
-      <g class="arch-group t2">
-        <rect class="arch-node" x="209" y="290" width="181" height="76" rx="11"/>
-        <text class="arch-t" x="299.5" y="318">Partner EDI</text>
-        <text class="arch-m" x="299.5" y="338">over SOAP</text>
-        <text class="arch-m" x="299.5" y="354">POs · ASN · invoices</text>
-      </g>
-      <g class="arch-group t2">
-        <rect class="arch-node" x="402" y="290" width="181" height="76" rx="11"/>
-        <text class="arch-t" x="492.5" y="318">Warehouse Docs</text>
-        <text class="arch-m" x="492.5" y="338">8 document types</text>
-        <text class="arch-m" x="492.5" y="354">Lacey Act compliance</text>
-      </g>
-
-      <!-- ============ tier 3 — application layer ============ -->
-      <text class="arch-cap" x="20" y="438">APPLICATION LAYER</text>
-      <g class="arch-group t3">
-        <rect class="arch-node arch-node--bar" x="16" y="448" width="568" height="52" rx="11"/>
-        <text class="arch-t arch-t--lg" x="300" y="472">Express · Node.js</text>
-        <text class="arch-m" x="300" y="490">1,048 REST endpoints · 124 permission checks · EN / ZH</text>
-      </g>
-
-      <!-- ============ tier 4 — data ============
-           One slim rail, not four cylinders: the tier caption already says
-           "4 MySQL databases · 274 tables", so four more MySQL labels were
-           repeating it in pictures and cost the diagram ~85px of height. -->
-      <text class="arch-cap" x="20" y="572">DATA<tspan class="arch-cap-sub" dx="10">4 MySQL databases · 274 tables</tspan></text>
-
-      <g class="arch-group t4">
-        <rect class="arch-node" x="16" y="582" width="568" height="30" rx="11"/>
-        <path class="arch-db-body" d="M212 590 V 604 A 10 3.5 0 0 0 232 604 V 590 Z"/>
-        <ellipse class="arch-db-top" cx="222" cy="590" rx="10" ry="3.5"/>
-        <text class="arch-m arch-m--foot" x="317" y="601">order hub</text>
-      </g>
-    </svg>
-  </div>
-  <p class="arch-hint" aria-hidden="true">Scroll the diagram sideways to see all four columns.</p>
-  <figcaption class="arch-caption" id="archCaption">
-    Request and response flow through the platform &mdash; surfaces on top, four MySQL databases at
-    the base.
-  </figcaption>
-</figure>
 
                         <figure class="featured-shots">
                             <div class="featured-img-link">
@@ -585,7 +438,7 @@
                                     <img src="erp-login-preview.png" alt="The ERP sign-in screen, with account login and email one-time-password options" class="showcase-img" loading="lazy" width="1200" height="750" />
                                 </div>
                             </div>
-                            <figcaption class="featured-shot-cap">The sign-in screen &mdash; the only one I can publish. Everything past it reads live company data, so the diagram above stands in.</figcaption>
+                            <figcaption class="featured-shot-cap">The sign-in screen &mdash; the only one I can publish. Everything past it reads live company data.</figcaption>
                         </figure>
                     </div>
 
@@ -3742,7 +3595,7 @@ const KBS_RUN = {
 })();
 
 /* ---- The three demos share one panel ---------------------------------------
-   Two full-height demo sections stacked to 2,300px between the diagram and the
+   Two full-height demo sections stacked to 2,300px between the flagship and the
    case studies, and both were about the same project. One tabbed panel instead,
    with a third tab so "try it" means more than one thing. Panels are toggled
    with the hidden attribute; both existing panels render their resting state on
