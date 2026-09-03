@@ -4,35 +4,53 @@
 <meta charset="UTF-8">
 <!-- Source of truth for Lionel_Wang_Resume.pdf. Rendered to A4 with puppeteer
      (format 'A4', zero margins). Print lays out at 96dpi, so the page box is
-     794 x 1123 CSS px = 595.5 x 842 pt, the template's scale. Measured in that
-     box: 1 page, content ends at 1105.9px, 17.1px clear of the bottom edge.
+     794 x 1123 CSS px. Measured in that box: 1 page, content ends at 1087.55px,
+     35.45px clear. The previous revision ended at 1105.91px.
 
-     LAYOUT   One vertical axis carries every date, project name and skill
-              label. --rail + --gap + 2*--pad = 192px is INVARIANT, which keeps
-              the body column at 602px: widen the rail and the margins pay for
-              it, so no line of body copy re-wraps. Do not break that sum.
-     RHYTHM   Every vertical gap is a step on one 3px scale (--s1..--s5) -
-              bullets 3, label-to-content 6, entry-to-entry 9, masthead-to-lede
-              12, section-to-section 15. Nothing is hand-set any more.
-     COLOUR   Three greys: --ink (headings, titles, emphasis), --body (prose),
-              --mute (dates, orgs, schools, contact). One accent in three jobs
-              only - the role line, the cap on each section rule, the bullet
-              markers. Printed luminance 9 / 20 / 45 / accent 27, so the
-              hierarchy survives a mono laser.
-     BASELINE Every rail is nudged down so a date sits on the same baseline as
-              the title beside it - 1px, and 2px on the experience dates.
-              Measured residual 0.00px. It is a relative offset, not padding,
-              because the rail is the taller item in the skills rows and
-              padding there would push the page 5px longer for nothing.
-     WRAPPING text-wrap:pretty kills one-word last lines. One &nbsp; in the
-              Dealer Portal line does what pretty would not.
-     DOM      name -> summary -> experience -> projects -> skills -> education,
-              h1/h2/h3 with no skipped level, so an ATS reads it correctly even
-              though the dates sit on the left.
-     Skills were tested as two columns: 7 value lines become 19 and the section
-     grows 52px. One column is both denser and easier to parse. Do not change it.
+     THE BRIEF  Shorter AND broader. The current role now answers all eight duty
+                areas of the official job description, and the body copy is
+                shorter than the four-bullet version it replaces: 358 words of
+                lede + experience against 384, 24 rendered lines against 27.
+                The word saving is modest (-6.8%); the real fix is per-bullet
+                length. The old version had seven bullets running 3 lines. This
+                one has none over 2, so the same page carries twice the ground.
+     HOW        Every experience bullet opens with a bolded one- or two-word
+                CATEGORY that ABSORBS the sentence's opening clause rather than
+                being added to it: "Ran the server and network estate: Windows
+                and Linux hosts..." becomes "Servers - Windows and Linux
+                hosts...". Breadth costs nothing and the labels double as a
+                scannable index of the duty areas.
+     SHAPE      Current role: 7 labelled bullets, each exactly 2 lines. System
+                Administrator: 6 labelled bullets, each exactly 1 line, mapping
+                to the five duties of the 2024 resume plus the network. Website
+                Developer: 2 one-line bullets. A three-line bullet means the copy
+                is wrong, not the label.
+     FREE SLOT  "reporting to executive management" rides on the org line, which
+                had unused width - the JD's authority framing at zero line cost.
+     LAYOUT     One vertical axis carries every date, project name and skill
+                label. --rail + --gap + 2*--pad = 192px is INVARIANT, which keeps
+                the body column at 602px. Do not break that sum.
+     RHYTHM     Every vertical gap is a step on one 3px scale (--s1..--s6).
+     COLOUR     Three greys + one accent in three jobs (role line, cap on each
+                section rule, bullet markers). Verified against a grayscale
+                render: the hierarchy survives a mono laser.
+     DOM        name -> summary -> experience -> projects -> skills -> education,
+                h1/h2/h3 with no skipped level, so an ATS reads it correctly even
+                though the dates sit on the left.
+     ROBUSTNESS Page height is a function of LINE COUNT, not font metrics,
+                because line-height is a multiple of font-size. So the test that
+                matters is how close each line sits to wrapping. Swept
+                letter-spacing across the whole sheet: 1 page through
+                +0.20px/char; the first body line wraps and it paginates at
+                +0.25px. Roboto and Arial differ by 0.3% in width at this
+                measure, so rendering with Google Fonts BLOCKED, or with Arial
+                or Segoe UI forced, measures identically - 1087.55px, 24 lines.
+     WATCH THE  The lede is the wrap-critical line: its second line ends about
+     LEDE       two characters short of wrapping to a third. Lengthening that
+                sentence by a couple of characters costs 15px and drops the
+                tracking headroom from +0.20 to +0.10. Re-measure it first.
      If you add content, cut words elsewhere; do not shrink the type scale, and
-     re-measure - the page is full. -->
+     re-measure - re-run the tracking sweep, not just the height. -->
 <meta name="robots" content="noindex, nofollow">
 <title>Weiqi Wang &mdash; Resume</title>
 <style>
@@ -43,32 +61,28 @@
   @page { size: A4; margin: 0; }
 
   :root {
-    /* three greys, one accent */
     --ink:     #14181d;
     --body:    #2c333a;
     --mute:    #6b737c;
     --rule:    #d6dce2;
     --accent:  #1b4b72;
 
-    /* the axis. rail + gap + 2*pad = 192px, invariant */
     --rail:    100px;
     --gap:     16px;
     --pad:     38px;
 
-    /* 3px vertical scale */
     --s1:      3px;
     --s2:      6px;
     --s3:      9px;
     --s4:      12px;
     --s5:      15px;
+    --s6:      18px;
 
     --lead:    1.4;
   }
 
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-  /* Chrome's last-line optimiser: kills one-word orphans without changing the
-     line count or a single word of copy. Degrades to normal wrapping. */
   .lede, .entry li, .def .txt, .certs .txt { text-wrap: pretty; }
 
   body {
@@ -87,15 +101,10 @@
     min-height: 100vh;
     padding: 26px var(--pad) 16px;
   }
-  /* No height clamp and no overflow:hidden. A clamp makes a resume fail in the
-     worst way - a font substitution shears the last lines off a PDF that still
-     reports one page. Without it, overflow paginates and you SEE it. */
 
-  /* And if it ever does paginate, break between blocks, not through one. */
   .entry, .def, .skill, .edu, .certs { break-inside: avoid; }
   .sec-h { break-after: avoid; }
 
-  /* ── Masthead ─────────────────────────────────────────── */
   .masthead {
     display: flex;
     align-items: flex-end;
@@ -126,17 +135,11 @@
     font-size: 7.8pt;
     line-height: 1.5;
     color: var(--mute);
-    /* optical: flex-end aligns boxes, not baselines, and the two line-heights
-       differ. -1.1px lands the last contact line on the role's baseline -
-       measured residual 0.04px. -4.2px overshoots it 3px the other way. */
     margin-bottom: -1.1px;
   }
   .contact a { color: var(--mute); text-decoration: none; }
 
-  /* ── Lede ─────────────────────────────────────────────── */
   .lede {
-    /* inset on the right so the summary runs ~95 characters, not the 110 a
-       full-width measure gives at this size */
     margin: var(--s4) 0 var(--s5);
     padding-right: 56px;
     font-size: 9pt;
@@ -145,8 +148,7 @@
   }
   .lede strong { font-weight: 700; color: var(--ink); }
 
-  /* ── Section headings ─────────────────────────────────── */
-  .sec { margin-top: var(--s5); }
+  .sec { margin-top: var(--s6); }
   .sec-h {
     display: flex;
     align-items: center;
@@ -166,7 +168,6 @@
     background: linear-gradient(to right, var(--accent) 0 24px, var(--rule) 24px);
   }
 
-  /* ── Rail grid: one vertical axis for the whole page ──── */
   .row {
     display: grid;
     grid-template-columns: var(--rail) 1fr;
@@ -174,9 +175,6 @@
     align-items: start;
   }
   .rail { grid-column: 1; text-align: right; position: relative; top: 1px; }
-  /* rail labels: one voice, ink and bold, no tracking. "Security & Network",
-     the longest at 92.2px, clears the 100px rail on one line - at 88px it
-     wrapped, which cost the page 15px. */
   .def .rail, .skill .rail, .certs .rail {
     font-size: 8pt;
     font-weight: 700;
@@ -184,10 +182,6 @@
     line-height: var(--lead);
     color: var(--ink);
   }
-  /* rail dates: mute, one line, mixed case - uppercase is now reserved for
-     section headings and the role line. "May 2022 - Mar 2023" measures 95.8px
-     at 7.3pt, which is why the rail is 100 and not 88, and why the dates no
-     longer need a hand-placed <br>. */
   .when, .edu .rail {
     font-size: 7.3pt;
     font-weight: 500;
@@ -196,7 +190,6 @@
     color: var(--mute);
   }
 
-  /* ── Experience ───────────────────────────────────────── */
   .entry { margin-bottom: var(--s3); }
   .entry:last-child { margin-bottom: 0; }
   .entry .job-title {
@@ -236,7 +229,7 @@
     content: '';
     position: absolute;
     left: 1.5px;
-    top: 0.6em;          /* centres the dot between x-height and cap-height */
+    top: 0.6em;
     width: 3.2px;
     height: 3.2px;
     border-radius: 50%;
@@ -244,7 +237,6 @@
   }
   .entry li strong { font-weight: 700; color: var(--ink); }
 
-  /* ── Projects ─────────────────────────────────────────── */
   .def { margin-bottom: var(--s1); }
   .def:last-child { margin-bottom: 0; }
   .def .txt {
@@ -253,7 +245,6 @@
     line-height: var(--lead);
   }
 
-  /* ── Skills ───────────────────────────────────────────── */
   .skill { margin-bottom: var(--s1); }
   .skill:last-child { margin-bottom: 0; }
   .skill .txt {
@@ -263,7 +254,6 @@
     color: var(--body);
   }
 
-  /* ── Education ────────────────────────────────────────── */
   .edu { margin-bottom: var(--s1); }
   .edu .deg {
     grid-column: 2;
@@ -305,8 +295,8 @@
 
   <p class="lede">
     IT systems and infrastructure engineer with an <strong>MSc in Cybersecurity</strong>. Four years running the servers,
-    network, cloud and Google Workspace estate of two furniture manufacturers &mdash; and, since 2025, <strong>sole engineer</strong>
-    of the ERP and automation platform both companies run their day on, end to end.
+    network, cloud and security of two furniture manufacturers, now <strong>sole engineer</strong> of the ERP, EDI and
+    automation platform they run the day on.
   </p>
 
   <section class="sec">
@@ -315,12 +305,15 @@
     <article class="entry row">
       <h3 class="job-title">IT Systems &amp; Infrastructure Specialist</h3>
       <div class="when">May 2025 &ndash; Present</div>
-      <div class="org">Amax Leather Canada Ltd. &amp; Aurora Furniture MFG &nbsp;&middot;&nbsp; Delta, BC</div>
+      <div class="org">Amax Leather Canada Ltd. &amp; Aurora Furniture MFG &nbsp;&middot;&nbsp; Delta, BC &nbsp;&middot;&nbsp; reporting to executive management</div>
       <ul>
-        <li>Sole engineer of the ERP platform both companies run on daily: <strong>1,048 REST endpoints</strong> across 77 Node/Express modules, 150 pages, 4 MySQL databases and <strong>274 tables</strong>, bilingual EN/ZH, ~230,000 lines in production. The primary database sits overseas, so batching, a local read mirror and caching &mdash; not CRUD &mdash; are the real work.</li>
-        <li>Built <strong>AmaxBot</strong>, an in-house GPT assistant: a chat UI with 55 function-calling tools plus a 3,300-line IMAP service answering 27 email commands. Its tool catalog is filtered by role before it reaches the model, so a non-admin request never contains a write tool.</li>
-        <li>Integrated the platform outward &mdash; EDI over SOAP with an EDI provider (POs, acknowledgments, ASNs, invoices) and an accounting hub of 6 connectors and 42 APIs. Every push is idempotent and keyed on the document number, so a resend cannot double-post.</li>
-        <li>Own production and its security posture: Windows and Linux servers, the AWS footprint, deployments, monitoring, backups and 726 operational scripts &mdash; with access enforced through <strong>124 role-based permission checks</strong>, OTP / two-factor sign-in, session and CSRF handling, and audit logging on every write.</li>
+        <li><strong>Platform</strong> &mdash; Built and run the ERP behind both companies: 1,048 REST endpoints, 274 MySQL tables, 150 pages, ~230,000 lines in production, bilingual EN/ZH, on an overseas database with a local read mirror.</li>
+        <li><strong>AmaxBot</strong> &mdash; In-house AI assistant, queried in plain English: 55 function-calling chat tools, 27 email commands over a 3,300-line IMAP service, tool catalog filtered by role before the model sees it.</li>
+        <li><strong>Integrations</strong> &mdash; EDI over SOAP with trading partners &mdash; POs, acknowledgments, ASNs, invoices &mdash; and an accounting hub of 6 connectors and 42 APIs; every push idempotent on document number, tested in Postman.</li>
+        <li><strong>Inventory</strong> &mdash; Fishbowl administration and location-group logic, zone consolidation across warehouses, XML packing slips, labels and BOLs, and scheduled exports for tax and reporting.</li>
+        <li><strong>Infrastructure</strong> &mdash; Windows and Linux servers, internal FTP, wired and wireless networking across office and warehouse sites, AWS, Google Workspace and Microsoft 365, and hardware redeployed between departments.</li>
+        <li><strong>Security</strong> &mdash; Vulnerability and access audits, patching, offsite SQL backups, DNS and mail hardening, VirusTotal-backed phishing screening, and 124 role-based permission checks with 2FA and audit logging.</li>
+        <li><strong>Web &amp; support</strong> &mdash; Corporate sites, partner portals and JavaScript dashboards; Python automation, documented workflows, onboarding and troubleshooting for Sales, Operations, Accounting and Warehouse.</li>
       </ul>
     </article>
 
@@ -329,10 +322,12 @@
       <div class="when">Aug 2022 &ndash; Apr 2025</div>
       <div class="org">Amax Leather Canada Ltd. &nbsp;&middot;&nbsp; Delta, BC</div>
       <ul>
-        <li>Administered the server estate &mdash; Windows and Linux, virtualization, storage, backup and restore &mdash; and the office and warehouse network across FortiGate firewalls, VPN, switching and Wi-Fi.</li>
-        <li>Ran Google Workspace for the group (accounts, groups, shared drives, endpoint and mobile policy) and the DNS estate; hardened mail with SPF, DKIM and DMARC and added ML-assisted phishing screening.</li>
-        <li>Built and maintained the AWS footprint (EC2, S3, IAM) behind internal applications, plus the API and EDI links to the warehouse and trading partners and the databases behind them.</li>
-        <li>Ran the security programme &mdash; FortiGate firewall policy and VPN, endpoint hardening, phishing defence, vulnerability scanning and remediation, access reviews and compliance auditing &mdash; plus incident response and day-to-day technical support for staff across offices and warehouses.</li>
+        <li><strong>Servers</strong> &mdash; Windows and Linux hosts, virtualization, storage, backup and restore.</li>
+        <li><strong>Network</strong> &mdash; FortiGate firewalls, VPN, switching and Wi-Fi across office and warehouse sites.</li>
+        <li><strong>Workspace</strong> &mdash; Google Workspace and DNS: accounts, groups, shared drives, mail routing, SPF, DKIM, DMARC.</li>
+        <li><strong>Cloud &amp; web</strong> &mdash; Company websites and internal applications on an AWS footprint of EC2, S3 and IAM.</li>
+        <li><strong>Integrations</strong> &mdash; Built the API and EDI links between the warehouse, trading partners and internal databases.</li>
+        <li><strong>Security</strong> &mdash; Hardening, patching, vulnerability scanning, access reviews, phishing defence, incident response.</li>
       </ul>
     </article>
 
@@ -341,8 +336,8 @@
       <div class="when">May 2022 &ndash; Mar 2023</div>
       <div class="org">Perfect D&eacute;cor &nbsp;&middot;&nbsp; Burnaby, BC</div>
       <ul>
-        <li>Built custom websites and large-scale web applications for clients end to end, from layout and imagery through deployment.</li>
-        <li>Revised existing client sites and web stores with new features and responsive redesigns, improving usability on mobile.</li>
+        <li><strong>Client builds</strong> &mdash; Custom sites and large-scale web applications end to end, from layout and imagery to launch.</li>
+        <li><strong>Store revisions</strong> &mdash; Rebuilt client sites and web stores with new features and responsive redesigns for mobile.</li>
       </ul>
     </article>
   </section>
@@ -352,15 +347,19 @@
 
     <div class="def row">
       <h3 class="rail">Dealer Portal</h3>
-      <div class="txt">Customer-facing portal for the dealer network &mdash; catalogs, price lists, branding, photo-upload claims &mdash; with every query&nbsp;tenancy-scoped.</div>
+      <div class="txt">Dealer-facing catalogs, price lists, branding and photo-upload claims; every query&nbsp;tenancy-scoped.</div>
     </div>
     <div class="def row">
       <h3 class="rail">Warehouse Docs</h3>
       <div class="txt">Eight document types with Excel and PDF generation, five email flows and timber-legality compliance, off one order hub.</div>
     </div>
     <div class="def row">
-      <h3 class="rail">Social Video</h3>
-      <div class="txt">Node app turning a Mandarin script into a finished 9:16 video: speech, imagery, burned-in subtitles, FFmpeg assembly.</div>
+      <h3 class="rail">Site Infrastructure</h3>
+      <div class="txt">Network topology, camera-coverage and expansion diagrams; CCTV archive automated into cloud storage.</div>
+    </div>
+    <div class="def row">
+      <h3 class="rail">Phishing Screen</h3>
+      <div class="txt">Gmail-integrated link and attachment scoring through VirusTotal, verdicts logged to a review sheet.</div>
     </div>
   </section>
 
@@ -369,11 +368,11 @@
 
     <div class="skill row">
       <div class="rail">Languages</div>
-      <div class="txt">JavaScript (ES2020+), Node.js, Python, SQL, HTML5, CSS3, Bash / PowerShell</div>
+      <div class="txt">JavaScript (ES2020+), Node.js, Python, SQL, XML, HTML5, CSS3, Bash / PowerShell</div>
     </div>
     <div class="skill row">
       <div class="rail">Backend</div>
-      <div class="txt">Express, REST API design, services &amp; scheduled jobs, IMAP &amp; SMTP, SOAP &amp; EDI, Puppeteer / Playwright</div>
+      <div class="txt">Express, REST API design, services &amp; scheduled jobs, IMAP &amp; SMTP, SOAP &amp; EDI, Postman, Puppeteer</div>
     </div>
     <div class="skill row">
       <div class="rail">Front End</div>
@@ -381,7 +380,7 @@
     </div>
     <div class="skill row">
       <div class="rail">Data</div>
-      <div class="txt">MySQL schema design, query optimization, read-mirror replication, caching, backup/restore, Excel &amp; CSV pipelines</div>
+      <div class="txt">MySQL schema design, query optimization, read-mirror replication, caching, backup/restore, Fishbowl, Excel &amp; CSV</div>
     </div>
     <div class="skill row">
       <div class="rail">AI</div>
@@ -389,7 +388,7 @@
     </div>
     <div class="skill row">
       <div class="rail">Infrastructure</div>
-      <div class="txt">AWS (EC2, S3, IAM), Windows &amp; Linux administration, Google Workspace, PM2, deployments, monitoring, backups</div>
+      <div class="txt">AWS (EC2, S3, IAM), Windows &amp; Linux administration, Google Workspace, Microsoft 365, PM2, monitoring, backups</div>
     </div>
     <div class="skill row">
       <div class="rail">Security &amp; Network</div>
