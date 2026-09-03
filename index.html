@@ -36,7 +36,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css?v=12" />
+    <link rel="stylesheet" href="style.css?v=13" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
     <!-- JSON-LD Structured Data -->
@@ -217,7 +217,7 @@
                 <article data-page="about" id="page-about" role="tabpanel" class="active">
                     <div class="about-hero">
                         <div class="hero-glow" aria-hidden="true"></div>
-                        <span class="about-greeting">Hello, I'm</span>
+                        <span class="about-greeting">Hello, I&rsquo;m</span>
                         <h2 class="about-name-big">Lionel Wang</h2>
                         <p class="about-tagline">I build the systems companies run on &mdash; end to end, in production</p>
                     </div>
@@ -244,17 +244,17 @@
                     <p class="about-text">
                         I am an IT systems and infrastructure engineer in Greater Vancouver. I started in 2022 as a
                         system administrator at a furniture manufacturer. Since 2025 I have been the sole engineer of
-                        the ERP and automation platform two furniture manufacturing companies run their day on, across
-                        274 tables and four databases. I own the schema, the backend, the front end and the deploys.
+                        the ERP and automation platform two furniture manufacturers operate on daily &mdash; 274 tables
+                        across four databases. I own the schema, the backend, the front end and the deploys.
                     </p>
                     <p class="about-text">
-                        My work is data models, integrations that survive being retried, and access control enforced
-                        in one place. I build in Node, Express and MySQL, ship every screen in English and Chinese,
-                        and put language models into the parts of the job that used to be re-typing. I am open to
-                        platform, integration and internal tooling roles where one person owns the system.
+                        My work is data modelling, idempotent integrations, and access control enforced at one
+                        choke point. I build in Node, Express and MySQL, ship every screen in English and Chinese,
+                        and apply language models where the job used to be re-typing. I am open to platform,
+                        integration and internal tooling roles where one engineer owns the system.
                     </p>
 
-                    <h3 class="section-heading">What I'm Doing</h3>
+                    <h3 class="section-heading">What I Do</h3>
 
                     <div class="services-grid">
                         <div class="service-card">
@@ -263,7 +263,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>AI & Machine Learning</h3>
-                                <p>GPT function calling, smart email responders, knowledge bases, and ML phishing detection.</p>
+                                <p>Function calling over live data, hybrid retrieval, IMAP commands, phishing detection.</p>
                             </div>
                         </div>
 
@@ -273,7 +273,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>System Administration</h3>
-                                <p>Windows/Linux servers, AWS, Google Workspace, and enterprise network management.</p>
+                                <p>Windows/Linux servers, AWS, Google Workspace, network and endpoint hardening.</p>
                             </div>
                         </div>
 
@@ -283,7 +283,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>Full-Stack Development</h3>
-                                <p>Web apps, dashboards, and internal tools with Node.js, Express, and MySQL.</p>
+                                <p>Internal platforms and operator tooling on Node.js, Express and MySQL.</p>
                             </div>
                         </div>
 
@@ -293,7 +293,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>Cybersecurity</h3>
-                                <p>Security audits, ethical hacking, DNS protection, and vulnerability testing.</p>
+                                <p>Security audits, penetration testing, DNS filtering, vulnerability scanning.</p>
                             </div>
                         </div>
 
@@ -303,7 +303,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>ERP & Automation</h3>
-                                <p>ERP and warehouse systems, accounting sync, EDI workflows, and automated reporting.</p>
+                                <p>ERP and warehouse systems, accounting sync, EDI over SOAP, scheduled reporting.</p>
                             </div>
                         </div>
                     </div>
@@ -325,7 +325,7 @@
                             <span class="marquee-item">Flask</span>
                             <span class="marquee-item">REST APIs</span>
                             <span class="marquee-item">EDI</span>
-                            <span class="marquee-item">QuickBooks</span>
+                            <span class="marquee-item">Embeddings</span>
                             <span class="marquee-item">Linux</span>
                             <span class="marquee-item">Git</span>
                             <span class="marquee-item">Wireshark</span>
@@ -344,7 +344,7 @@
                             <span class="marquee-item">Flask</span>
                             <span class="marquee-item">REST APIs</span>
                             <span class="marquee-item">EDI</span>
-                            <span class="marquee-item">QuickBooks</span>
+                            <span class="marquee-item">Embeddings</span>
                             <span class="marquee-item">Linux</span>
                             <span class="marquee-item">Git</span>
                             <span class="marquee-item">Wireshark</span>
@@ -383,7 +383,7 @@
                         <div class="featured-header">
                             <div>
                                 <h3 class="featured-title">Amax Leather ERP Platform</h3>
-                                <p class="featured-subtitle">Two furniture companies, one platform &mdash; designed, built and operated solo</p>
+                                <p class="featured-subtitle">One platform, two companies &mdash; designed, built and run by one engineer</p>
                             </div>
                         </div>
 
@@ -442,7 +442,12 @@
                         </figure>
                     </div>
 
-                    <h3 class="section-heading">Try It</h3>
+                    <details class="disclosure" id="demosDisclosure">
+                        <summary class="disclosure-sum">
+                            <h3 class="section-heading disclosure-title">Try It</h3>
+                            <span class="disclosure-note">Three runnable panels &mdash; an assistant sandbox, a recorded search rebuild, a caption planner.</span>
+                            <ion-icon class="disclosure-chev" name="chevron-down-outline" aria-hidden="true"></ion-icon>
+                        </summary>
 
                     <div class="demos" id="demos">
                         <div class="demos-tabs" role="tablist" aria-label="Interactive demos">
@@ -461,17 +466,17 @@
 
                         <div class="sbx-head">
                             <span class="sbx-eyebrow"><ion-icon name="sparkles-outline" aria-hidden="true"></ion-icon>AmaxBot &middot; interactive</span>
-                            <h4 class="sbx-title" id="sbxTitle">Watch it pick a tool, call it, and answer</h4>
+                            <h4 class="sbx-title" id="sbxTitle">How it picks a tool, calls it and answers</h4>
                             <p class="sbx-lede">
-                                It shows the routing decision, the tool call with its real argument
-                                shape, and the rows that come back.
+                                Each run shows the routing decision, the tool call with its real
+                                argument shape, and the rows returned.
                             </p>
 
                         </div>
 
                         <p class="sbx-notice">
                             <ion-icon name="flask-outline" aria-hidden="true"></ion-icon>
-                            <span><strong>This is a sandbox.</strong> It runs in your browser on canned sample
+                            <span><strong>This is a sandbox.</strong> It runs in your browser on static sample
                             data &mdash; fictional customers, no network calls, no database. The real assistant sits
                             behind a login and reads live company data.</span>
                         </p>
@@ -575,7 +580,7 @@
         <h3 class="kbs-title" id="kbsTitle">Keyword search vs. hybrid search</h3>
         <p class="kbs-lede">
             The knowledge base behind AmaxBot was searched with MariaDB <code>FULLTEXT</code>.
-            Chinese was unsearchable and English phrasing came back wrong. I shipped a hybrid
+            Chinese was unsearchable and paraphrased English missed. I shipped a hybrid
             embeddings&nbsp;+&nbsp;<code>FULLTEXT</code> layer and ran both paths against the same
             eight staff questions.
         </p>
@@ -680,7 +685,7 @@
         <h4 class="cap-title" id="capTitle">Where the pauses go</h4>
         <p class="cap-lede">
             The free speech engine returns zero bytes for any SSML pause tag, so the pacing is
-            built the other way round: split the script, synthesise each fragment on its own,
+            built in reverse: split the script, synthesize each fragment on its own,
             and splice measured silence between them. Type below and watch the plan change.
         </p>
     </div>
@@ -688,8 +693,8 @@
     <p class="cap-notice">
         <ion-icon name="flask-outline" aria-hidden="true"></ion-icon>
         <span><strong>This is the real pacing rule, running here.</strong> The gap lengths are the
-        constants from the renderer. What it cannot do in a browser is the speaking itself &mdash;
-        the duration is an estimate, and the renderer measures the actual audio instead.</span>
+        constants from the renderer. The browser cannot synthesize the audio, so the duration
+        here is an estimate; the renderer measures the real thing.</span>
     </p>
 
     <label class="cap-label" for="capInput">Script</label>
@@ -710,7 +715,14 @@
 
                     </div>
 
-                    <h3 class="section-heading">Case Studies</h3>
+                    </details>
+
+                    <details class="disclosure" id="casesDisclosure">
+                        <summary class="disclosure-sum">
+                            <h3 class="section-heading disclosure-title">Case Studies</h3>
+                            <span class="disclosure-note">Four builds, each written as problem, mechanism, result.</span>
+                            <ion-icon class="disclosure-chev" name="chevron-down-outline" aria-hidden="true"></ion-icon>
+                        </summary>
 
                     <div class="case-list">
 
@@ -722,15 +734,15 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Problem</span>
-                                <p class="case-v">Where is this order, do we have stock, what does this account owe &mdash; the answers lived in four databases nobody outside IT could query. Every question became an interruption answered hours later by screenshot.</p>
+                                <p class="case-v">Where is this order, is it in stock, what does this account owe &mdash; every answer sat behind SQL across four databases and 274 tables. Staff asked IT; IT answered hours later with a screenshot.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">One assistant on two surfaces sharing one accuracy layer: a chat UI with 55 function-calling tools, and a 3,300-line IMAP service answering 27 <code>@amaxbot_*</code> email commands from a shared mailbox.</p>
+                                <p class="case-v">Two surfaces over one accuracy layer: a chat UI exposing 55 function-calling tools, and an IMAP service answering 27 <code>@amaxbot_*</code> commands from a shared mailbox, each in English and Chinese.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Result</span>
-                                <p class="case-v">Staff self-serve from the ERP by chat or plain email, in English or Chinese. The tool catalog is filtered by role <em>before</em> the model ever sees it, so a non-admin request cannot contain a write tool.</p>
+                                <p class="case-v">Staff query the ERP themselves, by chat or plain email. The tool catalog is filtered by role <em>before</em> the model sees it, so a non-admin request cannot contain a write tool; out-of-scope rows never reach the model.</p>
                             </div>
                         </article>
 
@@ -742,15 +754,15 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Problem</span>
-                                <p class="case-v">Purchase orders arrived from trading partners over EDI, then the same orders and supplier bills were re-typed by hand into two accounting companies. Nobody caught a transposed figure until month-end close.</p>
+                                <p class="case-v">Purchase orders arrived from trading partners over EDI, then the same orders and supplier bills were re-keyed by hand into two accounting companies. Nobody caught a transposed figure until month-end close.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">Inbound, a SOAP client against an EDI provider that pulls purchase orders and returns acknowledgments, ship notices and invoices. Outbound, an accounting hub of 6 connectors and 42 APIs pushing sales documents and supplier bills on a daily schedule.</p>
+                                <p class="case-v">Inbound, a SOAP client against an EDI provider: pull partner purchase orders, return acknowledgment, ship notice and invoice. Outbound, an accounting hub of 6 connectors and 42 APIs posting sales documents and supplier bills on a daily schedule.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Result</span>
-                                <p class="case-v">Partner orders reach the ERP and both accounting companies without re-keying. Every push is <em>idempotent</em>, keyed on the document number, so a resend cannot double-post, and a rejected batch is un-flagged and retried automatically.</p>
+                                <p class="case-v">Partner orders reach the ERP and both accounting companies without re-keying. Every push is <em>idempotent</em>, keyed on the document number, so a resend cannot double-post; a rejected batch is un-flagged and retried.</p>
                             </div>
                         </article>
 
@@ -762,15 +774,15 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Problem</span>
-                                <p class="case-v">The knowledge base was searched with a single MariaDB <code>FULLTEXT</code> match, which finds only literal words. Chinese was not weak but dead: no CJK tokenizer, so a whole question arrives as one unmatchable token.</p>
+                                <p class="case-v">The knowledge base ran on one MariaDB <code>FULLTEXT</code> match &mdash; literal words only. Chinese failed outright: no CJK tokenizer, so a whole question arrives as one unmatchable token, and the Chinese columns sat outside the index.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">A retrieval layer that embeds 26 published articles as 110 chunks and fuses vector similarity with the existing <code>FULLTEXT</code> query by reciprocal-rank fusion. No vector database &mdash; the whole index is 0.64&nbsp;MB, scored in Node.</p>
+                                <p class="case-v">A retrieval layer embedding 26 articles as 110 chunks, fused with the existing <code>FULLTEXT</code> query by reciprocal-rank fusion. No vector database: 0.64&nbsp;MB of Float32 blobs, cosine-scored as a dot product in Node.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Result</span>
-                                <p class="case-v">Five of eight staff questions returned rows before, one of them the wrong article; all eight return the correct article now, including three Chinese ones that returned nothing at all. It ships behind a flag and degrades to the old query.</p>
+                                <p class="case-v">Five of eight staff questions returned rows before, one of them the wrong article; all eight now return the correct article, including three Chinese questions that returned nothing. It ships behind a flag and falls back to the old query.</p>
                             </div>
                         </article>
 
@@ -782,19 +794,21 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Problem</span>
-                                <p class="case-v">Marketing wanted a steady stream of Mandarin short-form video with no per-video budget and no editor in the loop &mdash; a publishable 1080&times;1920 file produced from pasted script text in a single pass.</p>
+                                <p class="case-v">Marketing needed a steady stream of Mandarin short-form video with no per-video budget and no editor in the loop: a publishable 1080&times;1920 file produced from pasted script text in a single pass.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">A standalone Node app: text-to-speech narration, b-roll with Ken Burns motion, an amplitude-driven talking-head overlay, burned-in captions and FFmpeg assembly, with live progress streamed to the browser. Every service in the chain is free.</p>
+                                <p class="case-v">A standalone Node app: TTS narration, Ken Burns b-roll, a talking-head overlay driven by per-100&nbsp;ms amplitude samples, burned-in captions, FFmpeg assembly, and progress streamed live to the browser. Every service in the chain is free.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Result</span>
-                                <p class="case-v">The free speech endpoint returns zero bytes for SSML pauses, so pacing is built from spliced silence and caption timing rides <em>measured</em> audio. Publish-ready video in one pass, covered by a 130-case unit suite.</p>
+                                <p class="case-v">The free speech endpoint returns zero bytes for SSML breaks, so pacing is spliced silence and each caption boundary snaps to the nearest <em>measured</em> pause. Publish-ready in one pass, covered by a 130-case unit suite.</p>
                             </div>
                         </article>
 
                     </div>
+
+                    </details>
 
                     <h3 class="section-heading">Other Projects</h3>
 
@@ -805,7 +819,7 @@
                                 <span class="project-icon"><ion-icon name="shield-checkmark-outline"></ion-icon></span>
                             </div>
                             <h3>Email Phishing Detection</h3>
-                            <p>A Google Apps Script on a timed trigger checks links and attachments against a reputation service and has a language model read the message for pretext.</p>
+                            <p>A Google Apps Script on a timed trigger submits links and attachment hashes to a reputation service, then a language model reads the body for pretext.</p>
                             <div class="tags">
                                 <span class="tag">Apps Script</span>
                                 <span class="tag">ML</span>
@@ -820,7 +834,7 @@
                                 <span class="project-icon"><ion-icon name="mic-outline"></ion-icon></span>
                             </div>
                             <h3>Voice Assistant</h3>
-                            <p>A Python desktop tool that transcribes speech live through Vosk running on the machine, then answers questions about what it just heard.</p>
+                            <p>A Python desktop tool that transcribes speech in real time with Vosk running on-device, then answers questions against the running transcript.</p>
                             <div class="tags">
                                 <span class="tag">Vosk</span>
                                 <span class="tag">ChatGPT API</span>
@@ -835,7 +849,7 @@
                                 <span class="project-icon"><ion-icon name="swap-horizontal-outline"></ion-icon></span>
                             </div>
                             <h3>EDI &amp; API Integration</h3>
-                            <p>Order and stock feeds between the ERP, marketplace back ends and warehouse systems, normalized into one order shape, upserts keyed on the partner&rsquo;s document number.</p>
+                            <p>Order and stock feeds between the ERP, marketplace back ends and warehouse systems, normalized to one order shape, upserts keyed on the partner&rsquo;s document number.</p>
                             <div class="tags">
                                 <span class="tag">EDI</span>
                                 <span class="tag">REST API</span>
@@ -849,7 +863,7 @@
                                 <span class="project-icon"><ion-icon name="pulse-outline"></ion-icon></span>
                             </div>
                             <h3>Network Monitoring</h3>
-                            <p>Scripted probes collect link, latency and service-availability metrics on a schedule, rendered as Grafana dashboards a non-engineer can read at a glance.</p>
+                            <p>Scheduled probes collect link, latency and service-availability metrics into a time series, rendered as Grafana dashboards a non-engineer can read at a glance.</p>
                             <div class="tags">
                                 <span class="tag">Networking</span>
                                 <span class="tag">Grafana</span>
@@ -863,7 +877,7 @@
                                 <span class="project-icon"><ion-icon name="cog-outline"></ion-icon></span>
                             </div>
                             <h3>Python Automation</h3>
-                            <p>Walks a folder of supplier PDFs and spreadsheets, pulls the tables out, reconciles them against the system and emits a formatted Excel workbook.</p>
+                            <p>Walks a folder of supplier PDFs and spreadsheets, extracts the tables, reconciles them against the ERP and writes an Excel exception workbook.</p>
                             <div class="tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">PDF</span>
@@ -878,7 +892,7 @@
                                 <span class="project-icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
                             </div>
                             <h3>Desktop Chat Assistant</h3>
-                            <p>A Python desktop app that watches an instant-messaging client, reads the conversation with a vision model and drafts a reply for a human to approve.</p>
+                            <p>A Python desktop app that watches an instant-messaging window, reads the thread with a vision model and holds each drafted reply for human approval.</p>
                             <div class="tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">Claude API</span>
@@ -893,7 +907,7 @@
                                 <span class="project-icon"><ion-icon name="videocam-outline"></ion-icon></span>
                             </div>
                             <h3>CCTV Archiver</h3>
-                            <p>Pulls recordings off a Hikvision NVR on a schedule and files them to Amazon S3, with a token-gated API and per-camera links mailed out.</p>
+                            <p>Pulls recordings off a Hikvision NVR on a schedule and uploads them to S3 through presigned PUT URLs, so the device holds no AWS credentials.</p>
                             <div class="tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">AWS</span>
@@ -907,7 +921,7 @@
                                 <span class="project-icon"><ion-icon name="newspaper-outline"></ion-icon></span>
                             </div>
                             <h3>Bilingual News Digest</h3>
-                            <p>A Node service that gathers industry news on a daily cron, summarizes it in English and Chinese and mails the digest, with its own web UI.</p>
+                            <p>A Node service on a timezone-pinned cron that gathers industry news, summarizes each story in English and Chinese, and mails a rendered HTML digest.</p>
                             <div class="tags">
                                 <span class="tag">Node.js</span>
                                 <span class="tag">Cron</span>
@@ -922,7 +936,7 @@
                                 <span class="project-icon"><ion-icon name="browsers-outline"></ion-icon></span>
                             </div>
                             <h3>Browser Automation</h3>
-                            <p>Playwright scripts that sign in to partner web portals and upload the inventory feed that used to be posted by hand, roughly 177 rows a run.</p>
+                            <p>Playwright scripts that drive a saved browser session to reach partner portals and upload the inventory feed, formerly posted by hand, roughly 177 rows a run.</p>
                             <div class="tags">
                                 <span class="tag">Playwright</span>
                                 <span class="tag">Automation</span>
@@ -941,7 +955,7 @@
                                     <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
                                 </div>
                                 <div class="showcase-img-wrapper">
-                                    <img src="aurora-preview.png" alt="Aurora Furniture Screenshot" class="showcase-img" loading="lazy" width="1200" height="677" />
+                                    <img src="aurora-preview.png" alt="Aurora Furniture home page" class="showcase-img" loading="lazy" width="1200" height="677" />
                                 </div>
                             </a>
                             <div class="showcase-tags">
@@ -961,7 +975,7 @@
                                     <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
                                 </div>
                                 <div class="showcase-img-wrapper">
-                                    <img src="amaxleather-preview.png" alt="Amax Leather Screenshot" class="showcase-img" loading="lazy" width="1200" height="677" />
+                                    <img src="amaxleather-preview.png" alt="Amax Leather storefront" class="showcase-img" loading="lazy" width="1200" height="677" />
                                 </div>
                             </a>
                             <div class="showcase-tags">
@@ -981,7 +995,7 @@
                                     <ion-icon name="open-outline" class="showcase-arrow"></ion-icon>
                                 </div>
                                 <div class="showcase-img-wrapper">
-                                    <img src="standardinstall-preview.png" alt="Standard Install Screenshot" class="showcase-img" loading="lazy" width="1200" height="679" />
+                                    <img src="standardinstall-preview.png" alt="Standard Install home page" class="showcase-img" loading="lazy" width="1200" height="679" />
                                 </div>
                             </a>
                             <div class="showcase-tags">
@@ -1012,11 +1026,11 @@
                                 <div class="tl-date">Jan 2024 &ndash; Dec 2024</div>
                                 <h3>Master of Science in Cybersecurity</h3>
                                 <div class="tl-org">New York Institute of Technology</div>
-                                <p>GPA: 3.74 &mdash; Network security, cryptography, ethical hacking, digital forensics.</p>
+                                <p>GPA 3.74 &mdash; network security, cryptography, penetration testing, forensics.</p>
                                 <div class="tl-tags">
                                     <span class="tag">Network Security</span>
                                     <span class="tag">Cryptography</span>
-                                    <span class="tag">Ethical Hacking</span>
+                                    <span class="tag">Pen Testing</span>
                                 </div>
                             </div>
                         </div>
@@ -1027,7 +1041,7 @@
                                 <div class="tl-date">Sep 2017 &ndash; Dec 2022</div>
                                 <h3>Bachelor of Technology in Information Technology</h3>
                                 <div class="tl-org">Kwantlen Polytechnic University</div>
-                                <p>GPA: 3.26 (3.8 in majors) &mdash; Web dev, IoT, cloud security. CO-OP completed.</p>
+                                <p>Major GPA 3.8 &mdash; web development, IoT, cloud security. CO-OP completed.</p>
                                 <div class="tl-tags">
                                     <span class="tag">Web Dev</span>
                                     <span class="tag">IoT</span>
@@ -1074,9 +1088,9 @@
                                 <div class="tl-date">Aug 2022 &ndash; Apr 2025</div>
                                 <h3>System Administrator</h3>
                                 <div class="tl-org">Amax Leather Canada Ltd</div>
-                                <p>AWS infrastructure, automation tools, OpenAI-integrated apps, and cybersecurity hardening.</p>
+                                <p>AWS infrastructure, automation tooling, GPT integrations, and security hardening.</p>
                                 <div class="tl-highlights">
-                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> AWS cloud infrastructure management</div>
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> EC2, S3 and IAM administration</div>
                                     <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> OpenAI-integrated internal tools</div>
                                     <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> Cybersecurity hardening & audits</div>
                                 </div>
@@ -1095,7 +1109,7 @@
                                 <div class="tl-date">May 2022 &ndash; Mar 2023</div>
                                 <h3>Website Developer</h3>
                                 <div class="tl-org">Perfect Decor</div>
-                                <p>Custom websites and web apps with modern UX/UI design. Delivered responsive, SEO-optimized sites.</p>
+                                <p>Client websites and web apps: responsive layouts, SEO, and page-speed work.</p>
                                 <div class="tl-tags">
                                     <span class="tag">HTML/CSS</span>
                                     <span class="tag">JavaScript</span>
@@ -1379,11 +1393,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="contactSubject">Subject</label>
-                                <input type="text" id="contactSubject" name="subject" placeholder="What's this about?" />
+                                <input type="text" id="contactSubject" name="subject" placeholder="Role or project" />
                             </div>
                             <div class="form-group">
                                 <label for="contactMessage">Message</label>
-                                <textarea id="contactMessage" name="message" rows="5" required placeholder="Tell me about your project or opportunity..."></textarea>
+                                <textarea id="contactMessage" name="message" rows="5" required placeholder="The role or system, and what you need built."></textarea>
                             </div>
                             <button type="submit" class="contact-submit-btn" id="contactSubmitBtn">
                                 <ion-icon name="paper-plane-outline"></ion-icon>
@@ -1394,7 +1408,7 @@
                     </div>
 
                     <div class="contact-cta">
-                        <p>Open to full-time roles, freelance, and collaboration.</p>
+                        <p>Open to full-time, contract and consulting work.</p>
                         <a href="mailto:lionelwwq@gmail.com" class="contact-cta-btn">
                             <ion-icon name="paper-plane-outline"></ion-icon>
                             Get in Touch
@@ -1597,7 +1611,7 @@
         const phrases = [
             'AI & ML Integration Specialist',
             'IT Infrastructure Specialist',
-            'Cybersecurity, MSc',
+            'MSc Cybersecurity',
             'Full-Stack Developer'
         ];
         let phraseIdx = 0, charIdx = 0;
@@ -2073,16 +2087,16 @@
 
         // ===== Skill bars — hover to show detailed tooltip =====
         const skillDetails = {
-            'AI / ML Integration': 'OpenAI GPT, Embeddings, Function Calling, LangChain',
-            'Network Security': 'Intrusion Detection, Firewall Config, Wireshark, Nmap',
-            'Full-Stack Development': 'Node.js, Express, Python, Flask, React basics',
+            'AI / ML Integration': 'OpenAI, Function Calling, Embeddings, Retrieval',
+            'Network Security': 'Intrusion Detection, FortiGate, Wireshark, Nmap',
+            'Full-Stack Development': 'Node.js, Express, Python, Flask, REST, i18n',
             'Server Management': 'Linux, Windows Server, AWS EC2, Docker',
-            'Python & JavaScript': 'Automation, Web Scraping, Scripting, REST APIs',
+            'Python & JavaScript': 'Automation, Puppeteer, Playwright, REST APIs',
             'Threat Analysis': 'Risk Assessment, SIEM, Vulnerability Scanning',
             'AWS & Cloud Infrastructure': 'EC2, S3, RDS, CloudFront, IAM',
-            'ERP / WMS Integration': 'QuickBooks, EDI, Inventory, Order Management',
+            'ERP / WMS Integration': 'Accounting Sync, EDI, Inventory, Orders',
             'API / EDI Integration': 'REST, SOAP, EDI 850/856/810, Webhooks',
-            'Database Management': 'MySQL, SQL Server, Query Optimization, Backups'
+            'Database Management': 'MySQL, Schema Design, Query Tuning, Backups'
         };
         document.querySelectorAll('.skill-item').forEach(item => {
             const label = item.querySelector('label');

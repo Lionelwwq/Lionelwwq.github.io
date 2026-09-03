@@ -5,14 +5,34 @@
 <!-- Source of truth for Lionel_Wang_Resume.pdf. Rendered to A4 with puppeteer
      (format 'A4', zero margins). Print lays out at 96dpi, so the page box is
      794 x 1123 CSS px = 595.5 x 842 pt, the template's scale. Measured in that
-     box: exactly 1 page, content ends at 1103px, 20px clear of the bottom edge.
-     LAYOUT: a single vertical axis at --rail carries the dates, project names
-     and skill labels; the body column is the same width in every section. DOM
-     order is name -> summary -> experience -> projects -> skills -> education,
-     so an ATS parser reads it correctly even though the dates sit on the left.
-     COLOUR: one accent (--accent), on structure and numerals only, never on
-     body text. If you add content, cut words elsewhere; do not shrink the type
-     scale, and re-measure — the page is full. -->
+     box: 1 page, content ends at 1105.9px, 17.1px clear of the bottom edge.
+
+     LAYOUT   One vertical axis carries every date, project name and skill
+              label. --rail + --gap + 2*--pad = 192px is INVARIANT, which keeps
+              the body column at 602px: widen the rail and the margins pay for
+              it, so no line of body copy re-wraps. Do not break that sum.
+     RHYTHM   Every vertical gap is a step on one 3px scale (--s1..--s5) -
+              bullets 3, label-to-content 6, entry-to-entry 9, masthead-to-lede
+              12, section-to-section 15. Nothing is hand-set any more.
+     COLOUR   Three greys: --ink (headings, titles, emphasis), --body (prose),
+              --mute (dates, orgs, schools, contact). One accent in three jobs
+              only - the role line, the cap on each section rule, the bullet
+              markers. Printed luminance 9 / 20 / 45 / accent 27, so the
+              hierarchy survives a mono laser.
+     BASELINE Every rail is nudged down so a date sits on the same baseline as
+              the title beside it - 1px, and 2px on the experience dates.
+              Measured residual 0.00px. It is a relative offset, not padding,
+              because the rail is the taller item in the skills rows and
+              padding there would push the page 5px longer for nothing.
+     WRAPPING text-wrap:pretty kills one-word last lines. One &nbsp; in the
+              Dealer Portal line does what pretty would not.
+     DOM      name -> summary -> experience -> projects -> skills -> education,
+              h1/h2/h3 with no skipped level, so an ATS reads it correctly even
+              though the dates sit on the left.
+     Skills were tested as two columns: 7 value lines become 19 and the section
+     grows 52px. One column is both denser and easier to parse. Do not change it.
+     If you add content, cut words elsewhere; do not shrink the type scale, and
+     re-measure - the page is full. -->
 <meta name="robots" content="noindex, nofollow">
 <title>Weiqi Wang &mdash; Resume</title>
 <style>
@@ -23,22 +43,38 @@
   @page { size: A4; margin: 0; }
 
   :root {
+    /* three greys, one accent */
     --ink:     #14181d;
-    --body:    #2b3138;
-    --mute:    #59616a;
-    --faint:   #868e97;
-    --rule:    #d5dce3;
+    --body:    #2c333a;
+    --mute:    #6b737c;
+    --rule:    #d6dce2;
     --accent:  #1b4b72;
-    --rail:    88px;
+
+    /* the axis. rail + gap + 2*pad = 192px, invariant */
+    --rail:    100px;
     --gap:     16px;
+    --pad:     38px;
+
+    /* 3px vertical scale */
+    --s1:      3px;
+    --s2:      6px;
+    --s3:      9px;
+    --s4:      12px;
+    --s5:      15px;
+
+    --lead:    1.4;
   }
 
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
+  /* Chrome's last-line optimiser: kills one-word orphans without changing the
+     line count or a single word of copy. Degrades to normal wrapping. */
+  .lede, .entry li, .def .txt, .certs .txt { text-wrap: pretty; }
+
   body {
     font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
     font-size: 8.3pt;
-    line-height: 1.4;
+    line-height: var(--lead);
     color: var(--body);
     background: #fff;
     width: 100%;
@@ -49,14 +85,15 @@
   .sheet {
     width: 100%;
     min-height: 100vh;
-    padding: 28px 44px 16px;
+    padding: 26px var(--pad) 16px;
   }
-  /* At the real A4 print box (794px wide) the sheet is pinned to exactly one
-     page. Below that the guard lifts, so a different render scale overflows
-     visibly onto a second page instead of silently clipping the last lines. */
-  @media (min-width: 700px) {
-    .sheet { height: 100vh; overflow: hidden; }
-  }
+  /* No height clamp and no overflow:hidden. A clamp makes a resume fail in the
+     worst way - a font substitution shears the last lines off a PDF that still
+     reports one page. Without it, overflow paginates and you SEE it. */
+
+  /* And if it ever does paginate, break between blocks, not through one. */
+  .entry, .def, .skill, .edu, .certs { break-inside: avoid; }
+  .sec-h { break-after: avoid; }
 
   /* ── Masthead ─────────────────────────────────────────── */
   .masthead {
@@ -64,21 +101,22 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 26px;
-    padding-bottom: 9px;
+    padding-bottom: var(--s3);
     border-bottom: 1.5px solid var(--ink);
   }
   .name {
     font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     font-size: 25pt;
     font-weight: 700;
-    line-height: 1.02;
+    line-height: 1;
     letter-spacing: -0.6px;
     color: var(--ink);
   }
   .role {
-    margin-top: 4px;
+    margin-top: var(--s1);
     font-size: 8.1pt;
     font-weight: 700;
+    line-height: 1.25;
     text-transform: uppercase;
     letter-spacing: 2.4px;
     color: var(--accent);
@@ -86,30 +124,37 @@
   .contact {
     text-align: right;
     font-size: 7.8pt;
-    line-height: 1.58;
+    line-height: 1.5;
     color: var(--mute);
+    /* optical: flex-end aligns boxes, not baselines, and the two line-heights
+       differ. -1.1px lands the last contact line on the role's baseline -
+       measured residual 0.04px. -4.2px overshoots it 3px the other way. */
+    margin-bottom: -1.1px;
   }
   .contact a { color: var(--mute); text-decoration: none; }
-  .contact .strong { color: var(--ink); font-weight: 500; }
 
   /* ── Lede ─────────────────────────────────────────────── */
   .lede {
-    margin: 11px 0 12px;
+    /* inset on the right so the summary runs ~95 characters, not the 110 a
+       full-width measure gives at this size */
+    margin: var(--s4) 0 var(--s5);
+    padding-right: 56px;
     font-size: 9pt;
-    line-height: 1.48;
+    line-height: 1.45;
     color: var(--body);
   }
   .lede strong { font-weight: 700; color: var(--ink); }
 
   /* ── Section headings ─────────────────────────────────── */
-  .sec { margin-top: 10px; }
+  .sec { margin-top: var(--s5); }
   .sec-h {
     display: flex;
     align-items: center;
-    gap: 11px;
-    margin-bottom: 7px;
+    gap: 10px;
+    margin-bottom: var(--s2);
     font-size: 8.2pt;
     font-weight: 700;
+    line-height: 1.2;
     text-transform: uppercase;
     letter-spacing: 2.4px;
     color: var(--ink);
@@ -128,54 +173,70 @@
     column-gap: var(--gap);
     align-items: start;
   }
-  .rail { grid-column: 1; text-align: right; }
+  .rail { grid-column: 1; text-align: right; position: relative; top: 1px; }
+  /* rail labels: one voice, ink and bold, no tracking. "Security & Network",
+     the longest at 92.2px, clears the 100px rail on one line - at 88px it
+     wrapped, which cost the page 15px. */
+  .def .rail, .skill .rail, .certs .rail {
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: var(--lead);
+    color: var(--ink);
+  }
+  /* rail dates: mute, one line, mixed case - uppercase is now reserved for
+     section headings and the role line. "May 2022 - Mar 2023" measures 95.8px
+     at 7.3pt, which is why the rail is 100 and not 88, and why the dates no
+     longer need a hand-placed <br>. */
+  .when, .edu .rail {
+    font-size: 7.3pt;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: var(--lead);
+    color: var(--mute);
+  }
 
   /* ── Experience ───────────────────────────────────────── */
-  .entry { margin-bottom: 8px; }
+  .entry { margin-bottom: var(--s3); }
   .entry:last-child { margin-bottom: 0; }
   .entry .job-title {
     grid-column: 2; grid-row: 1;
     font-size: 9.4pt;
     font-weight: 700;
-    line-height: 1.18;
+    line-height: 1.25;
     color: var(--ink);
   }
   .entry .when {
     grid-column: 1; grid-row: 1 / span 2;
-    font-size: 7.3pt;
-    font-weight: 500;
-    line-height: 1.28;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--faint);
     text-align: right;
-    padding-top: 2px;
+    position: relative;
+    top: 2px;
   }
   .entry .org {
     grid-column: 2; grid-row: 2;
-    margin-top: 1px;
     font-size: 8.2pt;
     font-weight: 500;
+    line-height: 1.35;
     color: var(--mute);
   }
   .entry ul {
     grid-column: 2; grid-row: 3;
-    margin-top: 4px;
+    margin-top: var(--s2);
     list-style: none;
   }
   .entry li {
     position: relative;
-    padding-left: 12px;
-    margin-bottom: 2.5px;
+    padding-left: 11px;
+    margin-bottom: var(--s1);
     font-size: 8.3pt;
-    line-height: 1.4;
+    line-height: var(--lead);
   }
   .entry li:last-child { margin-bottom: 0; }
   .entry li::before {
     content: '';
     position: absolute;
-    left: 1px;
-    top: 0.5em;
+    left: 1.5px;
+    top: 0.6em;          /* centres the dot between x-height and cap-height */
     width: 3.2px;
     height: 3.2px;
     border-radius: 50%;
@@ -184,53 +245,32 @@
   .entry li strong { font-weight: 700; color: var(--ink); }
 
   /* ── Projects ─────────────────────────────────────────── */
-  .def { margin-bottom: 4px; }
+  .def { margin-bottom: var(--s1); }
   .def:last-child { margin-bottom: 0; }
-  .def .rail {
-    font-size: 8.2pt;
-    font-weight: 700;
-    line-height: 1.28;
-    color: var(--ink);
-  }
   .def .txt {
     grid-column: 2;
     font-size: 8.3pt;
-    line-height: 1.4;
+    line-height: var(--lead);
   }
 
   /* ── Skills ───────────────────────────────────────────── */
-  .skill { margin-bottom: 3px; }
+  .skill { margin-bottom: var(--s1); }
   .skill:last-child { margin-bottom: 0; }
-  .skill .rail {
-    font-size: 8pt;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-    color: var(--accent);
-    line-height: 1.4;
-  }
   .skill .txt {
     grid-column: 2;
     font-size: 8.2pt;
-    line-height: 1.4;
+    line-height: var(--lead);
     color: var(--body);
   }
 
   /* ── Education ────────────────────────────────────────── */
-  .edu { margin-bottom: 4px; }
-  .edu .rail {
-    font-size: 7.3pt;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--faint);
-    padding-top: 2px;
-  }
+  .edu { margin-bottom: var(--s1); }
   .edu .deg {
     grid-column: 2;
     font-size: 8.8pt;
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.22;
+    line-height: 1.28;
   }
   .edu .school {
     grid-column: 2;
@@ -238,18 +278,11 @@
     color: var(--mute);
     line-height: 1.36;
   }
-  .certs { margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--rule); }
-  .certs .rail {
-    font-size: 8pt;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.2px;
-    line-height: 1.4;
-  }
+  .certs { margin-top: var(--s2); padding-top: var(--s2); border-top: 1px solid var(--rule); }
   .certs .txt {
     grid-column: 2;
     font-size: 8.2pt;
-    line-height: 1.4;
+    line-height: var(--lead);
     color: var(--body);
   }
 </style>
@@ -264,7 +297,7 @@
       <div class="role">IT Systems &amp; Infrastructure Specialist</div>
     </div>
     <div class="contact">
-      <span class="strong">Richmond, BC, Canada</span><br>
+      Richmond, BC, Canada<br>
       (778) 865-6808 &nbsp;&middot;&nbsp; <a href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a><br>
       <a href="https://lionelwwq.github.io/">lionelwwq.github.io</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/weiqi-wang-86bb07171">linkedin.com/in/weiqi-wang-86bb07171</a>
     </div>
@@ -281,7 +314,7 @@
 
     <article class="entry row">
       <h3 class="job-title">IT Systems &amp; Infrastructure Specialist</h3>
-      <div class="when">May 2025 &ndash;<br>Present</div>
+      <div class="when">May 2025 &ndash; Present</div>
       <div class="org">Amax Leather Canada Ltd. &amp; Aurora Furniture MFG &nbsp;&middot;&nbsp; Delta, BC</div>
       <ul>
         <li>Sole engineer of the ERP platform both companies run on daily: <strong>1,048 REST endpoints</strong> across 77 Node/Express modules, 150 pages, 4 MySQL databases and <strong>274 tables</strong>, bilingual EN/ZH, ~230,000 lines in production. The primary database sits overseas, so batching, a local read mirror and caching &mdash; not CRUD &mdash; are the real work.</li>
@@ -293,7 +326,7 @@
 
     <article class="entry row">
       <h3 class="job-title">System Administrator</h3>
-      <div class="when">Aug 2022 &ndash;<br>Apr 2025</div>
+      <div class="when">Aug 2022 &ndash; Apr 2025</div>
       <div class="org">Amax Leather Canada Ltd. &nbsp;&middot;&nbsp; Delta, BC</div>
       <ul>
         <li>Administered the server estate &mdash; Windows and Linux, virtualization, storage, backup and restore &mdash; and the office and warehouse network across FortiGate firewalls, VPN, switching and Wi-Fi.</li>
@@ -305,7 +338,7 @@
 
     <article class="entry row">
       <h3 class="job-title">Website Developer</h3>
-      <div class="when">May 2022 &ndash;<br>Mar 2023</div>
+      <div class="when">May 2022 &ndash; Mar 2023</div>
       <div class="org">Perfect D&eacute;cor &nbsp;&middot;&nbsp; Burnaby, BC</div>
       <ul>
         <li>Built custom websites and large-scale web applications for clients end to end, from layout and imagery through deployment.</li>
@@ -318,15 +351,15 @@
     <h2 class="sec-h">Selected Projects</h2>
 
     <div class="def row">
-      <div class="rail">Dealer Portal</div>
-      <div class="txt">Customer-facing portal for the dealer network &mdash; catalogs, price lists, branding, photo-upload claims &mdash; with every query tenancy-scoped.</div>
+      <h3 class="rail">Dealer Portal</h3>
+      <div class="txt">Customer-facing portal for the dealer network &mdash; catalogs, price lists, branding, photo-upload claims &mdash; with every query&nbsp;tenancy-scoped.</div>
     </div>
     <div class="def row">
-      <div class="rail">Warehouse Docs</div>
+      <h3 class="rail">Warehouse Docs</h3>
       <div class="txt">Eight document types with Excel and PDF generation, five email flows and timber-legality compliance, off one order hub.</div>
     </div>
     <div class="def row">
-      <div class="rail">Social Video</div>
+      <h3 class="rail">Social Video</h3>
       <div class="txt">Node app turning a Mandarin script into a finished 9:16 video: speech, imagery, burned-in subtitles, FFmpeg assembly.</div>
     </div>
   </section>
@@ -369,12 +402,12 @@
 
     <div class="edu row">
       <div class="rail">Dec 2024</div>
-      <div class="deg">Master of Science in Cybersecurity &nbsp;&middot;&nbsp; GPA 3.74</div>
-      <div class="school">New York Institute of Technology &mdash; network security, cryptography, ethical hacking</div>
+      <h3 class="deg">Master of Science in Cybersecurity &nbsp;&middot;&nbsp; GPA 3.74</h3>
+      <div class="school">New York Institute of Technology &mdash; network security, cryptography, penetration testing</div>
     </div>
     <div class="edu row">
       <div class="rail">Dec 2022</div>
-      <div class="deg">Bachelor of Technology in Information Technology (CO-OP) &nbsp;&middot;&nbsp; 3.8 GPA in major</div>
+      <h3 class="deg">Bachelor of Technology in Information Technology (CO-OP) &nbsp;&middot;&nbsp; 3.8 GPA in major</h3>
       <div class="school">Kwantlen Polytechnic University &mdash; web application development, IoT, website &amp; cloud security</div>
     </div>
     <div class="certs row">
