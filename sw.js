@@ -1,5 +1,5 @@
 // Bump this on EVERY static-file change or returning visitors keep the old page.
-const CACHE_NAME = 'lionel-portfolio-v7-2026-09-02';
+const CACHE_NAME = 'lionel-portfolio-v8-2026-09-02';
 // Only same-origin files the shell needs to paint. Cross-origin assets (the
 // unpkg ionicons module, Google Fonts) are deliberately NOT precached: a single
 // failed request rejects cache.addAll() and the whole install aborts, which is
@@ -26,8 +26,14 @@ self.addEventListener('install', (e) => {
     e.waitUntil(
         // addAll() is all-or-nothing: one 404 aborts the whole install. Add each
         // file individually so a missing asset costs that file, not the cache.
+        // cache: 'reload' bypasses the browser's own HTTP cache while filling
+        // ours. Without it a version bump populated the NEW cache with the OLD
+        // bytes still sitting in the HTTP cache, and visitors kept seeing the
+        // previous deploy however many times they reloaded. 2026-09-02 review.
         caches.open(CACHE_NAME).then(cache =>
-            Promise.all(ASSETS.map(url => cache.add(url).catch(() => null)))
+            Promise.all(ASSETS.map(url =>
+                cache.add(new Request(url, { cache: 'reload' })).catch(() => null)
+            ))
         )
     );
     self.skipWaiting();
@@ -42,7 +48,23 @@ self.addEventListener('activate', (e) => {
     self.clients.claim();
 });
 
+// Page loads go to the network first and fall back to the cache, so a deploy is
+// visible on the next reload instead of whenever the cache happens to turn over.
+// Everything else stays cache-first, which is what makes the page paint instantly
+// and still work offline.
 self.addEventListener('fetch', (e) => {
+    if (e.request.mode === 'navigate') {
+        e.respondWith(
+            fetch(e.request)
+                .then((res) => {
+                    const copy = res.clone();
+                    caches.open(CACHE_NAME).then(c => c.put(e.request, copy)).catch(() => {});
+                    return res;
+                })
+                .catch(() => caches.match(e.request).then(r => r || caches.match('/')))
+        );
+        return;
+    }
     e.respondWith(
         caches.match(e.request).then(cached => cached || fetch(e.request))
     );

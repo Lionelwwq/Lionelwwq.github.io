@@ -233,7 +233,7 @@
                         </div>
                         <div class="about-stat">
                             <span class="about-stat-number" data-count="230">0</span><span class="about-stat-suffix">K</span>
-                            <span class="about-stat-label">Lines Shipped</span>
+                            <span class="about-stat-label">Lines of Code</span>
                         </div>
                         <div class="about-stat">
                             <span class="about-stat-number" data-count="5">0</span>
@@ -252,11 +252,6 @@
                         in one place. I build in Node, Express and MySQL, ship every screen in English and Chinese,
                         and put language models into the parts of the job that used to be re-typing. I am open to
                         platform, integration and internal tooling roles where one person owns the system.
-                    </p>
-
-                    <p class="about-cta">
-                        <ion-icon name="rocket-outline"></ion-icon>
-                        Let's build something together.
                     </p>
 
                     <h3 class="section-heading">What I'm Doing</h3>
@@ -360,7 +355,7 @@
                     <div class="learning-grid">
                         <div class="learning-item">
                             <ion-icon name="cube-outline"></ion-icon>
-                            <span>Kubernetes & Docker</span>
+                            <span>Kubernetes</span>
                         </div>
                         <div class="learning-item">
                             <ion-icon name="git-branch-outline"></ion-icon>
@@ -388,7 +383,7 @@
                         <div class="featured-header">
                             <div>
                                 <h3 class="featured-title">Amax Leather ERP Platform</h3>
-                                <p class="featured-subtitle">The system two furniture companies run their day on &mdash; designed, built and operated solo</p>
+                                <p class="featured-subtitle">Two furniture companies, one platform &mdash; designed, built and operated solo</p>
                             </div>
                         </div>
 
@@ -416,14 +411,6 @@
                                 <span class="stat-label">Lines of Code</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-number">150</span>
-                                <span class="stat-label">Front-End Pages</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">20k+</span>
-                                <span class="stat-label">Orders in Hub</span>
-                            </div>
-                            <div class="stat-item">
                                 <span class="stat-number">124</span>
                                 <span class="stat-label">Permission Checks</span>
                             </div>
@@ -434,27 +421,19 @@
                                 <span class="tag">Node.js</span>
                                 <span class="tag">Express</span>
                                 <span class="tag">MySQL (4 DBs)</span>
+                                <span class="tag">RBAC</span>
                                 <span class="tag">OpenAI Function Calling</span>
                                 <span class="tag">IMAP / Nodemailer</span>
                                 <span class="tag">SOAP / EDI</span>
                                 <span class="tag">Puppeteer</span>
-                                <span class="tag">Playwright</span>
-                                <span class="tag">Passport</span>
-                                <span class="tag">Helmet</span>
-                                <span class="tag">RBAC</span>
                                 <span class="tag">i18n (EN/ZH)</span>
-                                <span class="tag">xlsx</span>
-                                <span class="tag">pdf-lib</span>
-                                <span class="tag">node-cron</span>
-                                <span class="tag">FFmpeg</span>
-                                <span class="tag">AWS S3</span>
                                 <span class="tag">PM2</span>
                             </div>
                         </div>
 
 <figure class="arch-fig" aria-labelledby="archCaption">
   <div class="arch-scroll">
-    <svg class="arch-svg" viewBox="0 0 600 700" role="img"
+    <svg class="arch-svg" viewBox="0 0 600 628" role="img"
          aria-labelledby="archTitle archDesc" xmlns="http://www.w3.org/2000/svg">
       <title id="archTitle">Architecture of the Amax Leather ERP platform</title>
       <desc id="archDesc">A four-tier request and response stack. At the top, four surfaces people
@@ -472,7 +451,7 @@
       <rect class="arch-band" x="8" y="8"   width="584" height="118" rx="14"/>
       <rect class="arch-band" x="8" y="170" width="584" height="202" rx="14"/>
       <rect class="arch-band" x="8" y="416" width="584" height="90"  rx="14"/>
-      <rect class="arch-band" x="8" y="550" width="584" height="140" rx="14"/>
+      <rect class="arch-band" x="8" y="550" width="584" height="68"  rx="14"/>
 
       <!-- ============ connectors ============
            Wires stop on the band boundaries, never on the boxes, so no line can
@@ -542,8 +521,6 @@
       </g>
       <g class="arch-group t2">
         <rect class="arch-node arch-node--hi" x="209" y="202" width="181" height="76" rx="11"/>
-        <rect class="arch-chip-bg" x="344" y="210" width="34" height="15" rx="7.5"/>
-        <text class="arch-chip" x="361" y="221">NEW</text>
         <text class="arch-t arch-t--hi" x="299.5" y="230">KB Search</text>
         <text class="arch-m" x="299.5" y="250">hybrid embeddings</text>
         <text class="arch-m" x="299.5" y="266">FULLTEXT · 110 chunks</text>
@@ -581,31 +558,18 @@
         <text class="arch-m" x="300" y="490">1,048 REST endpoints · 124 permission checks · EN / ZH</text>
       </g>
 
-      <!-- ============ tier 4 — data ============ -->
+      <!-- ============ tier 4 — data ============
+           One slim rail, not four cylinders: the tier caption already says
+           "4 MySQL databases · 274 tables", so four more MySQL labels were
+           repeating it in pictures and cost the diagram ~85px of height. -->
       <text class="arch-cap" x="20" y="572">DATA<tspan class="arch-cap-sub" dx="10">4 MySQL databases · 274 tables</tspan></text>
 
       <g class="arch-group t4">
-        <path class="arch-db-body" d="M53.5 590 V 624 A 29 7.5 0 0 0 111.5 624 V 590 Z"/>
-        <ellipse class="arch-db-top" cx="82.5" cy="590" rx="29" ry="7.5"/>
-        <text class="arch-db-label" x="82.5" y="645">MySQL</text>
+        <rect class="arch-node" x="16" y="582" width="568" height="30" rx="11"/>
+        <path class="arch-db-body" d="M212 590 V 604 A 10 3.5 0 0 0 232 604 V 590 Z"/>
+        <ellipse class="arch-db-top" cx="222" cy="590" rx="10" ry="3.5"/>
+        <text class="arch-m arch-m--foot" x="317" y="601">order hub</text>
       </g>
-      <g class="arch-group t4">
-        <path class="arch-db-body" d="M198.5 590 V 624 A 29 7.5 0 0 0 256.5 624 V 590 Z"/>
-        <ellipse class="arch-db-top" cx="227.5" cy="590" rx="29" ry="7.5"/>
-        <text class="arch-db-label" x="227.5" y="645">MySQL</text>
-      </g>
-      <g class="arch-group t4">
-        <path class="arch-db-body" d="M343.5 590 V 624 A 29 7.5 0 0 0 401.5 624 V 590 Z"/>
-        <ellipse class="arch-db-top" cx="372.5" cy="590" rx="29" ry="7.5"/>
-        <text class="arch-db-label" x="372.5" y="645">MySQL</text>
-      </g>
-      <g class="arch-group t4">
-        <path class="arch-db-body" d="M488.5 590 V 624 A 29 7.5 0 0 0 546.5 624 V 590 Z"/>
-        <ellipse class="arch-db-top" cx="517.5" cy="590" rx="29" ry="7.5"/>
-        <text class="arch-db-label" x="517.5" y="645">MySQL</text>
-      </g>
-
-      <text class="arch-m arch-m--foot" x="300" y="672">order hub · 20k+ orders</text>
     </svg>
   </div>
   <p class="arch-hint" aria-hidden="true">Scroll the diagram sideways to see all four columns.</p>
@@ -621,12 +585,8 @@
                                     <img src="erp-login-preview.png" alt="The ERP sign-in screen, with account login and email one-time-password options" class="showcase-img" loading="lazy" width="1200" height="750" />
                                 </div>
                             </div>
-                            <figcaption class="featured-shot-cap">The sign-in screen &mdash; the way staff get in, and the only screen I can show</figcaption>
+                            <figcaption class="featured-shot-cap">The sign-in screen &mdash; the only one I can publish. Everything past it reads live company data, so the diagram above stands in.</figcaption>
                         </figure>
-                        <p class="featured-shots-note">
-                            One screenshot only. Everything past that sign-in reads live company data and is
-                            not mine to publish, so the diagram above and the sandbox below stand in for it.
-                        </p>
                     </div>
 
                     <h3 class="section-heading">Try It &mdash; AmaxBot Sandbox</h3>
@@ -637,8 +597,8 @@
                             <span class="sbx-eyebrow"><ion-icon name="sparkles-outline" aria-hidden="true"></ion-icon>AmaxBot &middot; interactive</span>
                             <h4 class="sbx-title" id="sbxTitle">Watch it pick a tool, call it, and answer</h4>
                             <p class="sbx-lede">
-                                Most assistant demos print a reply and hide the work. This one shows the routing
-                                decision, the tool call with its real argument shape, and the rows that come back.
+                                It shows the routing decision, the tool call with its real argument
+                                shape, and the rows that come back.
                             </p>
 
                         </div>
@@ -701,12 +661,11 @@
                                     <span class="sbx-empty-icon" aria-hidden="true"><ion-icon name="terminal-outline"></ion-icon></span>
                                     <p class="sbx-empty-title">Nothing has run yet</p>
                                     <p class="sbx-empty-sub">
-                                        Pick a question above, or type your own below. Start with the one that made
-                                        the whole search rewrite worth doing:
+                                        Pick a question above, or type your own below. Start here:
                                     </p>
                                     <button type="button" class="sbx-empty-btn" data-sbx="kb_en">
                                         <ion-icon name="play-outline" aria-hidden="true"></ion-icon>
-                                        <span>&ldquo;can I send it back if I just don&rsquo;t like it&rdquo;</span>
+                                        <span>&ldquo;can I send it back if I just don't like it&rdquo;</span>
                                     </button>
                                 </div>
 
@@ -726,8 +685,8 @@
                         </div>
 
                         <p class="sbx-foot">
-                            Free text is keyword-matched to the nearest of the eight sample questions, and the panel
-                            tells you plainly when it cannot find one. There is no model running on this page.
+                            Free text is keyword-matched to the nearest of the eight sample questions, and
+                            the panel says so plainly when it cannot find one.
                         </p>
 
                         <p class="sbx-sr-only" id="sbxStatus" role="status" aria-live="polite"></p>
@@ -747,7 +706,7 @@
             <span class="kbs-badge-dot" aria-hidden="true"></span>
             Recorded run &middot; 2 Sep 2026
         </span>
-        <h3 class="kbs-title" id="kbsTitle">Keyword search vs. semantic search</h3>
+        <h3 class="kbs-title" id="kbsTitle">Keyword search vs. hybrid search</h3>
         <p class="kbs-lede">
             The knowledge base behind AmaxBot was searched with MariaDB <code>FULLTEXT</code>.
             Chinese was unsearchable and English phrasing came back wrong. I shipped a hybrid
@@ -761,9 +720,9 @@
         <ion-icon name="document-text-outline" aria-hidden="true"></ion-icon>
         <span>
             <strong>This is a replay of one measured run, not a live query.</strong>
-            Every question and every article title below is a verbatim record of what the two
-            search paths returned on 2 September 2026. The knowledge base itself is behind a
-            login and holds customer data, so nothing on this page talks to it.
+            Every question and article title below is a verbatim record of what the two
+            search paths returned. The knowledge base holds customer data, so nothing
+            on this page talks to it.
         </span>
     </p>
 
@@ -862,7 +821,7 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Result</span>
-                                <p class="case-v">Staff self-serve from the ERP by chat or plain email, in English or Chinese. The tool catalogue is filtered by role <em>before</em> the model ever sees it, so a non-admin request cannot contain a write tool.</p>
+                                <p class="case-v">Staff self-serve from the ERP by chat or plain email, in English or Chinese. The tool catalog is filtered by role <em>before</em> the model ever sees it, so a non-admin request cannot contain a write tool.</p>
                             </div>
                         </article>
 
@@ -878,7 +837,7 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Built</span>
-                                <p class="case-v">Inbound, a SOAP client against an EDI provider that pulls purchase orders and returns acknowledgements, ship notices and invoices. Outbound, an accounting hub of 6 connectors and 42 APIs pushing sales documents and supplier bills on a daily schedule.</p>
+                                <p class="case-v">Inbound, a SOAP client against an EDI provider that pulls purchase orders and returns acknowledgments, ship notices and invoices. Outbound, an accounting hub of 6 connectors and 42 APIs pushing sales documents and supplier bills on a daily schedule.</p>
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Result</span>
@@ -902,7 +861,7 @@
                             </div>
                             <div class="case-row">
                                 <span class="case-k">Result</span>
-                                <p class="case-v">On eight real staff questions the old path returned rows for five &mdash; one of them the wrong article &mdash; and the hybrid returned the correct article for all eight, including three Chinese questions that had returned nothing at all. It ships behind a flag and degrades to the old query.</p>
+                                <p class="case-v">Five of eight staff questions returned rows before, one of them the wrong article; all eight return the correct article now, including three Chinese ones that returned nothing at all. It ships behind a flag and degrades to the old query.</p>
                             </div>
                         </article>
 
@@ -936,7 +895,7 @@
                             <h3>Email Phishing Detection</h3>
                             <p>A Google Apps Script on a timed trigger checks links and attachments against a reputation service and has a language model read the message for pretext.</p>
                             <div class="tags">
-                                <span class="tag">Google App Script</span>
+                                <span class="tag">Apps Script</span>
                                 <span class="tag">ML</span>
                                 <span class="tag">ChatGPT API</span>
                                 <span class="tag">VirusTotal</span>
@@ -958,7 +917,7 @@
                         <div class="project-card">
                             <div class="project-icon"><ion-icon name="swap-horizontal-outline"></ion-icon></div>
                             <h3>EDI &amp; API Integration</h3>
-                            <p>Order and stock feeds between the ERP, marketplace back ends and warehouse systems, normalised into one order shape, upserts keyed on the partner&rsquo;s document number.</p>
+                            <p>Order and stock feeds between the ERP, marketplace back ends and warehouse systems, normalized into one order shape, upserts keyed on the partner&rsquo;s document number.</p>
                             <div class="tags">
                                 <span class="tag">EDI</span>
                                 <span class="tag">REST API</span>
@@ -1015,7 +974,7 @@
                         <div class="project-card">
                             <div class="project-icon"><ion-icon name="newspaper-outline"></ion-icon></div>
                             <h3>Bilingual News Digest</h3>
-                            <p>A Node service that gathers industry news on a daily cron, summarises it in English and Chinese and mails the digest, with its own web UI.</p>
+                            <p>A Node service that gathers industry news on a daily cron, summarizes it in English and Chinese and mails the digest, with its own web UI.</p>
                             <div class="tags">
                                 <span class="tag">Node.js</span>
                                 <span class="tag">Cron</span>
@@ -1156,9 +1115,9 @@
                                 <div class="tl-date">May 2025 &ndash; Present</div>
                                 <h3>IT Systems & Infrastructure Specialist</h3>
                                 <div class="tl-org">Amax Leather Canada Ltd & Aurora Furniture MFG</div>
-                                <p>Sole engineer of the ERP and automation platform both companies run on: 1,048 REST endpoints, 274 MySQL tables, 150 pages, ~230,000 lines in production &mdash; plus the in-house GPT assistant, the EDI and accounting integrations and the dealer portal.</p>
+                                <p>Sole engineer of the ERP and automation platform both companies run on: 1,048 REST endpoints, 274 MySQL tables, 150 pages, ~230,000 lines in production &mdash; plus the in-house GPT assistant, EDI and accounting integrations, and the dealer portal.</p>
                                 <div class="tl-highlights">
-                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> ~230,000-line platform, 1,048 REST endpoints</div>
+                                    <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> 77 route files, 24 services, 726 scripts</div>
                                     <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> AmaxBot: 55 function-calling tools + 27 email commands</div>
                                     <div class="tl-highlight"><ion-icon name="checkmark-circle-outline"></ion-icon> Partner EDI over SOAP + a 42-API accounting hub</div>
                                 </div>
@@ -1575,6 +1534,12 @@
         function switchTab(page, pushHash = true) {
             if (!validPages.includes(page)) return;
             if (_tabFadeTimer) { clearTimeout(_tabFadeTimer); _tabFadeTimer = null; }
+            // Clearing the timer above can strand the class it was going to remove:
+            // clicking away and back inside the fade window leaves the visible panel
+            // marked fade-out-tab forever. Reset unconditionally. 2026-09-02 review.
+            document.querySelectorAll('article[data-page]').forEach(a => {
+                a.classList.remove('fade-out-tab', 'fade-in-tab');
+            });
             navButtons.forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
@@ -1845,6 +1810,7 @@
             overlay.className = 'lightbox-overlay';
             overlay.setAttribute('role', 'dialog');
             overlay.setAttribute('aria-label', 'Certificate preview');
+            overlay.setAttribute('aria-modal', 'true');
             const clone = document.createElement('img');
             clone.src = img.src;
             clone.alt = img.alt;
@@ -1860,9 +1826,21 @@
             // and a later Escape anywhere on the page pulled focus to a removed
             // image. Unbind in closeLightbox, which every close path goes through.
             // 2026-09-02 audit.
+            // role="dialog" without a focus trap let six Tab presses walk out of the
+            // dialog into the page under the opaque overlay. The dialog holds exactly
+            // one control, so the trap is simply: Tab always returns to it.
+            // 2026-09-02 review.
+            const prevOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+            overlay.addEventListener('keydown', (e) => {
+                if (e.key !== 'Tab') return;
+                e.preventDefault();
+                closeBtn.focus();
+            });
             function onKey(e) { if (e.key === 'Escape') closeLightbox(); }
             function closeLightbox() {
                 document.removeEventListener('keydown', onKey);
+                document.body.style.overflow = prevOverflow;
                 overlay.style.opacity = '0';
                 overlay.style.transition = 'opacity 0.2s ease';
                 setTimeout(() => overlay.remove(), 200);
@@ -2107,7 +2085,9 @@
                 // Let the contact-card link still work — copy on the sidebar only
                 if (el.classList.contains('contact-card')) return;
                 e.preventDefault();
-                navigator.clipboard.writeText(text).then(() => showToast('Copied: ' + text));
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast('Copied: ' + text))
+                    .catch(() => showToast('Press Ctrl+C to copy'));
             });
         });
 
@@ -2227,6 +2207,16 @@ window.addEventListener('resize', updateScrollProgress);
         moveIndicator();
         navButtons.forEach(btn => btn.addEventListener('click', () => setTimeout(moveIndicator, 10)));
         window.addEventListener('resize', moveIndicator);
+        // The nav buttons grow ~16px each once <ion-icon> upgrades and again when the
+        // webfont lands, and the indicator was only re-measured on click and resize —
+        // so a deep link drew it under the wrong tab, 80px out on #contact. Watching
+        // the list itself catches every cause, including ones we have not thought of.
+        // 2026-09-02 review.
+        if (window.ResizeObserver) {
+            const navList = document.querySelector('.navbar-list');
+            if (navList) new ResizeObserver(() => moveIndicator()).observe(navList);
+        }
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveIndicator);
         screen.orientation?.addEventListener('change', () => setTimeout(moveIndicator, 100));
 
         // ===== 3. Ripple click effect =====
@@ -2319,8 +2309,10 @@ window.addEventListener('resize', updateScrollProgress);
             { label: 'Go to Skills', icon: 'bar-chart-outline', action: () => switchTab('skills') },
             { label: 'Go to Certificates', icon: 'ribbon-outline', action: () => switchTab('certificates') },
             { label: 'Go to Contact', icon: 'chatbubble-outline', action: () => switchTab('contact') },
-            { label: 'Copy Email', icon: 'copy-outline', action: () => { navigator.clipboard.writeText('lionelwwq@gmail.com'); showToast('Copied email!'); } },
-            { label: 'Copy Phone', icon: 'call-outline', action: () => { navigator.clipboard.writeText('+1 (778) 865-6808'); showToast('Copied phone!'); } },
+            // The toast used to fire whether or not the write resolved, so a browser
+            // that refuses clipboard access still reported success. 2026-09-02 review.
+            { label: 'Copy Email', icon: 'copy-outline', action: () => navigator.clipboard.writeText('lionelwwq@gmail.com').then(() => showToast('Copied email!')).catch(() => showToast('Press Ctrl+C to copy')) },
+            { label: 'Copy Phone', icon: 'call-outline', action: () => navigator.clipboard.writeText('+1 (778) 865-6808').then(() => showToast('Copied phone!')).catch(() => showToast('Press Ctrl+C to copy')) },
             { label: 'Download Resume', icon: 'download-outline', action: () => { const a = document.createElement('a'); a.href = 'Lionel_Wang_Resume.pdf'; a.download = ''; a.click(); } },
             { label: 'Toggle Theme', icon: 'moon-outline', action: () => themeToggle.click() },
         ];
@@ -2343,7 +2335,15 @@ window.addEventListener('resize', updateScrollProgress);
             cmdOverlay.classList.add('open');
             cmdInput.value = '';
             renderCommands();
-            setTimeout(() => cmdInput.focus(), 50);
+            // Under prefers-reduced-motion the global 0.01ms transition makes
+            // inherited visibility propagate a level per frame, so the input can
+            // still be hidden after 50ms and focus() silently does nothing.
+            // Retry each frame until it lands. 2026-09-02 review.
+            const focusInput = () => {
+                cmdInput.focus();
+                if (document.activeElement !== cmdInput) requestAnimationFrame(focusInput);
+            };
+            requestAnimationFrame(focusInput);
         }
         function closeCmd() {
             cmdOverlay.classList.remove('open');
@@ -2710,7 +2710,7 @@ const SBX_SCENARIOS = [
         q: '沙发到货的时候有破损怎么办',
         match: ['损坏', '政策', '怎么办', '到货', '过敏', '保修', '中文', 'chinese', 'damage claim', 'claim'],
         strong: ['沙发', '破损', '退货', '羽绒', 'arrived damaged', 'damaged on arrival'],
-        why: 'Two independent reasons this used to return nothing: MariaDB ships no CJK tokeniser, and the ' +
+        why: 'Two independent reasons this used to return nothing: MariaDB ships no CJK tokenizer, and the ' +
              'title_zh / content_zh columns were never added to the FULLTEXT index at all. The embedding is ' +
              'language-agnostic, so a Chinese question retrieves the English article.',
         args: { query: '沙发到货的时候有破损怎么办', mode: 'hybrid', lang: 'zh', top_k: 3 },
@@ -2749,7 +2749,7 @@ const SBX_SCENARIOS = [
                 'modify', 'add a customer', 'create an order', 'mark as paid'],
         strong: ['credit limit', 'delete', 'cancel', 'override', 'write off', 'approve', 'discount',
                  'drop table', 'truncate', 'insert into', 'update set'],
-        why: 'This is a write, not a read. The tool catalog is filtered by role BEFORE it is serialised to ' +
+        why: 'This is a write, not a read. The tool catalog is filtered by role BEFORE it is serialized to ' +
              'the model, so a read-only session is never shown a write tool. The model cannot call what it ' +
              'was never handed — a stronger guarantee than trusting it to decline.',
         policy: {

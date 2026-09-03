@@ -2297,6 +2297,11 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 @media (max-width: 640px) {
+
+    /* two per row so the last row never stretches to fill */
+    .stat-item {
+        min-width: calc(50% - 0.25rem);
+    }
     body {
         padding: 0.75rem;
     }
@@ -5242,3 +5247,119 @@ html.reduced-motion .arch-fig .arch-line {
    to disclose and the .case-more rules were removed with them.
    No print rules here on purpose either: the print stylesheet above shows only
    the Resume tab, so a case study never reaches paper. */
+
+/* ============================================================
+   ALIGNMENT PASS — re-measured independently at 1440/1280/1024/
+   900/768/640/480/414/390/360px, all six tabs, dark and light.
+   The audit's .stat-item rule has been REMOVED: the overflow it
+   claimed does not exist, and the rule breaks the deliberate
+   two-per-row phone layout at style.css:2302.
+   ============================================================ */
+
+/* Fix: the contact form's two-up row never collapsed on phones. The base
+   .form-row{1fr 1fr} at line 3095 outranks the @media(max-width:1080px)
+   rule at line 2294 on source order, so the Email input ran 178px outside
+   the row at 360px (148 at 390, 124 at 414, 58 at 480) and was clipped to
+   "you@examp". min-width:0 also releases the 1fr tracks from the input's
+   min-content floor. */
+.form-group { min-width: 0; }
+
+@media (max-width: 640px) {
+    .form-row { grid-template-columns: 1fr; }
+}
+
+/* Fix: the three stacked flagship panels are one tier (20px radius, same
+   width, consecutive) but resolved three paddings, so the text column
+   jogged twice — inner left 438 / 431.6 / 434 at 1280px. Unify on
+   .featured-project's 2rem. */
+@media (min-width: 641px) {
+    .sbx,
+    .kbs { padding: 2rem; }
+}
+
+/* Fix: the same three panels below 641px — 54 / 59.6 / 62 at 640px, and
+   54 / 54 / 51.6 at 480px and under where .kbs takes 1.25rem 1.1rem.
+   Unify on .featured-project's mobile 1.25rem. */
+@media (max-width: 640px) {
+    .sbx,
+    .kbs { padding: 1.25rem; }
+}
+
+/* Fix: the certificate grid used a 1.5rem gutter where every other card grid
+   (services, projects, showcase, contact, language) uses 1.25rem. Column
+   count is unchanged — 3 tracks would still need 1000px against an 802px
+   (1280vw) / 906px (1440vw) content column. */
+.certificates-grid { gap: 1.25rem; }
+
+/* Fix: service cards carried 1.75rem where the other cards of the same 14px
+   radius and column width (.project-card, .cert-card, .contact-card,
+   .tl-card) use 1.5rem. */
+.service-card { padding: 1.5rem; }
+
+/* Fix: language tiles were the only card on the site with unequal vertical
+   and horizontal padding (1.25rem 1rem). */
+.language-item { padding: 1.5rem; }
+
+/* ============================================================================
+   2026-09-02 review fixes — APPEND AT THE VERY END of style.css.
+   Placement matters: several of these exist earlier in the file inside
+   max-width media blocks that sit ABOVE the base component rules they were
+   meant to override, so they never applied. Re-stating them last restores
+   normal cascade order without relocating (and accidentally resurrecting)
+   entire media blocks.
+   ========================================================================== */
+
+/* Timeline marker sat 8.8px right of its spine at every width: the 32px dot at
+   left:-2.45rem inside padding-left:3rem centres at 24.8px, while .tl-line
+   centres at 16px. -3rem puts the dot centre on the line. */
+.tl-dot { left: -3rem; }
+
+/* Scroll-to-top was reachable by keyboard while fully transparent, giving one
+   invisible stop per tab cycle. visibility removes it from the tab order and
+   still fades. */
+.scroll-top {
+    visibility: hidden;
+    transition: opacity var(--transition), transform var(--transition),
+                visibility var(--transition), background var(--transition),
+                box-shadow var(--transition);
+}
+
+.scroll-top.visible { visibility: visible; }
+
+/* Raise only the genuinely illegible micro-labels (9.28-10.08px) to 11px.
+   The 0.68rem/10.88px badges are left alone deliberately. */
+.sbx-bar-badge,
+.sbx-chip-tool,
+.kbs-q-lang,
+.kbs-col-tag,
+.kbs-row-tag,
+.case-k,
+.case-tag { font-size: 0.6875rem; }
+
+@media (max-width: 640px) {
+    /* nowrap tooltips measured 325px inside a 200px box and pushed the Skills
+       panel to scrollWidth 346 vs clientWidth 294 at 320px. */
+    .skill-tooltip {
+        white-space: normal;
+        max-width: 200px;
+    }
+
+    /* 18x18 is too small to tap; 28px is the author's own intended value. */
+    .accent-dot {
+        width: 28px;
+        height: 28px;
+    }
+
+    .accent-picker { gap: 0.6rem; }
+
+    /* At 320px the toast cleared the scroll-top button by only 2px. */
+    .toast { bottom: 4rem; }
+}
+
+/* The remaining sub-11px text on a phone: the sandbox Clear button, and inline
+   <code> whose 0.78em/0.85em is taken from an already-small parent. max() puts a
+   floor under it without changing the desktop look. */
+.sbx-clear { font-size: 0.6875rem; }
+.case-v code,
+.kbs-col-sub code,
+.sbx-bar code { font-size: max(0.6875rem, 0.78em); }
