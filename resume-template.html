@@ -49,7 +49,7 @@
   .sheet {
     width: 100%;
     min-height: 100vh;
-    padding: 30px 44px 20px;
+    padding: 28px 44px 16px;
   }
   /* At the real A4 print box (794px wide) the sheet is pinned to exactly one
      page. Below that the guard lifts, so a different render scale overflows
@@ -101,39 +101,8 @@
   }
   .lede strong { font-weight: 700; color: var(--ink); }
 
-  /* ── Figures band ─────────────────────────────────────── */
-  .figures {
-    display: flex;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: 6px 0 5px;
-  }
-  .fig {
-    flex: 1 1 0;
-    padding-left: 13px;
-    border-left: 1px solid var(--rule);
-  }
-  .fig:first-child { padding-left: 0; border-left: 0; }
-  .fig-n {
-    display: block;
-    font-size: 13pt;
-    font-weight: 700;
-    line-height: 1.06;
-    letter-spacing: -0.3px;
-    color: var(--accent);
-  }
-  .fig-l {
-    display: block;
-    margin-top: 1px;
-    font-size: 6.3pt;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--faint);
-  }
-
   /* ── Section headings ─────────────────────────────────── */
-  .sec { margin-top: 12px; }
+  .sec { margin-top: 10px; }
   .sec-h {
     display: flex;
     align-items: center;
@@ -295,25 +264,17 @@
       <div class="role">IT Systems &amp; Infrastructure Specialist</div>
     </div>
     <div class="contact">
-      <span class="strong">Greater Vancouver, BC, Canada</span><br>
+      <span class="strong">Richmond, BC, Canada</span><br>
       (778) 865-6808 &nbsp;&middot;&nbsp; <a href="mailto:lionelwwq@gmail.com">lionelwwq@gmail.com</a><br>
       <a href="https://lionelwwq.github.io/">lionelwwq.github.io</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/weiqi-wang-86bb07171">linkedin.com/in/weiqi-wang-86bb07171</a>
     </div>
   </header>
 
   <p class="lede">
-    <strong>Sole engineer</strong> of the ~230,000-line ERP and automation platform Amax Leather Canada and Aurora Furniture MFG
-    run their daily operations on &mdash; schema, backend, front end, deployments and the pager. Ships the whole stack: an in-house
-    GPT assistant, EDI and accounting integrations, compliance document pipelines and a multi-tenant dealer portal.
+    IT systems and infrastructure engineer with an <strong>MSc in Cybersecurity</strong>. Four years running the servers,
+    network, cloud and Google Workspace estate of two furniture manufacturers &mdash; and, since 2025, <strong>sole engineer</strong>
+    of the ERP and automation platform both companies run their day on, end to end.
   </p>
-
-  <section class="figures">
-    <div class="fig"><span class="fig-n">~230,000</span><span class="fig-l">Lines in production</span></div>
-    <div class="fig"><span class="fig-n">1,048</span><span class="fig-l">REST endpoints</span></div>
-    <div class="fig"><span class="fig-n">274</span><span class="fig-l">MySQL tables</span></div>
-    <div class="fig"><span class="fig-n">150</span><span class="fig-l">Front-end pages</span></div>
-    <div class="fig"><span class="fig-n">124</span><span class="fig-l">Permission checks</span></div>
-  </section>
 
   <section class="sec">
     <h2 class="sec-h">Experience</h2>
@@ -323,12 +284,10 @@
       <div class="when">May 2025 &ndash;<br>Present</div>
       <div class="org">Amax Leather Canada Ltd. &amp; Aurora Furniture MFG &nbsp;&middot;&nbsp; Delta, BC</div>
       <ul>
-        <li>Sole engineer of the ERP platform two operating companies run on daily: 77 Node/Express route modules, 1,048 REST endpoints, 24 services, 150 pages and 139 front-end JS modules &mdash; ~230,000 lines in production.</li>
-        <li>Designed the data layer across 4 MySQL databases and 274 tables. The primary sits overseas on a slow link, so batching, a local read mirror and caching &mdash; not CRUD &mdash; are the real work; tens of thousands of orders flow through it.</li>
-        <li>Built <strong>AmaxBot</strong>, an in-house GPT assistant: a chat UI with 55 function-calling tools plus a 3,300-line IMAP bot serving 27 email commands, knowledge-base auto-replies and a daily digest. Its tool catalog is filtered by role before it reaches the model, so a non-admin request never contains a write tool.</li>
-        <li>Shipped hybrid semantic + full-text knowledge-base search over 26 articles: the old index returned rows for five of eight real questions, the hybrid the correct article for all eight, including three Chinese ones it could not read.</li>
-        <li>Integrated the platform outward: EDI over SOAP with an EDI provider (purchase orders, acknowledgements, ASNs, invoices) and an accounting hub of 6 connectors and 42 APIs; pushes are idempotent, so a resend cannot double-post.</li>
-        <li>Enforced role-based access control through 124 permission checks, shipped every page bilingually (EN/ZH), and run the servers, deployments, monitoring, 726 operational scripts and the AWS footprint.</li>
+        <li>Sole engineer of the ERP platform both companies run on daily: <strong>1,048 REST endpoints</strong> across 77 Node/Express modules, 150 pages, 4 MySQL databases and <strong>274 tables</strong>, bilingual EN/ZH, ~230,000 lines in production. The primary database sits overseas, so batching, a local read mirror and caching &mdash; not CRUD &mdash; are the real work.</li>
+        <li>Built <strong>AmaxBot</strong>, an in-house GPT assistant: a chat UI with 55 function-calling tools plus a 3,300-line IMAP service answering 27 email commands. Its tool catalog is filtered by role before it reaches the model, so a non-admin request never contains a write tool.</li>
+        <li>Integrated the platform outward &mdash; EDI over SOAP with an EDI provider (POs, acknowledgments, ASNs, invoices) and an accounting hub of 6 connectors and 42 APIs. Every push is idempotent and keyed on the document number, so a resend cannot double-post.</li>
+        <li>Own production: Windows and Linux servers, the AWS footprint, deployments, monitoring, backups and 726 operational scripts, with access enforced through 124 role-based permission checks.</li>
       </ul>
     </article>
 
@@ -337,19 +296,20 @@
       <div class="when">Aug 2022 &ndash;<br>Apr 2025</div>
       <div class="org">Amax Leather Canada Ltd. &nbsp;&middot;&nbsp; Delta, BC</div>
       <ul>
-        <li>Ran the server, network and Google Workspace estate plus the AWS footprint (EC2, S3, IAM) behind internal apps.</li>
-        <li>Hardened email and DNS with SPF/DKIM/DMARC, ran security audits, phishing defence and FortiGate firewalls.</li>
-        <li>Built the first LLM-integrated internal tools and maintained the API and EDI links to warehouse and partners.</li>
+        <li>Administered the server estate &mdash; Windows and Linux, virtualization, storage, backup and restore &mdash; and the office and warehouse network across FortiGate firewalls, VPN, switching and Wi-Fi.</li>
+        <li>Ran Google Workspace for the group (accounts, groups, shared drives, endpoint and mobile policy) and the DNS estate; hardened mail with SPF, DKIM and DMARC and added ML-assisted phishing screening.</li>
+        <li>Built and maintained the AWS footprint (EC2, S3, IAM) behind internal applications, plus the API and EDI links to the warehouse and trading partners and the databases behind them.</li>
+        <li>Ran security audits, vulnerability remediation and data-protection work, and provided day-to-day technical support and incident response for staff across offices and warehouses.</li>
       </ul>
     </article>
 
     <article class="entry row">
       <h3 class="job-title">Website Developer</h3>
       <div class="when">May 2022 &ndash;<br>Mar 2023</div>
-      <div class="org">Perfect Decor &nbsp;&middot;&nbsp; Burnaby, BC</div>
+      <div class="org">Perfect D&eacute;cor &nbsp;&middot;&nbsp; Burnaby, BC</div>
       <ul>
-        <li>Built custom client websites and web applications end to end, from layout through deployment.</li>
-        <li>Added features and responsive redesigns to existing client sites, improving usability on mobile.</li>
+        <li>Built custom websites and large-scale web applications for clients end to end, from layout and imagery through deployment.</li>
+        <li>Revised existing client sites and web stores with new features and responsive redesigns, improving usability on mobile.</li>
       </ul>
     </article>
   </section>
@@ -359,15 +319,15 @@
 
     <div class="def row">
       <div class="rail">Dealer Portal</div>
-      <div class="txt">Public-facing portal for the dealer network: per-dealer catalogs, price lists, branding and photo-upload claims. The hard part is tenancy &mdash; every query is scoped so one account can never read another's data.</div>
+      <div class="txt">Customer-facing portal for the dealer network: per-dealer catalogs, price lists, branding and photo-upload claims. Every query is tenancy-scoped, so one account can never read another's data.</div>
     </div>
     <div class="def row">
       <div class="rail">Warehouse Docs</div>
-      <div class="txt">Eight document types with Excel and PDF generation, five email flows and timber-legality compliance, driven off the same order hub the rest of the platform reads &mdash; one source of truth, no re-keying.</div>
+      <div class="txt">Eight document types with Excel and PDF generation, five email flows and timber-legality compliance, all driven off the same order hub the rest of the platform reads.</div>
     </div>
     <div class="def row">
       <div class="rail">Social Video</div>
-      <div class="txt">Standalone Node app that turns a Mandarin script into a finished 9:16 social video: text-to-speech, imagery, burned-in subtitles and FFmpeg assembly, with subtitle timing aligned to the synthesised speech.</div>
+      <div class="txt">Standalone Node app that turns a Mandarin script into a finished 9:16 video: text-to-speech, imagery, burned-in subtitles and FFmpeg assembly, with caption timing aligned to measured audio.</div>
     </div>
   </section>
 
@@ -380,7 +340,7 @@
     </div>
     <div class="skill row">
       <div class="rail">Backend</div>
-      <div class="txt">Express, REST API design (1,048 endpoints), 24 services / 22 utils, node-cron, IMAP &amp; SMTP, SOAP &amp; EDI, Puppeteer</div>
+      <div class="txt">Express, REST API design, services &amp; scheduled jobs, IMAP &amp; SMTP, SOAP &amp; EDI, Puppeteer / Playwright</div>
     </div>
     <div class="skill row">
       <div class="rail">Front End</div>
@@ -388,19 +348,19 @@
     </div>
     <div class="skill row">
       <div class="rail">Data</div>
-      <div class="txt">MySQL schema design (274 tables), query optimisation, read-mirror replication, caching, Excel/CSV pipelines</div>
+      <div class="txt">MySQL schema design, query optimization, read-mirror replication, caching, backup/restore, Excel &amp; CSV pipelines</div>
     </div>
     <div class="skill row">
       <div class="rail">AI</div>
-      <div class="txt">LLM function calling (55 tools), role-scoped tool catalogs, embeddings &amp; hybrid retrieval, NL-to-SQL, OCR</div>
+      <div class="txt">LLM function calling, role-scoped tool catalogs, embeddings &amp; hybrid retrieval, NL-to-SQL, OCR, prompt design</div>
     </div>
     <div class="skill row">
-      <div class="rail">Cloud &amp; Infra</div>
-      <div class="txt">AWS (EC2, S3, IAM), Windows &amp; Linux administration, PM2, deployments, monitoring, 726 operational scripts</div>
+      <div class="rail">Infrastructure</div>
+      <div class="txt">AWS (EC2, S3, IAM), Windows &amp; Linux administration, Google Workspace, PM2, deployments, monitoring, backups</div>
     </div>
     <div class="skill row">
-      <div class="rail">Security</div>
-      <div class="txt">RBAC (124 permission checks), OTP / 2FA, session &amp; CSRF handling, SPF/DKIM/DMARC, FortiGate, auditing</div>
+      <div class="rail">Security &amp; Network</div>
+      <div class="txt">RBAC, OTP / 2FA, session &amp; CSRF handling, SPF/DKIM/DMARC, FortiGate, VPN, DNS, auditing, incident response</div>
     </div>
   </section>
 
@@ -409,13 +369,13 @@
 
     <div class="edu row">
       <div class="rail">Dec 2024</div>
-      <div class="deg">Master of Science in Cybersecurity</div>
+      <div class="deg">Master of Science in Cybersecurity &nbsp;&middot;&nbsp; GPA 3.74</div>
       <div class="school">New York Institute of Technology &mdash; network security, cryptography, ethical hacking</div>
     </div>
     <div class="edu row">
-      <div class="rail">Jan 2023</div>
-      <div class="deg">Bachelor of Technology in Information Technology (CO-OP)</div>
-      <div class="school">Kwantlen Polytechnic University &mdash; 3.8 GPA in major; web application development, cloud &amp; website security</div>
+      <div class="rail">Dec 2022</div>
+      <div class="deg">Bachelor of Technology in Information Technology (CO-OP) &nbsp;&middot;&nbsp; 3.8 GPA in major</div>
+      <div class="school">Kwantlen Polytechnic University &mdash; web application development, IoT, website &amp; cloud security</div>
     </div>
     <div class="certs row">
       <div class="rail">Certifications</div>
@@ -426,4 +386,5 @@
 </main>
 
 </body>
+
 </html>

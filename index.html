@@ -589,9 +589,22 @@
                         </figure>
                     </div>
 
-                    <h3 class="section-heading">Try It &mdash; AmaxBot Sandbox</h3>
+                    <h3 class="section-heading">Try It</h3>
 
-                    <section class="sbx" id="amaxbotSandbox" aria-labelledby="sbxTitle">
+                    <div class="demos" id="demos">
+                        <div class="demos-tabs" role="tablist" aria-label="Interactive demos">
+                            <button type="button" class="demos-tab is-on" role="tab" aria-selected="true" aria-controls="amaxbotSandbox" id="demoTab-sbx" data-demo="amaxbotSandbox">
+                                <ion-icon name="sparkles-outline" aria-hidden="true"></ion-icon><span>Assistant</span>
+                            </button>
+                            <button type="button" class="demos-tab" role="tab" aria-selected="false" aria-controls="kbsearch" id="demoTab-kbs" data-demo="kbsearch" tabindex="-1">
+                                <ion-icon name="search-outline" aria-hidden="true"></ion-icon><span>Search rebuild</span>
+                            </button>
+                            <button type="button" class="demos-tab" role="tab" aria-selected="false" aria-controls="capdemo" id="demoTab-cap" data-demo="capdemo" tabindex="-1">
+                                <ion-icon name="film-outline" aria-hidden="true"></ion-icon><span>Caption timing</span>
+                            </button>
+                        </div>
+
+                    <section class="sbx" id="amaxbotSandbox" role="tabpanel" aria-labelledby="demoTab-sbx">
 
                         <div class="sbx-head">
                             <span class="sbx-eyebrow"><ion-icon name="sparkles-outline" aria-hidden="true"></ion-icon>AmaxBot &middot; interactive</span>
@@ -699,7 +712,7 @@
      the flagship, so it sits with the flagship.
      The question chips and both result columns are built by the JS block from
      KBS_RUN; everything else here is static so the finding survives without JS. -->
-<section class="kbs" id="kbsearch" aria-labelledby="kbsTitle">
+<section class="kbs" id="kbsearch" role="tabpanel" aria-labelledby="demoTab-kbs" hidden>
 
     <div class="kbs-head">
         <span class="kbs-badge">
@@ -800,6 +813,49 @@
     </p>
 
 </section>
+
+<!-- ===== Caption timing — Social Video Maker =====
+     The third demo exists because the other two are both about the flagship, and
+     a page that says "try it" should not mean "try one of them". This one runs the
+     renderer's actual pacing rule in the browser: split the script at punctuation,
+     then splice a silence whose length depends on WHICH punctuation ended the
+     fragment. The constants below are the ones in make-video.js. -->
+<section class="cap" id="capdemo" role="tabpanel" aria-labelledby="demoTab-cap" hidden>
+
+    <div class="cap-head">
+        <span class="cap-eyebrow"><ion-icon name="film-outline" aria-hidden="true"></ion-icon>Social Video Maker &middot; interactive</span>
+        <h4 class="cap-title" id="capTitle">Where the pauses go</h4>
+        <p class="cap-lede">
+            The free speech engine returns zero bytes for any SSML pause tag, so the pacing is
+            built the other way round: split the script, synthesise each fragment on its own,
+            and splice measured silence between them. Type below and watch the plan change.
+        </p>
+    </div>
+
+    <p class="cap-notice">
+        <ion-icon name="flask-outline" aria-hidden="true"></ion-icon>
+        <span><strong>This is the real pacing rule, running here.</strong> The gap lengths are the
+        constants from the renderer. What it cannot do in a browser is the speaking itself &mdash;
+        the duration is an estimate, and the renderer measures the actual audio instead.</span>
+    </p>
+
+    <label class="cap-label" for="capInput">Script</label>
+    <textarea id="capInput" class="cap-input" rows="3" spellcheck="false"
+        aria-describedby="capOut">真皮沙发，一体成型。持久耐用，坐感软硬适中。
+今天告诉你怎么挑！</textarea>
+
+    <div class="cap-out" id="capOut" aria-live="polite"></div>
+
+    <p class="cap-foot">
+        <span><strong>380 ms</strong> after a sentence</span>
+        <span><strong>180 ms</strong> after a clause</span>
+        <span><strong>500 ms</strong> at a paragraph</span>
+        <span><strong>120 ms</strong> at a line break</span>
+    </p>
+
+</section>
+
+                    </div>
 
                     <h3 class="section-heading">Case Studies</h3>
 
@@ -3683,6 +3739,139 @@ const KBS_RUN = {
     // Render the resting state immediately as well, so the columns are never
     // blank for a reader who arrives before the observer fires.
     select(KBS_RUN.queries[0].id, false);
+})();
+
+/* ---- The three demos share one panel ---------------------------------------
+   Two full-height demo sections stacked to 2,300px between the diagram and the
+   case studies, and both were about the same project. One tabbed panel instead,
+   with a third tab so "try it" means more than one thing. Panels are toggled
+   with the hidden attribute; both existing panels render their resting state on
+   load regardless of visibility, so switching to one is never a blank box. */
+(function demoTabs() {
+    const root = document.getElementById('demos');
+    if (!root) return;
+    const tabs = [...root.querySelectorAll('.demos-tab')];
+    const panels = tabs.map(t => document.getElementById(t.dataset.demo));
+
+    function show(i, focus) {
+        tabs.forEach((t, n) => {
+            const on = n === i;
+            t.classList.toggle('is-on', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+            t.tabIndex = on ? 0 : -1;
+            if (panels[n]) panels[n].hidden = !on;
+        });
+        if (focus) tabs[i].focus();
+        // the caption demo is the only one that needs its first paint on show
+        if (tabs[i].dataset.demo === 'capdemo') renderCaptionPlan();
+    }
+
+    tabs.forEach((t, i) => t.addEventListener('click', () => show(i, false)));
+
+    // Left/Right move between tabs, Home/End jump to the ends — the pattern a
+    // screen-reader user expects from role="tablist".
+    root.querySelector('.demos-tabs').addEventListener('keydown', (e) => {
+        const cur = tabs.findIndex(t => t.classList.contains('is-on'));
+        let next = null;
+        if (e.key === 'ArrowRight') next = (cur + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (cur - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next === null) return;
+        e.preventDefault();
+        show(next, true);
+    });
+})();
+
+/* ---- Caption timing --------------------------------------------------------
+   The renderer splits a script at punctuation and splices a cached silence file
+   between the fragments, with the gap chosen by WHICH punctuation ended the
+   fragment. These four constants are the ones in make-video.js. The estimate of
+   spoken length is exactly that — an estimate; the renderer probes the real
+   audio instead, which is the whole reason its captions do not drift. */
+const CAP_PAUSE = { sentence: 380, clause: 180, paragraph: 500, line: 120 };
+// Mandarin is spoken at roughly five characters a second; Latin script at
+// roughly fourteen. Enough to show the shape of the timeline, no more.
+const CAP_RATE = { cjk: 5.0, latin: 14.0 };
+
+function capSplit(text) {
+    const out = [];
+    let buf = '';
+    const push = (kind) => {
+        const t = buf.trim();
+        buf = '';
+        if (t) out.push({ text: t, kind });
+    };
+    for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        if (ch === '\n') {
+            const isPara = text[i + 1] === '\n';
+            const kind = isPara ? 'paragraph' : 'line';
+            if (buf.trim()) {
+                push(kind);
+            } else if (out.length && CAP_PAUSE[kind] > CAP_PAUSE[out[out.length - 1].kind]) {
+                // the fragment already ended on its punctuation, so the blank
+                // line finds an empty buffer — upgrade the pause we just set
+                out[out.length - 1].kind = kind;
+            }
+            if (isPara) i++;
+            continue;
+        }
+        buf += ch;
+        if ('。！？!?.'.includes(ch)) push('sentence');
+        else if ('，、,;；:：'.includes(ch)) push('clause');
+    }
+    push('sentence');
+    return out;
+}
+
+function capSpeakMs(s) {
+    let cjk = 0, latin = 0;
+    for (const ch of s) {
+        if (/[\u3400-\u9fff\uf900-\ufaff]/.test(ch)) cjk++;
+        else if (/\S/.test(ch)) latin++;
+    }
+    return Math.round((cjk / CAP_RATE.cjk + latin / CAP_RATE.latin) * 1000);
+}
+
+function renderCaptionPlan() {
+    const input = document.getElementById('capInput');
+    const out = document.getElementById('capOut');
+    if (!input || !out) return;
+    const parts = capSplit(input.value).slice(0, 24);
+    if (!parts.length) {
+        out.innerHTML = '<p class="cap-empty">Type a line or two above and the plan appears here.</p>';
+        return;
+    }
+    let t = 0, silence = 0;
+    const rows = parts.map((p) => {
+        const speak = capSpeakMs(p.text);
+        const gap = CAP_PAUSE[p.kind];
+        const at = t;
+        t += speak + gap;
+        silence += gap;
+        return `<div class="cap-row">
+            <span class="cap-at">${(at / 1000).toFixed(2)}s</span>
+            <span class="cap-frag">${p.text.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]))}</span>
+            <span class="cap-gap cap-gap--${p.kind}">+${gap}ms <em>${p.kind}</em></span>
+        </div>`;
+    }).join('');
+    out.innerHTML = rows + `<div class="cap-total">
+        <span><strong>${parts.length}</strong> fragments</span>
+        <span><strong>${(silence / 1000).toFixed(2)}s</strong> of spliced silence</span>
+        <span><strong>~${(t / 1000).toFixed(1)}s</strong> estimated runtime</span>
+    </div>`;
+}
+
+(function capInit() {
+    const input = document.getElementById('capInput');
+    if (!input) return;
+    let timer = null;
+    input.addEventListener('input', () => {
+        clearTimeout(timer);
+        timer = setTimeout(renderCaptionPlan, 140);
+    });
+    renderCaptionPlan();
 })();
     </script>
 </body>
